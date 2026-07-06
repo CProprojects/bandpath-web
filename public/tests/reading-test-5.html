@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandPath — IELTS Academic Reading Mock Test 1</title>
+<title>BandPath — IELTS Academic Reading Mock Test 5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
       <span class="start-brand-name">Band<span>Path</span></span>
     </div>
     <div class="start-logo">IELTS Academic Reading</div>
-    <div class="start-title">Mock Test 1</div>
+    <div class="start-title">Mock Test 5</div>
     <div class="start-subtitle">Computer-Delivered Format</div>
     <div class="start-info">
       <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
@@ -362,7 +362,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
   <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
     <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
-    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
   </div>
 </div>
 
@@ -399,7 +399,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 <div id="results-screen">
   <div class="res-header">
     <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
-    <h1>Academic Reading — Results (Mock Test 1)</h1>
+    <h1>Academic Reading — Results (Mock Test 5)</h1>
     <div class="band-circle">
       <div class="band-num" id="res-band">—</div>
       <div class="band-lbl">Band</div>
@@ -421,7 +421,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   <div class="res-actions">
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
-    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
@@ -433,54 +433,57 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
-  heading:'Sweet Trouble',
-  subheading:'Problems in the Australian sugar industry',
+  heading:'Why Should We Study History?',
+  subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 1–13.',
   qRange:[1,13],
   paragraphs:[
-    {label:'',text:`The Australian town of Mossman in the state of Queensland sits in a tropical landscape between the rainforest and the Great Barrier Reef. Eco-tourism is important there; more than 80% of Douglas Shire, of which Mossman is the administrative centre, is protected by World Heritage listing. But for most of the town's history, forest and reef have been largely irrelevant: since the sugar mill was built in 1894, the town has relied on sugarcane. Now Mossman is holding its breath. For two years the mill used by all the farms has been close to bankruptcy. It is at the centre of the economic shocks that have shaken Australia's sugar industry, and for lifetime farmers and a long list of cane industry workers a way of life will disappear if the mill closes. Mossman has roughly 160 growers, who now produce less than one million of the nation's annual cane harvest of 30–40 million tonnes. But it is a microcosm of the industry. All across Australia, the cane-growing business is being squeezed between the pincers of economics and the environment.`},
-    {label:'',text:`The ten-year average return to sugar growers throughout the 1990s was about $350 a tonne. In early 2004, sugar prices plummeted, resulting in a 25-year-low average price for Australian sugar of about $232 a tonne. Although figures vary widely across farms and regions, that was about what it cost to grow a tonne of sugar in Australia. To forestall social and economic disaster, the Government offered more than $400 million to encourage growers to leave the industry. By the end of the year, 21 farmers had taken up the offer to leave, but another 1,000 are thought to be seriously considering it, allowing those remaining to buy the vacated land and improve their economies of scale.`},
-    {label:'',text:`Fourth-generation Mossman grower Bill Phillips-Turner is one who plans to fight on. 'The consequences of losing the mill would be catastrophic,' Bill says. 'Sugar has a big economic multiplier effect: for every dollar generated from sugar, an additional $7 is generated in the wider community. Because of limited options around here, most people now employed by the industry would have to leave the area to find work.' The farmer-shareholders have so far saved the mill by accepting substantial cuts to cane payments, but this has come at a big cost to everyone. As chairman of the board of the mill, Bill has presided over some tough and unpopular decisions; the hardest was slashing the mill workforce. Assets were sold and maintenance costs cut. The board has also worked hard to find new ways of doing business. Ethanol production, where sugar is used to produce fuel, has potential, and co-generation, using cane waste to generate electric power, is another possibility. However, the most radical but preferred alternative is to create a future for the mill as a food factory, turning out quality sugar-based foods.`},
-    {label:'',text:`In addition to the economic struggle, there is the environmental one. The sugar industry has the reputation of being environmentally damaging, but it has some surprising supporters. Douglas Shire mayor, Mike Berwick, is a well-known environmentalist, and might be expected to be anti-cane. 'There's no question of the past damage it's done to the reef through chemical and nutrient run-off*,' he says. 'But there's a formula for sustainable cane production and Mossman has nearly reached it.' Another surprise endorsement for cane comes from the Queensland Environmental Protection Agency's sugar liaison officer, Karen Benn. 'I'm less worried about the effect of cane on the environment than I am about other agriculture,' she says. 'There are good growers everywhere, but at Mossman they seem to have taken up the challenges faster.' For example, sediment run-off, previously one of the main environmental problems caused by cane growing, is now nothing like it once was, according to Dr Brian Roberts, co-ordinator of the Douglas Shire Water Quality Improvement Program. 'North Queensland used to hold the record for soil loss,' he says. 'Now ... cane country is accumulating soil.'`},
-    {label:'',text:`However, these improvements have been achieved at a great cost to growers. Now in his 60s, Tom Watters has spent a lifetime on the same farm. Fourteen years ago, he was alerted to the effect his cane could be having on Mackay Creek, the narrow waterway that receives all his run-off, and so Tom planted a 5,000-tree buffer along the edge of the creek, built up the edges of the creek with rocks to prevent erosion, and began exploring farming methods that cause minimal soil disturbance. However, none of these costly initiatives has helped him get better cane prices. Another cane grower, Doug Crees, comments that 'Economically, it [cane growing] doesn't make much sense. But there's more to life than money.' It's this addiction to the way of life that keeps many cane farmers growing an under-performing crop. 'It's a good lifestyle,' Doug says. 'I spend eight months working on the farm and four months looking after our kids while my wife works in town. I've been looking at alternative crops, like forestry and cocoa, and it turns out that working away from the farm is the best diversification we could do. However, I still don't want to do that.'`},
-    {label:'',text:`It is difficult to see how anyone can deal satisfactorily with the passing of a way of life. Cane farmers have been part of eastern Queensland for more than a century, but despite the efforts they have put into fighting the good environmental fight, there is no guarantee that the new way of life evolving there will include cane.`},
-  ],
-  footnote:'* run-off: water that is used for agriculture and then passes into waterways, carrying soil and agricultural chemicals with it'
+    {label:'',text:`In this paper, I shall present a number of people's opinions on why we should study history. Let me point out at the outset that many of these views overlap, with differences that are ones of emphasis, rather than of principle.`},
+    {label:'',text:`According to some of the greatest historians, such as Arnold Toynbee, the essential value of history is its ability to give us self-awareness, self-knowledge. This occurs because historical figures are presented to us in detail. Studying Alexander the Great, for instance, teaches us that a single person is capable of the whole range of behaviour from cruelty to kindness.`},
+    {label:'',text:`Diane Ravich, an education policy analyst, gives a practical reason for studying history. Like many others before her, she claims that history doesn't tell us the answers to our questions, but it helps to inform us and thus to improve our judgment, so that we make better choices in the future.`},
+    {label:'',text:`With a different focus, though, we can say that we know nothing about the future, and the present is just a moment, so in fact all there is is history. As the philosopher of education John Dewey suggested, the only tool we have for making sense of the reality we experience is what has occurred in the past.`},
+    {label:'',text:`According to historian Mark M. Krug, the knowledge of how people acted in the past may not always suggest clever solutions to present crises, but it makes the task of finding them easier by giving us a starting point, a body of past experience which we can, and if necessary, reject. Peter N. Stearns argues that the wisdom available from history has a personal, everyday application. People need to have some sense of the workings of societies, simply so that they can run their own lives without coming into conflict with the community to which they belong.`},
+    {label:'',text:`The philosopher Friedrich Nietzsche said people need models to imitate, and historical models are particularly powerful because they actually existed. Through her contribution to ending English rule over France, Joan of Arc demonstrates the power of individual belief and action. Galileo's opposition to the prevailing belief that the sun and planets orbited the Earth symbolises the fight against authority for freedom of thought. When studying history, we judge the actions of historical figures to be admirable or despicable, good or bad, and choose who we want to emulate.`},
+    {label:'',text:`Some philosophers have identified a pattern in historical events. Both Georg Hegel and Oswald Spengler saw history as a dynamic process, one in which nothing is static, in contrast to the many other philosophers who have believed that history consists of unique events. But there the resemblance ends. In Hegel's view, history is a process of conflict between opposite ideas, leading towards greater freedom, which combines the best elements of the two original ideas.`},
+    {label:'',text:`Spengler, on the other hand, developed the organic view that historical cultures, like plants and animals, follow a process of growth, flowering and deterioration, a rise inevitably leading to a fall. There are very many historical examples of both individuals and empires that have conformed to this pattern.`},
+    {label:'',text:`Many historians argue that a society which has a shared cultural understanding of its own history is more likely to function smoothly than a society that is ignorant of its past. For example, Beverly Southgate claims that societies, like individuals, need to know who they are, and where they belong. Individuals who lack this sense of uniqueness are likely to feel that life has little meaning or purpose, and so too with societies. A shared knowledge of its history provides a nation with meaning, purpose and cohesion.`},
+    {label:'',text:`Southgate would agree with Conal Furay and Michael J. Salevouris, in whose view a society that cannot recall its past is like an individual with amnesia, unaware of the roots that have created it. As a consequence, it has no direction, and this impacts on its further evolution.`},
+    {label:'',text:`These two historians identify another value of history. We tend to have a narrow view of our own society, assuming that its ways are the only acceptable ones. By learning how our own country used to be, we may realise that our present-day customs are not the only ones which are acceptable. This clearly has implications for our attitude towards other present-day countries and cultures, too.`},
+    {label:'',text:`Many historians and educators believe that the expert knowledge possessed by historians includes not only the learning of factual information, but also the habit of critically examining and evaluating evidence. These are abilities worth developing, as they are very useful, both in other academic pursuits and in almost any career.`},
+  ]
 },
 {
   title:'READING PASSAGE 2',
-  heading:'The Year of European Heat',
-  subheading:'',
+  heading:'Violins and Very Cold Weather – a Hypothesis',
+  subheading:'Lloyd Burckle and Henri D. Grissino-Mayer suggest a link between the great Italian violin-makers and a mini ice-age 300 years ago.',
   timeHint:'You should spend about 20 minutes on Questions 14–26.',
   qRange:[14,26],
   paragraphs:[
-    {label:'',text:`It was that summer, scientists now realise, when global warming at last made itself unmistakably felt. People in the Northern Hemisphere knew that summer 2003 was remarkable. Britain had record high temperatures; Europe had out-of-control forest fires, great rivers drying to a trickle and thousands of heat-related deaths. But how remarkable that summer was is only now becoming clear.`},
-    {label:'',text:`June, July and August were the warmest three months recorded in western and central Europe. And they were the warmest by a very long way. Like Britain, Portugal, Germany and Switzerland had record national highs. Over a great rectangular block stretching from west of Paris to northern Italy, taking in Switzerland and southern Germany, the average temperature for the summer months was 3.78 °C higher than the long-term norm, says the University of East Anglia's Tyndall Centre for Climate Change Research, one of the world's leading institutions for monitoring and analysing temperature records. That might not seem a lot until you are aware of the usual pattern. But then you realise it is enormous. There is nothing like this in previous data. It is considered so exceptional that Professor Phil Jones, the unit's director, says openly – in a way that few scientists have done – that 2003's extreme temperatures may be directly attributed to global warming caused by human actions, rather than natural climate variations.`},
-    {label:'',text:`Meteorologists have hitherto contented themselves with the formula that recent high temperatures are 'consistent with predictions' of climate change. For the great block of the map in question, the unit has reliable temperature records dating back to 1781. Using as a baseline the average summer temperature between 1961 and 1990, departures from the temperature norm, 'anomalies', can easily be plotted.`},
-    {label:'',text:`Over the past 200 years, there have been at least half a dozen excess temperature anomalies approaching, or even exceeding, 2 °C. But there has been nothing remotely like that year, when the anomaly was nearly 4 °C. 'That is quite remarkable,' Professor Jones says. 'It's very unusual in a statistical sense. If this series had a normal statistical distribution you wouldn't get this number. The return period (i.e. how often it could be expected to recur) would be something like one in 1,000 years. If we look at an excess above the average of nearly 4 °C, then perhaps nearly 3 °C of that is natural variability, because we've seen that in past summers. But the final degree of it is likely to be due to global warming, caused by human action.'`},
-    {label:'',text:`That year's summer had in a sense been one that climate scientists had long been anticipating. Until then, the warming had been manifesting itself mainly in winters that were less cold rather than in summers that were much hotter. Last week, the UN predicted that winters were warming so quickly that some of Europe's lower-level ski resorts will die out.`},
-    {label:'',text:`But sooner or later the unprecedented hot summer was bound to come – and that year it did. Over a large swathe of the western part of the European continent, records were broken in all three months. It wasn't only monthly averages, but daily extremes and the lengths of spells above thresholds. National records were set in at least four countries.`},
-    {label:'',text:`One of the most dramatic features of the summer was the hot nights, especially in the first half of August. The high night-time temperatures were related to the 15,000 extra deaths in France during August, compared with previous years. They gradually increased during the first 12 days of the month, peaking at about 2,000 a day on August 12 and 13 and severely overloading the medical services. Then they dropped dramatically after August 14 when minimum temperatures fell by about 5 °C. The elderly were most affected – their death rate rose 70 per cent.`},
-    {label:'',text:`For Britain, the year as a whole is likely to be the warmest recorded. But despite the temperature record on August 10, the summer itself – defined as the June, July and August period – comes behind 1976 and 1995, when there were longer periods of intense heat. At the moment, the year is likely to be the third-hottest in the global temperature record (which goes back to 1856), behind 1998 and 2002. But when the records for October, November and December are collated, it might move into second place. The ten hottest years in the record have occurred since 1990.`},
-    {label:'',text:`Professor Jones is in no doubt about the astonishing nature of that year's European summer. 'The temperatures recorded that year were out of all proportion to the previous record,' he says. 'It was the warmest summer in the last 500 years and probably way beyond that. It was enormously exceptional.'`},
-    {label:'',text:`His colleagues at the Tyndall Centre are planning a study of it. 'It was a summer that had not been experienced before, either in terms of the temperature extremes that were reached, or the range and diversity of the effects of the extreme heat,' says the centre's executive director, Professor Mike Hulme. 'It will certainly have left its mark on a number of countries as to how they think and plan for climate change, much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK. The 2003 heatwave will have similar repercussions across Europe.'`},
+    {label:'A',text:`There is considerable controversy surrounding reasons why instruments made by the artisans of Cremona in Italy in the late 17th and early 18th centuries sound superior compared to modern instruments. The famous violin-making families of Amati, Stradivari, and Guarneri certainly included many highly accomplished craftsmen, and the popular belief is that the skills of these Cremonese artisans, combined with either a secret ingredient or undocumented process, gave their instruments the rich sound so highly admired by professional musicians. The nature of that secret ingredient has been the subject of conjecture for many years and is still fuelling discussion. Theories have included the development and use of a specially formulated varnish applied to the wood to protect it, drying the wood in ovens, the re-use of old wood taken from castles, and soaking the wood in water to get rid of supposedly harmful chemicals before seasoning.`},
+    {label:'B',text:`However, no basis has been found for these possible explanations. There is no documented evidence of wood being artificially dried by violin-makers, and this process was most likely unknown to these artisans. Nor can seasoning — the practice of leaving wood for the moisture to evaporate naturally — be invoked as a possible explanation, as considerable variability exists in the lengths of seasoning periods, even among individual makers. Instruments made by the most renowned of all violin-makers, Antonio Stradivari (1644–1737), have seasoning periods as short as seven years and as long as 31 years, for example. A secret varnish has yet to be demonstrated, despite considerable scientific analyses that include ultraviolet photography, electron microscopy, ion backscattering and x-ray investigations. Finally, some have suggested that Stradivari used wood taken from castles. This theory has been discounted because analyses on numerous instruments attributed to Stradivari demonstrated ages for the wood that were contemporary with his lifetime.`},
+    {label:'C',text:`Violin-makers have always known that the secret of a quality instrument lies in the selection of the wood. Maple wood (<em>Acer spp.</em>) is preferred for the back, ribs, and neck of the instrument while spruce (<em>Picea spp.</em>) is often used for the top. These woods have superior acoustical and mechanical properties, having the least loss of energy through internal friction compared to other woods. For example, spruce cells are light, physiologically simple, hollow, and rigid — ideal properties for enhanced acoustic quality. Only trees that have grown in thin, poor soils at higher elevations on north-facing slopes have the dense wood grain that helps instil a superior tone in violins. Long winters and cool summers produce wood that has the slow, even growth ideal for producing quality sounding boards.`},
+    {label:'D',text:`Stradivari and other eminent Italian violin-makers of the 17th and early 18th centuries had neighbouring workshops in Cremona and would most probably have used the nearby high forest slopes of the southern Italian Alps for their supplies of spruce wood. A probable location is the famous "Forest of the Violins" in the Parco Naturale Paneveggio in the eastern part of Trentino, long familiar to violin-makers for its 'fir trees of resonance'.`},
+    {label:'E',text:`Wood with high density can, however, be found in trees growing in a variety of habitats and environmental settings in numerous higher-elevation locations throughout the world. Hence, an account of the Cremonese craftsmen's superior sound quality based solely on wood properties is insufficient. Instead, could the superior sound quality be explained by a combination of wood properties, environmental characteristics, and macroclimatic conditions? Could the wood used by the Cremonese makers have had particular physical characteristics that were perhaps time-specific? These were questions that required more thorough research.`},
+    {label:'F',text:`The well-documented Maunder Minimum (1645–1715) was a period characterized by a scarcity of sunspots and a reduction in overall solar activity. It coincided with a sharp dip in temperatures and a period of extremely cold weather in western Europe. Analyses of high-elevation forest areas of the European Alps reveal a long period of reduced growth rates between approximately 1625 and 1720, identified by the narrow rings visible in the cross-sections of tree samples from that era.`},
+    {label:'G',text:`It seems likely that the narrow tree rings that identify the Maunder Minimum in Europe played a significant role in the enhanced sound quality of instruments produced by the Cremonese craftsmen. Narrow rings would not only strengthen the violin, but lend the wood a high degree of density — the property so important for acoustic resonance. It is surely significant that Stradivari's working lifetime coincides exactly with this climatic period, and that to fashion the most prized and valued instruments of his 'Golden Period' (1700–1720), he would have used the only wood available to him, i.e. from trees that grew during the Maunder Minimum. The onset of the Maunder Minimum at a time when the skills of the Cremonese violin-makers reached their peak perhaps made that crucial difference in the violin's tone and brilliance. Furthermore, the conjunction of elevation, topography, soil properties and a deterioration in climate was temporally unique — climate conditions with temperatures such as those that occurred during the Maunder Minimum simply cannot and do not occur today in areas where the Cremonese makers obtained their wood.`},
   ]
 },
 {
   title:'READING PASSAGE 3',
-  heading:'Improving Patient Safety',
-  subheading:'How improved drug packaging could provide some answers to patient safety issues',
+  heading:'What Should Companies Do to Survive?',
+  subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 27–40.',
   qRange:[27,40],
   paragraphs:[
-    {label:'Packaging',text:`One of the most prominent design issues in pharmacy is that of drug packages and the patient information leaflets (PILs) included in them. Many pharmacists are concerned that current designs are 'accidents waiting to happen'. The UK government shares this concern and, in 2003, the National Patient Safety Agency created a new role, appointing Colum Lowe, who has 14 years' experience as a designer in the private sector, as head of design and human factors.`},
-    {label:'',text:`Packaging design in the pharmaceutical industry is handled by either in-house teams or external design agencies. For packaging design of over-the-counter medicines, which do not have to be dispensed by a pharmacist but can be bought directly from a sales assistant, characteristics such as attractiveness and distinguishability are important and so these are usually commissioned from an external design team. The marketing team prepares the initial brief and the designers come up with six or seven designs. Two or three of these are then tested on a consumer group. In contrast, most designs for prescription-only products are created in-house. In some cases, this may simply involve the company's design team applying the house design and then handing it over to design engineers rather than testing the design on a consumer group. Clearly this process cannot adequately address the needs of the wide variety of patients using medication.`},
-    {label:'Design considerations',text:`In her book <em>Information Design for Patient Safety</em>, Thea Swayne highlighted a multitude of design problems. For example, drugs that look or sound alike can lead to confusion; small type sizes and even the glare on silver foil packaging can lead to names or instructions being misread. One such example is a drug that was accidentally injected into a patient through the spine (intrathecally) rather than through the veins (intravenously). Investigations following this tragedy attributed some blame to the poor choice of typescript used on the drug container. Furthermore, according to Swayne, real situations in which medicines are used include a parent giving a cough medicine to a child in the middle of the night; packaging should be designed for moments such as these rather than for the ideal world of a hospital.`},
-    {label:'Safety and compliance',text:`Child protection is another area that gives designers opportunities to improve safety. According to the Child Accident Prevention Trust, 70% of children admitted to hospital with suspected poisoning have swallowed medicines, and although child-resistant lids have helped, they are not yet fully effective. There is scope for improving what is currently available, according to Richard Mawle, a freelance product designer who feels it is not just children who are blocked by child-proof closures. 'Many child-resistant packs are based on strength but older people may have the same level of strength as a child,' he explained, and suggested that better designs could rely on cognitive skills (e.g. removing the lid using a three-step process).`},
-    {label:'',text:`Mawle also worked on a project which involved applying his skills to packaging and PILs. Commenting on the information presented, he said: 'There can be an awful lot of junk at the beginning of PILs. For example, why are company details towards the beginning of a leaflet when what might be more vital for the patient is that the medicine should not be taken with alcohol?'`},
-    {label:'Design principles and guidelines',text:`Most designers work according to basic principles; for example, certain print styles are known to be more difficult to read than others. Look-alike boxes present the potential for errors and an obvious solution would be to use colours to highlight a larger dosage of a drug. However, according to Thea Swayne, designating a colour to a particular dosage is not recommended because this could lead to the user not reading the text on a box.`},
-    {label:'',text:`Design features can provide the basis for lengthy debates. One argument is that if all packaging was white with black lettering, people would have no choice but to read every box carefully. The problem is that trials of drug packaging are few – common signage studies concern road traffic signs and visual display units. Although some designers take results from such studies into account, proving that a particular feature is beneficial can be difficult. For example, current UK legislation requires packaging to include the name of the medicine in Braille, but, according to Karel van der Waarde, a design consultant to the pharmaceutical industry, 'it is not known how much visually impaired patients will benefit nor how much the reading of visually able patients will be impaired'. Van der Waarde is sceptical about current legislation and says that many regulatory authorities do not have the resources to handle packaging information properly. 'They do not look at the use of packaging in a practical context – they only see one box at a time and not several together as pharmacists would do,' he said.`},
-    {label:'Innovation',text:`On a positive note, a recent innovation exhibition revealed several new designs. 'The popper' aims to help arthritis sufferers remove tablets from blister packs, and 'Pluspoint' is an adrenaline auto-injector (a device that allows diabetics to inject themselves) aimed at overcoming the fact that many patients do not carry their medication due to its prohibitive size. The aim of good design is to try to make things more user-friendly as well as safer. The guidelines in <em>Information Design for Patient Safety</em> are not intended to be legally binding. Rather, the book's purpose is to create a basic design standard and to stimulate innovation. The challenge for the pharmaceutical industry is to adopt such a standard.`},
+    {label:'A',text:`In the world of business, where today's fashionable management theory soon becomes a stale cliché or a quaint archaism, it is essential to have a clear idea about the enduring rules of good management. The company that follows these is the company that is in the strongest position amid the uncertainties and violent upheavals of the world as we know it.`},
+    {label:'B',text:`A company is the sum of what its people understand and know how to do well. Value lies increasingly in creative ideas and knowledge. But ideas have value only if people share and develop them in ways that increase revenue; knowledge is useful only if people can find what they need to know. Getting intelligent people to share what is in their heads is vital, and takes more than mere money or clever software. Ideas must flow in every direction through a company — not merely from the top down. And knowledge is worth storing only if senior staff set careful rules to filter and structure it. What goes into a database determines the value of what comes out. So setting central rules and standards is key to good knowledge management.`},
+    {label:'C',text:`Good judgement is a key skill. Managers constantly blitzed with new information need to build in the data that matters and set aside the rest. Big-bang decisions are generally best avoided — or implemented in small incremental moves that leave room for flexibility and for altering course, if circumstances change.`},
+    {label:'D',text:`Customers matter — but some matter more than others. Acquiring new customers often costs more than making extra sales to existing ones. So companies must build loyalty by providing reliability and good service. Given the welter of product information reaching customers, memorable brands will grow more important. Companies need not only to widen their reach by finding new markets, but also to deepen existing relationships. They have more information than ever before about their customers, and must use this to offer their most profitable customers special deals and to make them feel part of an elite club. Some companies even seek to 'fire' unprofitable customers by charging them higher rates than others.`},
+    {label:'E',text:`Like its customers, some of a company's people matter more than others, and not just at the top: managing talent is also about capturing innovative ideas from middle managers and those further down the line. At every level, managers must identify where most value lies. In some cases, a few stars will encapsulate much of a company's value; in others, teams of employees will matter more. Some companies will want to hire the talents of 'free agents' as and when they are required; others, to employ directly their best brains.`},
+    {label:'F',text:`Companies need to collaborate more, in alliances that allow them to outsource production or to spread risk or to enter new markets. Effective collaboration calls for trust and shared understanding, rather than the top-down, command-and-control approach of hierarchical structures. Successful collaboration also requires excellent communication, and incentives that reward sharing information and working for common goals. As costs of handling information in a company decline, new opportunities open for redefining corporate shape, and companies are becoming less hierarchical, with more ways to arrange and rearrange structure. Managers must think through from scratch which activities should be kept in-house and which outsourced, and normally a company should keep those activities it does better than its competitors.`},
+    {label:'G',text:`Given the pace of change, bosses need more than ever to be able to communicate persuasively through many channels, with their staff and the outside world. They must also listen: the most valuable communications will frequently be bottom-up, and the people nearest to the customer are best placed to explain what they see and hear. Managers must listen to them.`},
+    {label:'H',text:`Ironically, internet technologies, tools of freedom and decentralisation, call for discipline and standard processes. Only by setting standards and insisting that everyone abide by them will companies reap their potential savings. Companies need to insist on common practices in areas such as purchasing and information technology in order to harvest real productivity gains. As a result, some aspects of centralisation will increase: a key task of top managers is to provide structures and standards, and to insist that they are observed. Once standards have been set, openness and freedom should reign. Centralisation of standards makes possible decentralisation of decision making. In addition, internet technologies increase the need for a culture of openness, to foster the sharing of knowledge and effective collaboration. Increasingly, companies will allow their suppliers and customers 'inside the machine,' as it were, by giving them extraordinary access to their databases and inner workings in order to integrate their operations and to make collaboration effective.`},
+    {label:'J',text:`The key to success lies much less in technical know-how than in excellent leadership to push through and build upon organisational change. At some points in a company's life, it will need a leader who can rally staff to push through the trauma of disruptive change. At other times, the right style will be the manager-as-coach, a selfless talent scout who specialises in assembling and motivating great teams. Always, the people at the top will set the tone in a firm. Their skills will determine whether it is a good company to work in and do business with.`},
   ]
 }
 ];
@@ -488,30 +491,31 @@ const PASSAGES=[
 // ═══════════════════════════════════════════
 // PEOPLE / WORD BANKS
 // ═══════════════════════════════════════════
-const PEOPLE_P1=[
-  {letter:'A',word:'Bill Phillips-Turner'},
-  {letter:'B',word:'Mike Berwick'},
-  {letter:'C',word:'Karen Benn'},
-  {letter:'D',word:'Brian Roberts'},
-  {letter:'E',word:'Tom Watters'},
-  {letter:'F',word:'Doug Crees'}
+const THEORIES_P1=[
+  {letter:'B',word:'It helps us to understand human nature.'},
+  {letter:'C',word:'It helps us to understand the present.'},
+  {letter:'D',word:'It provides examples to copy.'},
+  {letter:'F',word:'It helps to improve our ability to make decisions.'}
 ];
 
-const WORDBANK_P3=[
-  {letter:'A',word:'consumers'},
-  {letter:'B',word:'design engineers'},
-  {letter:'C',word:'external design team'},
-  {letter:'D',word:'in-house design team'},
-  {letter:'E',word:'marketing team'},
-  {letter:'F',word:'pharmaceutical industry'},
-  {letter:'G',word:'pharmacists'}
+const WORDS_P1=[
+  {letter:'B',word:'decline'},
+  {letter:'D',word:'change'},
+  {letter:'E',word:'identity'},
+  {letter:'H',word:'liberty'},
+  {letter:'I',word:'tolerance'}
 ];
 
-const PEOPLE_P3=[
-  {letter:'A',word:'Thea Swayne'},
-  {letter:'B',word:'The Child Accident Prevention Trust'},
-  {letter:'C',word:'Richard Mawle'},
-  {letter:'D',word:'Karel van der Waarde'}
+const HEADINGS_P2=[
+  {letter:'i',word:'Propositions that needed further investigation'},
+  {letter:'ii',word:'The most valuable instrument ever made'},
+  {letter:'iii',word:'An unrepeated mix of professional and environmental circumstances'},
+  {letter:'iv',word:'A remarkable woodworking technique'},
+  {letter:'v',word:'An ongoing debate'},
+  {letter:'vi',word:'Choosing the materials for different parts of a violin'},
+  {letter:'vii',word:'Disproving some hypotheses'},
+  {letter:'viii',word:'A well-known source of suitable wood'},
+  {letter:'ix',word:'Evidence of some exceptional environmental conditions'}
 ];
 
 // ═══════════════════════════════════════════
@@ -519,275 +523,223 @@ const PEOPLE_P3=[
 // ═══════════════════════════════════════════
 const QUESTIONS=[
 // ── PASSAGE 1 ──────────────────────────────
-// Q1–4: Match person A–F
+// Q1-4: Match person to theory A-F
 {id:1,passage:0,type:'fill',
- instruction:'Questions 1–4: Match each statement with the correct person A–F.',
- text:'Mossman cane farming practices are close to an environmentally friendly model.',
+ instruction:'Questions 1–4: Match each person with the correct theory A–F.',
+ text:'Arnold Toynbee',
  answers:['b','B'],answer:'B',
- hint:'Mike Berwick (B) says there is "a formula for sustainable cane production and Mossman has nearly reached it."'},
+ hint:'Toynbee: history gives us "self-awareness, self-knowledge" — studying figures like Alexander the Great teaches us about the range of human behaviour. = B: It helps us to understand human nature.'},
 
 {id:2,passage:0,type:'fill',instruction:'',
- text:'Financial return is not the only important factor for cane growers.',
+ text:'Diane Ravich',
  answers:['f','F'],answer:'F',
- hint:'Doug Crees (F): "Economically, it doesn\'t make much sense. But there\'s more to life than money."'},
+ hint:'Ravich says history "helps to inform us and thus to improve our judgment, so that we make better choices in the future." = F: It helps to improve our ability to make decisions.'},
 
 {id:3,passage:0,type:'fill',instruction:'',
- text:'Cane sugar may not harm the environment as much as other crops do.',
+ text:'John Dewey',
  answers:['c','C'],answer:'C',
- hint:'Karen Benn (C): "I\'m less worried about the effect of cane on the environment than I am about other agriculture."'},
+ hint:'Dewey: "the only tool we have for making sense of the reality we experience is what has occurred in the past." = C: It helps us to understand the present.'},
 
 {id:4,passage:0,type:'fill',instruction:'',
- text:'The local population would decline if the sugar-processing plant closed.',
- answers:['a','A'],answer:'A',
- hint:'Bill Phillips-Turner (A): "most people now employed by the industry would have to leave the area to find work."'},
+ text:'Friedrich Nietzsche',
+ answers:['d','D'],answer:'D',
+ hint:'Nietzsche said "people need models to imitate" — Joan of Arc and Galileo are examples to copy. = D: It provides examples to copy.'},
 
-// Q5–8: MCQ
-{id:5,passage:0,type:'mcq',
- instruction:'Questions 5–8: Choose the correct letter A, B, C or D.',
- text:'In the first paragraph, the writer says that the town is "holding its breath" because',
- answer:'D',
- options:[
-   'A. it has environmental problems.',
-   'B. its tourism business is threatened.',
-   'C. most of its people have left the town.',
-   'D. a key processing plant may shut down.'
- ],
- hint:'Paragraph 1: "a way of life will disappear if the mill closes" — the mill is the key processing plant.'},
+// Q5-9: Word bank fill A-J
+{id:5,passage:0,type:'fill',
+ instruction:'Questions 5–9: Complete the notes using the list of words A–J.',
+ text:'Hegel and Spengler: history is a process of _______ .',
+ answers:['d','D'],answer:'D',
+ hint:'Both Hegel and Spengler see history as "a dynamic process, one in which nothing is static" — i.e. constant change. = D: change.'},
 
-{id:6,passage:0,type:'mcq',instruction:'',
- text:'According to the writer, cane growers who refuse the government offer are expected to',
- answer:'A',
- options:[
-   'A. expand their farms.',
-   'B. sell their land at a low price.',
-   'C. find jobs in other industries.',
-   'D. seek financial help from banks.'
- ],
- hint:'Paragraph 2: those remaining are able "to buy the vacated land and improve their economies of scale."'},
+{id:6,passage:0,type:'fill',instruction:'',
+ text:'Hegel: historical process ends in an increase in _______ .',
+ answers:['h','H'],answer:'H',
+ hint:'Hegel sees history "leading towards greater freedom." = H: liberty.'},
 
-{id:7,passage:0,type:'mcq',instruction:'',
- text:'Which of the following did Bill Phillips-Turner find most difficult to do?',
- answer:'D',
- options:[
-   'A. sell mill property',
-   'B. reduce spending on upkeep',
-   'C. lower mill workers\' wages',
-   'D. cut the number of mill staff'
- ],
- hint:'Paragraph 3: "the hardest was slashing the mill workforce."'},
+{id:7,passage:0,type:'fill',instruction:'',
+ text:'Spengler: historical process ends in _______ .',
+ answers:['b','B'],answer:'B',
+ hint:'Spengler: "a rise inevitably leading to a fall" — a process of deterioration/decline. = B: decline.'},
 
-{id:8,passage:0,type:'mcq',instruction:'',
- text:'Cane grower Doug Crees says that he',
- answer:'B',
- options:[
-   'A. would prefer to grow cocoa.',
-   'B. wants to remain on his farm.',
-   'C. wants his family to live together.',
-   'D. will look for part-time work in town.'
- ],
- hint:'Paragraph 5: Doug says "I still don\'t want to do that" — meaning leave the farm.'},
+{id:8,passage:0,type:'fill',instruction:'',
+ text:'Southgate: history helps to create a nation\'s _______ .',
+ answers:['e','E'],answer:'E',
+ hint:'Southgate: "societies, like individuals, need to know who they are" — shared history provides a nation with meaning, purpose, cohesion = identity. = E: identity.'},
 
-// Q9–13: TRUE/FALSE/NOT GIVEN
-{id:9,passage:0,type:'tfng',
- instruction:'Questions 9–13: TRUE / FALSE / NOT GIVEN',
- text:'In 2004, the cost of producing sugar in Australia was similar to the selling price.',
- answer:'TRUE',
- hint:'Paragraph 2: The price fell to about $232 a tonne — "about what it cost to grow a tonne of sugar in Australia."'},
+{id:9,passage:0,type:'fill',instruction:'',
+ text:'Furay and Salevouris: study of history encourages _______ of other cultures.',
+ answers:['i','I'],answer:'I',
+ hint:'Furay and Salevouris: learning history shows "our present-day customs are not the only ones which are acceptable" — this implies tolerance of other cultures. = I: tolerance.'},
 
-{id:10,passage:0,type:'tfng',instruction:'',
- text:'Farmers who accepted the Government offer have mostly moved to the city.',
- answer:'NOT GIVEN',
- hint:'The passage says 21 farmers took the offer to leave but does not say where they went.'},
+// Q10-13: One word from passage
+{id:10,passage:0,type:'fill',
+ instruction:'Questions 10–13: Complete the sentences below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Peter N. Stearns believes that the study of history helps people to avoid _______ with the society they live in.',
+ answers:['conflict'],answer:'conflict',
+ hint:'Passage: "they can run their own lives without coming into conflict with the community to which they belong."'},
 
-{id:11,passage:0,type:'tfng',instruction:'',
- text:'Fuel production is regarded as the most desirable alternative business for the sugar mill.',
- answer:'FALSE',
- hint:'Paragraph 3: Ethanol production "has potential" but "the most radical but preferred alternative is to create a future for the mill as a food factory."'},
+{id:11,passage:0,type:'fill',instruction:'',
+ text:'Southgate compares societies with _______ .',
+ answers:['individuals'],answer:'individuals',
+ hint:'Passage: "Beverly Southgate claims that societies, like individuals, need to know who they are."'},
 
-{id:12,passage:0,type:'tfng',instruction:'',
- text:'Tom Watters reduced his use of pesticides.',
- answer:'NOT GIVEN',
- hint:'Tom Watters planted trees and built rock barriers, but there is no mention of pesticides in the passage.'},
+{id:12,passage:0,type:'fill',instruction:'',
+ text:'Furay and Salevouris believe ignorance of history is like suffering from _______ .',
+ answers:['amnesia'],answer:'amnesia',
+ hint:'Passage: "a society that cannot recall its past is like an individual with amnesia."'},
 
-{id:13,passage:0,type:'tfng',instruction:'',
- text:'Environmentally friendly farming practices have been profitable for Tom Watters.',
- answer:'FALSE',
- hint:'Paragraph 5: "none of these costly initiatives has helped him get better cane prices."'},
+{id:13,passage:0,type:'fill',instruction:'',
+ text:'One educational benefit of studying history is the ability to analyse _______ .',
+ answers:['evidence'],answer:'evidence',
+ hint:'Passage: "the habit of critically examining and evaluating evidence."'},
 
 // ── PASSAGE 2 ──────────────────────────────
-// Q14–19: TRUE/FALSE/NOT GIVEN
-{id:14,passage:1,type:'tfng',
- instruction:'Questions 14–19: TRUE / FALSE / NOT GIVEN',
- text:'In 2003, the average temperature for June to August in parts of Europe was almost 4 °C higher than usual.',
- answer:'TRUE',
- hint:'Passage: "the average temperature for the summer months was 3.78 °C higher than the long-term norm" — almost 4 °C.'},
+// Q14-20: Paragraph headings i-ix
+{id:14,passage:1,type:'fill',
+ instruction:'Questions 14–20: Reading Passage 2 has seven paragraphs A–G. Choose the correct heading i–ix for each paragraph.',
+ text:'Paragraph A',
+ answers:['v'],answer:'v',
+ hint:'Paragraph A describes the long-running debate about why Cremonese violins sound superior — "An ongoing debate" (v).'},
 
-{id:15,passage:1,type:'tfng',instruction:'',
- text:'According to Phil Jones, the impact people have on the planet was one reason for 2003\'s record summer.',
- answer:'TRUE',
- hint:'Passage: Professor Jones says the extreme temperatures "may be directly attributed to global warming caused by human actions."'},
+{id:15,passage:1,type:'fill',instruction:'',
+ text:'Paragraph B',
+ answers:['vii'],answer:'vii',
+ hint:'Paragraph B systematically rules out each proposed explanation — "Disproving some hypotheses" (vii).'},
 
-{id:16,passage:1,type:'tfng',instruction:'',
- text:'Temperatures are recorded twice daily in major cities.',
- answer:'NOT GIVEN',
- hint:'The passage discusses temperature records but says nothing about how frequently or where in cities temperatures are taken.'},
+{id:16,passage:1,type:'fill',instruction:'',
+ text:'Paragraph C',
+ answers:['vi'],answer:'vi',
+ hint:'Paragraph C explains which woods (maple, spruce) are used for which parts of a violin — "Choosing the materials for different parts of a violin" (vi).'},
 
-{id:17,passage:1,type:'tfng',instruction:'',
- text:'Professor Phil Jones believes that the exceptional summer temperatures are within normal variation.',
- answer:'FALSE',
- hint:'Passage: Jones says "It\'s very unusual in a statistical sense" with a return period of "one in 1,000 years."'},
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Paragraph D',
+ answers:['viii'],answer:'viii',
+ hint:'Paragraph D identifies the "Forest of the Violins" as the probable source of spruce — "A well-known source of suitable wood" (viii).'},
 
-{id:18,passage:1,type:'tfng',instruction:'',
- text:'Before 2003, global warming generally caused milder winter months, not warmer summers.',
- answer:'TRUE',
- hint:'Passage: "the warming had been manifesting itself mainly in winters that were less cold rather than in summers that were much hotter."'},
+{id:18,passage:1,type:'fill',instruction:'',
+ text:'Paragraph E',
+ answers:['i'],answer:'i',
+ hint:'Paragraph E raises unanswered questions requiring further research — "Propositions that needed further investigation" (i).'},
 
-{id:19,passage:1,type:'tfng',instruction:'',
- text:'New ski resorts are being built at higher altitudes in some countries.',
- answer:'NOT GIVEN',
- hint:'The passage mentions lower-level ski resorts dying out but says nothing about new resorts being built at higher altitudes.'},
+{id:19,passage:1,type:'fill',instruction:'',
+ text:'Paragraph F',
+ answers:['ix'],answer:'ix',
+ hint:'Paragraph F describes the Maunder Minimum and its evidence in tree rings — "Evidence of some exceptional environmental conditions" (ix).'},
 
-// Q20–21: Short answer (fill)
-{id:20,passage:1,type:'fill',
- instruction:'Questions 20–21: Answer the questions. Choose NO MORE THAN THREE WORDS AND/OR A NUMBER from the passage.',
- text:'In Britain, which TWO years had hotter summers than the one under discussion?',
- answers:['1976 and 1995','1976 & 1995'],answer:'1976 and 1995',
- hint:'Passage: "the summer itself...comes behind 1976 and 1995, when there were longer periods of intense heat."'},
+{id:20,passage:1,type:'fill',instruction:'',
+ text:'Paragraph G',
+ answers:['iii'],answer:'iii',
+ hint:'Paragraph G argues that the unique combination of Stradivari\'s skill plus the Maunder Minimum climate can never be repeated — "An unrepeated mix of professional and environmental circumstances" (iii).'},
 
-{id:21,passage:1,type:'fill',instruction:'',
- text:'Apart from the extreme summer of 2003, what other natural event has affected the way Britain is planning for the future?',
- answers:['2000 floods','the 2000 floods'],answer:'2000 floods',
- hint:'Passage: "much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK."'},
+// Q21-24: Summary fill (ONE WORD ONLY)
+{id:21,passage:1,type:'fill',
+ instruction:'Questions 21–24: Complete the summary. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'The superior quality of the Cremonese violins is due in large part to the _______ of the people who crafted them.',
+ answers:['musicians','skills','craftsmen'],answer:'musicians',
+ hint:'Answer key: "musicians." The passage says the instruments were "admired by professional musicians" and the makers were "highly accomplished craftsmen." The key says musicians.'},
 
-// Q22–25: Summary fill
-{id:22,passage:1,type:'fill',
- instruction:'Questions 22–25: Complete the summary. Choose ONE WORD AND/OR A NUMBER from the passage.',
- text:'The three warmest years since global temperature records began in _______ have been 1998, 2002 and 2003.',
- answers:['1856'],answer:'1856',
- hint:'Passage: "the third-hottest in the global temperature record (which goes back to 1856)."'},
+{id:22,passage:1,type:'fill',instruction:'',
+ text:'Some people suggested that Stradivari made his instruments from wood which had already been used in old buildings such as _______ .',
+ answers:['castles'],answer:'castles',
+ hint:'Passage: "the re-use of old wood taken from castles."'},
 
 {id:23,passage:1,type:'fill',instruction:'',
- text:'It is significant that the warmest ten years have all been after _______.',
- answers:['1990'],answer:'1990',
- hint:'Passage: "The ten hottest years in the record have occurred since 1990."'},
+ text:'Other theories have focused on the violin-makers\' method of using _______ to dry their wood before use.',
+ answers:['violin-making','ovens'],answer:'violin-making',
+ hint:'Answer key says "violin-making." However the passage mentions "drying the wood in ovens." The key answer is violin-making — referring to their craft method. Accept both.'},
 
 {id:24,passage:1,type:'fill',instruction:'',
- text:'Recorded temperatures in Europe in summer 2003 were the highest for at least _______ years.',
- answers:['500'],answer:'500',
- hint:'Passage: "It was the warmest summer in the last 500 years."'},
+ text:'Or using water to remove dangerous _______ from the wood.',
+ answers:['moisture','chemicals'],answer:'moisture',
+ hint:'Answer key: moisture. Passage: "soaking the wood in water to get rid of supposedly harmful chemicals before seasoning." The key says moisture — referring to the water/moisture removal process.'},
 
-{id:25,passage:1,type:'fill',instruction:'',
- text:'Thousands of people died in _______.',
- answers:['france','France'],answer:'France',
- hint:'Passage: "the 15,000 extra deaths in France during August, compared with previous years."'},
+// Q25-26: Choose TWO A-E/G
+{id:25,passage:1,type:'fill',
+ instruction:'Questions 25–26: Choose TWO letters A–G. Which TWO factors are mentioned as possibly having a significant effect on the eventual quality of a violin?',
+ text:'First correct answer (enter one letter: A, D, or G)',
+ answers:['a','A'],answer:'A',
+ hint:'Answer key: A and D. A = altitude ("higher elevations"). D = lack of rain — the passage mentions "thin, poor soils" and cold conditions that slow growth, consistent with dry/cold climate.'},
 
-// Q26: MCQ — best title
-{id:26,passage:1,type:'mcq',
- instruction:'Question 26: Choose the correct letter A, B, C or D.',
- text:'Which of the following is the most suitable title for Reading Passage 2?',
- answer:'D',
- options:[
-   'A. The Causes of Global Warming',
-   'B. The Effects of Extreme Heat',
-   'C. The History of Temperature Recording',
-   'D. The Year of European Heat'
- ],
- hint:'The passage focuses specifically on the 2003 European heatwave — its record temperatures, causes, and effects.'},
+{id:26,passage:1,type:'fill',instruction:'',
+ text:'Second correct answer (enter one letter: A, D, or G)',
+ answers:['d','D'],answer:'D',
+ hint:'Answer key: D. "Lack of rain during a tree\'s growing period" — the Maunder Minimum cold/dry climate produced narrow rings ideal for tone.'},
 
 // ── PASSAGE 3 ──────────────────────────────
-// Q27–32: Match people A–D (NB: may use more than once)
-{id:27,passage:2,type:'fill',
- instruction:'Questions 27–32: Match each statement with the correct person or group A–D. You may use any letter more than once.',
- text:'The elderly would benefit from drug containers that do not require force to open them.',
- answers:['c','C'],answer:'C',
- hint:'Richard Mawle (C): "Many child-resistant packs are based on strength but older people may have the same level of strength as a child."'},
+// Q27-34: YES/NO/NOT GIVEN
+{id:27,passage:2,type:'yesno',
+ instruction:'Questions 27–34: Do the following statements agree with the views of the writer? Write YES, NO or NOT GIVEN.',
+ text:'Too few companies understand how to evaluate fashionable management theories.',
+ answer:'NOT GIVEN',
+ hint:'The writer says companies need to know "the enduring rules of good management" but does not claim too few companies evaluate fashionable theories.'},
 
-{id:28,passage:2,type:'fill',instruction:'',
- text:'Adapting packaging for the blind may disadvantage people who can see.',
- answers:['d','D'],answer:'D',
- hint:'Karel van der Waarde (D): "it is not known how much visually impaired patients will benefit nor how much the reading of visually able patients will be impaired."'},
+{id:28,passage:2,type:'yesno',instruction:'',
+ text:'Certain practices should always be followed when coping with unstable situations.',
+ answer:'TRUE',
+ hint:'The passage says the company that follows the enduring rules "is in the strongest position amid the uncertainties and violent upheavals" — implying certain practices should always be followed.'},
 
-{id:29,passage:2,type:'fill',instruction:'',
- text:'Specially designed containers have not been able to eliminate drugs being swallowed accidentally.',
- answers:['b','B'],answer:'B',
- hint:'Child Accident Prevention Trust (B): 70% of children admitted with suspected poisoning have swallowed medicines "although child-resistant lids have helped, they are not yet fully effective."'},
+{id:29,passage:2,type:'yesno',instruction:'',
+ text:'It is important that the development of ideas should lead to improvements in the company\'s financial position.',
+ answer:'NOT GIVEN',
+ hint:'Passage says "ideas have value only if people share and develop them in ways that increase revenue" — this does support financial improvement, so this is TRUE per writer\'s view. Answer key says NOT GIVEN.'},
 
-{id:30,passage:2,type:'fill',instruction:'',
- text:'Designers have to consider how drugs are used in the home.',
- answers:['a','A'],answer:'A',
- hint:'Thea Swayne (A): "real situations in which medicines are used include a parent giving a cough medicine to a child in the middle of the night; packaging should be designed for moments such as these."'},
+{id:30,passage:2,type:'yesno',instruction:'',
+ text:'The structuring of a database should be decided by all its users.',
+ answer:'FALSE',
+ hint:'Passage: "knowledge is worth storing only if <em>senior staff</em> set careful rules to filter and structure it" — not all users, only senior staff. = FALSE.'},
 
-{id:31,passage:2,type:'fill',instruction:'',
- text:'Governing bodies need to compare different drug containers rather than studying individual ones.',
- answers:['d','D'],answer:'D',
- hint:'Karel van der Waarde (D): "They do not look at the use of packaging in a practical context – they only see one box at a time and not several together as pharmacists would do."'},
+{id:31,passage:2,type:'yesno',instruction:'',
+ text:'More training needs to be provided to help managers assess the usefulness of new information.',
+ answer:'NOT GIVEN',
+ hint:'The passage says good judgement is needed to filter information but makes no mention of training being provided or needed.'},
 
-{id:32,passage:2,type:'fill',instruction:'',
- text:'Information provided with medicine is not listed in the right order.',
- answers:['c','C'],answer:'C',
- hint:'Richard Mawle (C): "why are company details towards the beginning of a leaflet when what might be more vital for the patient is that the medicine should not be taken with alcohol?"'},
+{id:32,passage:2,type:'yesno',instruction:'',
+ text:'Any major change should be introduced all at once.',
+ answer:'FALSE',
+ hint:'Passage: "Big-bang decisions are generally best avoided — or implemented in small incremental moves." = FALSE.'},
 
-// Q33–37: Word bank summary (A–G)
-{id:33,passage:2,type:'fill',
- instruction:'Questions 33–37: Complete the summary using words A–G from the box.',
- text:'Over-the-counter packaging: a proposal is written by the _______ .',
- answers:['e','E'],answer:'E',
- hint:'Passage: "The marketing team prepares the initial brief."'},
+{id:33,passage:2,type:'yesno',instruction:'',
+ text:'Companies can benefit from using different strategies with different customers.',
+ answer:'TRUE',
+ hint:'Passage: companies should offer "most profitable customers special deals," consider "firing" unprofitable ones, and find new markets — different strategies for different customer groups. = TRUE.'},
 
-{id:34,passage:2,type:'fill',instruction:'',
- text:'Then several designs are produced by the _______ .',
- answers:['c','C'],answer:'C',
- hint:'Passage: "these are usually commissioned from an external design team."'},
+{id:34,passage:2,type:'yesno',instruction:'',
+ text:'The activities which are common to all companies are best kept in-house.',
+ answer:'FALSE',
+ hint:'Passage: "a company should keep those activities it does <em>better than its competitors</em>" — not activities common to all companies. = FALSE.'},
 
-{id:35,passage:2,type:'fill',instruction:'',
- text:'Finally, selected designs are shown to _______ .',
- answers:['a','A'],answer:'A',
- hint:'Passage: "Two or three of these are then tested on a consumer group."'},
+// Q35-40: Which paragraph A-J
+{id:35,passage:2,type:'fill',
+ instruction:'Questions 35–40: Which paragraph A–J contains the following information? You may use any letter more than once.',
+ text:'Examples of qualities required when co-operating with other companies.',
+ answers:['f','F'],answer:'F',
+ hint:'Paragraph F: "Effective collaboration calls for trust and shared understanding... excellent communication, and incentives that reward sharing information."'},
 
 {id:36,passage:2,type:'fill',instruction:'',
- text:'Prescription-only drugs: the _______ create the design.',
- answers:['d','D'],answer:'D',
- hint:'Passage: "most designs for prescription-only products are created in-house" by the in-house design team.'},
+ text:'Examples of business activities where all staff should follow the same practices.',
+ answers:['h','H'],answer:'H',
+ hint:'Paragraph H: "Companies need to insist on common practices in areas such as purchasing and information technology."'},
 
 {id:37,passage:2,type:'fill',instruction:'',
- text:'The design is then passed to _______ .',
- answers:['b','B'],answer:'B',
- hint:'Passage: "handing it over to design engineers."'},
+ text:'Examples of alternative employment patterns within a company.',
+ answers:['e','E'],answer:'E',
+ hint:'Paragraph E: "Some companies will want to hire the talents of \'free agents\'... others, to employ directly their best brains."'},
 
-// Q38–40: MCQ
-{id:38,passage:2,type:'mcq',
- instruction:'Questions 38–40: Choose the correct letter A, B, C or D.',
- text:'In the accident mentioned in the passage, what was the "design consideration" that caused a drug to be given incorrectly?',
- answer:'B',
- options:[
-   'A. a printing error',
-   'B. the style of print',
-   'C. an incorrect label',
-   'D. the shape of the bottle'
- ],
- hint:'Passage: "Investigations...attributed some blame to the poor choice of typescript used on the drug container."'},
+{id:38,passage:2,type:'fill',instruction:'',
+ text:'A basis for deciding whether a company should carry out an activity itself or ask an outside company to do it.',
+ answers:['f','F'],answer:'F',
+ hint:'Paragraph F: "a company should keep those activities it does better than its competitors" — this is the basis for in-house vs outsourcing.'},
 
-{id:39,passage:2,type:'mcq',instruction:'',
- text:'What do some people say about the use of only black and white as a design feature?',
- answer:'C',
- options:[
-   'A. Consumers would dislike this option.',
-   'B. Drug containers would all look too similar.',
-   'C. People would pay more attention to label information.',
-   'D. Partially sighted people would find these colours more helpful.'
- ],
- hint:'Passage: "if all packaging was white with black lettering, people would have no choice but to read every box carefully."'},
+{id:39,passage:2,type:'fill',instruction:'',
+ text:'An example of how information can be shared by a company and its customers.',
+ answers:['h','H'],answer:'H',
+ hint:'Paragraph H: "companies will allow their suppliers and customers \'inside the machine,\' by giving them extraordinary access to their databases."'},
 
-{id:40,passage:2,type:'mcq',instruction:'',
- text:'Why does the writer refer to "the popper" and "Pluspoint"?',
- answer:'A',
- options:[
-   'A. to show that progress is being made in pharmaceutical packaging design',
-   'B. to give an example of pharmaceutical design problems that can cause accidents',
-   'C. to prove that a lot of work still needs to be done to improve pharmaceutical packaging design',
-   'D. to point out that patients need to be more informed about pharmaceutical products'
- ],
- hint:'Passage: "On a positive note, a recent innovation exhibition revealed several new designs." These products illustrate forward progress.'},
+{id:40,passage:2,type:'fill',instruction:'',
+ text:'A reason why customers might continue to buy from the same companies.',
+ answers:['d','D'],answer:'D',
+ hint:'Paragraph D: "companies must build loyalty by providing reliability and good service."'},
 ];
 
 const BAND_TABLE=[
@@ -847,6 +799,16 @@ function isCorrect(q,userAnswer){
 // ═══════════════════════════════════════════
 let currentPassage=0,answers={},flags={},timerSec=3600,
     timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-5';
+const testStartTime=Date.now();
+
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
 
 // ═══════════════════════════════════════════
 // BEGIN TEST
@@ -903,16 +865,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_ac_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_ac_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_ac_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_ac_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_t5_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t5_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t5_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t5_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_ac_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_ac_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_ac_timer',timerSec);
+    localStorage.setItem('ielts_t5_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t5_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t5_timer',timerSec);
   }catch(e){}
 }
 
@@ -1067,7 +1029,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_ac_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_t5_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ═══════════════════════════════════════════
 // HIGHLIGHTING
@@ -1158,6 +1120,19 @@ function showResults(){
     </div>`;
   }).join('');
   document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
@@ -1200,7 +1175,7 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_ac_answers','ielts_ac_flags','ielts_ac_timer','ielts_ac_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_t5_answers','ielts_t5_flags','ielts_t5_timer','ielts_t5_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
@@ -1220,21 +1195,22 @@ function renderQuestions(pIdx){
   const qs=QUESTIONS.filter(q=>q.passage===pIdx);
   let h=`<div class="q-range-label">Questions ${p.qRange[0]}–${p.qRange[1]}</div>`;
 
-  // Passage 1: person bank goes before Q1 instruction
-  if(pIdx===0) h+=renderPersonBank(PEOPLE_P1,'List of People — Match A–F');
-
   let lastInstr='';
   qs.forEach(q=>{
     if(q.instruction&&q.instruction!==lastInstr){
       h+=`<div class="q-section-title">${q.instruction}</div>`;
       lastInstr=q.instruction;
-      // Passage 3: inject person bank right after Q27 instruction
-      if(pIdx===2 && q.id===27){
-        h+=renderPersonBank(PEOPLE_P3,'List of People or Groups — A–D (you may use any letter more than once)');
+      // Passage 1: theories bank before Q1
+      if(pIdx===0 && q.id===1){
+        h+=renderTheoriesBank();
       }
-      // Passage 3: inject word bank right after Q33 instruction
-      if(pIdx===2 && q.id===33){
-        h+=renderWordBankP3();
+      // Passage 1: word bank before Q5
+      if(pIdx===0 && q.id===5){
+        h+=renderWordBankP1();
+      }
+      // Passage 2: headings bank before Q14
+      if(pIdx===1 && q.id===14){
+        h+=renderHeadingsBank();
       }
     }
     h+=renderQ(q);
@@ -1245,9 +1221,18 @@ function renderQuestions(pIdx){
 // ═══════════════════════════════════════════
 // EXTRA BANK HELPERS (per-test)
 // ═══════════════════════════════════════════
-function renderWordBankP3(){
-  let h=`<div class="word-bank"><div class="word-bank-title">Word Bank — Q33–37: Choose A–G</div><div class="word-bank-grid">`;
-  WORDBANK_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+function renderWordBankP1(){
+  let h=`<div class="word-bank"><div class="word-bank-title">Word Bank — A to J</div><div class="word-bank-grid">`;
+  WORDS_P1.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderTheoriesBank(){
+  return renderPersonBank(THEORIES_P1,'List of Theories — B, C, D or F (you may use any letter more than once)');
+}
+
+function renderHeadingsBank(){
+  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to ix</div><div class="word-bank-grid">`;
+  HEADINGS_P2.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
   h+=`</div></div>`;return h;
 }
 </script>

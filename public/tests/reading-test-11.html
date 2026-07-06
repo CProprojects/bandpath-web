@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandPath — IELTS Academic Reading Mock Test 8</title>
+<title>BandPath — IELTS Academic Reading Mock Test 11</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
       <span class="start-brand-name">Band<span>Path</span></span>
     </div>
     <div class="start-logo">IELTS Academic Reading</div>
-    <div class="start-title">Mock Test 8</div>
+    <div class="start-title">Mock Test 11</div>
     <div class="start-subtitle">Computer-Delivered Format</div>
     <div class="start-info">
       <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
@@ -362,7 +362,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
   <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
     <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
-    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
   </div>
 </div>
 
@@ -399,7 +399,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 <div id="results-screen">
   <div class="res-header">
     <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
-    <h1>Academic Reading — Results (Mock Test 8)</h1>
+    <h1>Academic Reading — Results (Mock Test 11)</h1>
     <div class="band-circle">
       <div class="band-num" id="res-band">—</div>
       <div class="band-lbl">Band</div>
@@ -421,7 +421,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   <div class="res-actions">
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
-    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
@@ -433,83 +433,85 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
-  heading:'What Lucy Taught Us',
-  subheading:'A scientific finding in east Africa has changed our understanding of how humans have developed',
+  heading:'How the first trans-Atlantic telegraph cable was laid',
+  subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 1–13.',
   qRange:[1,13],
   paragraphs:[
-    {label:'',text:`On a Sunday morning in late November 1974, a team of scientists were digging in an isolated spot in the Afar region of Ethiopia. Surveying the area, palaeoanthropologist Donald Johanson spotted a small piece of bone. Straight away, he recognised it as coming from the elbow of a human ancestor. And there were plenty more. 'As I looked up the slopes to my left, I saw bits of the skull, a chunk of jaw, a couple of vertebrae,' says Johanson.`},
-    {label:'',text:`It was immediately obvious that the skeleton was a significant find, because the sediments at the site were known to be 3.5 million years old. 'I realised this was part of a skeleton that was older than three million years,' says Johanson. It was the most ancient early human ever found. Later it became apparent that it was also the most complete – 40% of the skeleton had been preserved.`},
-    {label:'',text:`At the group's campsite that night, Johanson played a Beatles song called 'Lucy in the Sky with Diamonds', and, as the feeling was that the skeleton was female due to its size, someone suggested calling it Lucy. The name stuck and Johanson says, 'All of a sudden, she became a person.' But the morning after the discovery, the discussion was dominated by questions. How old was Lucy when she died? Did she have children? And might she be our direct ancestor? Nowadays, we're starting to get the answers to some of these questions.`},
-    {label:'',text:`According to Johanson, Lucy had an incredible combination of primitive and derived features, which had not been seen before. Her skull and jaws were more ape-like than those of other groups of early humans. Her braincase was also very small, no bigger than that of a chimp. She had a hefty jaw, a low forehead and long dangly arms.`},
-    {label:'',text:`For Johanson, it was immediately apparent that Lucy walked upright. That's because the shape and positioning of her pelvis reflected a fully upright gait. Lucy's knee and ankle were also preserved and seemed to reflect bipedal walking. Later studies of feet offer even more evidence. As an upright walker, Lucy strengthened the idea that walking was one of the selective pressures driving human evolution forwards. Early humans did not need bigger brains to take defining steps away from apes. Extra brainpower only came over a million years later with the arrival of the species Homo erectus, meaning upright man. Though big brains would clearly be important later, walking remains one of the traits that makes us uniquely human.`},
-    {label:'',text:`She may have walked like a human, but Lucy spent at least some of her time up in the trees, as chimpanzees and orangutans still do today. It may be that upright walking evolved in the trees, as a way to walk along branches that would otherwise be too flexible. It's not clear why Lucy left the safety of the trees. It is thought that savannahs were gradually opening up, so trees were spaced further apart. But hunting for food may have been the real reason for heading to the ground, says Chris Stringer of the Natural History Museum in London. In line with this idea, recent evidence suggests that the diet of early humans was changing at that time.`},
-    {label:'',text:`Studies of the remains of food trapped on preserved human teeth indicate that several species, including Lucy's, were expanding their diet around 3.5 million years ago. Instead of mostly eating fruit from trees, they began to include grasses and possibly meat. This change in diet may have allowed them to range more widely, and to travel around more efficiently in a changing environment. Fossilised crocodile and turtle eggs were found near her skeleton, suggesting that Lucy died while foraging for them in a nearby lake.`},
-    {label:'',text:`How did early humans process all these new foods? Later species, like Homo erectus, are known to have used simple stone tools, but no tools have ever been found from this far back. However, in 2010 archaeologists uncovered animal bones with scratches that seem to have been made by stone tools. This suggests that Lucy and her relatives used stone tools to eat meat. There have since been heated debates over whether or not the marks were really made by tools. But if they were, it is not surprising, says Fred Spoor of the Max Planck Institute for Evolutionary Anthropology in Leipzig, Germany.`},
-    {label:'',text:`It also seems that Lucy's childhood was much briefer than ours and that she had to fend for herself from a young age. We know that Lucy was a full-grown adult because she had wisdom teeth and her bones had fused. But unlike modern humans, she seems to have grown to full size very quickly, and time of death was when she was around 12 years old. In line with that, a recent study of a 3-year-old early human suggested that their brains matured much earlier than ours do.`},
+    {label:'',text:`On August 16 1858, the first telegraphic message crossed the Atlantic Ocean. Travelling along a recently laid cable, the message from Britain's Queen Victoria to US President James Buchanan took just 16 hours. Prior to this, communication across the Atlantic would have been by ship – and taken around 10 days.`},
+    {label:'',text:`People had been communicating via overland telegraph since 1844 and messages had been passing between Britain and France since 1850 when the first submarine cable was laid in the English Channel. But the attempt to span the Atlantic Ocean was the most daring attempt yet – and was the talk of the age, the 19th-century equivalent of the Apollo space mission. The idea that one could seemingly cheat time and space was inspiring and it changed the way people thought about the world and their place in it.`},
+    {label:'',text:`The driving force behind the trans-Atlantic telegraph cable was an American businessman called Cyrus Field. In 1856, he and Englishmen John Watkins Brett and Charles Tilson Bright formed the Atlantic Telegraph company. They raised £350,000 mostly from businessmen in London, Liverpool, Manchester and Glasgow. They also secured £14,000 annually from the British government plus the loan of ships and a similar amount from the US government.`},
+    {label:'',text:`Getting the cable made proved to be difficult. The distance between the west coast of Ireland and Newfoundland is over 3,700km, and Field was unable to find a company that was capable of supplying the required cable in the desired time frame. As a result, two companies were engaged to fulfil the order. The cable had a core of seven copper wires down which the signal would pass. These were insulated with several layers of gutta-percha (a natural plastic made from tree sap) and then armoured with iron wire. When it was complete, the weight of the cable proved too great for any single ship. It was therefore loaded onto two: the British ship, HMS Agamemnon and the American ship, USS Niagara.`},
+    {label:'',text:`The first attempt to lay the cable began on August 5 1857 with both ships departing from the west coast of Ireland, near Ballycarbery Castle. The venture did not go according to plan. The cable snapped on the first day, but was recovered from the bottom and repaired. A few days later, mid-Atlantic, the cable snapped again, this time in water 3km deep. It was lost and the expedition abandoned.`},
+    {label:'',text:`The next summer in 1858 they tried again. On this expedition, the two great ships met mid-Atlantic, each carrying half the cable. The two ends were joined together and the ships sailed away from each other. The cable broke three times and each time they were forced to start again. On July 29, with little hope of success, the cable was joined for the fourth time and the ships sailed for home. This time they succeeded. The cable was landed in Newfoundland on August 4 and in Ireland the following day. And a week or so later Queen Victoria sent that first trans-Atlantic message to President Buchanan.`},
+    {label:'',text:`The celebrations were tremendous. One US newspaper proclaimed: "New York has seldom seen a more complete holiday than that on September 1 1858, in celebration of the successful laying of the Atlantic cable. The enthusiasm of an entire nation was expressed in this jubilee of its metropolis, and the era of a closer connection with Europe was well ushered in by a day of genuine rejoicing and gaiety."`},
+    {label:'',text:`Celebrations were, however, short-lived: the cable performed badly and failed after just three weeks. The project was put on hold, but the concept had been proved possible. By 1865, further research had been carried out into the problems which had plagued the earlier cables. In addition, cables had been successfully laid in the Mediterranean and in the Persian Gulf. The cables that were used were better engineered, with thicker cores and better insulation allowing faster transmission speeds.`},
+    {label:'',text:`In 1865, Field incorporated a second company to raise enough funds to try again. He chartered the largest ship in the world at the time, the SS Great Eastern, which could carry the entire Atlantic cable. Huge salt-water tanks and other state-of-the-art machinery were fitted to ensure it remained in mint condition during its journey. All went well until, in heavy winds 1000km off the coast of Newfoundland, the cable rubbed on the side of the ship, snapped and plunged to the deep ocean floor.`},
+    {label:'',text:`Not one to quit, Field vowed to return the following year. This final 1866 expedition proved to be successful and the cable was put into commercial service on July 28. One month later, the 1865 cable was brought to the surface and repaired, providing a second Atlantic telegraph link.`},
+    {label:'',text:`The service had obvious and immediate impact. People in government were able to respond more swiftly to evolving situations. News travelled more quickly, which boosted trade on both sides of the Atlantic. It also had a profound effect on things such as family life and cultural ties. For example, it was no longer so difficult for immigrants in America to keep in touch with their families back home.`},
+    {label:'',text:`The roller-coaster of cable-laying highs and lows between 1857 and 1866 caught the imaginations of a generation the way the space race did in the 20th century. There was immense public interest in the endeavour and in telegraphy more generally. At the time, telegraphic science was reported widely in the newspapers and the fortunes of the telegraph companies were followed closely. Discussions of the issues and solutions to spanning the Atlantic with cable became everyday topics of conversation, and endless articles in the newspapers ensured that the project stayed in people's thoughts.`},
   ]
 },
 {
   title:'READING PASSAGE 2',
-  heading:"The gender gap in New Zealand's high school examination results",
-  subheading:"Results from New Zealand's new national examinations for secondary schools are giving that country some cause for concern",
+  heading:'Removing Unwanted Noise',
+  subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 14–26.',
   qRange:[14,26],
   paragraphs:[
-    {label:'A',text:`The issue is the difference in pass rates between the sexes: at each level of the examination and across all school types, the difference is about 10 percentage points. Girls are doing better in every subject, and those in girls-only schools are taking top honours. The results are not a surprise: high school girls have been outperforming boys academically for more than a decade. It is an international phenomenon, and within Australia was the subject of much debate and controversy. Within New Zealand back in the 1980s, there was a concerted campaign, called 'Girls Can Do Anything', which was aimed at lifting girls' participation rates, achievement levels and aspirations. This was so successful that the pendulum has now swung to the other extreme. Views differ on how worried people should be. After all, for much of history, girls were excluded from any form of education, and this new phenomenon could be seen as a temporary over-correction before the balance is righted.`},
-    {label:'B',text:`However the New Zealand State Ministry of Education says it is taking the issue seriously. It is working with a reference group on boys' education which has been set up, and it has commissioned an Australian academic to report on interventions that have been found to work for boys, drawing particularly on Australia's experience. But some, such as former prison manager Celia Lashlie, the author of a book for parents of teenage boys, believe there is still resistance within the Education Ministry towards doing anything about the problem.`},
-    {label:'C',text:`Education Ministry learning policy manager Steve Benson says that the 'National Certificate in Educational Achievement', or NCEA, as New Zealand's high school exams are called, is useful to employers and to universities because it provides a fine-grained picture of pupils' performance in every aspect of a subject, rather than just a pass or fail in an overall area. 'In most parts of the curriculum, for example in maths, there isn't really a gender gap. But literacy is a different matter. Even boys who are good at writing tend not to write so much. There's actually a quantity issue.'`},
-    {label:'D',text:`The discrepancy in reading and writing skills between males and females shows up as early as preschool, and the difference is clear by the time these children enter high school. Not being good at literacy was not such a problem in the old days when many students left school for manual jobs after Year 11. But nowadays many more stay on to higher education, and almost all jobs require literacy skills. Roger Moses, the headmaster of Wellington College, says that the written content of NCEA papers is more demanding than the previous system of secondary school qualifications in New Zealand, even in subjects such as statistics and accounting.`},
-    {label:'E',text:`New Zealand 15-year-olds do very well in international reading tests, but beneath this average lies a wide variance, with New Zealand European girls most represented at the top and New Zealand Pacific Island boys at the bottom. Yet some European girls drop out, and some Pacific Island boys excel. In other words, the range in performance within each gender group is much greater than the gender differences. Ethnic differences, and differences in socio-economic status, may be more significant than the simple boy/girl explanation.`},
-    {label:'F',text:`This makes the Education Ministry nervous about pushing solutions that emphasise stereotyped gender differences, rather than looking at under-achievement as a whole. Rob Burroughs, principal of Linwood High School in Christchurch, agrees. For three years his school ran separate boys' classes to try to address the disparity in performance, before abandoning them. The research showed that the boys did better in their own class than in the co-educational environment. But when he looked at which teachers they had, and how well those teachers' other classes did, it became clear that the difference was, instead, to do with the quality of instruction.`},
-    {label:'G',text:`At Onslow College, Dr Stuart Martin would do away with the NCEA Level 1 exam if he could. He says that in Year 11, aged 15, boys are simply not mature enough to cope. 'They tend to think that just passing is enough, and that it's not necessary to work hard for a Merit or an Excellence grade. Often they are busy with other activities and part-time jobs. Boys' competitive instinct tends to come out later in their schooling years, especially if there is money attached or other tangible rewards. By 17, boys are catching up academically with the girls, and by the end of Year 13, boys are again winning the top prizes.'`},
-    {label:'H',text:`Boys in single-sex schools do better in NCEA across all levels, something economist Brian Easton reported after analysing data from the first year of NCEA's implementation. He said the results were valid, even when socio-economic status was taken into account. Dr Paul Baker, head of Waitaki Boys' High School in Oamaru, agrees. He thinks that although it is possible for all schools to do more to boost boys' performance, it is easier in a boys' school, where activities cannot be 'captured by girls'.`},
+    {label:'A',text:`A noisy restaurant, a busy road, or a windy day are all situations that can be intensely frustrating for the hearing impaired when trying to understand what other people are saying. Some 10 million people in the UK suffer from hearing difficulties and, helpful as hearing aids are, those who wear them often complain that background noise continues to interfere with their understanding. But what if hearing aid wearers could choose to filter out all the troublesome sounds and focus just on the voices they want to hear?`},
+    {label:'',text:`Engineer Dr Richard Turner believes that this is fast becoming a possibility. He is developing a system that identifies the distracting noise and 'rubs it out'. 'The poor performance in noise of current hearing devices is a major reason why six million people in the UK who would benefit from hearing aids do not use them,' he said. Moreover, as the population ages, a greater number of people will be hindered by the inability to hear clearly. In addition, hearing-impaired patients who have been fitted with cochlear implants – devices implanted to help those whose auditory hair cells have died – suffer from similar limitations.`},
+    {label:'B',text:`The solution lies in the statistics of sound, as Turner explained: 'Many interfering noises are immediately recognisable. Raindrops patter on a surface, a fire crackles, talkers babble at a party and the wind howls. But what makes these different noises sound the way they do? No two rain sounds are identical because the precise arrangement of falling water droplets is never repeated. Nonetheless, there must be statistical similarities in the sounds of these raindrops compared with, say, the crackle of a fire.' He believes that for this reason, the brain may be able to group similar types of sounds together based on their specific characteristics.`},
+    {label:'',text:`Turner and his colleagues have analysed this process mathematically and then developed algorithms that mimic what the brain is doing. The mathematical system that they have developed is capable of being 'trained' – a process that uses new methods from the field of machine learning – so that it can recognise new sounds. 'Rather surprisingly, it seems that a relatively small set of statistics is sufficient to describe a large number of sounds' he says. Crucially, the system that Turner and his team have come up with is capable of telling the difference between speech and other types of sound.`},
+    {label:'C',text:`'What we can now do is to erase background noise and pass these cleaned-up sounds to a listener to improve their perception in difficult surroundings,' said Turner. The idea is that future devices will have several different modes in which they can operate. These might include a mode for travelling in a car or on a train, a mode for places like a noisy party or a busy restaurant, a mode that can be used outdoors in windy weather, and so on. The device might intelligently select an appropriate mode based on the characteristics of the incoming sound.`},
+    {label:'D',text:`'In a sense we are developing the technology to underpin intelligent hearing devices,' said Turner. An additional possibility would be for users to override the selection made by the device and select a processing mode based upon what sorts of noise they wish to erase. They could even guide the processing on their device using an interface on a mobile phone through wireless communication. Turner anticipates that his team will need two more years of simulating the effect of modifications that clean up sound before they start to work with device specialists. 'If these preliminary tests go well, then we'll be looking to work with hearing device companies to try to adapt their processing in order to incorporate these machine learning techniques.'`},
+    {label:'E',text:`Tinnitus sufferers, who are plagued by a constant ringing in their ears, could also benefit from the technology. At present, people with tinnitus sometimes use environmental sound generators as a distraction from the ringing in their ears. But such generators offer only a limited selection of sounds – a gently flowing stream, waves lapping on the seashore, or leaves rustling. With the new technology, individual patients could select the best sound to distract them from their tinnitus.`},
+    {label:'F',text:`The technology not only holds promise for helping the hearing impaired, but it also has the potential to improve phone calls – anyone who has ever tried to hold a conversation with someone phoning from a crowded room will recognise the possible benefits of such a facility. Systems that can deal with unwanted audio content would also be welcomed by the increasing numbers of people using video-sharing websites. For example, a video containing a conversation that takes place by a busy roadside on a windy day could be made more intelligible by isolating the speech from the noises – users could even be offered the chance to de-noise their video during the upload process.`},
   ]
 },
 {
   title:'READING PASSAGE 3',
-  heading:'The strange world of sight',
-  subheading:'Seeing is believing, it is said. But, asks Richard Gregory, could it be the other way round?',
+  heading:'The Bug Picture',
+  subheading:'Lara Zanarini gives her view on insects',
   timeHint:'You should spend about 20 minutes on Questions 27–40.',
   qRange:[27,40],
   paragraphs:[
-    {label:'',text:`Two of the great British men of the 17th century, the philosopher John Locke and the physicist Isaac Newton, were both aware that objects are not coloured, and that against all appearances light is not coloured either. This is still not generally recognised even now, 400 years later, because it seems so implausible. Yet it tells us something very important – that perceptions are not identical with what we perceive, and may be very different.`},
-    {label:'',text:`The most accurate historical account of perception is that of the 19th-century German scientist Hermann von Helmholtz. However, it was ridiculed at the time. Von Helmholtz thought that perceptions are unconscious inferences we make based on a combination of clues provided by the eyes and other senses, and knowledge of the world. This idea of unconscious inference for perception preceded, by several years, the psychoanalyst Freud's notion of the unconscious, which was also initially treated with derision because it undermined the notion of humans as pre-eminently rational beings who could be held responsible for their actions and awarded blame or praise accordingly.`},
-    {label:'',text:`Crucially, perception of the present depends on rich, though of course not always correct or appropriate, knowledge from the past. We interpret sense data (what we hear, touch, taste, see and smell) from the present according to what we already know. This raises the question: if we see the present through memory, why aren't past and present confused? The pioneering Russian neurologist Alexander Luria described the case of Mr S, who had a remarkable memory. However, he was prone to just such confusions, for example mistaking seeing his clock for remembering it, and so failing to get up in the morning. This suggests that perhaps an important function of perception is to underline the present. Individual perceptions have a vividness that is rare for memories, which might be how we are able to separate them. Try this: look at something for a few seconds, and then shut your eyes and visualise it in memory. You will almost certainly find that the memory is pale by comparison with the perception. Perhaps this is why past and present are not normally confused. Luria's Mr S had exceptionally vivid memories, and rich synaesthesia (experiencing perceptions from another sense as well as the one being stimulated, such as musical notes experienced as colours), which may be why he confused seeing with having seen.`},
-    {label:'',text:`The complexity of processes involved in how we see first impressed itself on me 45 years ago. With my colleague Jean Wallace, I studied the rare case of Sydney Bradford, a man who had been born blind but, through a corneal graft at the age of 52, suddenly found himself able to see. Almost immediately after the operation he was able to 'see' but he could only see those things that he already knew about, having experienced them through touch. It was his touch memories that enabled him to perceive them with his eyes. When Bradford was first taken to the zoo, he proved utterly unable to see an elephant as he had no knowledge to make sense of his perceptions.`},
-    {label:'',text:`The more recent case in California of Mike May, who was also born blind, is similar. Since his operation, his sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth and tell us about the shape of things. Some of the consequences of May's new-found vision were less happy. He had been a champion blind skier, but following the operation, he would have to shut his eyes while skiing to block out what he now found was a terrifying sight.`},
-    {label:'',text:`But acceptance of this intimate connection between memory and perception, even though it was first noticed in the 17th century, has been slow in brain science. Despite the fact that state-of-the-art brain imaging shows that perception animates parts of the brain associated with both present information and memory, most research on memory and perception is still undertaken as if these were separate processes. Seeing used to be thought of as taking place only in the eyes, and in quite specialised brain regions; but now it seems that half the brain is occupied with seeing, requiring a lot of energy. Perhaps this is why we shut our eyes for a rest.`},
-    {label:'',text:`It is not just extreme cases like Mike May, but also much more common errors of seeing – illusions – that can reveal the crucial role of memory in governing what we (think we) see. Our brains calculate the likelihood of what is out there, and when too far-fetched, perceptions are rejected.`},
-    {label:'',text:`A dramatic and discomforting example is looking at the two sides of a face-mask. From the front it is a convex shape with the nose sticking out. Then if the mask is rotated, the back of the mask will be seen as convex, though we know that it must be concave. It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is – hollow. Science often learns from what does not happen: people not seeing a hollow face as hollow is the most revealing experiment on perception. The unsettling truth from brain science is that even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are.`},
-  ]
+    {label:'',text:`How many other species do we share our planet with? The truth is that scientists don't have the slightest idea. Some early guesses of 30 million or even 100 million have been replaced in the last few years with more reliable ones of somewhere between five to ten million species. But despite this massive uncertainty there is one thing which is indisputable: the vast majority of Earth's inhabitants are invertebrate – without a backbone – and most of those are insects.`},
+    {label:'',text:`It is therefore not very surprising that these creatures have a pre-eminent impact on the functioning of global ecosystems. Creatures like us – and I don't just mean primates (such as apes and monkeys), but all vertebrates (back-boned animals) – make up less than three percent of all species.`},
+    {label:'',text:`Yet it is these very animals that most people hold dear, especially those with a passing resemblance to ourselves. I use a slide in my lectures which has images of all sorts of insects along with one face-on image of a female slender loris, a wide-eyed furry primate, with a baby on its back. No prizes for guessing the first, and probably the only, thing audiences look at. It seems we can't help ourselves. Appealing they may be, but in the great ecological scheme of things, they are fairly useless. If you really want to understand the world around you – you need to take a serious look at insects.`},
+    {label:'',text:`Pollination, the process by which flying insects transfer grains of pollen from one plant to another and so aid their reproduction, is perhaps one of the most essential partnerships ever to have evolved. This plant-insect version of 'I'll scratch your back if you scratch mine', has been around for 100 million years and it has given the world a rich diversity, and not just of flowering plants. Twenty thousand species of bee are responsible for the continued survival of the angiosperms, which includes a very long list of fruit and vegetables from pumpkins, plums and peas to cherries, cucumbers and cocoa.`},
+    {label:'',text:`What about herbivory and carnivory – plant- and meat-eating? Ecology really doesn't get much more basic than this. The light energy from the sun is converted to chemical energy and the plants – the producers – that carry out this astonishing transformation are fed on by primary consumers – the herbivores. They in turn are eaten by secondary consumers – the carnivores. But it may come as a surprise to many that all the herds of grazing ungulates – cows, goats and sheep – are entirely 'out-munched', perhaps by a factor of ten to one, by myriads of tiny insects. What about the meat-eaters? Again, insects consume many times more animal flesh than all vertebrate carnivores put together, and ants alone are the major carnivorous species in any habitat you could mention.`},
+    {label:'',text:`If this sounds implausible, consider that although insects are individually small, there are an awful lot of them – an estimated ten million, million, million (10¹⁹) with an impressively large biomass*. Insects are also the major food source for countless species. Many trillions of creatures a year are eaten by insect-eating species of birds, bats and a multitude of other furry and feathery animals. Space prevents me from extolling the role of insects in global decomposition and nutrient recycling.`},
+    {label:'',text:`But there is a problem looming – the first effects of which we are already feeling. Almost every study that has been done to date points to a steady decline in insect species' richness and abundance. The loss of natural habitat and the prodigious amounts of pesticides used in agriculture are taking their toll. The decreases seen in well-studied insect groups such as bees and butterflies are surely taking place in many other groups as well. At what point does the web of life become so frayed that it starts to disintegrate? We may find out sooner rather than later.`},
+    {label:'',text:`It is thought that the world's tropical forests hold more than half of all extant species. If these complex habitats are being felled and degraded at even the slowest rate that has been suggested, it will still only be a matter of a few hundred years before they are lost. It is therefore an inescapable conclusion that our planet could lose more than half of all its living species in the time it takes for a tiny acorn to become a veteran oak tree.`},
+    {label:'',text:`There's no doubt about it – we are the most intelligent and capable species yet to evolve on Earth. In a very short time after our appearance we covered the entire globe, establishing colonies wherever it was possible to survive. A few of us have walked on the surface of the Moon and visited the deepest abysses of the oceans. We spend vast sums of money to probe the very make-up of matter and remotely examine other parts of our solar system. We want to understand the science of everything from the infinitesimally small to the astronomically large. This truly is 'big' science and of course it's expensive. But do we have to do it right now? What about understanding the environment a bit better? Perhaps what we actually need is a bit more 'bug' science.`},
+  ],
+  footnote:'* biomass: the total quantity or weight of organisms in a certain area'
 }
 ];
 
 // ═══════════════════════════════════════════
 // PEOPLE / WORD BANKS
 // ═══════════════════════════════════════════
-const STATEMENTS_P2=[
-  {letter:'A',word:"Boys gain lower marks on NCEA if they attend an all-boys' school."},
-  {letter:'B',word:'Boys are disadvantaged by girls tending to take over at school.'},
-  {letter:'C',word:'Good teaching is more important than whether classrooms are single-sex or mixed.'},
-  {letter:'D',word:'Mathematical skills were not so important in the past.'},
-  {letter:'E',word:'The difference in achievement between school boys and girls is only evident in some subjects.'},
-  {letter:'F',word:'Older boys are more motivated to study than younger boys.'},
-  {letter:'G',word:'The NCEA exams have higher literacy standards than past exams did.'},
-  {letter:'H',word:'The New Zealand government is reluctant to take action on behalf of boys.'}
+const HEADINGS_P2=[
+  {letter:'i',word:'How hearing loss may be caused by certain types of sounds'},
+  {letter:'ii',word:"Uses for Turner's research in media and communications"},
+  {letter:'iii',word:'Creating a model for the classification of sounds'},
+  {letter:'iv',word:'Potential developments that still require further research'},
+  {letter:'v',word:'A drawback in the help currently available to those with hearing problems'},
+  {letter:'vi',word:'Providing the hearing-impaired with training in new technology'},
+  {letter:'vii',word:'A more effective way to take attention away from a hearing problem'},
+  {letter:'viii',word:'Analysing the sounds produced in the process of speaking'},
+  {letter:'ix',word:'The possibility of a hearing aid that can adjust itself to different environments'}
 ];
 
-const WORDBANK_P3=[
-  {letter:'A',word:'back'},
-  {letter:'B',word:'brain'},
-  {letter:'C',word:'view'},
-  {letter:'D',word:'convex'},
-  {letter:'E',word:'sight'},
-  {letter:'F',word:'nose'},
-  {letter:'G',word:'round'},
-  {letter:'H',word:'hollow'},
-  {letter:'I',word:'drawing'},
-  {letter:'J',word:'preconception'}
+const ENDINGS_P3=[
+  {letter:'A',word:'a fall in the total number and variety of insects in the world.'},
+  {letter:'B',word:'the number of plants that are pollinated by insects.'},
+  {letter:'C',word:'how many different animal species are currently in existence.'},
+  {letter:'D',word:"how long it will be before the Earth's biodiversity is drastically reduced."},
+  {letter:'E',word:"the predominance of invertebrates among the Earth's species."},
+  {letter:'F',word:'the declining numbers of bees and butterflies.'}
 ];
 
 // ═══════════════════════════════════════════
@@ -517,247 +519,266 @@ const WORDBANK_P3=[
 // ═══════════════════════════════════════════
 const QUESTIONS=[
 // ── PASSAGE 1 ──────────────────────────────
-// Q1-5: TRUE/FALSE/NOT GIVEN
+// Q1-9: Which paragraph A-G
+// Q1-6: TRUE/FALSE/NOT GIVEN
 {id:1,passage:0,type:'tfng',
- instruction:'Questions 1–5: Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.',
- text:'Donald Johanson was uncertain about the nature of the elbow bone he found in Afar.',
- answer:'FALSE',
- hint:'"Straight away, he recognised it as coming from the elbow of a human ancestor" — he was certain immediately, not uncertain.'},
+ instruction:'Questions 1–6: Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.',
+ text:'Field failed to find a company that could produce all of the cable needed by the specified date.',
+ answer:'TRUE',
+ hint:'"Field was unable to find a company that was capable of supplying the required cable in the desired time frame."'},
 
 {id:2,passage:0,type:'tfng',instruction:'',
- text:'Several bones were found by Donald Johanson at the same site in Afar.',
- answer:'TRUE',
- hint:'"There were plenty more. \'As I looked up the slopes to my left, I saw bits of the skull, a chunk of jaw, a couple of vertebrae.\'"'},
+ text:'HMS Agamemnon and USS Niagara set sail from different locations on August 5, 1857.',
+ answer:'FALSE',
+ hint:'"Both ships departing from the west coast of Ireland, near Ballycarbery Castle" — the same location.'},
 
 {id:3,passage:0,type:'tfng',instruction:'',
- text:'The experts realised the importance of the discovery at Afar.',
+ text:'On the 1858 expedition, the cable broke three times because of a manufacturing fault.',
  answer:'NOT GIVEN',
- hint:'The passage says the skeleton itself was a significant find, but does not state that "the experts" collectively realised its importance — only Johanson\'s own reaction is given.'},
+ hint:'"The cable broke three times and each time they were forced to start again" — no reason is given for why it broke.'},
 
 {id:4,passage:0,type:'tfng',instruction:'',
- text:'It was the upper part of the skeleton that had suffered the least damage.',
- answer:'NOT GIVEN',
- hint:'The passage says 40% of the skeleton was preserved but never specifies which part (upper or lower) suffered the least damage.'},
+ text:'The newspaper quoted in the passage disapproved of the enthusiasm that met the 1858 expedition.',
+ answer:'FALSE',
+ hint:'The newspaper praised the "genuine rejoicing and gaiety" — approval, not disapproval.'},
 
 {id:5,passage:0,type:'tfng',instruction:'',
- text:"The skeleton's measurements helped Johanson's team to decide if it was male or female.",
+ text:'Many articles appeared in the press between 1857 and 1866 about the science behind the telegraph.',
  answer:'TRUE',
- hint:'"As the feeling was that the skeleton was female due to its size, someone suggested calling it Lucy" — size (a measurement) is what suggested it was female.'},
+ hint:'"Telegraphic science was reported widely in the newspapers... endless articles in the newspapers ensured that the project stayed in people\'s thoughts."'},
 
-// Q6-13: Notes completion, ONE WORD ONLY
-{id:6,passage:0,type:'fill',
- instruction:'Questions 6–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
- text:'Movement: upright movement possibly started among the _______ of trees.',
- answers:['branches'],answer:'branches',
- hint:'"It may be that upright walking evolved in the trees, as a way to walk along branches that would otherwise be too flexible."'},
+{id:6,passage:0,type:'tfng',instruction:'',
+ text:'Between 1857 and 1866, people talked about the problems related to the telegraph project on a regular basis.',
+ answer:'TRUE',
+ hint:'"Discussions of the issues and solutions to spanning the Atlantic with cable became everyday topics of conversation."'},
 
-{id:7,passage:0,type:'fill',instruction:'',
- text:"Movement: Lucy probably moved to the _______ in search of food.",
- answers:['ground'],answer:'ground',
- hint:'"Hunting for food may have been the real reason for heading to the ground."'},
+// Q7-13: Notes completion, ONE WORD ONLY
+{id:7,passage:0,type:'fill',
+ instruction:'Questions 7–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'The first attempts to lay cable: the central wires of the cable were made of _______ .',
+ answers:['copper'],answer:'copper',
+ hint:'"The cable had a core of seven copper wires down which the signal would pass."'},
 
 {id:8,passage:0,type:'fill',instruction:'',
- text:'Diet and eating habits: analysis of food in the _______ of the skeletons of early humans shows changes in their diet.',
- answers:['teeth'],answer:'teeth',
- hint:'"Studies of the remains of food trapped on preserved human teeth indicate that several species... were expanding their diet."'},
+ text:'The cable was put onto two ships due to its _______ .',
+ answers:['weight'],answer:'weight',
+ hint:'"The weight of the cable proved too great for any single ship."'},
 
 {id:9,passage:0,type:'fill',instruction:'',
- text:'Diet and eating habits: it is likely that meat and grasses were substituted for _______ .',
- answers:['fruit'],answer:'fruit',
- hint:'"Instead of mostly eating fruit from trees, they began to include grasses and possibly meat."'},
+ text:"Events between 1858 and 1866: further research led to the cable's thickness and _______ being improved.",
+ answers:['insulation'],answer:'insulation',
+ hint:'"The cables that were used were better engineered, with thicker cores and better insulation allowing faster transmission speeds."'},
 
 {id:10,passage:0,type:'fill',instruction:'',
- text:'_______ that were located close to Lucy suggest these were also part of her diet.',
- answers:['eggs'],answer:'eggs',
- hint:'"Fossilised crocodile and turtle eggs were found near her skeleton, suggesting that Lucy died while foraging for them."'},
+ text:'Field set up another company to get the _______ for another attempt.',
+ answers:['funds'],answer:'funds',
+ hint:'"Field incorporated a second company to raise enough funds to try again."'},
 
 {id:11,passage:0,type:'fill',instruction:'',
- text:'_______ that were found had marks on them, possibly made by tools used for eating.',
- answers:['bones'],answer:'bones',
- hint:'"Archaeologists uncovered animal bones with scratches that seem to have been made by stone tools."'},
+ text:'The changes the trans-Atlantic telegraph brought about: members of the _______ could react more quickly to events.',
+ answers:['government'],answer:'government',
+ hint:'"People in government were able to respond more swiftly to evolving situations."'},
 
 {id:12,passage:0,type:'fill',instruction:'',
- text:"Comparisons with modern-day humans: modern-day humans have a longer _______ than Lucy did.",
- answers:['childhood'],answer:'childhood',
- hint:"\"Lucy's childhood was much briefer than ours.\""},
+ text:'News could be relayed faster, thus improving _______ .',
+ answers:['trade'],answer:'trade',
+ hint:'"News travelled more quickly, which boosted trade on both sides of the Atlantic."'},
 
 {id:13,passage:0,type:'fill',instruction:'',
- text:"Comparisons with modern-day humans: the _______ of modern-day humans appear to develop later than Lucy's did.",
- answers:['brains'],answer:'brains',
- hint:'"A recent study of a 3-year-old early human suggested that their brains matured much earlier than ours do" — implying our brains develop later.'},
+ text:'It became easier for US _______ to maintain contact with their families.',
+ answers:['immigrants'],answer:'immigrants',
+ hint:'"It was no longer so difficult for immigrants in America to keep in touch with their families back home."'},
 
 // ── PASSAGE 2 ──────────────────────────────
-// Q14-16: Summary completion, NO MORE THAN TWO WORDS
+// Q14-19: Headings i-ix (bank rendered before Q14)
 {id:14,passage:1,type:'fill',
- instruction:'Questions 14–16: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
- text:'The difference in pass rates between boys and girls in New Zealand is about 10 percentage _______ .',
- answers:['points'],answer:'points',
- hint:'Paragraph A: "the difference is about 10 percentage points."'},
+ instruction:'Questions 14–19: The text has six sections, A–F. Choose the correct heading for each section from the list of headings below. Write the correct number, i–ix.',
+ text:'Section A',
+ answers:['v'],answer:'v',
+ hint:'Section A describes hearing aid wearers still struggling with background noise — "A drawback in the help currently available to those with hearing problems" (v).'},
 
 {id:15,passage:1,type:'fill',instruction:'',
- text:'Girls have been outperforming boys academically for more than a _______ .',
- answers:['decade'],answer:'decade',
- hint:'Paragraph A: "high school girls have been outperforming boys academically for more than a decade."'},
+ text:'Section B',
+ answers:['iii'],answer:'iii',
+ hint:'Section B: Turner groups sounds by their statistical characteristics — "Creating a model for the classification of sounds" (iii).'},
 
 {id:16,passage:1,type:'fill',instruction:'',
- text:'This gender gap is not unique to New Zealand; it has also been noticed and debated in _______ .',
- answers:['australia'],answer:'Australia',
- hint:'Paragraph A: "It is an international phenomenon, and within Australia was the subject of much debate and controversy."'},
+ text:'Section C',
+ answers:['ix'],answer:'ix',
+ hint:'Section C: devices with modes that adapt to car, party, or windy-outdoor sound environments — "a hearing aid that can adjust itself to different environments" (ix).'},
 
-// Q17-20: Which paragraph A-H
-{id:17,passage:1,type:'fill',
- instruction:'Questions 17–20: Reading Passage 2 has eight paragraphs, A–H. Which paragraph contains the following information? Write the correct letter, A–H.',
- text:"an advantage of New Zealand's secondary school tests",
- answers:['c','C'],answer:'C',
- hint:'Paragraph C: Steve Benson explains NCEA "is useful to employers and to universities because it provides a fine-grained picture of pupils\' performance."'},
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Section D',
+ answers:['iv'],answer:'iv',
+ hint:'Section D: Turner "anticipates... two more years of simulating" before working with device specialists — further research needed (iv).'},
 
 {id:18,passage:1,type:'fill',instruction:'',
- text:"a mention of current government initiatives to boost male achievement",
- answers:['b','B'],answer:'B',
- hint:'Paragraph B: the Ministry "is working with a reference group on boys\' education... and has commissioned an Australian academic to report on interventions."'},
+ text:'Section E',
+ answers:['vii'],answer:'vii',
+ hint:'Section E: better, more selectable distraction sounds for tinnitus sufferers — "A more effective way to take attention away from a hearing problem" (vii).'},
 
 {id:19,passage:1,type:'fill',instruction:'',
- text:'when gender difference in literacy skills first becomes evident',
- answers:['d','D'],answer:'D',
- hint:'Paragraph D: "The discrepancy in reading and writing skills between males and females shows up as early as preschool."'},
+ text:'Section F',
+ answers:['ii'],answer:'ii',
+ hint:'Section F: applications for phone calls and video-sharing websites — "Uses for Turner\'s research in media and communications" (ii).'},
 
-{id:20,passage:1,type:'fill',instruction:'',
- text:'findings that relate academic achievement to race',
- answers:['h','H'],answer:'H',
- hint:'Paragraph H: economist Brian Easton\'s findings on boys in single-sex schools "were valid, even when socio-economic status was taken into account" — discussed alongside ethnicity in this section of the argument.'},
+// Q20-23: Summary completion, NO MORE THAN TWO WORDS
+{id:20,passage:1,type:'fill',
+ instruction:'Questions 20–23: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'Although sounds are never _______ , he believes they do share some similarities.',
+ answers:['repeated'],answer:'repeated',
+ hint:'"No two rain sounds are identical because the precise arrangement of falling water droplets is never repeated."'},
 
-// Q21-26: Match person to statement (bank rendered before Q21)
-{id:21,passage:1,type:'fill',
- instruction:'Questions 21–26: Look at the following people and the list of statements below. Match each person with the correct statement, A–H.',
- text:'Celia Lashlie',
- answers:['h','H'],answer:'H',
- hint:'Celia Lashlie "believe[s] there is still resistance within the Education Ministry towards doing anything about the problem" = H (government reluctant to act).'},
+{id:21,passage:1,type:'fill',instruction:'',
+ text:'He and his colleagues have worked on a mathematical system using _______ which replicate how we hear sounds.',
+ answers:['algorithms'],answer:'algorithms',
+ hint:'"Turner and his colleagues... developed algorithms that mimic what the brain is doing."'},
 
 {id:22,passage:1,type:'fill',instruction:'',
- text:'Steve Benson',
- answers:['e','E'],answer:'E',
- hint:'Steve Benson: "In most parts of the curriculum, for example in maths, there isn\'t really a gender gap. But literacy is a different matter." = E (gap only evident in some subjects).'},
+ text:'Many different sounds can be described using a limited number of _______ .',
+ answers:['statistics'],answer:'statistics',
+ hint:'"It seems that a relatively small set of statistics is sufficient to describe a large number of sounds."'},
 
 {id:23,passage:1,type:'fill',instruction:'',
- text:'Roger Moses',
- answers:['g','G'],answer:'G',
- hint:'Roger Moses says NCEA papers are "more demanding than the previous system" in written content = G (higher literacy standards than past exams).'},
+ text:'They have now developed a system that can distinguish _______ from other sounds.',
+ answers:['speech'],answer:'speech',
+ hint:'"The system... is capable of telling the difference between speech and other types of sound."'},
 
-{id:24,passage:1,type:'fill',instruction:'',
- text:'Rob Burroughs',
- answers:['c','C'],answer:'C',
- hint:'Rob Burroughs found the real difference "was, instead, to do with the quality of instruction" = C (good teaching more important than class type).'},
+// Q24-26: MCQ
+{id:24,passage:1,type:'mcq',
+ instruction:'Questions 24–26: Choose the correct letter, A, B, C or D.',
+ text:"Turner's team are now planning a new development involving a device which could",
+ answer:'B',
+ options:[
+   'A. allow sound to be heard at a greater distance.',
+   'B. adapt itself to different kinds of background noise.',
+   'C. allow a user to remove all types of sound completely.',
+   'D. adapt itself to disorders involving other senses.'
+ ],
+ hint:'"Future devices will have several different modes... The device might intelligently select an appropriate mode based on the characteristics of the incoming sound."'},
 
-{id:25,passage:1,type:'fill',instruction:'',
- text:'Stuart Martin',
- answers:['f','F'],answer:'F',
- hint:'Stuart Martin: boys\' "competitive instinct tends to come out later" and by 17 they catch up = F (older boys more motivated).'},
+{id:25,passage:1,type:'mcq',instruction:'',
+ text:'In section E, a stream, waves and leaves are examples of the sounds that tinnitus sufferers',
+ answer:'A',
+ options:[
+   'A. can currently use to help their condition.',
+   'B. might choose to use if they were available.',
+   'C. hear in their ears as a result of their condition.',
+   'D. find to be the most natural solutions to their problem.'
+ ],
+ hint:'"At present, people with tinnitus sometimes use environmental sound generators... a gently flowing stream, waves lapping on the seashore, or leaves rustling" — already in current use.'},
 
-{id:26,passage:1,type:'fill',instruction:'',
- text:'Paul Baker',
- answers:['b','B'],answer:'B',
- hint:'Paul Baker says in boys\' schools activities "cannot be \'captured by girls\'" = B (boys disadvantaged by girls taking over).'},
+{id:26,passage:1,type:'mcq',instruction:'',
+ text:"The writer refers to 'a busy roadside on a windy day' in section F to illustrate that",
+ answer:'A',
+ options:[
+   'A. unwanted noise could be erased from video recordings.',
+   'B. some environments are difficult for the hearing-impaired.',
+   'C. when noises are combined in a video they are difficult to erase.',
+   'D. people must cooperate in order to learn how to apply the technology.'
+ ],
+ hint:'"A video containing a conversation that takes place by a busy roadside on a windy day could be made more intelligible by isolating the speech from the noises."'},
 
 // ── PASSAGE 3 ──────────────────────────────
-// Q27-30: MCQ
-{id:27,passage:2,type:'mcq',
- instruction:'Questions 27–30: Choose the correct letter, A, B, C or D.',
- text:'Why does the writer refer to Locke and Newton in the first paragraph?',
- answer:'D',
- options:[
-   'A. to indicate that his article will cover several scientific fields',
-   'B. to stress how much physics has changed in 400 years',
-   'C. to persuade the reader to take him seriously',
-   'D. to point out that his notions are not new'
- ],
- hint:'Locke and Newton were "both aware" of this idea 400 years ago, showing the writer\'s point is not a new one.'},
+// Q27-31: YES/NO/NOT GIVEN
+{id:27,passage:2,type:'yesno',
+ instruction:'Questions 27–31: Do the following statements agree with the views of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.',
+ text:'Early guesses probably greatly over-estimated the total number of species on Earth.',
+ answer:'YES',
+ hint:'"Some early guesses of 30 million or even 100 million have been replaced... with more reliable ones of somewhere between five to ten million species" — the early guesses were too high.'},
 
-{id:28,passage:2,type:'mcq',instruction:'',
- text:"According to the writer, why was Freud's theory of the unconscious mocked?",
+{id:28,passage:2,type:'yesno',instruction:'',
+ text:'Primates play a significant role in the ecology of our planet.',
+ answer:'NO',
+ hint:'"Appealing they may be, but in the great ecological scheme of things, they are fairly useless" — referring to primates like the slender loris.'},
+
+{id:29,passage:2,type:'yesno',instruction:'',
+ text:'We still have a great deal to learn about the importance of pollination.',
+ answer:'NOT GIVEN',
+ hint:'The writer describes pollination\'s importance in detail but never states how much more there is left to learn about it.'},
+
+{id:30,passage:2,type:'yesno',instruction:'',
+ text:"Some people may be unaware that the world's insects consume more food overall than mammals.",
+ answer:'YES',
+ hint:'"It may come as a surprise to many that all the herds of grazing ungulates... are entirely \'out-munched\'... by myriads of tiny insects."'},
+
+{id:31,passage:2,type:'yesno',instruction:'',
+ text:'It will take a long time for us to learn the effects of habitat loss and extensive pesticide use.',
+ answer:'NO',
+ hint:'"We may find out sooner rather than later" — the opposite of taking a long time.'},
+
+// Q32-36: Complete each sentence with the correct ending (bank rendered before Q32)
+{id:32,passage:2,type:'fill',
+ instruction:'Questions 32–36: Complete each sentence with the correct ending, A–F, below.',
+ text:'Scientists have recently revised their views regarding',
+ answers:['c','C'],answer:'C',
+ hint:'Ending C: "how many different animal species are currently in existence" — early guesses of species numbers have been revised.'},
+
+{id:33,passage:2,type:'fill',instruction:'',
+ text:'There is absolutely no doubt about',
+ answers:['e','E'],answer:'E',
+ hint:'Ending E: "the predominance of invertebrates among the Earth\'s species" — "one thing which is indisputable."'},
+
+{id:34,passage:2,type:'fill',instruction:'',
+ text:'Almost every study done so far has indicated',
+ answers:['a','A'],answer:'A',
+ hint:'Ending A: "a fall in the total number and variety of insects in the world" — "points to a steady decline in insect species\' richness and abundance."'},
+
+{id:35,passage:2,type:'fill',instruction:'',
+ text:'A lot of research on insect groups has focused on',
+ answers:['f','F'],answer:'F',
+ hint:'Ending F: "the declining numbers of bees and butterflies" — "well-studied insect groups such as bees and butterflies."'},
+
+{id:36,passage:2,type:'fill',instruction:'',
+ text:'The rate at which tropical forests are being lost can help us calculate',
+ answers:['d','D'],answer:'D',
+ hint:'Ending D: "how long it will be before the Earth\'s biodiversity is drastically reduced" — losing tropical forests means losing "more than half of all its living species."'},
+
+// Q37-40: MCQ
+{id:37,passage:2,type:'mcq',
+ instruction:'Questions 37–40: Choose the correct letter, A, B, C or D.',
+ text:'In the third paragraph, the writer refers to a particular slide to emphasise',
  answer:'C',
  options:[
-   'A. It was too complex for his contemporaries to understand.',
-   'B. It involved criticism of the way people behaved in society.',
-   'C. People felt that it devalued the accepted concept of humanity.',
-   'D. People assumed that it was intended as a joke.'
+   'A. the predominance of insects in the world.',
+   'B. a common misunderstanding about global biodiversity.',
+   'C. our instinctive reaction towards certain types of animals.',
+   'D. the main distinction between vertebrates and invertebrates.'
  ],
- hint:'"It undermined the notion of humans as pre-eminently rational beings who could be held responsible for their actions" — it devalued the accepted view of humanity.'},
+ hint:'"No prizes for guessing the first, and probably the only, thing audiences look at. It seems we can\'t help ourselves" — an instinctive reaction.'},
 
-{id:29,passage:2,type:'mcq',instruction:'',
- text:'The writer describes Mr S failing to get up in order to demonstrate',
+{id:38,passage:2,type:'mcq',instruction:'',
+ text:"What does 'they' in the third paragraph refer to?",
+ answer:'D',
+ options:[
+   'A. lectures about animals given by the writer',
+   'B. audiences who attend events focused on insect life',
+   'C. images which depict various different types of species',
+   'D. creatures which appear comparatively similar to humans'
+ ],
+ hint:'"Appealing they may be, but... they are fairly useless" refers back to primates like the loris — "those with a passing resemblance to ourselves."'},
+
+{id:39,passage:2,type:'mcq',instruction:'',
+ text:"What does the writer imply about 'big' science in the final paragraph?",
  answer:'A',
  options:[
-   "A. how realistic most people's memories are.",
-   'B. how hard it is to tell dreaming and waking apart.',
-   'C. how unusual it is to mistake a perception for a memory.',
-   'D. how valuable knowledge of the past can be.'
+   'A. It should not be our priority at the moment.',
+   'B. It serves no useful purpose in the long term.',
+   'C. It will cost an unreasonable amount in the future.',
+   'D. It results from our natural curiosity about the world.'
  ],
- hint:'Mr S is an exceptional case (unusually vivid memories) used to illustrate, by contrast, how normally pale/unrealistic ordinary memories are compared with perceptions.'},
+ hint:'"But do we have to do it right now?... Perhaps what we actually need is a bit more \'bug\' science" — big science should wait.'},
 
-{id:30,passage:2,type:'mcq',instruction:'',
- text:'What point is the writer making in the text as a whole?',
- answer:'A',
+{id:40,passage:2,type:'mcq',instruction:'',
+ text:'What point does the writer make overall about insects?',
+ answer:'B',
  options:[
-   'A. Perception involves much more than the data collected by the eyes.',
-   'B. Learning to see as an adult can be a time-consuming process.',
-   'C. Science is failing to devote enough attention to sight.',
-   'D. Human perception is remarkably reliable.'
+   'A. Certain insect species are more at risk than others.',
+   'B. Insects are more important than many people realise.',
+   'C. There is an interdependence between different insect species.',
+   'D. The ecological role of insects is likely to change in the near future.'
  ],
- hint:'The whole passage argues perception depends on memory, inference and expectation, not just raw visual data from the eyes.'},
-
-// Q31-36: YES/NO/NOT GIVEN
-{id:31,passage:2,type:'yesno',
- instruction:'Questions 31–36: Do the following statements agree with the views of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.',
- text:'Sydney Bradford relied on recollections of objects he had been told about to help him see after his operation.',
- answer:'NO',
- hint:'He relied on touch memories — things he had physically experienced before, not things he had been told about.'},
-
-{id:32,passage:2,type:'yesno',instruction:'',
- text:'People who only start to see as adults can learn to see as other people do in time.',
- answer:'YES',
- hint:'Mike May\'s "sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth."'},
-
-{id:33,passage:2,type:'yesno',instruction:'',
- text:'People who have gained their sight as adults find certain activities harder to do than before.',
- answer:'YES',
- hint:'May "would have to shut his eyes while skiing to block out what he now found was a terrifying sight" — skiing became harder, not easier.'},
-
-{id:34,passage:2,type:'yesno',instruction:'',
- text:'It is evident now that sight involves the eyes and one particular area of the brain.',
- answer:'NO',
- hint:'"Now it seems that half the brain is occupied with seeing" — not one particular region, but a much larger, distributed part of the brain.'},
-
-{id:35,passage:2,type:'yesno',instruction:'',
- text:'The mask experiment is particularly useful in training people who are regaining their sight.',
- answer:'NOT GIVEN',
- hint:'The mask experiment is used to illustrate how memory/expectation governs perception in general — no mention of it being used to train people regaining sight.'},
-
-{id:36,passage:2,type:'yesno',instruction:'',
- text:'People with perfect vision can fail to interpret objects correctly under certain circumstances.',
- answer:'YES',
- hint:'"Even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are."'},
-
-// Q37-40: Summary using word bank A-J (bank rendered before Q37)
-{id:37,passage:2,type:'fill',
- instruction:'Questions 37–40: Complete the summary using the list of words, A–J, below.',
- text:'In this experiment, having looked at the front of a simple face-mask, subjects look at the reverse. However, the subjects are convinced that they are still looking at a mask which is _______ in shape.',
- answers:['d','D'],answer:'D',
- hint:'Word bank D = convex. "From the front it is a convex shape... the back of the mask will be seen as convex" (D).'},
-
-{id:38,passage:2,type:'fill',instruction:'',
- text:'They believe that the _______ is poking out in the normal manner because that is what they are used to seeing.',
- answers:['f','F'],answer:'F',
- hint:'Word bank F = nose. "From the front it is a convex shape with the nose sticking out" — the nose is expected to poke out (F).'},
-
-{id:39,passage:2,type:'fill',instruction:'',
- text:'Attempting to make a _______ of the mask in this orientation leads to the same problem.',
- answers:['i','I'],answer:'I',
- hint:'Word bank I = drawing. "It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is" — sketch = drawing (I).'},
-
-{id:40,passage:2,type:'fill',instruction:'',
- text:'The subjects fail to see a concave form because of the _______ they have that the features of a face stick out.',
- answers:['j','J'],answer:'J',
- hint:'Word bank J = preconception. Subjects expect (a preconception) that facial features stick out, so they cannot see the true concave shape (J).'},
+ hint:'The whole passage argues insects are ecologically dominant and essential, despite being widely overlooked in favour of more "appealing" vertebrates.'},
 ];
 
 const BAND_TABLE=[
@@ -817,6 +838,16 @@ function isCorrect(q,userAnswer){
 // ═══════════════════════════════════════════
 let currentPassage=0,answers={},flags={},timerSec=3600,
     timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-11';
+const testStartTime=Date.now();
+
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
 
 // ═══════════════════════════════════════════
 // BEGIN TEST
@@ -873,16 +904,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_t8_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_t8_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_t8_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_t8_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_t11_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t11_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t11_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t11_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_t8_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_t8_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_t8_timer',timerSec);
+    localStorage.setItem('ielts_t11_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t11_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t11_timer',timerSec);
   }catch(e){}
 }
 
@@ -1037,7 +1068,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_t8_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_t11_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ═══════════════════════════════════════════
 // HIGHLIGHTING
@@ -1128,6 +1159,19 @@ function showResults(){
     </div>`;
   }).join('');
   document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
@@ -1170,7 +1214,7 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_t8_answers','ielts_t8_flags','ielts_t8_timer','ielts_t8_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_t11_answers','ielts_t11_flags','ielts_t11_timer','ielts_t11_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
@@ -1195,13 +1239,13 @@ function renderQuestions(pIdx){
     if(q.instruction&&q.instruction!==lastInstr){
       h+=`<div class="q-section-title">${q.instruction}</div>`;
       lastInstr=q.instruction;
-      // Passage 2: statement bank before Q21
-      if(pIdx===1 && q.id===21){
-        h+=renderPersonBank(STATEMENTS_P2,'List of Statements — A to H');
+      // Passage 2: headings bank before Q14
+      if(pIdx===1 && q.id===14){
+        h+=renderWordBank(HEADINGS_P2,'List of Headings — i to ix');
       }
-      // Passage 3: word bank before Q37
-      if(pIdx===2 && q.id===37){
-        h+=renderWordBank(WORDBANK_P3,'Word Bank — A to J');
+      // Passage 3: sentence-ending bank before Q32
+      if(pIdx===2 && q.id===32){
+        h+=renderPersonBank(ENDINGS_P3,'Sentence Endings — A to F');
       }
     }
     h+=renderQ(q);

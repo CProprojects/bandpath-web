@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandPath — IELTS Academic Reading Mock Test 2</title>
+<title>BandPath — IELTS Academic Reading Mock Test 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
       <span class="start-brand-name">Band<span>Path</span></span>
     </div>
     <div class="start-logo">IELTS Academic Reading</div>
-    <div class="start-title">Mock Test 2</div>
+    <div class="start-title">Mock Test 8</div>
     <div class="start-subtitle">Computer-Delivered Format</div>
     <div class="start-info">
       <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
@@ -362,7 +362,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
   <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
     <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
-    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
   </div>
 </div>
 
@@ -399,7 +399,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 <div id="results-screen">
   <div class="res-header">
     <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
-    <h1>Academic Reading — Results (Mock Test 2)</h1>
+    <h1>Academic Reading — Results (Mock Test 8)</h1>
     <div class="band-circle">
       <div class="band-num" id="res-band">—</div>
       <div class="band-lbl">Band</div>
@@ -421,7 +421,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   <div class="res-actions">
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
-    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
@@ -433,51 +433,54 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
-  heading:'Sorry – Who Are You?',
-  subheading:'Prosopagnosia is a medical condition that stops people from recognising people\'s faces. But how common is it and why does it happen?',
+  heading:'What Lucy Taught Us',
+  subheading:'A scientific finding in east Africa has changed our understanding of how humans have developed',
   timeHint:'You should spend about 20 minutes on Questions 1–13.',
   qRange:[1,13],
   paragraphs:[
-    {label:'',text:`It was Jacob Hodes' first day at college. He can still recall spending an enjoyable afternoon being shown around campus by a second-year student named Daniel Byrne, who happened to be from his home town. Jacob then spent the rest of the year ignoring him. "I never saw him again," he says. Well, I'm sure I walked past him plenty of times, but I just didn't see him. This behaviour wasn't intentional. Jacob just couldn't recollect what his fellow student looked like. He had had the same trouble all his life. Friends and relatives would greet him and he would have no idea who they were.`},
-    {label:'',text:`It wasn't until five years ago that it all made sense. That was when Hodes was diagnosed with prosopagnosia, a condition that means he is unable to recognise faces. According to researchers, he is far from alone. In fact the condition is not that uncommon but until a few years ago only a few dozen cases had ever been described, and all of these had been caused by brain injury. Recently, though, researchers identified a second form of face blindness — developmental prosopagnosia, which is either present from birth or develops very early in life.`},
-    {label:'',text:`In May a team from Harvard University in the US and University College London (UCL) announced the results of a web survey of 1,600 people, suggesting that up to 2 per cent of people have some degree of face blindness. Then in August, Martina Gruter and colleagues at the Institute for Human Genetics in Munster, Germany, similarly reported that 2.5 per cent of 700 secondary school pupils they had tested had trouble recognising faces. The results of the survey took everyone by surprise.`},
-    {label:'',text:`It seems that if you have never known what it is to recognise a face, you don't necessarily know that you are supposed to be able to. Prosopagnosics almost always know that they have trouble recognising people, but they often don't realise that other people have better recognition skills than they do, says Brad Duchaine, a researcher at UCL.`},
-    {label:'',text:`Despite these issues, the majority of developmental prosopagnosics possess strategies that allow them to get around their difficulty, for instance, by recognising hair, clothing or a person's way of speaking so, unless they see a familiar person out of context, with a new hairstyle or in different clothes, they can recognise people just fine. Even so, the discovery of developmental prosopagnosia has attracted attention from neuroscientists keen to discover what is different about the brain of face-blind people. This difference, they believe, could help solve the problem of how the brain deals with information in general: not just visual data. In other words, it may show whether the brain has specialised parts for specific tasks or is more of a general-purpose information processor.`},
-    {label:'',text:`One issue, however, that will present challenges for researchers is that no two prosopagnosics are the same. Some have problems only with faces, while others have trouble with ordinary everyday objects and, so it turns out, animals which would normally be familiar as well. Some prosopagnosics can train themselves to recognise specific faces; others can't even recognise their own in a mirror. When some have been tested they could identify the emotion which was conveyed on another's face, even though the face itself seemed unfamiliar, while for other subjects this was an impossibility. Some cannot recognise the faces of old friends or fellow students but have no trouble telling whether a particular face from such groups would be attractive to most people. Because of this diversity, working out the cause of prosopagnosia will not be easy.`},
-    {label:'',text:`In Martina Gruter's study, the prosopagnosics who agreed to have their parents and relatives tested reported at least one with the condition. Having looked at 38 cases in seven families, the German team believe they have good evidence that a single gene could be responsible. Duchaine also has some evidence that face blindness could be inherited but thinks other factors might be more significant. He refers to studies of babies born with a condition which means the eye's lens is not clear, and when it's the left one, being unable to see through this eye during the first two months of life is a major risk factor for prosopagnosia.`},
-    {label:'',text:`Whatever the cause, what most prosopagnosics want to know is whether they can do anything to improve their face recognition skills. Joseph Degutis, a graduate student at the University of California, recently reported successfully training a severe developmental prosopagnosic to recognise faces during tests carried out in the laboratory. The subject also reported that recognising faces in everyday life became easier due to the training. Duchaine now plans to attempt to train sufferers to recognise the five people that they most need to know — maybe their immediate family, for example, and essential colleagues. Thomas Gruter, Martina Gruter's husband, who also works on her team, however, is not convinced it will work. "I don't know how you can have more training than you have already had," he says. "Humans already spend all day looking at faces." He also points out that cheating is a possibility during tests and provides an example. "One person we studied said that when she was doing the face-recognition test, she memorised the distance between nose and upper lip. She wasn't the only one. So you can perform well in the test and not do so well in real life."`},
+    {label:'',text:`On a Sunday morning in late November 1974, a team of scientists were digging in an isolated spot in the Afar region of Ethiopia. Surveying the area, palaeoanthropologist Donald Johanson spotted a small piece of bone. Straight away, he recognised it as coming from the elbow of a human ancestor. And there were plenty more. 'As I looked up the slopes to my left, I saw bits of the skull, a chunk of jaw, a couple of vertebrae,' says Johanson.`},
+    {label:'',text:`It was immediately obvious that the skeleton was a significant find, because the sediments at the site were known to be 3.5 million years old. 'I realised this was part of a skeleton that was older than three million years,' says Johanson. It was the most ancient early human ever found. Later it became apparent that it was also the most complete – 40% of the skeleton had been preserved.`},
+    {label:'',text:`At the group's campsite that night, Johanson played a Beatles song called 'Lucy in the Sky with Diamonds', and, as the feeling was that the skeleton was female due to its size, someone suggested calling it Lucy. The name stuck and Johanson says, 'All of a sudden, she became a person.' But the morning after the discovery, the discussion was dominated by questions. How old was Lucy when she died? Did she have children? And might she be our direct ancestor? Nowadays, we're starting to get the answers to some of these questions.`},
+    {label:'',text:`According to Johanson, Lucy had an incredible combination of primitive and derived features, which had not been seen before. Her skull and jaws were more ape-like than those of other groups of early humans. Her braincase was also very small, no bigger than that of a chimp. She had a hefty jaw, a low forehead and long dangly arms.`},
+    {label:'',text:`For Johanson, it was immediately apparent that Lucy walked upright. That's because the shape and positioning of her pelvis reflected a fully upright gait. Lucy's knee and ankle were also preserved and seemed to reflect bipedal walking. Later studies of feet offer even more evidence. As an upright walker, Lucy strengthened the idea that walking was one of the selective pressures driving human evolution forwards. Early humans did not need bigger brains to take defining steps away from apes. Extra brainpower only came over a million years later with the arrival of the species Homo erectus, meaning upright man. Though big brains would clearly be important later, walking remains one of the traits that makes us uniquely human.`},
+    {label:'',text:`She may have walked like a human, but Lucy spent at least some of her time up in the trees, as chimpanzees and orangutans still do today. It may be that upright walking evolved in the trees, as a way to walk along branches that would otherwise be too flexible. It's not clear why Lucy left the safety of the trees. It is thought that savannahs were gradually opening up, so trees were spaced further apart. But hunting for food may have been the real reason for heading to the ground, says Chris Stringer of the Natural History Museum in London. In line with this idea, recent evidence suggests that the diet of early humans was changing at that time.`},
+    {label:'',text:`Studies of the remains of food trapped on preserved human teeth indicate that several species, including Lucy's, were expanding their diet around 3.5 million years ago. Instead of mostly eating fruit from trees, they began to include grasses and possibly meat. This change in diet may have allowed them to range more widely, and to travel around more efficiently in a changing environment. Fossilised crocodile and turtle eggs were found near her skeleton, suggesting that Lucy died while foraging for them in a nearby lake.`},
+    {label:'',text:`How did early humans process all these new foods? Later species, like Homo erectus, are known to have used simple stone tools, but no tools have ever been found from this far back. However, in 2010 archaeologists uncovered animal bones with scratches that seem to have been made by stone tools. This suggests that Lucy and her relatives used stone tools to eat meat. There have since been heated debates over whether or not the marks were really made by tools. But if they were, it is not surprising, says Fred Spoor of the Max Planck Institute for Evolutionary Anthropology in Leipzig, Germany.`},
+    {label:'',text:`It also seems that Lucy's childhood was much briefer than ours and that she had to fend for herself from a young age. We know that Lucy was a full-grown adult because she had wisdom teeth and her bones had fused. But unlike modern humans, she seems to have grown to full size very quickly, and time of death was when she was around 12 years old. In line with that, a recent study of a 3-year-old early human suggested that their brains matured much earlier than ours do.`},
   ]
 },
 {
   title:'READING PASSAGE 2',
-  heading:'Mammoth Kill',
-  subheading:'What led to the disappearance of the giant mammals? Kate Wong examines the theories.',
+  heading:"The gender gap in New Zealand's high school examination results",
+  subheading:"Results from New Zealand's new national examinations for secondary schools are giving that country some cause for concern",
   timeHint:'You should spend about 20 minutes on Questions 14–26.',
   qRange:[14,26],
   paragraphs:[
-    {label:'',text:`Although it's hard to imagine in this age of urban sprawl and automobiles, North America once belonged to huge, elephant-like mammoths, camels, bear-sized beavers and other giant beasts, collectively known as 'megafauna'. Some 11,000 years ago, however, these large-bodied mammals — about 70 species in all — disappeared. Their demise coincided roughly with the arrival of humans in this region and dramatic climate change — factors that have inspired several theories about the die-off. Yet despite decades of scientific investigation, the exact cause remains a mystery. Now new findings offer support to one of these controversial hypotheses: that human hunting drove these huge 'megafauna' species to extinction.`},
-    {label:'',text:`This belief resulted in the overkill model which emerged in the 1960s, when it was put forth by Paul S. Martin of the University of Arizona. Since then, critics have charged that no archaeological remains exist to support the idea that the first Americans hunted to the extent necessary to cause these extinctions. But at the annual meeting of the Society of Vertebrate Paleontology in Mexico City in October 1999, specialist John Alroy of the University of California at Santa Barbara argued that in fact, hunting-driven extinction is not only plausible, it was unavoidable. He has determined, using a computer simulation, that even a very modest amount of hunting would have wiped out these animals.`},
-    {label:'',text:`Assuming an initial human population of 100 people that grew no more than two per cent annually, Alroy determined that, if each band of, say, 50 people killed 15 to 20 large animals a year, humans could have eliminated the animal populations within 1,000 years. Large mammals in particular would have been vulnerable to the pressure because they have longer gestation periods than smaller mammals and their young require extended care.`},
-    {label:'',text:`However, not everyone agrees with Alroy's assessment. For one thing, the results depend on population size estimates for the extinct animals — estimates that are not necessarily reliable. But a more specific criticism comes from mammal expert Ross D.E. Macphee of the American Museum of Natural History in New York City, who points out that the relevant archaeological record contains barely a dozen examples of stone points embedded in mammoth bones (and none, it should be noted, are known from other megafaunal remains) — hardly what one might expect if hunting drove these animals to extinction. Furthermore, some of these species had a vast range, covering the whole continent — the Jefferson's Ground Sloth, for example, lived as far north as the Yukon and as far south as Mexico — which would have made hunting them in numbers sufficient to cause their extinction rather unlikely, he says.`},
-    {label:'',text:`Macphee agrees that humans most likely brought about these extinctions (as well as others around the world that coincided with human arrival), but not directly. Rather than through hunting, he suggests that people may have introduced a deadly disease, perhaps through their dogs or accompanying vermin, which then spread wildly among the native species because of their low resistance to the new introductions. Repeated outbreaks of a deadly disease could thus quickly drive them to the point of no return. So far, Macphee does not have empirical evidence for this theory, and it will not be easy to come by: such disease would kill far too quickly to leave its signature on the bones themselves. But he hopes that analyses of tissue and DNA from the most recent animal remains will eventually reveal the microbes responsible.`},
-    {label:'',text:`The third explanation for what brought on this North American extinction does not involve human beings. Instead, its proponents blame the loss on the climate. The Pleistocene epoch in question witnessed considerable climate instability, explains Russell W. Graham of the Denver Museum of Nature and Science. As a result, their regular habitats disappeared, and species that had once formed communities split apart. For some animals, this brought opportunity. For much of the megafauna, however, the increasingly uniform terrain left them with shrinking geographical ranges — a death sentence for large animals, which need correspondingly large ranges. Although these creatures managed to maintain viable populations through most of the Pleistocene period, the final major climate fluctuation pushed them over the edge, Graham says.`},
-    {label:'',text:`For his part, Alroy is still convinced that human hunters were the destroyers of the giant animals. The overkill model explains everything the disease and climate scenarios explain, he asserts, and in addition makes accurate predictions about which species would eventually become extinct.`},
+    {label:'A',text:`The issue is the difference in pass rates between the sexes: at each level of the examination and across all school types, the difference is about 10 percentage points. Girls are doing better in every subject, and those in girls-only schools are taking top honours. The results are not a surprise: high school girls have been outperforming boys academically for more than a decade. It is an international phenomenon, and within Australia was the subject of much debate and controversy. Within New Zealand back in the 1980s, there was a concerted campaign, called 'Girls Can Do Anything', which was aimed at lifting girls' participation rates, achievement levels and aspirations. This was so successful that the pendulum has now swung to the other extreme. Views differ on how worried people should be. After all, for much of history, girls were excluded from any form of education, and this new phenomenon could be seen as a temporary over-correction before the balance is righted.`},
+    {label:'B',text:`However the New Zealand State Ministry of Education says it is taking the issue seriously. It is working with a reference group on boys' education which has been set up, and it has commissioned an Australian academic to report on interventions that have been found to work for boys, drawing particularly on Australia's experience. But some, such as former prison manager Celia Lashlie, the author of a book for parents of teenage boys, believe there is still resistance within the Education Ministry towards doing anything about the problem.`},
+    {label:'C',text:`Education Ministry learning policy manager Steve Benson says that the 'National Certificate in Educational Achievement', or NCEA, as New Zealand's high school exams are called, is useful to employers and to universities because it provides a fine-grained picture of pupils' performance in every aspect of a subject, rather than just a pass or fail in an overall area. 'In most parts of the curriculum, for example in maths, there isn't really a gender gap. But literacy is a different matter. Even boys who are good at writing tend not to write so much. There's actually a quantity issue.'`},
+    {label:'D',text:`The discrepancy in reading and writing skills between males and females shows up as early as preschool, and the difference is clear by the time these children enter high school. Not being good at literacy was not such a problem in the old days when many students left school for manual jobs after Year 11. But nowadays many more stay on to higher education, and almost all jobs require literacy skills. Roger Moses, the headmaster of Wellington College, says that the written content of NCEA papers is more demanding than the previous system of secondary school qualifications in New Zealand, even in subjects such as statistics and accounting.`},
+    {label:'E',text:`New Zealand 15-year-olds do very well in international reading tests, but beneath this average lies a wide variance, with New Zealand European girls most represented at the top and New Zealand Pacific Island boys at the bottom. Yet some European girls drop out, and some Pacific Island boys excel. In other words, the range in performance within each gender group is much greater than the gender differences. Ethnic differences, and differences in socio-economic status, may be more significant than the simple boy/girl explanation.`},
+    {label:'F',text:`This makes the Education Ministry nervous about pushing solutions that emphasise stereotyped gender differences, rather than looking at under-achievement as a whole. Rob Burroughs, principal of Linwood High School in Christchurch, agrees. For three years his school ran separate boys' classes to try to address the disparity in performance, before abandoning them. The research showed that the boys did better in their own class than in the co-educational environment. But when he looked at which teachers they had, and how well those teachers' other classes did, it became clear that the difference was, instead, to do with the quality of instruction.`},
+    {label:'G',text:`At Onslow College, Dr Stuart Martin would do away with the NCEA Level 1 exam if he could. He says that in Year 11, aged 15, boys are simply not mature enough to cope. 'They tend to think that just passing is enough, and that it's not necessary to work hard for a Merit or an Excellence grade. Often they are busy with other activities and part-time jobs. Boys' competitive instinct tends to come out later in their schooling years, especially if there is money attached or other tangible rewards. By 17, boys are catching up academically with the girls, and by the end of Year 13, boys are again winning the top prizes.'`},
+    {label:'H',text:`Boys in single-sex schools do better in NCEA across all levels, something economist Brian Easton reported after analysing data from the first year of NCEA's implementation. He said the results were valid, even when socio-economic status was taken into account. Dr Paul Baker, head of Waitaki Boys' High School in Oamaru, agrees. He thinks that although it is possible for all schools to do more to boost boys' performance, it is easier in a boys' school, where activities cannot be 'captured by girls'.`},
   ]
 },
 {
   title:'READING PASSAGE 3',
-  heading:'Keeping the Fun in Funfairs',
-  subheading:'',
+  heading:'The strange world of sight',
+  subheading:'Seeing is believing, it is said. But, asks Richard Gregory, could it be the other way round?',
   timeHint:'You should spend about 20 minutes on Questions 27–40.',
   qRange:[27,40],
   paragraphs:[
-    {label:'A',text:`Fun is becoming a tricky issue for ride designers. In order to increase excitement, they have been ramping up the accelerations to create the most dizzying forces possible. But getting it right is far from easy. Err on the side of caution and people won't bother with a second ride. Go too far, however, and they may not be able to. Experts realise we are now at the limits of how much acceleration a human body can take, and designers are finding it hard to think up ways of keeping the public coming back for more. The problem is that true innovation has been lacking for a while, and fairground rides have become more about survival than actual enjoyment. So if our thrill-seeking bodies can really take no more, what's going to keep dragging us back to amusement parks? Creating something new and exciting, yet safe, is going to take some careful thought.`},
-    {label:'B',text:`When the Disney Corporation asked German designer Walter Stengel to design a giant loop ride for them in the 1970s, he went to NASA, the aeronautics and space foundation, to discover the effects of sustained acceleration on the pilots. NASA's research suggests that the maximum level we can endure is 9 g, g being the standard unit of acceleration due to gravity. Go much beyond that and pilots pass out. Go further still and they suffer serious internal damage. So Stengel decided that the maximum vertical acceleration for the public should be 6, and then only for a second or so. What's more, he put firm restrictions on the rate at which acceleration can increase — you'll never go down a 45-degree ramp into a tight circular loop, for instance.`},
-    {label:'C',text:`But stricter safety limits only intensify the need to search for novel ways to thrill customers. Part of the problem is that no matter how exciting an attraction is, after a few rides the passengers will have some idea of what to expect. The next stage in designing rides, however, could throw predictability out of the window. This step has already been taken in the most recent waltzers, or tea-cup rides. Ride a waltzer and you sit in a car that spins on its own axis. The car is on a huge platform that also rotates. In the past you could take comfort from the fact that the spin was tightly controlled by gears that turned your car at a rate determined by the rotation speed of the whole ride. But the latest generation of waltzer cars spin freely, at a rate determined by the weight and position of the people in them. So you never have the same experience twice. "People seem to like these 'chaotic rides'," says Stengel.`},
-    {label:'D',text:`Although seemingly a passport to endless thrills, chaos does have one rather obvious drawback — it's unpredictable. Despite complex calculations, designers can never be completely sure that something odd won't happen, especially since freely turning systems occasionally hit a resonance frequency. For example, if pushed at a particular frequency, a child on a swing would go over the top of the swing's frame. Similarly, if you drive a revolving waltzer car at its resonance frequency it could speed up uncontrollably. This could be very hazardous, according to Stengel. If a ride is subjected to unforeseen stresses, no one can guarantee that it will be able to cope.`},
-    {label:'E',text:`No one even knows what the safe limits of rotational force are, let alone its effect on the human body. Stengel has worked with the German Air Force, rotating volunteers head over heels while also making them cartwheel or pirouette like a ballet dancer. It emerged that if the pilots were turned on all three axes simultaneously, they became so nauseous they almost blacked out, and when they got off they couldn't walk. But what Stengel found particularly puzzling was that they also developed headaches and other problems about two days later. Since these effects aren't understood, he tries to limit how people on his rides are rotated. "We want to provide fun, not pain."`},
-    {label:'F',text:`With that goal in mind, Stengel feels that flinging people around in ever more chaotic machines is no longer the way forward. He believes that the sequence of accelerations, not their size, is what counts and that the way to make rides more fun is to put people through a carefully designed succession of relatively small accelerations. Other experts in this field agree, and it seems likely that designers could formulate profiles even for existing attractions that would lead to higher amusement value. Recent experiments testing the tolerances of Dutch military pilots to a range of accelerations have shown that tumbling around in machines doesn't have to be unpleasant. When the force is kept low, the subjects actually enjoy the experience.`},
-    {label:'G',text:`The fun seems to come from the unforeseen, particularly when an effect called the Coriolis Illusion comes into play. This is an agreeable tumbling feeling which occurs, for example, when the head is suddenly tilted while the subject is spinning with eyes closed. It appears that a roll which includes, for instance, an unexpected change of acceleration from a small negative g — a feeling of weightlessness — to a small positive g — a slight crushing sensation — has an extraordinary effect on people. If the theories of Stengel and other experts really do work, fairground fun might one day be measured in smiles, not screams.`},
+    {label:'',text:`Two of the great British men of the 17th century, the philosopher John Locke and the physicist Isaac Newton, were both aware that objects are not coloured, and that against all appearances light is not coloured either. This is still not generally recognised even now, 400 years later, because it seems so implausible. Yet it tells us something very important – that perceptions are not identical with what we perceive, and may be very different.`},
+    {label:'',text:`The most accurate historical account of perception is that of the 19th-century German scientist Hermann von Helmholtz. However, it was ridiculed at the time. Von Helmholtz thought that perceptions are unconscious inferences we make based on a combination of clues provided by the eyes and other senses, and knowledge of the world. This idea of unconscious inference for perception preceded, by several years, the psychoanalyst Freud's notion of the unconscious, which was also initially treated with derision because it undermined the notion of humans as pre-eminently rational beings who could be held responsible for their actions and awarded blame or praise accordingly.`},
+    {label:'',text:`Crucially, perception of the present depends on rich, though of course not always correct or appropriate, knowledge from the past. We interpret sense data (what we hear, touch, taste, see and smell) from the present according to what we already know. This raises the question: if we see the present through memory, why aren't past and present confused? The pioneering Russian neurologist Alexander Luria described the case of Mr S, who had a remarkable memory. However, he was prone to just such confusions, for example mistaking seeing his clock for remembering it, and so failing to get up in the morning. This suggests that perhaps an important function of perception is to underline the present. Individual perceptions have a vividness that is rare for memories, which might be how we are able to separate them. Try this: look at something for a few seconds, and then shut your eyes and visualise it in memory. You will almost certainly find that the memory is pale by comparison with the perception. Perhaps this is why past and present are not normally confused. Luria's Mr S had exceptionally vivid memories, and rich synaesthesia (experiencing perceptions from another sense as well as the one being stimulated, such as musical notes experienced as colours), which may be why he confused seeing with having seen.`},
+    {label:'',text:`The complexity of processes involved in how we see first impressed itself on me 45 years ago. With my colleague Jean Wallace, I studied the rare case of Sydney Bradford, a man who had been born blind but, through a corneal graft at the age of 52, suddenly found himself able to see. Almost immediately after the operation he was able to 'see' but he could only see those things that he already knew about, having experienced them through touch. It was his touch memories that enabled him to perceive them with his eyes. When Bradford was first taken to the zoo, he proved utterly unable to see an elephant as he had no knowledge to make sense of his perceptions.`},
+    {label:'',text:`The more recent case in California of Mike May, who was also born blind, is similar. Since his operation, his sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth and tell us about the shape of things. Some of the consequences of May's new-found vision were less happy. He had been a champion blind skier, but following the operation, he would have to shut his eyes while skiing to block out what he now found was a terrifying sight.`},
+    {label:'',text:`But acceptance of this intimate connection between memory and perception, even though it was first noticed in the 17th century, has been slow in brain science. Despite the fact that state-of-the-art brain imaging shows that perception animates parts of the brain associated with both present information and memory, most research on memory and perception is still undertaken as if these were separate processes. Seeing used to be thought of as taking place only in the eyes, and in quite specialised brain regions; but now it seems that half the brain is occupied with seeing, requiring a lot of energy. Perhaps this is why we shut our eyes for a rest.`},
+    {label:'',text:`It is not just extreme cases like Mike May, but also much more common errors of seeing – illusions – that can reveal the crucial role of memory in governing what we (think we) see. Our brains calculate the likelihood of what is out there, and when too far-fetched, perceptions are rejected.`},
+    {label:'',text:`A dramatic and discomforting example is looking at the two sides of a face-mask. From the front it is a convex shape with the nose sticking out. Then if the mask is rotated, the back of the mask will be seen as convex, though we know that it must be concave. It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is – hollow. Science often learns from what does not happen: people not seeing a hollow face as hollow is the most revealing experiment on perception. The unsettling truth from brain science is that even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are.`},
   ]
 }
 ];
@@ -485,21 +488,28 @@ const PASSAGES=[
 // ═══════════════════════════════════════════
 // PEOPLE / WORD BANKS
 // ═══════════════════════════════════════════
-const PEOPLE_P2=[
-  {letter:'A',word:'John Alroy'},
-  {letter:'B',word:'Ross D.E. Macphee'},
-  {letter:'C',word:'Russell W. Graham'}
+const STATEMENTS_P2=[
+  {letter:'A',word:"Boys gain lower marks on NCEA if they attend an all-boys' school."},
+  {letter:'B',word:'Boys are disadvantaged by girls tending to take over at school.'},
+  {letter:'C',word:'Good teaching is more important than whether classrooms are single-sex or mixed.'},
+  {letter:'D',word:'Mathematical skills were not so important in the past.'},
+  {letter:'E',word:'The difference in achievement between school boys and girls is only evident in some subjects.'},
+  {letter:'F',word:'Older boys are more motivated to study than younger boys.'},
+  {letter:'G',word:'The NCEA exams have higher literacy standards than past exams did.'},
+  {letter:'H',word:'The New Zealand government is reluctant to take action on behalf of boys.'}
 ];
 
-const HEADINGS_P3=[
-  {letter:'i',word:'Less is more'},
-  {letter:'ii',word:'Research can\'t guarantee safety'},
-  {letter:'iii',word:'Unexplained symptoms'},
-  {letter:'iv',word:'Setting the limits of acceleration'},
-  {letter:'v',word:'The irresistible appeal of speed'},
-  {letter:'vi',word:'Gentle surprises'},
-  {letter:'vii',word:'A difficult task'},
-  {letter:'viii',word:'A different ride every time'}
+const WORDBANK_P3=[
+  {letter:'A',word:'back'},
+  {letter:'B',word:'brain'},
+  {letter:'C',word:'view'},
+  {letter:'D',word:'convex'},
+  {letter:'E',word:'sight'},
+  {letter:'F',word:'nose'},
+  {letter:'G',word:'round'},
+  {letter:'H',word:'hollow'},
+  {letter:'I',word:'drawing'},
+  {letter:'J',word:'preconception'}
 ];
 
 // ═══════════════════════════════════════════
@@ -507,221 +517,247 @@ const HEADINGS_P3=[
 // ═══════════════════════════════════════════
 const QUESTIONS=[
 // ── PASSAGE 1 ──────────────────────────────
-// Q1-7: TRUE/FALSE/NOT GIVEN
+// Q1-5: TRUE/FALSE/NOT GIVEN
 {id:1,passage:0,type:'tfng',
- instruction:'Questions 1–7: Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.',
- text:'Before attending college, Jacob was capable of recognising people he knew well.',
+ instruction:'Questions 1–5: Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.',
+ text:'Donald Johanson was uncertain about the nature of the elbow bone he found in Afar.',
  answer:'FALSE',
- hint:'The passage says Jacob "had had the same trouble all his life" — friends and relatives greeted him and he had no idea who they were.'},
+ hint:'"Straight away, he recognised it as coming from the elbow of a human ancestor" — he was certain immediately, not uncertain.'},
 
 {id:2,passage:0,type:'tfng',instruction:'',
- text:'Researchers believe that prosopagnosia may be a growing problem.',
+ text:'Several bones were found by Donald Johanson at the same site in Afar.',
  answer:'TRUE',
- hint:'The survey results surprised everyone, suggesting far more people have prosopagnosia than previously thought. The findings from both Harvard/UCL and the German team support the view that this is a notable and growing concern.'},
+ hint:'"There were plenty more. \'As I looked up the slopes to my left, I saw bits of the skull, a chunk of jaw, a couple of vertebrae.\'"'},
 
 {id:3,passage:0,type:'tfng',instruction:'',
- text:'It is harder to identify developmental prosopagnosia in babies than in young children.',
+ text:'The experts realised the importance of the discovery at Afar.',
  answer:'NOT GIVEN',
- hint:'The passage mentions babies and left-eye lens defects as a risk factor but says nothing about comparing difficulty of diagnosis between babies and young children.'},
+ hint:'The passage says the skeleton itself was a significant find, but does not state that "the experts" collectively realised its importance — only Johanson\'s own reaction is given.'},
 
 {id:4,passage:0,type:'tfng',instruction:'',
- text:'A German study seems to support the Harvard and UCL research findings.',
- answer:'TRUE',
- hint:'Martina Gruter\'s German team similarly reported 2.5% of 700 pupils had trouble — consistent with the 2% figure from Harvard/UCL. The passage says "The results of the survey took everyone by surprise."'},
+ text:'It was the upper part of the skeleton that had suffered the least damage.',
+ answer:'NOT GIVEN',
+ hint:'The passage says 40% of the skeleton was preserved but never specifies which part (upper or lower) suffered the least damage.'},
 
 {id:5,passage:0,type:'tfng',instruction:'',
- text:'In general, prosopagnosics are aware that other people can recognise faces more easily than they can.',
- answer:'FALSE',
- hint:'The passage says prosopagnosics "often don\'t realise that other people have better recognition skills than they do."'},
-
-{id:6,passage:0,type:'tfng',instruction:'',
- text:'In most cases, prosopagnosics have developed ways to deal with their problem.',
+ text:"The skeleton's measurements helped Johanson's team to decide if it was male or female.",
  answer:'TRUE',
- hint:'Passage: "the majority of developmental prosopagnosics possess strategies that allow them to get around their difficulty."'},
+ hint:'"As the feeling was that the skeleton was female due to its size, someone suggested calling it Lucy" — size (a measurement) is what suggested it was female.'},
 
-{id:7,passage:0,type:'tfng',instruction:'',
- text:'The study of prosopagnosia may help neuroscientists to treat different kinds of brain injury.',
- answer:'NOT GIVEN',
- hint:'Neuroscientists study prosopagnosia to understand general brain information-processing, not specifically to treat brain injury. That application is not mentioned.'},
+// Q6-13: Notes completion, ONE WORD ONLY
+{id:6,passage:0,type:'fill',
+ instruction:'Questions 6–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Movement: upright movement possibly started among the _______ of trees.',
+ answers:['branches'],answer:'branches',
+ hint:'"It may be that upright walking evolved in the trees, as a way to walk along branches that would otherwise be too flexible."'},
 
-// Q8-13: Notes completion (ONE WORD ONLY)
-{id:8,passage:0,type:'fill',
- instruction:'Questions 8–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
- text:'Prosopagnosics may also have problems recognising commonly seen _______ and objects.',
- answers:['animals'],answer:'animals',
- hint:'Passage: "others have trouble with ordinary everyday objects and, so it turns out, animals which would normally be familiar as well."'},
+{id:7,passage:0,type:'fill',instruction:'',
+ text:"Movement: Lucy probably moved to the _______ in search of food.",
+ answers:['ground'],answer:'ground',
+ hint:'"Hunting for food may have been the real reason for heading to the ground."'},
+
+{id:8,passage:0,type:'fill',instruction:'',
+ text:'Diet and eating habits: analysis of food in the _______ of the skeletons of early humans shows changes in their diet.',
+ answers:['teeth'],answer:'teeth',
+ hint:'"Studies of the remains of food trapped on preserved human teeth indicate that several species... were expanding their diet."'},
 
 {id:9,passage:0,type:'fill',instruction:'',
- text:'Some prosopagnosics cannot identify the _______ on someone else\'s face.',
- answers:['emotion'],answer:'emotion',
- hint:'Passage: "for other subjects this [identifying the emotion on another\'s face] was an impossibility."'},
+ text:'Diet and eating habits: it is likely that meat and grasses were substituted for _______ .',
+ answers:['fruit'],answer:'fruit',
+ hint:'"Instead of mostly eating fruit from trees, they began to include grasses and possibly meat."'},
 
 {id:10,passage:0,type:'fill',instruction:'',
- text:'Prosopagnosia may be caused by just one _______ according to Martina Gruter.',
- answers:['gene'],answer:'gene',
- hint:'Passage: "the German team believe they have good evidence that a single gene could be responsible."'},
+ text:'_______ that were located close to Lucy suggest these were also part of her diet.',
+ answers:['eggs'],answer:'eggs',
+ hint:'"Fossilised crocodile and turtle eggs were found near her skeleton, suggesting that Lucy died while foraging for them."'},
 
 {id:11,passage:0,type:'fill',instruction:'',
- text:'A defect in the _______ eye may also be a cause, according to Brad Duchaine.',
- answers:['left'],answer:'left',
- hint:'Passage: "when it\'s the left one, being unable to see through this eye during the first two months of life is a major risk factor for prosopagnosia."'},
+ text:'_______ that were found had marks on them, possibly made by tools used for eating.',
+ answers:['bones'],answer:'bones',
+ hint:'"Archaeologists uncovered animal bones with scratches that seem to have been made by stone tools."'},
 
 {id:12,passage:0,type:'fill',instruction:'',
- text:'Joseph Degutis\' patient proved he had been successfully trained to recognise faces inside the _______ and in the outside world.',
- answers:['laboratory'],answer:'laboratory',
- hint:'Passage: "successfully training a severe developmental prosopagnosic to recognise faces during tests carried out in the laboratory."'},
+ text:"Comparisons with modern-day humans: modern-day humans have a longer _______ than Lucy did.",
+ answers:['childhood'],answer:'childhood',
+ hint:"\"Lucy's childhood was much briefer than ours.\""},
 
 {id:13,passage:0,type:'fill',instruction:'',
- text:'Thomas Gruter doubts training will work and mentions that _______ by some subjects can affect research results.',
- answers:['cheating'],answer:'cheating',
- hint:'Passage: "He also points out that cheating is a possibility during tests."'},
+ text:"Comparisons with modern-day humans: the _______ of modern-day humans appear to develop later than Lucy's did.",
+ answers:['brains'],answer:'brains',
+ hint:'"A recent study of a 3-year-old early human suggested that their brains matured much earlier than ours do" — implying our brains develop later.'},
 
 // ── PASSAGE 2 ──────────────────────────────
-// Q14-20: Summary fill (NO MORE THAN TWO WORDS)
+// Q14-16: Summary completion, NO MORE THAN TWO WORDS
 {id:14,passage:1,type:'fill',
- instruction:'Questions 14–20: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
- text:'Three theories have been put forward to explain the disappearance of the different species of large mammals that inhabited _______ 11,000 years ago.',
- answers:['north america','North America'],answer:'North America',
- hint:'Passage: "North America once belonged to huge, elephant-like mammoths... Some 11,000 years ago, however, these large-bodied mammals... disappeared."'},
+ instruction:'Questions 14–16: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'The difference in pass rates between boys and girls in New Zealand is about 10 percentage _______ .',
+ answers:['points'],answer:'points',
+ hint:'Paragraph A: "the difference is about 10 percentage points."'},
 
 {id:15,passage:1,type:'fill',instruction:'',
- text:'The _______ proposed around fifty years ago by Paul S. Martin blames hunting by people for mass extinction.',
- answers:['overkill model'],answer:'overkill model',
- hint:'Passage: "This belief resulted in the overkill model which emerged in the 1960s, when it was put forth by Paul S. Martin."'},
+ text:'Girls have been outperforming boys academically for more than a _______ .',
+ answers:['decade'],answer:'decade',
+ hint:'Paragraph A: "high school girls have been outperforming boys academically for more than a decade."'},
 
 {id:16,passage:1,type:'fill',instruction:'',
- text:'Computer calculations seem to support this explanation, but critics question the reliability of figures based on _______ by people for mass extinction.',
- answers:['hunting'],answer:'hunting',
- hint:'Passage: "human hunting drove these huge megafauna species to extinction."'},
+ text:'This gender gap is not unique to New Zealand; it has also been noticed and debated in _______ .',
+ answers:['australia'],answer:'Australia',
+ hint:'Paragraph A: "It is an international phenomenon, and within Australia was the subject of much debate and controversy."'},
 
-{id:17,passage:1,type:'fill',instruction:'',
- text:'The second theory suggests that humans introduced a _______ which wiped out the large mammals.',
- answers:['deadly disease'],answer:'deadly disease',
- hint:'Passage: "he suggests that people may have introduced a deadly disease."'},
+// Q17-20: Which paragraph A-H
+{id:17,passage:1,type:'fill',
+ instruction:'Questions 17–20: Reading Passage 2 has eight paragraphs, A–H. Which paragraph contains the following information? Write the correct letter, A–H.',
+ text:"an advantage of New Zealand's secondary school tests",
+ answers:['c','C'],answer:'C',
+ hint:'Paragraph C: Steve Benson explains NCEA "is useful to employers and to universities because it provides a fine-grained picture of pupils\' performance."'},
 
 {id:18,passage:1,type:'fill',instruction:'',
- text:'However, so far this theory also lacks any _______ .',
- answers:['empirical evidence'],answer:'empirical evidence',
- hint:'Passage: "So far, Macphee does not have empirical evidence for this theory."'},
+ text:"a mention of current government initiatives to boost male achievement",
+ answers:['b','B'],answer:'B',
+ hint:'Paragraph B: the Ministry "is working with a reference group on boys\' education... and has commissioned an Australian academic to report on interventions."'},
 
 {id:19,passage:1,type:'fill',instruction:'',
- text:'The final theory suggests that this period experienced significant _______ which eventually led to the loss of habitat.',
- answers:['climate instability'],answer:'climate instability',
- hint:'Passage: "The Pleistocene epoch in question witnessed considerable climate instability."'},
+ text:'when gender difference in literacy skills first becomes evident',
+ answers:['d','D'],answer:'D',
+ hint:'Paragraph D: "The discrepancy in reading and writing skills between males and females shows up as early as preschool."'},
 
 {id:20,passage:1,type:'fill',instruction:'',
- text:'This also led to the division of the _______ that some of the large mammals had organised.',
- answers:['communities'],answer:'communities',
- hint:'Passage: "species that had once formed communities split apart."'},
+ text:'findings that relate academic achievement to race',
+ answers:['h','H'],answer:'H',
+ hint:'Paragraph H: economist Brian Easton\'s findings on boys in single-sex schools "were valid, even when socio-economic status was taken into account" — discussed alongside ethnicity in this section of the argument.'},
 
-// Q21-26: Match statements to people A/B/C
+// Q21-26: Match person to statement (bank rendered before Q21)
 {id:21,passage:1,type:'fill',
- instruction:'Questions 21–26: Match each statement with the correct person A, B or C. You may use any letter more than once.',
- text:'Too little evidence exists to support the hunting theory.',
- answers:['b','B'],answer:'B',
- hint:'Ross D.E. Macphee (B) points out barely a dozen stone-point examples in mammoth bones — "hardly what one might expect if hunting drove these animals to extinction."'},
+ instruction:'Questions 21–26: Look at the following people and the list of statements below. Match each person with the correct statement, A–H.',
+ text:'Celia Lashlie',
+ answers:['h','H'],answer:'H',
+ hint:'Celia Lashlie "believe[s] there is still resistance within the Education Ministry towards doing anything about the problem" = H (government reluctant to act).'},
 
 {id:22,passage:1,type:'fill',instruction:'',
- text:'The bigger the animal, the bigger the territory it requires for survival.',
- answers:['c','C'],answer:'C',
- hint:'Russell W. Graham (C): "a death sentence for large animals, which need correspondingly large ranges."'},
+ text:'Steve Benson',
+ answers:['e','E'],answer:'E',
+ hint:'Steve Benson: "In most parts of the curriculum, for example in maths, there isn\'t really a gender gap. But literacy is a different matter." = E (gap only evident in some subjects).'},
 
 {id:23,passage:1,type:'fill',instruction:'',
- text:'Globally, humans have been indirectly responsible for the elimination of many species.',
- answers:['b','B'],answer:'B',
- hint:'Ross D.E. Macphee (B): "humans most likely brought about these extinctions (as well as others around the world that coincided with human arrival), but not directly."'},
+ text:'Roger Moses',
+ answers:['g','G'],answer:'G',
+ hint:'Roger Moses says NCEA papers are "more demanding than the previous system" in written content = G (higher literacy standards than past exams).'},
 
 {id:24,passage:1,type:'fill',instruction:'',
- text:'Population estimates can be used to understand how large mammals became extinct.',
- answers:['a','A'],answer:'A',
- hint:'John Alroy (A) used population estimates in his computer simulation to argue hunting caused extinction.'},
+ text:'Rob Burroughs',
+ answers:['c','C'],answer:'C',
+ hint:'Rob Burroughs found the real difference "was, instead, to do with the quality of instruction" = C (good teaching more important than class type).'},
 
 {id:25,passage:1,type:'fill',instruction:'',
- text:'Scientific examination of fossil remains may provide some proof for one of the theories.',
- answers:['b','B'],answer:'B',
- hint:'Macphee (B) "hopes that analyses of tissue and DNA from the most recent animal remains will eventually reveal the microbes responsible."'},
+ text:'Stuart Martin',
+ answers:['f','F'],answer:'F',
+ hint:'Stuart Martin: boys\' "competitive instinct tends to come out later" and by 17 they catch up = F (older boys more motivated).'},
 
 {id:26,passage:1,type:'fill',instruction:'',
- text:'Environmental changes negatively affected the social groupings of some large species.',
- answers:['c','C'],answer:'C',
- hint:'Russell W. Graham (C): climate instability caused habitats to disappear and "species that had once formed communities split apart."'},
+ text:'Paul Baker',
+ answers:['b','B'],answer:'B',
+ hint:'Paul Baker says in boys\' schools activities "cannot be \'captured by girls\'" = B (boys disadvantaged by girls taking over).'},
 
 // ── PASSAGE 3 ──────────────────────────────
-// Q27-32: Paragraph headings (i–viii), Paragraph A = vii (given as example)
-{id:27,passage:2,type:'fill',
- instruction:'Questions 27–32: Reading Passage 3 has seven paragraphs A–G. Paragraph A is given as an example (vii – A difficult task). Choose the correct heading i–viii for Paragraphs B–G.',
- text:'Paragraph B',
- answers:['iv'],answer:'iv',
- hint:'Paragraph B discusses Stengel setting the maximum acceleration at 6g and restricting how fast it can increase — "Setting the limits of acceleration" (iv).'},
+// Q27-30: MCQ
+{id:27,passage:2,type:'mcq',
+ instruction:'Questions 27–30: Choose the correct letter, A, B, C or D.',
+ text:'Why does the writer refer to Locke and Newton in the first paragraph?',
+ answer:'D',
+ options:[
+   'A. to indicate that his article will cover several scientific fields',
+   'B. to stress how much physics has changed in 400 years',
+   'C. to persuade the reader to take him seriously',
+   'D. to point out that his notions are not new'
+ ],
+ hint:'Locke and Newton were "both aware" of this idea 400 years ago, showing the writer\'s point is not a new one.'},
 
-{id:28,passage:2,type:'fill',instruction:'',
- text:'Paragraph C',
- answers:['viii'],answer:'viii',
- hint:'Paragraph C describes the new waltzer cars that spin freely, meaning "you never have the same experience twice" — "A different ride every time" (viii).'},
+{id:28,passage:2,type:'mcq',instruction:'',
+ text:"According to the writer, why was Freud's theory of the unconscious mocked?",
+ answer:'C',
+ options:[
+   'A. It was too complex for his contemporaries to understand.',
+   'B. It involved criticism of the way people behaved in society.',
+   'C. People felt that it devalued the accepted concept of humanity.',
+   'D. People assumed that it was intended as a joke.'
+ ],
+ hint:'"It undermined the notion of humans as pre-eminently rational beings who could be held responsible for their actions" — it devalued the accepted view of humanity.'},
 
-{id:29,passage:2,type:'fill',instruction:'',
- text:'Paragraph D',
- answers:['ii'],answer:'ii',
- hint:'Paragraph D explains how chaotic rides can hit resonance frequency unpredictably and "no one can guarantee it will be able to cope" — "Research can\'t guarantee safety" (ii).'},
+{id:29,passage:2,type:'mcq',instruction:'',
+ text:'The writer describes Mr S failing to get up in order to demonstrate',
+ answer:'A',
+ options:[
+   "A. how realistic most people's memories are.",
+   'B. how hard it is to tell dreaming and waking apart.',
+   'C. how unusual it is to mistake a perception for a memory.',
+   'D. how valuable knowledge of the past can be.'
+ ],
+ hint:'Mr S is an exceptional case (unusually vivid memories) used to illustrate, by contrast, how normally pale/unrealistic ordinary memories are compared with perceptions.'},
 
-{id:30,passage:2,type:'fill',instruction:'',
- text:'Paragraph E',
- answers:['iii'],answer:'iii',
- hint:'Paragraph E covers the puzzling delayed headaches and other symptoms volunteers developed — "Unexplained symptoms" (iii).'},
+{id:30,passage:2,type:'mcq',instruction:'',
+ text:'What point is the writer making in the text as a whole?',
+ answer:'A',
+ options:[
+   'A. Perception involves much more than the data collected by the eyes.',
+   'B. Learning to see as an adult can be a time-consuming process.',
+   'C. Science is failing to devote enough attention to sight.',
+   'D. Human perception is remarkably reliable.'
+ ],
+ hint:'The whole passage argues perception depends on memory, inference and expectation, not just raw visual data from the eyes.'},
 
-{id:31,passage:2,type:'fill',instruction:'',
- text:'Paragraph F',
- answers:['i'],answer:'i',
- hint:'Paragraph F argues that smaller, carefully sequenced accelerations make rides more enjoyable — "Less is more" (i).'},
-
-{id:32,passage:2,type:'fill',instruction:'',
- text:'Paragraph G',
- answers:['vi'],answer:'vi',
- hint:'Paragraph G describes the Coriolis Illusion — unexpected, pleasant sensations — "Gentle surprises" (vi).'},
-
-// Q33-37: Sentence completion (NO MORE THAN TWO WORDS AND/OR A NUMBER)
-{id:33,passage:2,type:'fill',
- instruction:'Questions 33–37: Complete the sentences below. Choose NO MORE THAN TWO WORDS AND/OR A NUMBER from the passage for each answer.',
- text:'Some attractions such as the new type of waltzers depend on both the _______ and position of their passengers in order to create a variety of ride experiences.',
- answers:['weight','position'],answer:'weight / position',
- hint:'Passage: "the latest generation of waltzer cars spin freely, at a rate determined by the weight and position of the people in them."'},
-
-{id:34,passage:2,type:'fill',instruction:'',
- text:'Designers need to be aware that a "chaotic" ride could accelerate at a violent rate if it reaches its _______ .',
- answers:['resonance frequency'],answer:'resonance frequency',
- hint:'Passage: "if you drive a revolving waltzer car at its resonance frequency it could speed up uncontrollably."'},
-
-{id:35,passage:2,type:'fill',instruction:'',
- text:'Research has shown that people will begin to feel ill if they are subjected to movement on all _______ at the same time.',
- answers:['three axes'],answer:'three axes',
- hint:'Passage: "if the pilots were turned on all three axes simultaneously, they became so nauseous they almost blacked out."'},
-
-{id:36,passage:2,type:'fill',instruction:'',
- text:'Volunteers in Stengel\'s rotation tests suffered delayed reactions such as _______ .',
- answers:['headaches'],answer:'headaches',
- hint:'Passage: "they also developed headaches and other problems about two days later."'},
-
-{id:37,passage:2,type:'fill',instruction:'',
- text:'A phenomenon known as the _______ produced a pleasurable sensation in test subjects.',
- answers:['coriolis illusion','Coriolis Illusion'],answer:'Coriolis Illusion',
- hint:'Passage: "an effect called the Coriolis Illusion comes into play. This is an agreeable tumbling feeling."'},
-
-// Q38-40: YES/NO/NOT GIVEN
-{id:38,passage:2,type:'yesno',
- instruction:'Questions 38–40: Do the following statements agree with the claims of the writer? Write YES, NO or NOT GIVEN.',
- text:'There is still a lot to be learnt about the rates of acceleration which people can withstand.',
+// Q31-36: YES/NO/NOT GIVEN
+{id:31,passage:2,type:'yesno',
+ instruction:'Questions 31–36: Do the following statements agree with the views of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.',
+ text:'Sydney Bradford relied on recollections of objects he had been told about to help him see after his operation.',
  answer:'NO',
- hint:'Paragraph B shows NASA already knows the maximum is 9g and Stengel set the public limit at 6g — these limits are established. The writer does NOT claim more needs to be learned about linear acceleration limits. Answer: NO.'},
+ hint:'He relied on touch memories — things he had physically experienced before, not things he had been told about.'},
 
-{id:39,passage:2,type:'yesno',instruction:'',
- text:'Children enjoy funfairs more than adults.',
- answer:'NOT GIVEN',
- hint:'The passage does not compare children\'s and adults\' enjoyment of funfairs.'},
-
-{id:40,passage:2,type:'yesno',instruction:'',
- text:'Current rides could probably be adapted to become more enjoyable.',
+{id:32,passage:2,type:'yesno',instruction:'',
+ text:'People who only start to see as adults can learn to see as other people do in time.',
  answer:'YES',
- hint:'Passage: "it seems likely that designers could formulate profiles even for existing attractions that would lead to higher amusement value."'},
+ hint:'Mike May\'s "sight has gradually improved as he learns to see, for example, by understanding how shadows represent depth."'},
+
+{id:33,passage:2,type:'yesno',instruction:'',
+ text:'People who have gained their sight as adults find certain activities harder to do than before.',
+ answer:'YES',
+ hint:'May "would have to shut his eyes while skiing to block out what he now found was a terrifying sight" — skiing became harder, not easier.'},
+
+{id:34,passage:2,type:'yesno',instruction:'',
+ text:'It is evident now that sight involves the eyes and one particular area of the brain.',
+ answer:'NO',
+ hint:'"Now it seems that half the brain is occupied with seeing" — not one particular region, but a much larger, distributed part of the brain.'},
+
+{id:35,passage:2,type:'yesno',instruction:'',
+ text:'The mask experiment is particularly useful in training people who are regaining their sight.',
+ answer:'NOT GIVEN',
+ hint:'The mask experiment is used to illustrate how memory/expectation governs perception in general — no mention of it being used to train people regaining sight.'},
+
+{id:36,passage:2,type:'yesno',instruction:'',
+ text:'People with perfect vision can fail to interpret objects correctly under certain circumstances.',
+ answer:'YES',
+ hint:'"Even people with no visual impairment see what, at some level, they expect to see, and often miss things as they really are."'},
+
+// Q37-40: Summary using word bank A-J (bank rendered before Q37)
+{id:37,passage:2,type:'fill',
+ instruction:'Questions 37–40: Complete the summary using the list of words, A–J, below.',
+ text:'In this experiment, having looked at the front of a simple face-mask, subjects look at the reverse. However, the subjects are convinced that they are still looking at a mask which is _______ in shape.',
+ answers:['d','D'],answer:'D',
+ hint:'Word bank D = convex. "From the front it is a convex shape... the back of the mask will be seen as convex" (D).'},
+
+{id:38,passage:2,type:'fill',instruction:'',
+ text:'They believe that the _______ is poking out in the normal manner because that is what they are used to seeing.',
+ answers:['f','F'],answer:'F',
+ hint:'Word bank F = nose. "From the front it is a convex shape with the nose sticking out" — the nose is expected to poke out (F).'},
+
+{id:39,passage:2,type:'fill',instruction:'',
+ text:'Attempting to make a _______ of the mask in this orientation leads to the same problem.',
+ answers:['i','I'],answer:'I',
+ hint:'Word bank I = drawing. "It is almost, if not quite, impossible to sketch the back of a hollow mask to look as it is" — sketch = drawing (I).'},
+
+{id:40,passage:2,type:'fill',instruction:'',
+ text:'The subjects fail to see a concave form because of the _______ they have that the features of a face stick out.',
+ answers:['j','J'],answer:'J',
+ hint:'Word bank J = preconception. Subjects expect (a preconception) that facial features stick out, so they cannot see the true concave shape (J).'},
 ];
 
 const BAND_TABLE=[
@@ -781,6 +817,16 @@ function isCorrect(q,userAnswer){
 // ═══════════════════════════════════════════
 let currentPassage=0,answers={},flags={},timerSec=3600,
     timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-8';
+const testStartTime=Date.now();
+
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
 
 // ═══════════════════════════════════════════
 // BEGIN TEST
@@ -837,16 +883,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_t2_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_t2_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_t2_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_t2_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_t8_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t8_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t8_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t8_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_t2_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_t2_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_t2_timer',timerSec);
+    localStorage.setItem('ielts_t8_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t8_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t8_timer',timerSec);
   }catch(e){}
 }
 
@@ -1001,7 +1047,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_t2_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_t8_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ═══════════════════════════════════════════
 // HIGHLIGHTING
@@ -1092,6 +1138,19 @@ function showResults(){
     </div>`;
   }).join('');
   document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
@@ -1134,7 +1193,7 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_t2_answers','ielts_t2_flags','ielts_t2_timer','ielts_t2_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_t8_answers','ielts_t8_flags','ielts_t8_timer','ielts_t8_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
@@ -1159,27 +1218,18 @@ function renderQuestions(pIdx){
     if(q.instruction&&q.instruction!==lastInstr){
       h+=`<div class="q-section-title">${q.instruction}</div>`;
       lastInstr=q.instruction;
-      // Passage 2: people bank before Q21 matching section
+      // Passage 2: statement bank before Q21
       if(pIdx===1 && q.id===21){
-        h+=renderPersonBank(PEOPLE_P2,'List of People — A, B or C (you may use any letter more than once)');
+        h+=renderPersonBank(STATEMENTS_P2,'List of Statements — A to H');
       }
-      // Passage 3: headings bank before Q27
-      if(pIdx===2 && q.id===27){
-        h+=renderHeadingsBank();
+      // Passage 3: word bank before Q37
+      if(pIdx===2 && q.id===37){
+        h+=renderWordBank(WORDBANK_P3,'Word Bank — A to J');
       }
     }
     h+=renderQ(q);
   });
   document.getElementById('questions-content').innerHTML=h;
-}
-
-// ═══════════════════════════════════════════
-// EXTRA BANK HELPERS (per-test)
-// ═══════════════════════════════════════════
-function renderHeadingsBank(){
-  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to viii (Paragraph A = vii, given)</div><div class="word-bank-grid">`;
-  HEADINGS_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
-  h+=`</div></div>`;return h;
 }
 </script>
 </body>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandPath — IELTS Academic Reading Mock Test 4</title>
+<title>BandPath — IELTS Academic Reading Mock Test 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
       <span class="start-brand-name">Band<span>Path</span></span>
     </div>
     <div class="start-logo">IELTS Academic Reading</div>
-    <div class="start-title">Mock Test 4</div>
+    <div class="start-title">Mock Test 8</div>
     <div class="start-subtitle">Computer-Delivered Format</div>
     <div class="start-info">
       <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
@@ -362,7 +362,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
   <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
     <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
-    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
   </div>
 </div>
 
@@ -399,7 +399,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 <div id="results-screen">
   <div class="res-header">
     <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
-    <h1>Academic Reading — Results (Mock Test 4)</h1>
+    <h1>Academic Reading — Results (Mock Test 8)</h1>
     <div class="band-circle">
       <div class="band-num" id="res-band">—</div>
       <div class="band-lbl">Band</div>
@@ -421,7 +421,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   <div class="res-actions">
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
-    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
@@ -433,53 +433,51 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
-  heading:'Part A: The History of Chicken & Part B: Poor Office Lighting',
+  heading:'Listening to the Ocean',
   subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 1–13.',
   qRange:[1,13],
   paragraphs:[
-    {label:'Part A',text:`<strong>The History of Chicken</strong>`},
-    {label:'',text:`Short introduced project-based learning, which has given students more opportunities to ask questions and follow their interests. For one popular project — the Chicken Challenge — students investigate the driving question, "What's the most effective way to produce the best chickens for market in the least amount of time?" As they raise chickens in a school greenhouse, students conduct nutrition trials, do research, and prepare marketing materials to explain their approach. It's an academically rich project that also appeals to students' desire for hands-on learning. "There's the real life of caring for animals that rely on you," Short says.`},
-    {label:'',text:`The changes in her curriculum have made a difference. Enrollment in the school's agro program has doubled in 10 years, with girls now outnumbering boys in many classes. Technology has become an integral part of teaching and learning in a classroom equipped with a polymerase chain reaction machine and other real-world lab equipment for genetic studies. Interest has also spread to the junior high, where Short's STEM students are investigating the use of robotics in fishing lures and asking about using drones to gather data. "They're teaching me," she says, when it comes to emerging technologies.`},
-    {label:'A Growing Movement',text:`Four of Short's students were among the 40,000 young people who gathered in Indianapolis in October for the National FFA convention. This annual event showcases the work of student researchers, FFA leaders, and young entrepreneurs, along with innovations developed by industry partners and technologists.`},
-    {label:'',text:`"We have more members now than at any point in history," says Blaze Currie, team leader for the leadership development team at FFA. The organization used to be known as Future Farmers of America but has rebranded to reflect a wider range of opportunities. "We still have students who come from rural communities, but we also have chapters in 18 of the 20 largest cities in the country."`},
-    {label:'Part B',text:`<strong>Poor Office Lighting</strong>`},
-    {label:'',text:`Poor lighting (which includes light being too bright or creating glare) can cause us to lose our ability to focus through eyestrain, fatigue and headaches. This can result in lower productivity, absenteeism and a recent study by the HSE has shown that it also has an adverse effect on our daily moods. If you imagine sitting in an intensely lit room all day, squinting at another bright light, you can start to visualize how it might begin to affect you. Another condition associated with prolonged exposure to computer light is computer vision syndrome (CVS) or visual display unit (VDU) glare, affecting between 64% and 90% of the UK office population. While this hasn't been found to have any long-term complications, it can cause all the problems previously mentioned as well as dry eyes and temporary myopia (difficulty in seeing distant objects). Overhead lighting is generally fixed in the early phases of office development at an overly bright 500 lux, often over areas that do not need the light. After all, it's surely better to have too much light than not enough?`},
+    {label:'A',text:`The oceans of Earth cover more than 70 percent of the planet's surface, yet, until quite recently, we knew less about their depths than we did about the surface of the Moon. Distant as it is, the Moon has been far more accessible to study because astronomers long have been able to look at its surface, first with the naked eye and then with the telescope — both instruments that focus light. And, with telescopes tuned to different wavelengths of light, modern astronomers can not only analyze Earth's atmosphere, but also determine the temperature and composition of the Sun or other stars many hundreds of light-years away. Until the twentieth century, however, no analogous instruments were available for the study of Earth's oceans: Light, which can travel trillions of miles through the vast vacuum of space, cannot penetrate very far in seawater.`},
+    {label:'B',text:`Curious investigators long have been fascinated by sound and the way it travels in water. As early as 1490, Leonardo da Vinci observed: "If you cause your ship to stop and place the head of a long tube in the water and place the outer extremity to your ear, you will hear ships at a great distance from you." In 1687, the first mathematical theory of sound propagation was published by Sir Isaac Newton in his <em>Philosophiae Naturalis Principia Mathematica</em>. Investigators were measuring the speed of sound in air beginning in the mid-seventeenth century, but it was not until 1826 that Daniel Colladon, a Swiss physicist, and Charles Sturm, a French mathematician, accurately measured its speed in water. Using a long tube to listen underwater (as da Vinci had suggested), they recorded how fast the sound of a submerged bell traveled across Lake Geneva. Their result — 1,435 meters per second in water of 1.8 degrees Celsius — was only 3 meters per second off from the speed accepted today. What these investigators demonstrated was that water — whether fresh or salt — is an excellent medium for sound, transmitting it almost five times faster than its speed in air.`},
+    {label:'C',text:`In 1877 and 1878, the British scientist John William Strutt, third Baron Rayleigh, published his two-volume seminal work, <em>The Theory of Sound</em>, often regarded as marking the beginning of the modern study of acoustics. The recipient of the Nobel Prize for Physics in 1904 for his successful isolation of the element argon, Lord Rayleigh made key discoveries in the fields of acoustics and optics that are critical to the theory of wave propagation in fluids. Among other things, Lord Rayleigh was the first to describe a sound wave as a mathematical equation (the basis of all theoretical work on acoustics) and the first to describe how small particles in the atmosphere scatter certain wavelengths of sunlight, a principle that also applies to the behavior of sound waves in water.`},
+    {label:'D',text:`A number of factors influence how far sound travels underwater and how long it lasts. For one, particles in seawater can reflect, scatter, and absorb certain frequencies of sound — just as certain wavelengths of light may be reflected, scattered, and absorbed by specific types of particles in the atmosphere. Seawater absorbs 30 times the amount of sound absorbed by distilled water, with specific chemicals (such as magnesium sulfate and boric acid) damping out certain frequencies of sound. Researchers also learned that low-frequency sounds, whose long wavelengths generally pass over tiny particles, tend to travel farther without loss through absorption or scattering. Further work on the effects of salinity, temperature, and pressure on the speed of sound has yielded fascinating insights into the structure of the ocean. Speaking generally, the ocean is divided into horizontal layers in which sound speed is influenced more greatly by temperature in the upper regions and by pressure in the lower depths. At the surface is a sun-warmed upper layer, the actual temperature and thickness of which varies with the season. At mid-latitudes, this layer tends to be isothermal — the temperature tends to be uniform throughout the layer because the water is well mixed by the action of waves, winds, and convection currents; a sound signal moving down through this layer tends to travel at an almost constant speed. Next comes a transitional layer called the thermocline, in which temperature drops steadily with depth; as the temperature falls, so does the speed of sound.`},
+    {label:'E',text:`The U.S. Navy was quick to appreciate the usefulness of low-frequency sound and the deep sound channel in extending the range at which it could detect submarines. In great secrecy during the 1950s, the U.S. Navy launched a project that went by the code name Jezebel; it would later come to be known as the Sound Surveillance System (SOSUS). The system involved arrays of underwater microphones, called hydrophones, that were placed on the ocean bottom and connected by cables to onshore processing centers. With SOSUS deployed in both deep and shallow waters along both coasts of North America and the British West Indies, the U.S. Navy not only could detect submarines in much of the northern hemisphere, it also could distinguish how many propellers a submarine had, whether it was conventional or nuclear, and sometimes even the class of sub.`},
+    {label:'F',text:`The realization that SOSUS could be used to listen to whales also was made by Christopher Clark, a biological acoustician at Cornell University, when he first visited a SOSUS station in 1992. When Clark looked at the graphic representations of sound, scrolling 24 hours a day, every day, he saw the voice patterns of blue, finback, minke, and humpback whales. He also could hear the sounds. Using a SOSUS receiver in the West Indies, he could hear whales that were 1,770 kilometers (1,100 miles) away. Whales are the biggest of Earth's creatures. Using the SOSUS stations, scientists can track the whales in real time and position them on a map. Moreover, they can track not just one whale at a time, but many creatures simultaneously throughout the North Atlantic and the eastern North Pacific. They also can learn to distinguish whale calls. For example, Fox and colleagues have detected changes in the calls of finback whales during different seasons and have found that blue whales in different regions of the Pacific Ocean have different calls.`},
+    {label:'G',text:`SOSUS, with its vast reach, also has proved instrumental in obtaining information crucial to our understanding of Earth's weather and climate. Specifically, the system has enabled researchers to begin making ocean temperature measurements on a global scale — measurements that are keys to puzzling out the workings of heat transfer between the ocean and the atmosphere. The ocean plays an enormous role in determining air temperature; the heat capacity in only the upper few meters of ocean is thought to be equal to all of the heat in the entire atmosphere. For sound waves traveling horizontally in the ocean, speed is largely a function of temperature. Thus, the travel time of a wave of sound between two points is a sensitive indicator of the average temperature along its path. Transmitting sound in numerous directions through the deep sound channel can give scientists measurements spanning vast areas of the globe. Thousands of sound paths in the ocean could be pieced together into a map of global ocean temperatures and, by repeating measurements along the same paths over time, scientists could track changes in temperature over months or years.`},
+    {label:'H',text:`Researchers also are using other acoustic techniques to monitor climate. Oceanographer Jeff Nystuen at the University of Washington, for example, has explored the use of sound to measure rainfall over the ocean. Monitoring changing global rainfall patterns undoubtedly will contribute to understanding major climate change as well as the weather phenomenon known as El Niño. Since 1985, Nystuen has used hydrophones to listen to rain over the ocean, acoustically measuring not only the rainfall rate but also the rainfall type, from drizzle to thunderstorms. By using the sound of rain underwater as a "natural" rain gauge, the measurement of rainfall over the oceans will become available to climatologists.`},
   ]
 },
 {
   title:'READING PASSAGE 2',
-  heading:'Early Approaches to Organisational Design',
-  subheading:'A review of the classical and neoclassical theories of organisational structures.',
+  heading:'The Beginning of the Consumer Age',
+  subheading:'How the public became mass consumers in the late 19th and early 20th centuries.',
   timeHint:'You should spend about 20 minutes on Questions 14–26.',
   qRange:[14,26],
   paragraphs:[
-    {label:'',text:`Determining the 'best' type of organisational structure for a particular situation has long been an important task for managers in all types of organisations. All structures have advantages and disadvantages and managers face the challenge of developing the most appropriate design for changing circumstances.`},
-    {label:'The Classical Approach',text:`Early management writers attempted to approach organisational design using a set of principles that would make an organisational structure perform efficiently in most situations, independent of external conditions and internal objectives. The sociologist Max Weber and management writers Frederick Taylor and Henri Fayol were major contributors to this so-called classical approach. They believed that the most efficient organisations had a legalised formal and hierarchical structure called a 'bureaucracy'. Members of the organisation were guided by a sense of duty to the organisation and by a set of rational rules and regulations. According to Weber, such organisations were characterised by the specialisation of tasks, appointment by merit, and an impersonal climate.`},
-    {label:'',text:`Today the word 'bureaucracy' sometimes has negative connotations. Early management writers, however, commended bureaucracy as an organisational design for its rationality, rules for decision-making, clear chain of command, and promotion of people based on ability and experience, rather than favouritism or whim. Weber also believed that clearly specified authority and responsibility made performance easier to evaluate and reward.`},
-    {label:'',text:`Weber, Taylor and Fayol developed their theories when organisations that resembled this bureaucratic model were modern and efficient. It became evident, however, that some of the major advantages of the bureaucratic structure could become disadvantages if the theory were applied dogmatically. For example, the safeguards against favouritism could be rigidly imposed by adhering excessively to rules — resulting in both managers and subordinates becoming depersonalised.`},
-    {label:'',text:`The classical approach has been criticised from two major perspectives. First, the theory may not have a basis in reality. Have organisations like those described by Weber and the others ever existed? Second, it claims that organisations designed and managed according to bureaucratic principles will enjoy the predicted benefits. But critics argue that the world no longer fits the assumptions in Weber's model (if it ever did), and so a bureaucracy might not yield beneficial results.`},
-    {label:'',text:`Early human relations researchers and behavioural scientists attempted to deal with the major inadequacy of the classical bureaucratic model: neglect of the human element. They argued that an industrial organisation has two objectives: economic effectiveness and employee satisfaction. They also wrote that the bureaucratic structure could be improved by permitting more subordinate participation in decision-making. Because these researchers tried to improve, and not reject, the classical model, they are sometimes called neoclassical theorists and include Douglas McGregor, Chris Argyris and Rensis Likert.`},
-    {label:'The Neoclassical Approach',text:`McGregor believed that the vertical division of labour that characterised bureaucratic organisations was derived from negative and false assumptions about workers which he called 'Theory X'. Managers assume lower-level employees lack ambition and need orders to work effectively. The rigid formal hierarchy is designed to maintain managers' power over subordinates. Decision-making takes place at upper levels of management while the decisions are carried out by people at lower levels. McGregor argued that organisations based instead on 'Theory Y' assumptions use their members' potential. Theory Y assumes that most people find work satisfying, commit themselves willingly to organisational goals and seek responsibility. Members have more independence than in bureaucratic organisations and lower-level participation in decision-making is encouraged.`},
-    {label:'',text:`Argyris was concerned that managers in bureaucratic organisations had near-total responsibility for controlling their subordinates' work. He argued that managerial domination makes subordinates passive and dependent, and decreases their sense of responsibility and self-control. Argyris argued for an alternative organisational design that acknowledged human needs and feelings, and increased workers' satisfaction. Like McGregor, he favoured giving subordinates more independence and decision-making power to create a more informal organisational culture.`},
-    {label:'',text:`Likert shared the perspectives of McGregor and Argyris. In his research, he found that managers who encouraged their subordinates could motivate them more than traditional authoritarian managers. Likert based a model of four possible systems on these findings. In System 1, power and authority are distributed strictly according to the classical management-subordinate relationship: a manager gives orders to lower-level members. In System 4 organisations, by contrast, there is extensive participation in decision-making and problem-solving groups. Some individuals in each group also belong to other work groups to ensure communication between them. System 4 represents Likert's view of an ideal organisation.`},
-    {label:'Criticisms of the Neoclassical Approach',text:`The neoclassical approach to organisational design compensates for limitations in the traditional classical model, but it has also been criticised. First, the neoclassicists share the classical assumption that there is one best way to design an organisation. They overlook environmental, technological, and other variables that might affect an organisation's design, and overemphasise psychological and behavioural variables. Second, Theories X and Y oversimplify human motivation and neglect individual differences. Not everyone is motivated by the non-monetary aspects of work, nor is all work satisfying. Finally, the coordination of work groups to achieve organisational goals may be more difficult than the neoclassicists suggest, particularly when the objectives of lower-level employees are not consistent with those of upper-level managers.`},
+    {label:'A',text:`By 1900 all major industrialised countries had become aware of the importance not only of production, but also of the consumption of goods by their citizens. As a result, a culture of consumption emerged, and this played an important role in the shaping of a country's social and economic identity. One feature of this new culture was a heightened awareness of social status and a strong desire at all levels to show off newly acquired wealth. New aspirations were expressed most visibly through the acquisition of consumer goods, and the concept of style became increasingly significant as a measure of social status.`},
+    {label:'B',text:`One of the ways in which manufacturers tried to encourage consumption was by identifying a particular market and deliberately making their goods look attractive to potential customers. However, the dissemination of goods to a mass market depended on more than the efforts of manufacturers and designers to inject style into products. It also required a whole network of activities and institutions. These included changes in production methods so that more goods could be manufactured; the development of new kinds of retail outlets; and the expansion of advertising to promote sales. The introduction of a credit system of buying, initiated by the Singer Sewing Machine Company in the US in the 1860s and later adopted elsewhere by furniture and electrical appliance manufacturers, also went a long way towards making more goods available to more people.`},
+    {label:'C',text:`There were also changes to the selling environment. The department stores established in the second half of the 19th century — Bon Marché in Paris, Macy's in New York, Harvey Nichols in London — were joined, about the turn of the century, by multi-branch retailers appealing to the lower end of the market, such as John Jacob's furniture stores in England. In US department stores, interior areas expanded and large shop windows were introduced to show off new products to their best advantage. Electric lighting increased their visual appeal. This idea was pioneered in 1877 by the US store-owner John Wanamaker, who persuaded inventor Thomas Edison to install electricity in his Philadelphia department store.`},
+    {label:'D',text:`In the United States where there were large distances between urban centres, mail order became a vital means whereby the rural population could acquire goods that they would not otherwise have been able to buy. Chicago entrepreneur Montgomery Ward launched the concept producing a single-sheet mail-order catalogue in 1872. Three years later, his catalogue had nearly four thousand items listed on it. Businessman Richard Sears followed suit in 1891, and together with partner Alvah C. Roebuck, moved on to develop the largest mail-order company of the 20th century.`},
+    {label:'E',text:`By the end of the 19th century, consumer culture had taken root in industrialized countries and was changing the way people lived and perceived their own status. People were becoming increasingly conscious of their own status, which was expressed through the acquisition of consumer goods and the concept of style. In response, manufacturers began to create goods that were more appealing to the public and retailers expanded their advertising and sales efforts.`},
+    {label:'F',text:`Retail stores adapted to meet the demands of consumers, with large department stores opening in major cities and multi-branch retailers appealing to the lower end of the market. The selling environment was changed with large shop windows, electric lighting, and the expansion of interior areas to showcase goods. Additionally, mail-order catalogues became popular in the United States as a way for rural populations to access goods they wouldn't otherwise have access to. These developments helped to drive the growth of consumer culture and the associated economy.`},
   ]
 },
 {
   title:'READING PASSAGE 3',
-  heading:'Avalanche',
-  subheading:'Nature\'s destructive fury is unleashed on mountainsides around the world.',
-  timeHint:'You should spend about 25 minutes on Questions 27–40.',
+  heading:'Digital Diet',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 27–40.',
   qRange:[27,40],
   paragraphs:[
-    {label:'A',text:`Hurtling down a mountainside at speeds of up to 300 kilometres an hour, an avalanche is at once both a terrifying sight and a spectacle of nature. The power of gravity pulls the snow mass down the mountain slope, capturing all in its path, from rocks, trees, and ice to, from time to time, human victims. Avalanches are caused by a wide range of factors, including the steepness of the mountainside, the weather, the terrain, the snowpack conditions and human activity. Avalanches occur in all parts of the world, in the northern hemisphere and the southern — wherever there are slopes steep enough for the snow to slide down, sometimes recording as much as 250,000 cubic metres of snow descending at unimaginable speeds and force, destroying all in its path.`},
-    {label:'B',text:`An avalanche is an occurrence of nature whereby an entire layer of snow, or snowpack, separates naturally, or from human activity, and descends with rapid downward force, building up speed and air pressure ahead of it, with phenomenal destructive force. An avalanche has three main parts: the starting zone, the avalanche track and the runout zone. The starting zone is a volatile area of a slope where snow that is unstable can fracture and separate from the compacted snow and start to move downward. Usually, this occurs high up the slope of a mountain, but can happen anywhere there is a slope, and the usual cause is when the weight or force of the snow is greater than the strength holding it together. The avalanche track is the route the cascading snow follows, and is often a noticeable track following open or chute-like terrain, away from dense growths of trees, which indicates that other avalanches may have occurred, and often ending with large collecting areas where there is an abundance of debris, such as in gullies or flattened open areas. This is known as the runout zone, which is where the snow is usually piled the highest, with mounds of debris deposits.`},
-    {label:'C',text:`There are three main types of avalanches: wet snow avalanches, dry snow avalanches and slab avalanches. Wet snow avalanches are often thought of as the least dangerous, usually occurring naturally in the spring season because of melting snow from the increasing temperatures. They are considered less dangerous because of the slow speed, due to friction, but can cause significant destruction because of their large mass. Water saturation is a key point, due to the melting, and they pull boulders, earth and vegetation with them. Dry snow avalanches are normally the largest, consisting of an enormous powder cloud masking huge volumes of a rapidly moving snowpack and occur at any time or for any reason. These avalanches can reach speeds of 300 km/hr, and can carry up to 10,000,000 tonnes of snow for incredibly long distances, and often uphill as they come to rest. Finally, some experts consider slab avalanches as the most dangerous, as a slab, or block, of snow separates from the main body of snow and cascades downward. A 'crown fracture' appears at the top and 'flank fractures' are created vertically, separating the block of snow which speeds downhill, destroying everything. Interestingly, these types of avalanches often leave 'walls' carved in the snow where the avalanche has broken away. Slab avalanches account for most related fatalities, and are often caused by human activity, notably skiers.`},
-    {label:'D',text:`Other factors that can cause avalanches include natural conditions such as wind, weather, composition of the snow, storms, sunlight and moisture. Interestingly, coastal environments limit many of the dangerous aspects of mountainous conditions, with an ongoing stabilization of the snowpack due to a continuous freeze-thaw cycle moderating weather extremes. Very cold temperatures can also cause critical circumstances which give rise to avalanches, by affecting the stability of the snow pack, with differences in ground temperatures contrasting with the ambient air temperature, thus affecting moisture content, crystal formation and varying thicknesses of snow. Storms, be they rain or snow, lead to weight variations, with heavy precipitation on top, and less chance of snow bonding to secure a stable weight-load. And sunlight introduces a number of factors — melting, re-freezing and radiation loss — which means significant variations in the heat/cooling process, which impacts on the stability of the snow pack.`},
-    {label:'E',text:`So, what can be done to prevent, predict or control this unleashing of nature's destructive forces? In areas where avalanches present a major threat, such as mountainous communities, ski resorts and transportation facilities, there are a number of initiatives being introduced, because holding back Mother Nature has always been a long-held, but not always successful, dream. Explosives are regularly used in mountainous areas, armies being employed to fire high-decibel cannons which trigger shock waves to loosen snow packs, and other concussion devices dropped from helicopters or hand-launched. Protective fences can direct snow build-up to help prevent snow packs being formed, and there is often construction of avalanche dams to re-direct falling snow, or the building of earth mounds to slow the slide of avalanches. Lastly, to protect human life in the possibility of avalanche conditions, snow shelters have been constructed to withstand the impact of the force of snow, shielding human life, vehicle traffic and residential dwellings.`},
-    {label:'F',text:`Avalanches cannot accurately be predicted, although the conditions can be monitored, studied and assessed. Snow and weather conditions, including temperature, wind and moisture, are a reliable guide, as well as human activity, recent history and forecasts of worsening conditions. However, unfortunately, disasters have occurred. And will continue so. During World War I, between 40,000 and 80,000 soldiers died in the mountainous regions of central Europe, in particular on the Austrian-Italian battlefields, and it has been determined that many were killed as a result of artillery fire, the concussive effects resulting in avalanches. Numerous ski resorts and their communities have unfortunately suffered devastating avalanches, notably in Turkey in 1993, when 43 climbers lost their lives, and in France in 1999, when 12 people were buried under 100,000 tonnes of snow, and in the same year, 31 people died in Austria in one avalanche.`},
-    {label:'G',text:`There are various classification systems for avalanches, but none that is universally recognized. Canada and the United States use one system, defining risk levels using various factors, while Europe employs a different rating system with different criteria, and other alpine nations utilize varying systems which reflect different aspects of risk and outcomes. Avalanches pose a constant threat, and work is constantly being done to forecast, and mitigate, the risks and outcomes of avalanches. Survival is possible for those caught in this most terrible of natural circumstances, and future work and investigation is vital to ensure the safety of those caught in one of nature's most destructive unleashings.`},
+    {label:'A',text:`Telecommuting, Internet shopping and online meetings may save energy as compared with in-person alternatives, but as the digital age moves on, its green reputation is turning a lot browner. E-mailing, number crunching and Web searches in the U.S. consumed as much as 61 billion kilowatt-hours last year, or 1.5 per cent of the nation's electricity — half of which comes from coal. In 2005 the computers of the world ate up 123 billion kilowatt-hours of energy, a number that will double by 2010 if present trends continue, according to Jonathan Koomey, a staff scientist at Lawrence Berkeley National Laboratory. As a result, the power bill to run a computer over its lifetime will surpass the cost of buying the machine in the first place, giving Internet and computer companies a business reason to cut energy costs, as well as an environmental one.`},
+    {label:'B',text:`One of the biggest energy sinks comes not from the computers themselves but from the air-conditioning needed to keep them from overheating. For every kilowatt-hour of energy used for computing in a data centre, another kilowatt-hour is required to cool the furnace-like racks of servers.`},
+    {label:'C',text:`For Internet giant Google, this reality has driven efforts such as the installation of a solar array that can provide 30 per cent of the peak power needs of its Mountain View, Calif., headquarters as well as increased purchases of renewable energy. But to deliver Web pages within seconds, the firm must maintain hundreds of thousands of computer servers in cavernous buildings. "It's a good thing to worry about server energy efficiency," remarks Google's green energy czar Bill Weihl. "We are actively working to maximize the efficiency of our data centres, which account for most of the energy Google consumes worldwide." Google will funnel some of its profits into a new effort, dubbed RE&lt;C (for renewable energy cheaper than coal) to make sources such as solar-thermal, high-altitude wind and geothermal cheaper than coal "within years, not decades," according to Weihl.`},
+    {label:'D',text:`In the meantime, the industry as a whole has employed a few tricks to save watts. Efforts include cutting down on the number of transformations the electricity itself must undergo before achieving the correct operating voltage; rearranging the stacks of servers and the mechanics of their cooling; and using software to create multiple "virtual" computers, rather than having to deploy several real ones. Such virtualization has allowed computer maker Hewlett-Packard to consolidate 86 data centers spread throughout the world to just three, with three backups, says Pat Tiernan, the firm's vice president of social and environmental responsibility.`},
+    {label:'E',text:`The industry is also tackling the energy issue at the computer-chip level. With every doubling of processing power in recent years has come a doubling in power consumption. But to save energy, chipmakers such as Intel and AMD have shifted to so-called multicore technology, which packs multiple processors into one circuit rather than separating them. "When we moved to multicore — away from a linear focus on megahertz and gigahertz — and throttled down microprocessors, the energy savings were pretty substantial," says Allyson Klein, Intel's marketing manager for its Ecotech Initiative. Chipmakers continue to shrink circuits on the nanoscale as well, which means a chip needs less electricity to deliver the same performance, she adds.`},
+    {label:'F',text:`With such chips, more personal computers will meet various efficiency standards, such as Energy Star compliance (which mandates that a desktop consume no more than 65 watts). The federal government, led by agencies such as NASA and the Department of Defense, may soon require all their purchases to meet the Electronic Product Environmental Assessment Tool standard. And Google, Intel and others have formed the Climate Savers Computing Initiative, an effort to cut power consumption from all computers by 50 per cent by 2010.`},
+    {label:'G',text:`Sleep modes and other power management tools built into most operating systems can offer savings today. Yet about 90 per cent of computers do not have such settings enabled, according to Klein. Properly activated, they would prevent a computer from leading to the emission of thousands of kilograms of carbon dioxide from power plants every year. But if powering down or unplugging the computer is not an option, then perhaps the most environmentally friendly use of all those wasted computing cycles is in helping to model climate change. The University of Oxford's ClimatePrediction.net offers an opportunity to at least predict the consequences of all that coal burning.`},
+    {label:'H',text:`CO2 Stats is a free tool that can be embedded into any Website to calculate the carbon dioxide emissions associated with using it. That estimate is based on an assumption of 300 watts of power consumed by the personal computer, network and server involved — or 16.5 milligrams of CO2 emitted every second of use. "The typical carbon footprint is roughly equivalent to 1.5 people breathing," says physicist Alexander Wissner-Gross of Harvard University, who co-created the Web tool.`},
   ]
 }
 ];
@@ -487,23 +485,24 @@ const PASSAGES=[
 // ═══════════════════════════════════════════
 // PEOPLE / WORD BANKS
 // ═══════════════════════════════════════════
-const PEOPLE_P2=[
-  {letter:'A',word:'Max Weber'},
-  {letter:'B',word:'Douglas McGregor'},
-  {letter:'C',word:'Chris Argyris'},
-  {letter:'D',word:'Rensis Likert'}
+const HEADINGS_P2=[
+  {letter:'i',word:'The emergence of consumer culture and its impact on social and economic culture'},
+  {letter:'ii',word:'The strategies adopted by manufacturers to promote consumption'},
+  {letter:'iii',word:'The expansion of retail networks to meet market demands'},
+  {letter:'iv',word:'The innovations in the selling environment to enhance product presentation'},
+  {letter:'v',word:'The significance of mail order in bridging the rural-urban divide'},
+  {letter:'vi',word:'The interplay of social aspirations, consumer goods, and style in shaping consumer culture'},
+  {letter:'vii',word:'The proliferation of credit systems and its impact on widespread availability of goods'},
+  {letter:'viii',word:'The development of large department stores and multi-branch retailers to cater to a wider market'},
+  {letter:'ix',word:'The underlying drivers behind the growth of consumer culture and its economy'}
 ];
 
-const HEADINGS_P3=[
-  {letter:'i',word:'The components which make up an avalanche'},
-  {letter:'ii',word:'Wide-ranging facts about avalanches'},
-  {letter:'iii',word:'Different systems at work to try to reduce risk and minimize loss'},
-  {letter:'iv',word:'The worse avalanches in history'},
-  {letter:'v',word:'Governments try to categorize different kinds of avalanches'},
-  {letter:'vi',word:'More factors that lead to avalanches'},
-  {letter:'vii',word:'Forecasting avalanches is not an exact science, and does not always prevent loss of human life'},
-  {letter:'viii',word:'What are governments doing to prevent the loss of human life?'},
-  {letter:'ix',word:'What constitutes the different kinds of avalanches?'}
+const PEOPLE_P3=[
+  {letter:'A',word:'Jonathan Koomey'},
+  {letter:'B',word:'Allyson Klein'},
+  {letter:'C',word:'Pat Tiernan'},
+  {letter:'D',word:'Bill Weihl'},
+  {letter:'E',word:'Alexander Wissner-Gross'}
 ];
 
 // ═══════════════════════════════════════════
@@ -511,251 +510,257 @@ const HEADINGS_P3=[
 // ═══════════════════════════════════════════
 const QUESTIONS=[
 // ── PASSAGE 1 ──────────────────────────────
-// Q1-5: TRUE/FALSE/NOT GIVEN (Part A)
+// Q1-4: TRUE/FALSE/NOT GIVEN
 {id:1,passage:0,type:'tfng',
- instruction:'Questions 1–5: TRUE / FALSE / NOT GIVEN (Part A — The History of Chicken)',
- text:'This project can help build both academic knowledge and experimental learning.',
+ instruction:'Questions 1–4: TRUE / FALSE / NOT GIVEN',
+ text:'In the past, research on the Moon was much easier than it is now.',
  answer:'TRUE',
- hint:'The passage calls it "an academically rich project that also appeals to students\' desire for hands-on learning" — both academic and experimental.'},
+ hint:'Paragraph A says we knew more about the Moon\'s surface than ocean depths — the Moon was "far more accessible to study" with telescopes. Past research was easier (not harder) than ocean research.'},
 
 {id:2,passage:0,type:'tfng',instruction:'',
- text:'There has been an increase in the number of students in the agri school where males have outnumbered females.',
+ text:'The same light technology used in the investigation of the Moon can be employed in the study of the ocean.',
  answer:'FALSE',
- hint:'The passage says "girls now outnumbering boys in many classes" — the opposite of males outnumbering females.'},
+ hint:'Paragraph A: "Light... cannot penetrate very far in seawater" — so the light-based technology used for the Moon cannot be used for oceans.'},
 
 {id:3,passage:0,type:'tfng',instruction:'',
- text:'Children in Short\'s school have become more enthusiastic than before.',
- answer:'TRUE',
- hint:'Enrollment has doubled, interest has spread to junior high, and students are independently exploring robotics and drones — all showing growing enthusiasm.'},
+ text:'Research on the depth of the ocean by the method of sound waves is more time-consuming.',
+ answer:'NOT GIVEN',
+ hint:'The passage discusses sound waves being used to study the ocean but never compares this approach to others in terms of time required.'},
 
 {id:4,passage:0,type:'tfng',instruction:'',
- text:'Four of Short\'s students who took part in Indianapolis won awards.',
- answer:'NOT GIVEN',
- hint:'The passage says four students attended the National FFA convention in Indianapolis, but says nothing about them winning awards.'},
-
-{id:5,passage:0,type:'tfng',instruction:'',
- text:'Interest of urban students towards the agricultural sector is increasing.',
+ text:'Hydrophones technology is able to detect the category of precipitation.',
  answer:'TRUE',
- hint:'FFA "have chapters in 18 of the 20 largest cities in the country" — showing urban students are increasingly interested.'},
+ hint:'Paragraph H: Nystuen used hydrophones to measure "not only the rainfall rate but also the rainfall type, from drizzle to thunderstorms" — detecting precipitation category.'},
 
-// Q6-8: Fill (NO MORE THAN THREE WORDS OR A NUMBER) — Part A
-{id:6,passage:0,type:'fill',
- instruction:'Questions 6–8: Choose NO MORE THAN THREE WORDS OR A NUMBER from the text for each answer.',
- text:'The changes in _______ have brought a great change in the perspective of students.',
- answers:['her curriculum','the curriculum','curriculum'],answer:'her curriculum',
- hint:'Passage: "The changes in her curriculum have made a difference."'},
+// Q5-8: Which paragraph A-H
+{id:5,passage:0,type:'fill',
+ instruction:'Questions 5–8: Which paragraph A–H contains the following information? You may use any letter more than once.',
+ text:'Elements that affect sound transmission in the ocean.',
+ answers:['d','D'],answer:'D',
+ hint:'Paragraph D discusses the multiple factors (salinity, temperature, pressure, chemicals) that affect how sound travels underwater.'},
+
+{id:6,passage:0,type:'fill',instruction:'',
+ text:'Relationship between global climate and ocean temperature.',
+ answers:['g','G'],answer:'G',
+ hint:'Paragraph G: "the system has enabled researchers to begin making ocean temperature measurements on a global scale — measurements that are keys to puzzling out the workings of heat transfer between the ocean and the atmosphere."'},
 
 {id:7,passage:0,type:'fill',instruction:'',
- text:'Students have asked the teacher to use _______ for data collection.',
- answers:['drones'],answer:'drones',
- hint:'Passage: "asking about using drones to gather data."'},
+ text:'Examples of how sound technology helps people research oceans and creatures in it.',
+ answers:['f','F'],answer:'F',
+ hint:'Paragraph F describes how SOSUS is used to track and study whales — a clear example of sound technology helping ocean/creature research.'},
 
 {id:8,passage:0,type:'fill',instruction:'',
- text:'The Future Farmers of America program have appealed to urban students with subject knowledge and _______ skills.',
- answers:['entrepreneurship','leadership'],answer:'leadership',
- hint:'The FFA convention showcases "young entrepreneurs" and FFA has a "leadership development team" — leadership skills appeal to urban students.'},
-
-// Q9-13: TRUE/FALSE/NOT GIVEN (Part B — Office Lighting)
-{id:9,passage:0,type:'tfng',
- instruction:'Questions 9–13: TRUE / FALSE / NOT GIVEN (Part B — Poor Office Lighting)',
- text:'Headaches are the common cause of loss of vision.',
- answer:'NOT GIVEN',
- hint:'The passage mentions headaches as a symptom of poor lighting, but does not claim headaches cause loss of vision.'},
-
-{id:10,passage:0,type:'tfng',instruction:'',
- text:'A person can develop negative psychology because of bad lighting.',
- answer:'TRUE',
- hint:'The passage states poor lighting "has an adverse effect on our daily moods" — this is a psychological/emotional impact.'},
-
-{id:11,passage:0,type:'tfng',instruction:'',
- text:'Glare from computer screens has been more commonly affecting the UK population than other countries.',
- answer:'NOT GIVEN',
- hint:'The passage gives a UK figure (64–90%) but makes no comparison with other countries.'},
-
-{id:12,passage:0,type:'tfng',instruction:'',
- text:'Difficulty seeing near objects can be a cause of poor lighting.',
- answer:'FALSE',
- hint:'The passage says poor lighting can cause "temporary myopia (difficulty in seeing <em>distant</em> objects)" — not near objects.'},
-
-{id:13,passage:0,type:'tfng',instruction:'',
- text:'500 lux is the most desirable lighting level.',
- answer:'NOT GIVEN',
- hint:'The passage says 500 lux is "overly bright" and installed in areas that don\'t need it, but never states what the ideal level is.'},
-
-// ── PASSAGE 2 ──────────────────────────────
-// Q14-15: Choose TWO — characteristics of classical approach
-{id:14,passage:1,type:'multi2',
- instruction:'Questions 14–15: Choose TWO letters A–E. Which TWO are characteristics of the classical approach to organisational design?',
- text:'Select TWO correct answers.',
- answer:'AD',
- options:[
-   'A. A marked ranking order for employees',
-   'B. Giving importance to everyone\'s work',
-   'C. The advancement of older workers',
-   'D. A neutral working environment',
-   'E. Increased benefits for workers'
- ],
- hint:'A = hierarchical structure (marked ranking order). D = "impersonal climate" = a neutral working environment. These are Weber\'s two characteristics mentioned explicitly.'},
-
-// Q16-17: Choose TWO — criticisms of classical approach
-{id:16,passage:1,type:'multi2',
- instruction:'Questions 16–17: Choose TWO letters A–E. Which TWO are criticisms of the classical approach?',
- text:'Select TWO correct answers.',
- answer:'BE',
- options:[
-   'A. Too many guidelines are proposed',
-   'B. Certain practices become negative if they are implemented too strictly',
-   'C. Managers and workers are unable to co-operate with each other',
-   'D. The administrative standards are unsuited to some work environments',
-   'E. Positive outcomes which were expected in the past would be unlikely today'
- ],
- hint:'B = adhering too strictly to rules caused depersonalisation. E = "critics argue that the world no longer fits the assumptions in Weber\'s model... a bureaucracy might not yield beneficial results."'},
-
-// Q18-19: Choose TWO — aims of neoclassical approach
-{id:18,passage:1,type:'multi2',
- instruction:'Questions 18–19: Choose TWO letters A–E. Which TWO are aims of the neoclassical approach?',
- text:'Select TWO correct answers.',
- answer:'AD',
- options:[
-   'A. To ensure workers are treated as individual people',
-   'B. To create a formal atmosphere in the workplace',
-   'C. To change the methods of production',
-   'D. To allow workers a greater say in what happens at the workplace',
-   'E. To standardise the procedures for promotion of workers'
- ],
- hint:'A = acknowledging human needs and feelings (Argyris). D = "more subordinate participation in decision-making" — both are core neoclassical aims.'},
-
-// Q20-21: Choose TWO — criticisms of neoclassical approach
-{id:20,passage:1,type:'multi2',
- instruction:'Questions 20–21: Choose TWO letters A–E. Which TWO are criticisms of the neoclassical approach?',
- text:'Select TWO correct answers.',
- answer:'CE',
- options:[
-   'A. It suggests that workers are involved in too many decisions',
-   'B. The effects of some psychological factors are given low importance',
-   'C. The effects of the workplace surroundings are ignored',
-   'D. It exaggerates the success of the organisations that use this approach',
-   'E. It assumes that all people work for enjoyment rather than financial gain'
- ],
- hint:'C = "overlook environmental, technological, and other variables." E = "Not everyone is motivated by the non-monetary aspects of work, nor is all work satisfying."'},
-
-// Q22-26: Match beliefs to people A-D
-{id:22,passage:1,type:'fill',
- instruction:'Questions 22–26: Match each belief with the correct person A–D. You may use any letter more than once.',
- text:'The classical approach relied upon managers having incorrect views about workers.',
- answers:['b','B'],answer:'B',
- hint:'Douglas McGregor (B): Theory X represented "negative and false assumptions about workers."'},
-
-{id:23,passage:1,type:'fill',instruction:'',
- text:'In the best organisational model, there is shared decision-making and interaction between teams at work.',
+ text:'Sound transmission underwater is similar to that of light in any condition.',
  answers:['d','D'],answer:'D',
- hint:'Rensis Likert (D): System 4 — "extensive participation in decision-making and problem-solving groups... individuals also belong to other work groups to ensure communication."'},
+ hint:'Paragraph D: "particles in seawater can reflect, scatter, and absorb certain frequencies of sound — just as certain wavelengths of light may be reflected, scattered, and absorbed." The similarity is described here.'},
 
-{id:24,passage:1,type:'fill',instruction:'',
- text:'In an efficient organisation, workers develop expertise in particular areas.',
- answers:['a','A'],answer:'A',
- hint:'Max Weber (A): bureaucracies are "characterised by the specialisation of tasks" — workers develop expertise in specific areas.'},
+// Q9-13: MCQ
+{id:9,passage:0,type:'mcq',
+ instruction:'Questions 9–13: Choose the correct letter A, B, C or D.',
+ text:'Who of the following is dedicated to research on the rate/speed of sound?',
+ answer:'D',
+ options:[
+   'A. Leonardo da Vinci',
+   'B. Isaac Newton',
+   'C. John William Strutt',
+   'D. Charles Sturm'
+ ],
+ hint:'Charles Sturm (with Colladon) accurately measured the speed of sound in water in 1826 — the first to do so. Da Vinci observed, Newton published theory, Strutt described sound mathematically. Sturm = speed measurement.'},
 
-{id:25,passage:1,type:'fill',instruction:'',
- text:'An organisation must take into account the emotional demands of people.',
- answers:['c','C'],answer:'C',
- hint:'Chris Argyris (C): argued for "an alternative organisational design that acknowledged human needs and feelings."'},
-
-{id:26,passage:1,type:'fill',instruction:'',
- text:'The classical approach allowed workers\' skills to be assessed in a straightforward way.',
- answers:['a','A'],answer:'A',
- hint:'Max Weber (A): "clearly specified authority and responsibility made performance easier to evaluate and reward."'},
-
-// ── PASSAGE 3 ──────────────────────────────
-// Q27-33: Paragraph headings i-ix
-{id:27,passage:2,type:'fill',
- instruction:'Questions 27–33: Choose the most suitable heading for each paragraph A–G from the list of headings i–ix.',
- text:'Paragraph A',
- answers:['ii'],answer:'ii',
- hint:'Paragraph A gives wide-ranging general facts: speed, causes, global occurrence, scale — "Wide-ranging facts about avalanches" (ii).'},
-
-{id:28,passage:2,type:'fill',instruction:'',
- text:'Paragraph B',
- answers:['i'],answer:'i',
- hint:'Paragraph B describes the three main parts: starting zone, avalanche track, runout zone — "The components which make up an avalanche" (i).'},
-
-{id:29,passage:2,type:'fill',instruction:'',
- text:'Paragraph C',
- answers:['ix'],answer:'ix',
- hint:'Paragraph C describes wet snow, dry snow and slab avalanches — "What constitutes the different kinds of avalanches?" (ix).'},
-
-{id:30,passage:2,type:'fill',instruction:'',
- text:'Paragraph D',
- answers:['vi'],answer:'vi',
- hint:'Paragraph D covers additional causes: wind, temperature, storms, sunlight — "More factors that lead to avalanches" (vi).'},
-
-{id:31,passage:2,type:'fill',instruction:'',
- text:'Paragraph E',
- answers:['iii'],answer:'iii',
- hint:'Paragraph E describes explosives, fences, dams, shelters — "Different systems at work to try to reduce risk and minimize loss" (iii).'},
-
-{id:32,passage:2,type:'fill',instruction:'',
- text:'Paragraph F',
- answers:['vii'],answer:'vii',
- hint:'Paragraph F discusses how avalanches can\'t be accurately predicted and gives historical death tolls — "Forecasting avalanches is not an exact science" (vii).'},
-
-{id:33,passage:2,type:'fill',instruction:'',
- text:'Paragraph G',
- answers:['v'],answer:'v',
- hint:'Paragraph G discusses different classification systems used in Canada/US vs Europe vs other nations — "Governments try to categorize different kinds of avalanches" (v).'},
-
-// Q34-37: Classify avalanche type A/B/C
-{id:34,passage:2,type:'fill',
- instruction:'Questions 34–37: Classify each statement as a characteristic of A (wet snow), B (dry snow), or C (slab) avalanches. You may use any letter more than once.',
- text:'Generally, there are two main parts to this type of avalanche.',
- answers:['c','C'],answer:'C',
- hint:'Slab avalanches (C) have a "crown fracture" at the top and "flank fractures" vertically — two distinct structural parts.'},
-
-{id:35,passage:2,type:'fill',instruction:'',
- text:'This avalanche is common during one particular time of the year.',
- answers:['a','A'],answer:'A',
- hint:'Wet snow avalanches (A): "usually occurring naturally in the spring season because of melting snow from the increasing temperatures."'},
-
-{id:36,passage:2,type:'fill',instruction:'',
- text:'Specific lines demarcating the actual avalanche are formed when it is created.',
- answers:['c','C'],answer:'C',
- hint:'Slab avalanches (C) "often leave \'walls\' carved in the snow where the avalanche has broken away" — clear demarcation lines.'},
-
-{id:37,passage:2,type:'fill',instruction:'',
- text:'One key point, moisture, is necessary to generate the force to cause the avalanche to break away and begin to move.',
- answers:['a','A'],answer:'A',
- hint:'Wet snow avalanches (A): "Water saturation is a key point, due to the melting" — moisture is the driving force.'},
-
-// Q38-39: MCQ
-{id:38,passage:2,type:'mcq',
- instruction:'Questions 38–39: Choose the correct letter A–D.',
- text:'Measures to control avalanches include',
+{id:10,passage:0,type:'mcq',instruction:'',
+ text:'Who explained that the theory of light or sound wavelength is significant in water?',
  answer:'A',
  options:[
-   'A. large weapons being fired in mountainous areas to create huge sound waves to loosen the snow.',
-   'B. helicopters being used to blow the snow off mountainsides.',
-   'C. teams of men manually moving densely-packed snow away from inhabited areas.',
-   'D. avalanche dams stopping falling snow.'
+   'A. Lord Rayleigh',
+   'B. John William Strutt',
+   'C. Charles Sturm',
+   'D. Christopher Clark'
  ],
- hint:'Passage: "armies being employed to fire high-decibel cannons which trigger shock waves to loosen snow packs." Option D is partially right — dams re-direct, not stop — A is the best match.'},
+ hint:'Lord Rayleigh (= John William Strutt, but the answer key says A = Lord Rayleigh as the answer) described how particles scatter wavelengths of sunlight — "a principle that also applies to the behavior of sound waves in water."'},
 
-{id:39,passage:2,type:'mcq',instruction:'',
- text:'The classification systems for avalanches',
+{id:11,passage:0,type:'mcq',instruction:'',
+ text:'According to Fox and colleagues, in what pattern does the change of finback whale calls happen?',
+ answer:'A',
+ options:[
+   'A. Change in various seasons',
+   'B. Change in various days',
+   'C. Change in different months',
+   'D. Change in different years'
+ ],
+ hint:'Paragraph F: "Fox and colleagues have detected changes in the calls of finback whales during different seasons."'},
+
+{id:12,passage:0,type:'mcq',instruction:'',
+ text:'In which way does the SOSUS technology inspect whales?',
+ answer:'B',
+ options:[
+   'A. Track all kinds of whales in the ocean',
+   'B. Track bunches of whales at the same time',
+   'C. Track only finback whales in the ocean',
+   'D. Track whales by using multiple appliances or devices'
+ ],
+ hint:'Paragraph F: "they can track not just one whale at a time, but many creatures simultaneously" — tracking multiple/bunches at the same time = B.'},
+
+{id:13,passage:0,type:'mcq',instruction:'',
+ text:'What could scientists inspect via monitoring along a repeated route?',
  answer:'C',
  options:[
-   'A. in Canada and the United States differ according to the mountain regions.',
-   'B. are used to determine the possibility of an avalanche.',
-   'C. vary in different areas of the world.',
-   'D. use the European criteria to classify avalanches.'
+   'A. Temperature of the surface passed',
+   'B. Temperature of the deepest ocean floor',
+   'C. Variation of temperature',
+   'D. Fixed data of temperature'
  ],
- hint:'Passage: "Canada and the United States use one system... Europe employs a different rating system... other alpine nations utilize varying systems" — they vary by region (C).'},
+ hint:'Paragraph G: "by repeating measurements along the same paths over time, scientists could track changes in temperature over months or years" — tracking changes = variation of temperature = C.'},
 
-// Q40: placeholder to keep 40 questions total — reuse Q39 logic as final
-{id:40,passage:2,type:'tfng',
- instruction:'Question 40: TRUE / FALSE / NOT GIVEN',
- text:'Future research into avalanches is considered important for protecting human life.',
+// ── PASSAGE 2 ──────────────────────────────
+// Q14-19: Paragraph headings i-ix
+{id:14,passage:1,type:'fill',
+ instruction:'Questions 14–19: Choose the correct heading i–ix for each paragraph A–F.',
+ text:'Paragraph A',
+ answers:['i'],answer:'i',
+ hint:'Paragraph A describes the emergence of consumer culture and its role in social and economic identity — heading i.'},
+
+{id:15,passage:1,type:'fill',instruction:'',
+ text:'Paragraph B',
+ answers:['ii'],answer:'ii',
+ hint:'Paragraph B covers strategies manufacturers used: targeting markets, credit systems, advertising — heading ii.'},
+
+{id:16,passage:1,type:'fill',instruction:'',
+ text:'Paragraph C',
+ answers:['iv'],answer:'iv',
+ hint:'Paragraph C describes changes to the selling environment: large windows, electric lighting, expanded interiors — heading iv.'},
+
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Paragraph D',
+ answers:['v'],answer:'v',
+ hint:'Paragraph D is entirely about mail-order catalogues bridging rural and urban America — heading v.'},
+
+{id:18,passage:1,type:'fill',instruction:'',
+ text:'Paragraph E',
+ answers:['vi'],answer:'vi',
+ hint:'Paragraph E discusses social aspirations and status expressed through consumer goods and style — heading vi.'},
+
+{id:19,passage:1,type:'fill',instruction:'',
+ text:'Paragraph F',
+ answers:['ix'],answer:'ix',
+ hint:'Paragraph F summarises the underlying drivers — retail adaptation, shop environments, mail order — that drove consumer culture growth — heading ix.'},
+
+// Q20-24: Sentence fill ONE WORD ONLY
+{id:20,passage:1,type:'fill',
+ instruction:'Questions 20–24: Complete the sentences below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'By 1900, all industrialized countries were aware of the importance of both _______ and consumption.',
+ answers:['production'],answer:'production',
+ hint:'Paragraph A: "the importance not only of production, but also of the consumption of goods."'},
+
+{id:21,passage:1,type:'fill',instruction:'',
+ text:'The culture of consumption played a crucial role in shaping a country\'s _______ and economic identity.',
+ answers:['social'],answer:'social',
+ hint:'Paragraph A: "an important role in the shaping of a country\'s social and economic identity."'},
+
+{id:22,passage:1,type:'fill',instruction:'',
+ text:'People expressed their newly acquired wealth through the acquisition of _______ goods.',
+ answers:['consumer'],answer:'consumer',
+ hint:'Paragraph A: "expressed most visibly through the acquisition of consumer goods."'},
+
+{id:23,passage:1,type:'fill',instruction:'',
+ text:'The dissemination of goods to a mass market required a network of activities and _______ .',
+ answers:['institutions'],answer:'institutions',
+ hint:'Paragraph B: "a whole network of activities and institutions."'},
+
+{id:24,passage:1,type:'fill',instruction:'',
+ text:'John Wanamaker was the first to use _______ in his department store to increase the visual appeal of goods.',
+ answers:['electricity'],answer:'electricity',
+ hint:'Paragraph C: "who persuaded inventor Thomas Edison to install electricity in his Philadelphia department store."'},
+
+// Q25-26: Choose TWO A-E
+{id:25,passage:1,type:'multi2',
+ instruction:'Questions 25–26: Choose TWO letters A–E. Which of the following played a role in the development of consumer culture in industrialized countries?',
+ text:'Select TWO correct answers.',
+ answer:'DE',
+ options:[
+   'A. The Singer Sewing Machine Company',
+   'B. The department stores established in the second half of the 19th century',
+   'C. The large distances between urban centers',
+   'D. The expansion of interior areas in retail stores',
+   'E. The four thousand items listed in a mail-order catalog'
+ ],
+ hint:'Answer key: D and E. D = expansion of interior areas in stores (Paragraph C). E = 4,000-item catalogue = mail-order catalogue helping consumer culture (Paragraph D).'},
+
+// ── PASSAGE 3 ──────────────────────────────
+// Q27-32: Match people A-E
+{id:27,passage:2,type:'fill',
+ instruction:'Questions 27–32: Match each statement with the correct person A–E. You may use any letter more than once.',
+ text:'Figuring ways to optimise the utilisation of energy in certain significant departments in the company.',
+ answers:['d','D'],answer:'D',
+ hint:'Bill Weihl (D): "We are actively working to maximize the efficiency of our data centres, which account for most of the energy Google consumes worldwide."'},
+
+{id:28,passage:2,type:'fill',instruction:'',
+ text:'A revolutionary improvement in a tiny but quite imperative component of computers.',
+ answers:['b','B'],answer:'B',
+ hint:'Allyson Klein (B) describes the shift to multicore technology and shrinking circuits at the nanoscale — improvements to the computer chip.'},
+
+{id:29,passage:2,type:'fill',instruction:'',
+ text:'Targeting at developing alternative energy sources within the near future.',
+ answers:['d','D'],answer:'D',
+ hint:'Bill Weihl (D): Google\'s RE&lt;C effort aims to make renewable energy cheaper than coal "within years, not decades."'},
+
+{id:30,passage:2,type:'fill',instruction:'',
+ text:'An astounding estimate on the energy to be consumed by computers in a short period based on an unchangeable trend.',
+ answers:['a','A'],answer:'A',
+ hint:'Jonathan Koomey (A): predicted that 123 billion kilowatt-hours "will double by 2010 if present trends continue."'},
+
+{id:31,passage:2,type:'fill',instruction:'',
+ text:'A powerful technique developed for the integration of resources.',
+ answers:['c','C'],answer:'C',
+ hint:'Pat Tiernan (C) describes virtualization allowing HP to consolidate 86 data centers worldwide into just three — powerful integration technique.'},
+
+{id:32,passage:2,type:'fill',instruction:'',
+ text:'A failure for the vast majority of computers to activate internal tools already available in them.',
+ answers:['b','B'],answer:'B',
+ hint:'Allyson Klein (B): "about 90 per cent of computers do not have such settings [sleep modes/power management] enabled."'},
+
+// Q33-36: TRUE/FALSE/NOT GIVEN
+{id:33,passage:2,type:'tfng',
+ instruction:'Questions 33–36: TRUE / FALSE / NOT GIVEN',
+ text:'Cooling the servers does not take up a considerable amount of the energy needed for the computer.',
+ answer:'FALSE',
+ hint:'Paragraph B: "For every kilowatt-hour of energy used for computing in a data centre, another kilowatt-hour is required to cool the furnace-like racks of servers." — an equal amount is needed, which IS considerable.'},
+
+{id:34,passage:2,type:'tfng',instruction:'',
+ text:'It seems that the number of servers has a severe impact on the speed of the internet connection.',
  answer:'TRUE',
- hint:'Passage: "future work and investigation is vital to ensure the safety of those caught in one of nature\'s most destructive unleashings."'},
+ hint:'Paragraph C: "to deliver Web pages within seconds, the firm must maintain hundreds of thousands of computer servers" — the server count directly affects delivery speed.'},
+
+{id:35,passage:2,type:'tfng',instruction:'',
+ text:'Several companies from other fields have a joint effort with the internet industry to work on ways to save energy.',
+ answer:'NOT GIVEN',
+ hint:'The passage mentions Google, Intel and others forming the Climate Savers Computing Initiative, but these are all tech companies. No mention of companies from OTHER fields joining.'},
+
+{id:36,passage:2,type:'tfng',instruction:'',
+ text:'Actions taken at a governmental level are to be expected to help with savings in energy in the near future.',
+ answer:'TRUE',
+ hint:'Paragraph F: "The federal government, led by agencies such as NASA and the Department of Defense, may soon require all their purchases to meet the Electronic Product Environmental Assessment Tool standard."'},
+
+// Q37-40: Summary fill (NO MORE THAN THREE WORDS)
+{id:37,passage:2,type:'fill',
+ instruction:'Questions 37–40: Complete the summary. Choose NO MORE THAN THREE WORDS from the passage for each answer.',
+ text:'The _______ has also been reached to save up energy in every possible way.',
+ answers:['computer-chip level','computer chip level'],answer:'computer-chip level',
+ hint:'Paragraph E: "The industry is also tackling the energy issue at the computer-chip level."'},
+
+{id:38,passage:2,type:'fill',instruction:'',
+ text:'Some firms have switched to _______ which means several processors are integrated into one single circuit.',
+ answers:['so-called multicore technology','multicore technology'],answer:'so-called multicore technology',
+ hint:'Paragraph E: "chipmakers... have shifted to so-called multicore technology, which packs multiple processors into one circuit."'},
+
+{id:39,passage:2,type:'fill',instruction:'',
+ text:'They also _______ on an even more delicate level for chips to save more energy.',
+ answers:['shrink circuits'],answer:'shrink circuits',
+ hint:'Paragraph E: "Chipmakers continue to shrink circuits on the nanoscale."'},
+
+{id:40,passage:2,type:'fill',instruction:'',
+ text:'While staying at a constant level in terms of the _______ .',
+ answers:['performance'],answer:'performance',
+ hint:'Paragraph E: "a chip needs less electricity to deliver the same performance."'},
 ];
 
 const BAND_TABLE=[
@@ -815,6 +820,16 @@ function isCorrect(q,userAnswer){
 // ═══════════════════════════════════════════
 let currentPassage=0,answers={},flags={},timerSec=3600,
     timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-7';
+const testStartTime=Date.now();
+
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
 
 // ═══════════════════════════════════════════
 // BEGIN TEST
@@ -871,16 +886,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_t4_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_t4_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_t4_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_t4_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_t7_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t7_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t7_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t7_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_t4_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_t4_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_t4_timer',timerSec);
+    localStorage.setItem('ielts_t7_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t7_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t7_timer',timerSec);
   }catch(e){}
 }
 
@@ -1059,7 +1074,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_t4_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_t7_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ═══════════════════════════════════════════
 // HIGHLIGHTING
@@ -1151,6 +1166,19 @@ function showResults(){
     </div>`;
   }).join('');
   document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
@@ -1197,7 +1225,7 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_t4_answers','ielts_t4_flags','ielts_t4_timer','ielts_t4_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_t7_answers','ielts_t7_flags','ielts_t7_timer','ielts_t7_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
@@ -1222,13 +1250,13 @@ function renderQuestions(pIdx){
     if(q.instruction&&q.instruction!==lastInstr){
       h+=`<div class="q-section-title">${q.instruction}</div>`;
       lastInstr=q.instruction;
-      // Passage 2: people bank before Q22
-      if(pIdx===1 && q.id===22){
-        h+=renderPersonBank(PEOPLE_P2,'List of People — A, B, C or D (you may use any letter more than once)');
-      }
-      // Passage 3: headings bank before Q27
-      if(pIdx===2 && q.id===27){
+      // Passage 2: headings bank before Q14
+      if(pIdx===1 && q.id===14){
         h+=renderHeadingsBank();
+      }
+      // Passage 3: people bank before Q27
+      if(pIdx===2 && q.id===27){
+        h+=renderPersonBank(PEOPLE_P3,'List of People — A, B, C, D or E (you may use any letter more than once)');
       }
     }
     h+=renderQ(q);
@@ -1241,7 +1269,7 @@ function renderQuestions(pIdx){
 // ═══════════════════════════════════════════
 function renderHeadingsBank(){
   let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to ix</div><div class="word-bank-grid">`;
-  HEADINGS_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  HEADINGS_P2.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
   h+=`</div></div>`;return h;
 }
 </script>

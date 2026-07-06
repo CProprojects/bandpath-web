@@ -30,6 +30,26 @@ export const TESTS: TestMeta[] = [
     file: "/tests/listening-test-1.html",
     requiresPro: false,
   },
+  ...Array.from({ length: 10 }, (_, i) => i + 2).map((n) => ({
+    id: `reading-test-${n}`,
+    title: `Reading Test ${n}`,
+    type: "reading" as const,
+    questionCount: 40,
+    durationMinutes: 60,
+    difficulty: "Medium" as const,
+    file: `/tests/reading-test-${n}.html`,
+    requiresPro: true,
+  })),
+  ...Array.from({ length: 6 }, (_, i) => i + 2).map((n) => ({
+    id: `listening-test-${n}`,
+    title: `Listening Test ${n}`,
+    type: "listening" as const,
+    questionCount: 40,
+    durationMinutes: 30,
+    difficulty: "Medium" as const,
+    file: `/tests/listening-test-${n}.html`,
+    requiresPro: true,
+  })),
 ];
 
 export function getTestById(id: string) {

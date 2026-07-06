@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandPath — IELTS Academic Reading Mock Test 6</title>
+<title>BandPath — IELTS Academic Reading Mock Test 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
       <span class="start-brand-name">Band<span>Path</span></span>
     </div>
     <div class="start-logo">IELTS Academic Reading</div>
-    <div class="start-title">Mock Test 6</div>
+    <div class="start-title">Mock Test 2</div>
     <div class="start-subtitle">Computer-Delivered Format</div>
     <div class="start-info">
       <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
@@ -362,7 +362,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
   <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
     <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
-    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
   </div>
 </div>
 
@@ -399,7 +399,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 <div id="results-screen">
   <div class="res-header">
     <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
-    <h1>Academic Reading — Results (Mock Test 6)</h1>
+    <h1>Academic Reading — Results (Mock Test 2)</h1>
     <div class="band-circle">
       <div class="band-num" id="res-band">—</div>
       <div class="band-lbl">Band</div>
@@ -421,7 +421,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   <div class="res-actions">
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
-    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
@@ -433,50 +433,51 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
-  heading:'A Brief History of Humans and Food',
-  subheading:'',
+  heading:'Sorry – Who Are You?',
+  subheading:'Prosopagnosia is a medical condition that stops people from recognising people\'s faces. But how common is it and why does it happen?',
   timeHint:'You should spend about 20 minutes on Questions 1–13.',
   qRange:[1,13],
   paragraphs:[
-    {label:'',text:`During the journey from our hunter-gatherer ancestors to the present day there have been three seismic changes that have had an impact on the food we eat: the discovery of cooking, the emergence of agriculture and the invention of methods of preserving food.`},
-    {label:'',text:`The 19th-century scientist Charles Darwin thought that cooking, after language, was the greatest discovery made by man. All of us eat some raw food, for instance fruit and vegetables, but the great majority of food we eat is cooked. Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves against attack by insects or other herbivorous animals. These toxic chemicals are referred to as 'plant secondary compounds', because they are not directly involved in the plant's normal growth, development and reproduction, and are produced purely as chemical defences. They give many of the plants we consume, such as coffee or brussels sprouts, their bitter taste.`},
-    {label:'',text:`Cooked food is often more digestible, because heat breaks down tough cellulose cell walls in plants or tough connective tissue in animals. Chewing raw turnip, a plate of uncooked rice, or a raw leg of lamb is much harder work than eating the cooked equivalent. The energy expended in chewing to break down the tough material is replaced by energy from the fuel that is used in cooking the food, so the ratio of energy gained to energy expended by the body is greater when food is cooked.`},
-    {label:'',text:`Until the development of agriculture, hunter-gatherers spent up to seven hours a day gathering food. This all began to change around 10,500 years ago with the advent of farming, which led to some dramatic changes in human societies. People began to create a variety of new tools to help with survival, and in turn populations increased in size. These changes led to the possibility of specialisation of different tasks within society. It was around this time that writing became more sophisticated and allowed people to maintain records of the harvest and taxes. Eventually, formalised structures of government were established as people settled in one area.`},
-    {label:'',text:`The arrival of agriculture meant that, for the first time, our ancestors had more food than they could eat immediately. This, combined with the seasonality of production, led them to discover methods of preserving food: smoking, drying, adding acid by fermentation or adding salt. These four methods all share one feature in common: they make the food a more hostile environment for bacteria that can cause it to spoil. They also tend to slow down any natural chemical reactions in the food that would cause decay.`},
-    {label:'',text:`Although foods today are still preserved in the ancient ways, two more recent methods of preserving food have become more common: canning and freezing. Canning was invented by a Frenchman, Nicholas Appert, in the early 19th century. He sealed food in bottles fabricated from glass and then heated them in boiling water to cook the contents. Appert's method had great advantages over older methods of food preservation: it could be applied to a wide range of foods, and the flavour of the food as well as the texture were similar to the freshly cooked product. His idea was soon copied by Englishman Peter Durand. Until this point containers had weighed too much to be widely used, but he produced the first ones which were light and resistant to damage. Two years later, in 1812, two Englishmen, Bryan Donkin and John Hall, started the commercial canning of food, although the real take-off in popularity of canning had to wait until the can opener was invented in 1855. Up to this time, cans were opened with a chisel which was used to break open the top when hit with a hammer. Canning is an extremely effective way of preserving food: one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition.`},
-    {label:'',text:`In the 21st century, the dominance of canning as a method of food preservation has been overtaken by another technology: freezing. Chilling food to keep it fresh is an old idea. The earliest mentions of icehouses, thick-walled buildings, half underground, date back to 1,700 BC in northwest Iran. In early 16th-century Italy, water was mixed with chemicals to lower its freezing point to -18 degrees Celsius, and several centuries later frozen fish and other goods were transported by ship from Australia to England. But the modern frozen food industry was started in the 1920s by an American, Clarence Birdseye. While Birdseye was on a fishing trip with the Inuit in the Canadian Arctic, he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected. Nevertheless, the big growth in demand for frozen food came about with the arrival of freezers in the homes of ordinary people. The advantages of frozen over canned food include the fact that the flavour and consistency are often identical to the equivalent fresh product, and that freezing can be used to preserve a huge variety of foods.`},
+    {label:'',text:`It was Jacob Hodes' first day at college. He can still recall spending an enjoyable afternoon being shown around campus by a second-year student named Daniel Byrne, who happened to be from his home town. Jacob then spent the rest of the year ignoring him. "I never saw him again," he says. Well, I'm sure I walked past him plenty of times, but I just didn't see him. This behaviour wasn't intentional. Jacob just couldn't recollect what his fellow student looked like. He had had the same trouble all his life. Friends and relatives would greet him and he would have no idea who they were.`},
+    {label:'',text:`It wasn't until five years ago that it all made sense. That was when Hodes was diagnosed with prosopagnosia, a condition that means he is unable to recognise faces. According to researchers, he is far from alone. In fact the condition is not that uncommon but until a few years ago only a few dozen cases had ever been described, and all of these had been caused by brain injury. Recently, though, researchers identified a second form of face blindness — developmental prosopagnosia, which is either present from birth or develops very early in life.`},
+    {label:'',text:`In May a team from Harvard University in the US and University College London (UCL) announced the results of a web survey of 1,600 people, suggesting that up to 2 per cent of people have some degree of face blindness. Then in August, Martina Gruter and colleagues at the Institute for Human Genetics in Munster, Germany, similarly reported that 2.5 per cent of 700 secondary school pupils they had tested had trouble recognising faces. The results of the survey took everyone by surprise.`},
+    {label:'',text:`It seems that if you have never known what it is to recognise a face, you don't necessarily know that you are supposed to be able to. Prosopagnosics almost always know that they have trouble recognising people, but they often don't realise that other people have better recognition skills than they do, says Brad Duchaine, a researcher at UCL.`},
+    {label:'',text:`Despite these issues, the majority of developmental prosopagnosics possess strategies that allow them to get around their difficulty, for instance, by recognising hair, clothing or a person's way of speaking so, unless they see a familiar person out of context, with a new hairstyle or in different clothes, they can recognise people just fine. Even so, the discovery of developmental prosopagnosia has attracted attention from neuroscientists keen to discover what is different about the brain of face-blind people. This difference, they believe, could help solve the problem of how the brain deals with information in general: not just visual data. In other words, it may show whether the brain has specialised parts for specific tasks or is more of a general-purpose information processor.`},
+    {label:'',text:`One issue, however, that will present challenges for researchers is that no two prosopagnosics are the same. Some have problems only with faces, while others have trouble with ordinary everyday objects and, so it turns out, animals which would normally be familiar as well. Some prosopagnosics can train themselves to recognise specific faces; others can't even recognise their own in a mirror. When some have been tested they could identify the emotion which was conveyed on another's face, even though the face itself seemed unfamiliar, while for other subjects this was an impossibility. Some cannot recognise the faces of old friends or fellow students but have no trouble telling whether a particular face from such groups would be attractive to most people. Because of this diversity, working out the cause of prosopagnosia will not be easy.`},
+    {label:'',text:`In Martina Gruter's study, the prosopagnosics who agreed to have their parents and relatives tested reported at least one with the condition. Having looked at 38 cases in seven families, the German team believe they have good evidence that a single gene could be responsible. Duchaine also has some evidence that face blindness could be inherited but thinks other factors might be more significant. He refers to studies of babies born with a condition which means the eye's lens is not clear, and when it's the left one, being unable to see through this eye during the first two months of life is a major risk factor for prosopagnosia.`},
+    {label:'',text:`Whatever the cause, what most prosopagnosics want to know is whether they can do anything to improve their face recognition skills. Joseph Degutis, a graduate student at the University of California, recently reported successfully training a severe developmental prosopagnosic to recognise faces during tests carried out in the laboratory. The subject also reported that recognising faces in everyday life became easier due to the training. Duchaine now plans to attempt to train sufferers to recognise the five people that they most need to know — maybe their immediate family, for example, and essential colleagues. Thomas Gruter, Martina Gruter's husband, who also works on her team, however, is not convinced it will work. "I don't know how you can have more training than you have already had," he says. "Humans already spend all day looking at faces." He also points out that cheating is a possibility during tests and provides an example. "One person we studied said that when she was doing the face-recognition test, she memorised the distance between nose and upper lip. She wasn't the only one. So you can perform well in the test and not do so well in real life."`},
   ]
 },
 {
   title:'READING PASSAGE 2',
-  heading:'Why Do We Need the Arts?',
-  subheading:'Sometimes people question why we need "the arts"; what functions do art, music, dance and literature serve?',
+  heading:'Mammoth Kill',
+  subheading:'What led to the disappearance of the giant mammals? Kate Wong examines the theories.',
   timeHint:'You should spend about 20 minutes on Questions 14–26.',
   qRange:[14,26],
   paragraphs:[
-    {label:'A',text:`Imagine a world in which people spend hours working in offices or factories, and then go home in the evening to sit down to dinner, after which they sleep until it's time to get up and work again. In this world, people do not read or watch TV, listen to music, play computer games or have pictures to decorate their homes. In fact, there are no pictures in this world – not even advertisements are illustrated, but all are words, and very plain ones at that, with no playfulness left in them. The buildings are completely functional without a single decorative feature anywhere, and there is no music to dance to and enjoy. Such a world is a world without the arts in any form.`},
-    {label:'B',text:`To ask what the arts are good for is not exactly the same as asking what their purpose is. The arts do not have to have a purpose – they do not exist in order to teach, to make a moral point, to entertain, to distract, to amuse, to support a revolution, to disgust, to challenge, to stimulate or to cheer; they exist chiefly for their own sake. It is artists, not the arts as such, that may have an aim in mind, and their aim may be to do any of the things just listed. But equally, artists may just make a work of art because they feel compelled to. Because the work is its own justification, no aim or goal is necessarily required to explain or, still less, to justify its existence.`},
-    {label:'C',text:`But to say that the arts do not have to serve an aim beyond themselves, even though they may sometimes do so, is not to say that they are good for nothing. On the contrary, as such an important part of human experience, they are good for many things. The distinction here lies between things that are instrumental and things that are ends in themselves. An instrument exists for something beyond itself – namely, for what it can be used to do. We know that pictures are used as instruments in advertising, and the objective is always to persuade us to buy something. Similarly, music can be written chiefly to accompany dancing, or as a soundtrack to a movie. A play can be written to point out to the theatre audience a social injustice or other problems that should be dealt with. But even though the arts can sometimes be instrumental, that fact is not essential to their nature. What the arts are 'good for' arises from their being an end in themselves, or more accurately, representing many different things that are valuable for their own sakes – such as, for instance, the creation of beauty.`},
-    {label:'D',text:`The phrase 'the arts' includes painting, sculpture, music, literature, dance and theatre performance, and whatever else (to quote the famous US artist Andy Warhol) anyone can get away with in calling their creation a contribution to 'the arts'. But the generalisation that the arts, whatever else they are, are always an end in themselves, applies to them all. The arts are one major form of response to the world. They are often an attempt to capture an aspect of the world, to draw attention to something about it to comment on it, to present a surprising or fresh angle on it, to represent it for the sake of exploring something about it, or enjoying or celebrating it. They can help people to focus on, for example, the colour or shape of an object, its eccentricity or typicality, and the interest or perhaps disgust it provokes in them.`},
-    {label:'E',text:`For a loose comparison, think of laughing at a joke. We do not laugh so that we can achieve a further goal – in order to be healthy or relaxed, say, even if we thereby succeed in being healthier or more relaxed – but simply because the joke has elicited that reaction. But although it is merely a reaction, laughing is, in fact, good for something nevertheless; it does make people feel better. The arts are a reaction in the same way. French artist Cézanne painted Mont Sainte-Victoire repeatedly because he was fascinated by it, not because he thought that painting it would say something about politics or society or human hopes. Being fascinated by something, attracted to it, repelled by it, keen to reveal an unusual aspect of it, are all responses to that thing; the making of the arts is one outstanding way of expressing such responses.`},
-    {label:'F',text:`But the arts are a response not only to things in the world but also to experience of the world, which lies inside the artist himself. And they are also often an expression of what presses from within the artist without being elicited by externals. Music is a prime example. A symphony, unless it is devised to represent bird song, rain, the sea and the like, is an abstract expression of a composer's conception. We may be able to describe what the Russian composer Tchaikovsky is doing in his ballet music, but how can we describe what he is expressing in his piano concertos? Composers may experiment with melody and rhythm in very abstract, sometimes mathematical, ways.`},
-    {label:'G',text:`When artists get to work responding to and expressing ideas, whether or not they also want to make a point, entertain, distract, support a revolution and the rest, they are producing something that someone else will react to in some way. They seek to connect with their audience and express an idea or emotion which has the capacity to enrich our experience of life itself.`},
+    {label:'',text:`Although it's hard to imagine in this age of urban sprawl and automobiles, North America once belonged to huge, elephant-like mammoths, camels, bear-sized beavers and other giant beasts, collectively known as 'megafauna'. Some 11,000 years ago, however, these large-bodied mammals — about 70 species in all — disappeared. Their demise coincided roughly with the arrival of humans in this region and dramatic climate change — factors that have inspired several theories about the die-off. Yet despite decades of scientific investigation, the exact cause remains a mystery. Now new findings offer support to one of these controversial hypotheses: that human hunting drove these huge 'megafauna' species to extinction.`},
+    {label:'',text:`This belief resulted in the overkill model which emerged in the 1960s, when it was put forth by Paul S. Martin of the University of Arizona. Since then, critics have charged that no archaeological remains exist to support the idea that the first Americans hunted to the extent necessary to cause these extinctions. But at the annual meeting of the Society of Vertebrate Paleontology in Mexico City in October 1999, specialist John Alroy of the University of California at Santa Barbara argued that in fact, hunting-driven extinction is not only plausible, it was unavoidable. He has determined, using a computer simulation, that even a very modest amount of hunting would have wiped out these animals.`},
+    {label:'',text:`Assuming an initial human population of 100 people that grew no more than two per cent annually, Alroy determined that, if each band of, say, 50 people killed 15 to 20 large animals a year, humans could have eliminated the animal populations within 1,000 years. Large mammals in particular would have been vulnerable to the pressure because they have longer gestation periods than smaller mammals and their young require extended care.`},
+    {label:'',text:`However, not everyone agrees with Alroy's assessment. For one thing, the results depend on population size estimates for the extinct animals — estimates that are not necessarily reliable. But a more specific criticism comes from mammal expert Ross D.E. Macphee of the American Museum of Natural History in New York City, who points out that the relevant archaeological record contains barely a dozen examples of stone points embedded in mammoth bones (and none, it should be noted, are known from other megafaunal remains) — hardly what one might expect if hunting drove these animals to extinction. Furthermore, some of these species had a vast range, covering the whole continent — the Jefferson's Ground Sloth, for example, lived as far north as the Yukon and as far south as Mexico — which would have made hunting them in numbers sufficient to cause their extinction rather unlikely, he says.`},
+    {label:'',text:`Macphee agrees that humans most likely brought about these extinctions (as well as others around the world that coincided with human arrival), but not directly. Rather than through hunting, he suggests that people may have introduced a deadly disease, perhaps through their dogs or accompanying vermin, which then spread wildly among the native species because of their low resistance to the new introductions. Repeated outbreaks of a deadly disease could thus quickly drive them to the point of no return. So far, Macphee does not have empirical evidence for this theory, and it will not be easy to come by: such disease would kill far too quickly to leave its signature on the bones themselves. But he hopes that analyses of tissue and DNA from the most recent animal remains will eventually reveal the microbes responsible.`},
+    {label:'',text:`The third explanation for what brought on this North American extinction does not involve human beings. Instead, its proponents blame the loss on the climate. The Pleistocene epoch in question witnessed considerable climate instability, explains Russell W. Graham of the Denver Museum of Nature and Science. As a result, their regular habitats disappeared, and species that had once formed communities split apart. For some animals, this brought opportunity. For much of the megafauna, however, the increasingly uniform terrain left them with shrinking geographical ranges — a death sentence for large animals, which need correspondingly large ranges. Although these creatures managed to maintain viable populations through most of the Pleistocene period, the final major climate fluctuation pushed them over the edge, Graham says.`},
+    {label:'',text:`For his part, Alroy is still convinced that human hunters were the destroyers of the giant animals. The overkill model explains everything the disease and climate scenarios explain, he asserts, and in addition makes accurate predictions about which species would eventually become extinct.`},
   ]
 },
 {
   title:'READING PASSAGE 3',
-  heading:'The Significant Role of Mother Tongue Language in Education',
+  heading:'Keeping the Fun in Funfairs',
   subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 27–40.',
   qRange:[27,40],
   paragraphs:[
-    {label:'',text:`One consequence of population mobility is an increasing diversity within schools. To illustrate, in the city of Toronto in Canada, 58% of kindergarten pupils come from homes where English is not the language of communication. Schools in Europe and North America have experienced this diversity for years, but educational policies and practices vary widely between countries and even within countries. Some political parties and groups search for ways to 'solve the problem' of diverse communities and their integration in schools and society. They see few positive consequences for the host society and worry that diversity threatens the identity of the host society. Consequently, they promote unfortunate educational policies that will make the 'problem' disappear. If students retain their culture and language, they are viewed as less capable of identifying with the mainstream culture and learning the mainstream language of the society.`},
-    {label:'',text:`The challenge for educators and policy-makers is to shape the evolution of national identity in such a way that the rights of all citizens (including school children) are respected, and the cultural, linguistic and economic resources of the nation are maximized. To waste the resources of the nation by discouraging children from developing their mother tongues is quite simply unintelligent from the point of view of national self-interest. A first step in providing an appropriate education for culturally and linguistically diverse children is to examine what the existing research says about the role of children's mother tongues in their educational development.`},
-    {label:'',text:`In fact, the research is very clear. When children continue to develop their abilities in two or more languages throughout primary school, they gain a deeper understanding of language and how to use it effectively. They have more practice in processing language, especially when they develop literacy in both. More than 150 research studies conducted during the past 35 years strongly support what Goethe, the famous eighteenth-century German philosopher, once said: that the person who knows only one language does not truly know that language. Research suggests that bilingual children may also develop more flexibility in their thinking as a result of processing information through two different languages.`},
-    {label:'',text:`Children who come to school with a solid foundation in their mother tongue develop stronger literacy abilities in the school language. When parents and other caregivers (e.g. grandparents) are able to spend time with their children and tell stories or discuss issues with them in a way that develops their mother tongue, children come to school well-prepared to learn the school language and succeed educationally. Children's knowledge and skills transfer across languages from the mother tongue to the school language. Transfer across languages can be two-way: both languages nurture each other when the educational environment permits children access to both languages.`},
-    {label:'',text:`Some educators and parents are suspicious of mother tongue-based teaching programs because they worry that they take time away from the majority language. For example, in a bilingual program where 50% of the time is spent teaching through children's home language and 50% through the majority language, surely children won't progress as far in the latter? One of the most strongly established findings of educational research, however, is that well-implemented bilingual programs can promote literacy and subject-matter knowledge in a minority language without any negative effects on children's development in the majority language. Within Europe, the Foyer program in Belgium, which develops children's speaking and literacy abilities in three languages (their mother tongue, Dutch and French), most clearly illustrates the benefits of bilingual and trilingual education (see Cummins, 2000).`},
-    {label:'',text:`It is easy to understand how this happens. When children are learning through a minority language, they are learning concepts and intellectual skills too. Pupils who know how to tell the time in their mother tongue understand the concept of telling time. In order to tell time in the majority language they do not need to re-learn the concept. Similarly, at more advanced stages, there is transfer across languages in other skills, such as knowing how to distinguish the main idea from the supporting details of a written passage or story, and distinguishing fact from opinion. Studies of secondary school pupils are providing interesting findings in this area, and it would be worth extending this research.`},
-    {label:'',text:`Many people marvel at how quickly bilingual children seem to 'pick up' conversational skills in the majority language at school (although it takes much longer for them to catch up with native speakers in academic language skills). However, educators are often much less aware of how quickly children can lose their ability to use their mother tongue, even in the home context. The extent and rapidity of language loss will vary according to the concentration of families from a particular linguistic group in the neighborhood. Where the mother tongue is used extensively in the community, then language loss among young children will be less. However, where language communities are not concentrated in particular neighborhoods, children can lose their ability to communicate in their mother tongue within two to three years of starting school. They may retain receptive skills in the language but they will use the majority language in speaking with their peers and siblings and in responding to their parents. By the time children become adolescents, the linguistic division between parents and children has become an emotional chasm. Pupils frequently become alienated from the cultures of both home and school, with predictable results.`},
+    {label:'A',text:`Fun is becoming a tricky issue for ride designers. In order to increase excitement, they have been ramping up the accelerations to create the most dizzying forces possible. But getting it right is far from easy. Err on the side of caution and people won't bother with a second ride. Go too far, however, and they may not be able to. Experts realise we are now at the limits of how much acceleration a human body can take, and designers are finding it hard to think up ways of keeping the public coming back for more. The problem is that true innovation has been lacking for a while, and fairground rides have become more about survival than actual enjoyment. So if our thrill-seeking bodies can really take no more, what's going to keep dragging us back to amusement parks? Creating something new and exciting, yet safe, is going to take some careful thought.`},
+    {label:'B',text:`When the Disney Corporation asked German designer Walter Stengel to design a giant loop ride for them in the 1970s, he went to NASA, the aeronautics and space foundation, to discover the effects of sustained acceleration on the pilots. NASA's research suggests that the maximum level we can endure is 9 g, g being the standard unit of acceleration due to gravity. Go much beyond that and pilots pass out. Go further still and they suffer serious internal damage. So Stengel decided that the maximum vertical acceleration for the public should be 6, and then only for a second or so. What's more, he put firm restrictions on the rate at which acceleration can increase — you'll never go down a 45-degree ramp into a tight circular loop, for instance.`},
+    {label:'C',text:`But stricter safety limits only intensify the need to search for novel ways to thrill customers. Part of the problem is that no matter how exciting an attraction is, after a few rides the passengers will have some idea of what to expect. The next stage in designing rides, however, could throw predictability out of the window. This step has already been taken in the most recent waltzers, or tea-cup rides. Ride a waltzer and you sit in a car that spins on its own axis. The car is on a huge platform that also rotates. In the past you could take comfort from the fact that the spin was tightly controlled by gears that turned your car at a rate determined by the rotation speed of the whole ride. But the latest generation of waltzer cars spin freely, at a rate determined by the weight and position of the people in them. So you never have the same experience twice. "People seem to like these 'chaotic rides'," says Stengel.`},
+    {label:'D',text:`Although seemingly a passport to endless thrills, chaos does have one rather obvious drawback — it's unpredictable. Despite complex calculations, designers can never be completely sure that something odd won't happen, especially since freely turning systems occasionally hit a resonance frequency. For example, if pushed at a particular frequency, a child on a swing would go over the top of the swing's frame. Similarly, if you drive a revolving waltzer car at its resonance frequency it could speed up uncontrollably. This could be very hazardous, according to Stengel. If a ride is subjected to unforeseen stresses, no one can guarantee that it will be able to cope.`},
+    {label:'E',text:`No one even knows what the safe limits of rotational force are, let alone its effect on the human body. Stengel has worked with the German Air Force, rotating volunteers head over heels while also making them cartwheel or pirouette like a ballet dancer. It emerged that if the pilots were turned on all three axes simultaneously, they became so nauseous they almost blacked out, and when they got off they couldn't walk. But what Stengel found particularly puzzling was that they also developed headaches and other problems about two days later. Since these effects aren't understood, he tries to limit how people on his rides are rotated. "We want to provide fun, not pain."`},
+    {label:'F',text:`With that goal in mind, Stengel feels that flinging people around in ever more chaotic machines is no longer the way forward. He believes that the sequence of accelerations, not their size, is what counts and that the way to make rides more fun is to put people through a carefully designed succession of relatively small accelerations. Other experts in this field agree, and it seems likely that designers could formulate profiles even for existing attractions that would lead to higher amusement value. Recent experiments testing the tolerances of Dutch military pilots to a range of accelerations have shown that tumbling around in machines doesn't have to be unpleasant. When the force is kept low, the subjects actually enjoy the experience.`},
+    {label:'G',text:`The fun seems to come from the unforeseen, particularly when an effect called the Coriolis Illusion comes into play. This is an agreeable tumbling feeling which occurs, for example, when the head is suddenly tilted while the subject is spinning with eyes closed. It appears that a roll which includes, for instance, an unexpected change of acceleration from a small negative g — a feeling of weightlessness — to a small positive g — a slight crushing sensation — has an extraordinary effect on people. If the theories of Stengel and other experts really do work, fairground fun might one day be measured in smiles, not screams.`},
   ]
 }
 ];
@@ -484,12 +485,21 @@ const PASSAGES=[
 // ═══════════════════════════════════════════
 // PEOPLE / WORD BANKS
 // ═══════════════════════════════════════════
-const WORDS_P3=[
-  {letter:'C',word:'dislocation'},
-  {letter:'D',word:'rate'},
-  {letter:'F',word:'family'},
-  {letter:'I',word:'ability'},
-  {letter:'J',word:'area'}
+const PEOPLE_P2=[
+  {letter:'A',word:'John Alroy'},
+  {letter:'B',word:'Ross D.E. Macphee'},
+  {letter:'C',word:'Russell W. Graham'}
+];
+
+const HEADINGS_P3=[
+  {letter:'i',word:'Less is more'},
+  {letter:'ii',word:'Research can\'t guarantee safety'},
+  {letter:'iii',word:'Unexplained symptoms'},
+  {letter:'iv',word:'Setting the limits of acceleration'},
+  {letter:'v',word:'The irresistible appeal of speed'},
+  {letter:'vi',word:'Gentle surprises'},
+  {letter:'vii',word:'A difficult task'},
+  {letter:'viii',word:'A different ride every time'}
 ];
 
 // ═══════════════════════════════════════════
@@ -497,253 +507,221 @@ const WORDS_P3=[
 // ═══════════════════════════════════════════
 const QUESTIONS=[
 // ── PASSAGE 1 ──────────────────────────────
-// Q1-5: TRUE/FALSE/NOT GIVEN
+// Q1-7: TRUE/FALSE/NOT GIVEN
 {id:1,passage:0,type:'tfng',
- instruction:'Questions 1–5: TRUE / FALSE / NOT GIVEN',
- text:'According to Darwin, cooking was the most significant development in human history.',
+ instruction:'Questions 1–7: Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.',
+ text:'Before attending college, Jacob was capable of recognising people he knew well.',
  answer:'FALSE',
- hint:'Darwin thought cooking was the greatest discovery "after language" — meaning language was more significant. The statement says cooking was MOST significant, which contradicts this.'},
+ hint:'The passage says Jacob "had had the same trouble all his life" — friends and relatives greeted him and he had no idea who they were.'},
 
 {id:2,passage:0,type:'tfng',instruction:'',
- text:'The process of cooking gets rid of some plant poisons.',
+ text:'Researchers believe that prosopagnosia may be a growing problem.',
  answer:'TRUE',
- hint:'Passage: "Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves."'},
+ hint:'The survey results surprised everyone, suggesting far more people have prosopagnosia than previously thought. The findings from both Harvard/UCL and the German team support the view that this is a notable and growing concern.'},
 
 {id:3,passage:0,type:'tfng',instruction:'',
- text:'Eating cooked food is more energy efficient than eating raw food.',
- answer:'TRUE',
- hint:'Passage: "the ratio of energy gained to energy expended by the body is greater when food is cooked."'},
+ text:'It is harder to identify developmental prosopagnosia in babies than in young children.',
+ answer:'NOT GIVEN',
+ hint:'The passage mentions babies and left-eye lens defects as a risk factor but says nothing about comparing difficulty of diagnosis between babies and young children.'},
 
 {id:4,passage:0,type:'tfng',instruction:'',
- text:'Clarence Birdseye had previously worked in the Australian food industry.',
- answer:'NOT GIVEN',
- hint:'The passage says Birdseye was an American who went fishing with the Inuit in Canada. No previous job in Australia is mentioned.'},
+ text:'A German study seems to support the Harvard and UCL research findings.',
+ answer:'TRUE',
+ hint:'Martina Gruter\'s German team similarly reported 2.5% of 700 pupils had trouble — consistent with the 2% figure from Harvard/UCL. The passage says "The results of the survey took everyone by surprise."'},
 
 {id:5,passage:0,type:'tfng',instruction:'',
- text:'Birdseye\'s trip with the Inuit confirmed what he already believed about rapid freezing.',
+ text:'In general, prosopagnosics are aware that other people can recognise faces more easily than they can.',
  answer:'FALSE',
- hint:'Passage: "he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected." — it surprised him.'},
+ hint:'The passage says prosopagnosics "often don\'t realise that other people have better recognition skills than they do."'},
 
-// Q6-13: Notes completion ONE WORD ONLY
-{id:6,passage:0,type:'fill',
- instruction:'Questions 6–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
- text:'Agriculture led to the development of equipment and larger _______ .',
- answers:['populations','population'],answer:'population',
- hint:'Passage: "populations increased in size" — agriculture brought larger populations.'},
+{id:6,passage:0,type:'tfng',instruction:'',
+ text:'In most cases, prosopagnosics have developed ways to deal with their problem.',
+ answer:'TRUE',
+ hint:'Passage: "the majority of developmental prosopagnosics possess strategies that allow them to get around their difficulty."'},
 
-{id:7,passage:0,type:'fill',instruction:'',
- text:'Agriculture gave people the ability to keep _______ as writing developed.',
- answers:['records'],answer:'records',
- hint:'Passage: "allowed people to maintain records of the harvest and taxes."'},
+{id:7,passage:0,type:'tfng',instruction:'',
+ text:'The study of prosopagnosia may help neuroscientists to treat different kinds of brain injury.',
+ answer:'NOT GIVEN',
+ hint:'Neuroscientists study prosopagnosia to understand general brain information-processing, not specifically to treat brain injury. That application is not mentioned.'},
 
-{id:8,passage:0,type:'fill',instruction:'',
- text:'Early methods of food preservation included: smoking, drying and combining food with acid or _______ .',
- answers:['salt'],answer:'salt',
- hint:'Passage: "smoking, drying, adding acid by fermentation or adding salt."'},
+// Q8-13: Notes completion (ONE WORD ONLY)
+{id:8,passage:0,type:'fill',
+ instruction:'Questions 8–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Prosopagnosics may also have problems recognising commonly seen _______ and objects.',
+ answers:['animals'],answer:'animals',
+ hint:'Passage: "others have trouble with ordinary everyday objects and, so it turns out, animals which would normally be familiar as well."'},
 
 {id:9,passage:0,type:'fill',instruction:'',
- text:'Nicholas Appert put food into containers made of _______ .',
- answers:['glass'],answer:'glass',
- hint:'Passage: "He sealed food in bottles fabricated from glass."'},
+ text:'Some prosopagnosics cannot identify the _______ on someone else\'s face.',
+ answers:['emotion'],answer:'emotion',
+ hint:'Passage: "for other subjects this [identifying the emotion on another\'s face] was an impossibility."'},
 
 {id:10,passage:0,type:'fill',instruction:'',
- text:'Appert\'s method resulted in preserved food that had the same taste and _______ as fresh food.',
- answers:['texture'],answer:'texture',
- hint:'Passage: "the flavour of the food as well as the texture were similar to the freshly cooked product."'},
+ text:'Prosopagnosia may be caused by just one _______ according to Martina Gruter.',
+ answers:['gene'],answer:'gene',
+ hint:'Passage: "the German team believe they have good evidence that a single gene could be responsible."'},
 
 {id:11,passage:0,type:'fill',instruction:'',
- text:'Peter Durand introduced cans which had the advantage of being _______ and hard to break.',
- answers:['light'],answer:'light',
- hint:'Passage: "he produced the first ones which were light and resistant to damage."'},
+ text:'A defect in the _______ eye may also be a cause, according to Brad Duchaine.',
+ answers:['left'],answer:'left',
+ hint:'Passage: "when it\'s the left one, being unable to see through this eye during the first two months of life is a major risk factor for prosopagnosia."'},
 
 {id:12,passage:0,type:'fill',instruction:'',
- text:'In 1855, the metal can opener replaced the _______ which had been used with a hammer to open cans.',
- answers:['chisel'],answer:'chisel',
- hint:'Passage: "cans were opened with a chisel which was used to break open the top when hit with a hammer."'},
+ text:'Joseph Degutis\' patient proved he had been successfully trained to recognise faces inside the _______ and in the outside world.',
+ answers:['laboratory'],answer:'laboratory',
+ hint:'Passage: "successfully training a severe developmental prosopagnosic to recognise faces during tests carried out in the laboratory."'},
 
 {id:13,passage:0,type:'fill',instruction:'',
- text:'Some food was still found to be edible after more than a hundred years — e.g. an old can of _______ .',
- answers:['meat'],answer:'meat',
- hint:'Passage: "one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition."'},
+ text:'Thomas Gruter doubts training will work and mentions that _______ by some subjects can affect research results.',
+ answers:['cheating'],answer:'cheating',
+ hint:'Passage: "He also points out that cheating is a possibility during tests."'},
 
 // ── PASSAGE 2 ──────────────────────────────
-// Q14-18: Which paragraph A-G
+// Q14-20: Summary fill (NO MORE THAN TWO WORDS)
 {id:14,passage:1,type:'fill',
- instruction:'Questions 14–18: Reading Passage 2 has seven paragraphs A–G. Which paragraph contains the following information?',
- text:'A claim that artists may have no clear objective when creating a piece of art.',
- answers:['b','B'],answer:'B',
- hint:'Paragraph B: "artists may just make a work of art because they feel compelled to" — no clear objective required.'},
+ instruction:'Questions 14–20: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'Three theories have been put forward to explain the disappearance of the different species of large mammals that inhabited _______ 11,000 years ago.',
+ answers:['north america','North America'],answer:'North America',
+ hint:'Passage: "North America once belonged to huge, elephant-like mammoths... Some 11,000 years ago, however, these large-bodied mammals... disappeared."'},
 
 {id:15,passage:1,type:'fill',instruction:'',
- text:'A description of how artists hope to benefit other people.',
- answers:['g','G'],answer:'G',
- hint:'Paragraph G: "They seek to connect with their audience and express an idea or emotion which has the capacity to enrich our experience of life itself."'},
+ text:'The _______ proposed around fifty years ago by Paul S. Martin blames hunting by people for mass extinction.',
+ answers:['overkill model'],answer:'overkill model',
+ hint:'Passage: "This belief resulted in the overkill model which emerged in the 1960s, when it was put forth by Paul S. Martin."'},
 
 {id:16,passage:1,type:'fill',instruction:'',
- text:'A comparison between the arts and things made to perform a particular function.',
- answers:['c','C'],answer:'C',
- hint:'Paragraph C distinguishes between things that are "instrumental" (existing for something beyond themselves) and arts that are "ends in themselves."'},
+ text:'Computer calculations seem to support this explanation, but critics question the reliability of figures based on _______ by people for mass extinction.',
+ answers:['hunting'],answer:'hunting',
+ hint:'Passage: "human hunting drove these huge megafauna species to extinction."'},
 
 {id:17,passage:1,type:'fill',instruction:'',
- text:'A claim that it\'s possible to convince the world that anything you have made is a work of art.',
- answers:['d','D'],answer:'D',
- hint:'Paragraph D: "whatever else... anyone can get away with in calling their creation a contribution to \'the arts\'" — quoting Andy Warhol.'},
+ text:'The second theory suggests that humans introduced a _______ which wiped out the large mammals.',
+ answers:['deadly disease'],answer:'deadly disease',
+ hint:'Passage: "he suggests that people may have introduced a deadly disease."'},
 
 {id:18,passage:1,type:'fill',instruction:'',
- text:'An example of something that has an unintentional benefit for us.',
- answers:['e','E'],answer:'E',
- hint:'Paragraph E: laughing at a joke — we don\'t laugh to become healthy, but it makes us feel better anyway. The arts work the same way — an unintentional benefit.'},
+ text:'However, so far this theory also lacks any _______ .',
+ answers:['empirical evidence'],answer:'empirical evidence',
+ hint:'Passage: "So far, Macphee does not have empirical evidence for this theory."'},
 
-// Q19-22: Summary fill ONE WORD ONLY
-{id:19,passage:1,type:'fill',
- instruction:'Questions 19–22: Complete the summary below. Choose ONE WORD ONLY from the passage for each answer.',
- text:'Such as the inter-dependent relationship between music and _______ , or between the visual arts and the advertising business.',
- answers:['movie','movies'],answer:'movie',
- hint:'Paragraph C: "music can be written chiefly to accompany dancing, or as a soundtrack to a movie."'},
+{id:19,passage:1,type:'fill',instruction:'',
+ text:'The final theory suggests that this period experienced significant _______ which eventually led to the loss of habitat.',
+ answers:['climate instability'],answer:'climate instability',
+ hint:'Passage: "The Pleistocene epoch in question witnessed considerable climate instability."'},
 
 {id:20,passage:1,type:'fill',instruction:'',
- text:'Or between the visual arts and the _______ business.',
- answers:['advertising'],answer:'advertising',
- hint:'Paragraph C: "pictures are used as instruments in advertising, and the objective is always to persuade us to buy something."'},
+ text:'This also led to the division of the _______ that some of the large mammals had organised.',
+ answers:['communities'],answer:'communities',
+ hint:'Passage: "species that had once formed communities split apart."'},
 
-{id:21,passage:1,type:'fill',instruction:'',
- text:'A dramatist may use a _______ to draw our attention to various issues in society.',
- answers:['play'],answer:'play',
- hint:'Paragraph C: "A play can be written to point out to the theatre audience a social injustice or other problems."'},
+// Q21-26: Match statements to people A/B/C
+{id:21,passage:1,type:'fill',
+ instruction:'Questions 21–26: Match each statement with the correct person A, B or C. You may use any letter more than once.',
+ text:'Too little evidence exists to support the hunting theory.',
+ answers:['b','B'],answer:'B',
+ hint:'Ross D.E. Macphee (B) points out barely a dozen stone-point examples in mammoth bones — "hardly what one might expect if hunting drove these animals to extinction."'},
 
 {id:22,passage:1,type:'fill',instruction:'',
- text:'Apart from these obvious practical benefits, there are other benefits, such as the _______ we find in an artist\'s work.',
- answers:['beauty'],answer:'beauty',
- hint:'Paragraph C: "representing many different things that are valuable for their own sakes – such as, for instance, the creation of beauty."'},
+ text:'The bigger the animal, the bigger the territory it requires for survival.',
+ answers:['c','C'],answer:'C',
+ hint:'Russell W. Graham (C): "a death sentence for large animals, which need correspondingly large ranges."'},
 
-// Q23-24: Choose TWO — effects of arts in paragraph D
-{id:23,passage:1,type:'multi2',
- instruction:'Questions 23–24: Choose TWO letters A–E. In paragraph D, which TWO effects does the writer say the arts can have?',
- text:'Select TWO correct answers.',
- answer:'BD',
- options:[
-   'A. They can interest people from all over the world.',
-   'B. They can make us see things from a different perspective.',
-   'C. They can inspire us to take up an artistic activity ourselves.',
-   'D. They can encourage us to think about our reactions to things around us.',
-   'E. They can draw our attention to serious global issues.'
- ],
- hint:'B = "present a surprising or fresh angle on it" — different perspective. D = "the interest or perhaps disgust it provokes in them" — thinking about reactions. Both from Paragraph D.'},
+{id:23,passage:1,type:'fill',instruction:'',
+ text:'Globally, humans have been indirectly responsible for the elimination of many species.',
+ answers:['b','B'],answer:'B',
+ hint:'Ross D.E. Macphee (B): "humans most likely brought about these extinctions (as well as others around the world that coincided with human arrival), but not directly."'},
 
-// Q25-26: Choose TWO — statements about composers and music
-{id:25,passage:1,type:'multi2',
- instruction:'Questions 25–26: Choose TWO letters A–E. Which TWO statements about composers and music does the writer make?',
- text:'Select TWO correct answers.',
- answer:'AC',
- options:[
-   'A. Music tends to spring from the composer\'s individual experiences.',
-   'B. Composers need to structure music very carefully.',
-   'C. Music can be quite unrelated to the natural world.',
-   'D. Music finds its best expression in a symphony.',
-   'E. Composers are good at depicting the world around us.'
- ],
- hint:'A = Paragraph F: music is "also often an expression of what presses from within the artist." C = Paragraph F: a symphony "is an abstract expression of a composer\'s conception" — unrelated to the natural world.'},
+{id:24,passage:1,type:'fill',instruction:'',
+ text:'Population estimates can be used to understand how large mammals became extinct.',
+ answers:['a','A'],answer:'A',
+ hint:'John Alroy (A) used population estimates in his computer simulation to argue hunting caused extinction.'},
+
+{id:25,passage:1,type:'fill',instruction:'',
+ text:'Scientific examination of fossil remains may provide some proof for one of the theories.',
+ answers:['b','B'],answer:'B',
+ hint:'Macphee (B) "hopes that analyses of tissue and DNA from the most recent animal remains will eventually reveal the microbes responsible."'},
+
+{id:26,passage:1,type:'fill',instruction:'',
+ text:'Environmental changes negatively affected the social groupings of some large species.',
+ answers:['c','C'],answer:'C',
+ hint:'Russell W. Graham (C): climate instability caused habitats to disappear and "species that had once formed communities split apart."'},
 
 // ── PASSAGE 3 ──────────────────────────────
-// Q27-30: MCQ
-{id:27,passage:2,type:'mcq',
- instruction:'Questions 27–30: Choose the correct letter A, B, C or D.',
- text:'What point is the writer making in the second paragraph?',
- answer:'C',
- options:[
-   'A. Some present studies on children\'s mother tongues are misleading.',
-   'B. A culturally rich education programme benefits some children more than others.',
-   'C. Bilingual children can make a valuable contribution to the wealth of a country.',
-   'D. The law on mother tongue use at school should be strengthened.'
- ],
- hint:'Paragraph 2: "To waste the resources of the nation by discouraging children from developing their mother tongues is quite simply unintelligent" — bilingual children are a national resource = C.'},
+// Q27-32: Paragraph headings (i–viii), Paragraph A = vii (given as example)
+{id:27,passage:2,type:'fill',
+ instruction:'Questions 27–32: Reading Passage 3 has seven paragraphs A–G. Paragraph A is given as an example (vii – A difficult task). Choose the correct heading i–viii for Paragraphs B–G.',
+ text:'Paragraph B',
+ answers:['iv'],answer:'iv',
+ hint:'Paragraph B discusses Stengel setting the maximum acceleration at 6g and restricting how fast it can increase — "Setting the limits of acceleration" (iv).'},
 
-{id:28,passage:2,type:'mcq',instruction:'',
- text:'Why does the writer refer to something that Goethe said?',
- answer:'A',
- options:[
-   'A. To lend weight to his argument.',
-   'B. To contradict some research.',
-   'C. To introduce a new concept.',
-   'D. To update current thinking.'
- ],
- hint:'The writer uses Goethe\'s quote to support and reinforce the research findings — "to lend weight to his argument" (A).'},
+{id:28,passage:2,type:'fill',instruction:'',
+ text:'Paragraph C',
+ answers:['viii'],answer:'viii',
+ hint:'Paragraph C describes the new waltzer cars that spin freely, meaning "you never have the same experience twice" — "A different ride every time" (viii).'},
 
-{id:29,passage:2,type:'mcq',instruction:'',
- text:'The writer believes that when young children have a firm grasp of their mother tongue',
- answer:'B',
- options:[
-   'A. They can teach older family members what they learn at school.',
-   'B. They go on to do much better throughout their time at school.',
-   'C. They can read stories about their cultural background.',
-   'D. They develop stronger relationships with their family than with their peers.'
- ],
- hint:'Passage: "Children who come to school with a solid foundation in their mother tongue develop stronger literacy abilities in the school language... and succeed educationally." = B.'},
+{id:29,passage:2,type:'fill',instruction:'',
+ text:'Paragraph D',
+ answers:['ii'],answer:'ii',
+ hint:'Paragraph D explains how chaotic rides can hit resonance frequency unpredictably and "no one can guarantee it will be able to cope" — "Research can\'t guarantee safety" (ii).'},
 
-{id:30,passage:2,type:'mcq',instruction:'',
- text:'Why are some people suspicious about mother tongue-based teaching programmes?',
- answer:'D',
- options:[
-   'A. They worry that children will be slow to learn to read in either language.',
-   'B. They think that children will confuse words in the two languages.',
-   'C. They believe that the programmes will make children less interested in their lessons.',
-   'D. They fear that the programmes will use up valuable time in the school day.'
- ],
- hint:'Passage: "they worry that they take time away from the majority language" — using up valuable school time = D.'},
+{id:30,passage:2,type:'fill',instruction:'',
+ text:'Paragraph E',
+ answers:['iii'],answer:'iii',
+ hint:'Paragraph E covers the puzzling delayed headaches and other symptoms volunteers developed — "Unexplained symptoms" (iii).'},
 
-// Q31-35: Summary fill using word bank A-J
-{id:31,passage:2,type:'fill',
- instruction:'Questions 31–35: Complete the summary using the list of words A–J below.',
- text:'Bilingual children acquire the _______ to converse in the majority language remarkably quickly.',
- answers:['i','I'],answer:'I',
- hint:'Passage: "bilingual children seem to \'pick up\' conversational skills in the majority language" — the ability (I) to converse.'},
+{id:31,passage:2,type:'fill',instruction:'',
+ text:'Paragraph F',
+ answers:['i'],answer:'i',
+ hint:'Paragraph F argues that smaller, carefully sequenced accelerations make rides more enjoyable — "Less is more" (i).'},
 
 {id:32,passage:2,type:'fill',instruction:'',
- text:'The fact that the mother tongue can disappear at a similar _______ is less well understood.',
- answers:['d','D'],answer:'D',
- hint:'Passage: "The extent and rapidity of language loss" — rate/speed of disappearance. = D: rate.'},
+ text:'Paragraph G',
+ answers:['vi'],answer:'vi',
+ hint:'Paragraph G describes the Coriolis Illusion — unexpected, pleasant sensations — "Gentle surprises" (vi).'},
 
-{id:33,passage:2,type:'fill',instruction:'',
- text:'This phenomenon depends on the proportion of people with the same linguistic background settled in a particular _______ .',
- answers:['j','J'],answer:'J',
- hint:'Passage: "the concentration of families from a particular linguistic group in the neighborhood" — the area/neighborhood. = J: area.'},
+// Q33-37: Sentence completion (NO MORE THAN TWO WORDS AND/OR A NUMBER)
+{id:33,passage:2,type:'fill',
+ instruction:'Questions 33–37: Complete the sentences below. Choose NO MORE THAN TWO WORDS AND/OR A NUMBER from the passage for each answer.',
+ text:'Some attractions such as the new type of waltzers depend on both the _______ and position of their passengers in order to create a variety of ride experiences.',
+ answers:['weight','position'],answer:'weight / position',
+ hint:'Passage: "the latest generation of waltzer cars spin freely, at a rate determined by the weight and position of the people in them."'},
 
 {id:34,passage:2,type:'fill',instruction:'',
- text:'If this is limited, children are likely to lose the active use of their mother tongue, and thus no longer employ it even with _______ .',
- answers:['f','F'],answer:'F',
- hint:'Passage: "they will use the majority language in speaking with their peers and siblings and in responding to their parents" — even with family. = F: family.'},
+ text:'Designers need to be aware that a "chaotic" ride could accelerate at a violent rate if it reaches its _______ .',
+ answers:['resonance frequency'],answer:'resonance frequency',
+ hint:'Passage: "if you drive a revolving waltzer car at its resonance frequency it could speed up uncontrollably."'},
 
 {id:35,passage:2,type:'fill',instruction:'',
- text:'It follows that teenage children in these circumstances experience a sense of _______ in relation to all aspects of their lives.',
- answers:['c','C'],answer:'C',
- hint:'Passage: "Pupils frequently become alienated from the cultures of both home and school" — a sense of dislocation. = C: dislocation.'},
+ text:'Research has shown that people will begin to feel ill if they are subjected to movement on all _______ at the same time.',
+ answers:['three axes'],answer:'three axes',
+ hint:'Passage: "if the pilots were turned on all three axes simultaneously, they became so nauseous they almost blacked out."'},
 
-// Q36-40: YES/NO/NOT GIVEN
-{id:36,passage:2,type:'yesno',
- instruction:'Questions 36–40: Do the following statements agree with the views of the writer? Write YES, NO or NOT GIVEN.',
- text:'Less than half the children who attend kindergarten in Toronto have English as their mother tongue.',
- answer:'YES',
- hint:'Passage: "58% of kindergarten pupils come from homes where English is not the language of communication" — so more than half do NOT have English as mother tongue, meaning fewer than half DO. = YES.'},
+{id:36,passage:2,type:'fill',instruction:'',
+ text:'Volunteers in Stengel\'s rotation tests suffered delayed reactions such as _______ .',
+ answers:['headaches'],answer:'headaches',
+ hint:'Passage: "they also developed headaches and other problems about two days later."'},
 
-{id:37,passage:2,type:'yesno',instruction:'',
- text:'Research proves that learning the host country language at school can have an adverse effect on a child\'s mother tongue.',
- answer:'NOT GIVEN',
- hint:'The passage says bilingual programmes do NOT have negative effects on the majority language, but doesn\'t explicitly claim the reverse — that majority language learning damages the mother tongue.'},
+{id:37,passage:2,type:'fill',instruction:'',
+ text:'A phenomenon known as the _______ produced a pleasurable sensation in test subjects.',
+ answers:['coriolis illusion','Coriolis Illusion'],answer:'Coriolis Illusion',
+ hint:'Passage: "an effect called the Coriolis Illusion comes into play. This is an agreeable tumbling feeling."'},
 
-{id:38,passage:2,type:'yesno',instruction:'',
- text:'The Foyer programme is to be adopted by the French education system.',
- answer:'NOT GIVEN',
- hint:'The Foyer programme is in Belgium (Dutch and French), but the passage makes no mention of France adopting it.'},
+// Q38-40: YES/NO/NOT GIVEN
+{id:38,passage:2,type:'yesno',
+ instruction:'Questions 38–40: Do the following statements agree with the claims of the writer? Write YES, NO or NOT GIVEN.',
+ text:'There is still a lot to be learnt about the rates of acceleration which people can withstand.',
+ answer:'NO',
+ hint:'Paragraph B shows NASA already knows the maximum is 9g and Stengel set the public limit at 6g — these limits are established. The writer does NOT claim more needs to be learned about linear acceleration limits. Answer: NO.'},
 
 {id:39,passage:2,type:'yesno',instruction:'',
- text:'Bilingual children are taught to tell the time earlier than monolingual children.',
+ text:'Children enjoy funfairs more than adults.',
  answer:'NOT GIVEN',
- hint:'The passage uses telling the time as an example of concept transfer between languages, not as evidence that bilingual children learn to tell time earlier.'},
+ hint:'The passage does not compare children\'s and adults\' enjoyment of funfairs.'},
 
 {id:40,passage:2,type:'yesno',instruction:'',
- text:'Bilingual children can eventually apply reading comprehension strategies acquired in one language when reading in the other.',
+ text:'Current rides could probably be adapted to become more enjoyable.',
  answer:'YES',
- hint:'Passage: "there is transfer across languages in other skills, such as knowing how to distinguish the main idea from the supporting details of a written passage or story." = YES.'},
+ hint:'Passage: "it seems likely that designers could formulate profiles even for existing attractions that would lead to higher amusement value."'},
 ];
 
 const BAND_TABLE=[
@@ -803,6 +781,16 @@ function isCorrect(q,userAnswer){
 // ═══════════════════════════════════════════
 let currentPassage=0,answers={},flags={},timerSec=3600,
     timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-2';
+const testStartTime=Date.now();
+
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
 
 // ═══════════════════════════════════════════
 // BEGIN TEST
@@ -859,16 +847,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_t6_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_t6_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_t6_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_t6_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_t2_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t2_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t2_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t2_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_t6_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_t6_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_t6_timer',timerSec);
+    localStorage.setItem('ielts_t2_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t2_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t2_timer',timerSec);
   }catch(e){}
 }
 
@@ -920,19 +908,9 @@ function renderQ(q){
   }else if(q.type==='mcq'){
     const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
     inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
-  }else if(q.type==='multi2'){
-    const sel=val?val.split(''):[];
-    const opts=(q.options||[]).map((o,i)=>{
-      const l=String.fromCharCode(65+i);
-      const checked=sel.includes(l);
-      const dis=(!checked&&sel.length>=2)?' disabled':'';
-      return`<label class="q-option${checked?' selected':''}"><input type="checkbox" value="${l}"${checked?' checked':''}${dis} onchange="setMulti2(${q.id},'${l}',this.checked)"><span>${o}</span></label>`;
-    }).join('');
-    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
   }
-  const qLabel=q.type==='multi2'?`Questions ${q.id}–${q.id+1}`:`Question ${q.id}`;
   return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
-    <div class="q-num">${qLabel}</div>${inner}
+    <div class="q-num">Question ${q.id}</div>${inner}
     <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
   </div>`;
 }
@@ -943,15 +921,6 @@ function renderQ(q){
 function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
 function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
 function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
-function setMulti2(id,letter,checked){
-  let cur=(answers[id]||'').split('').filter(Boolean);
-  if(checked){if(!cur.includes(letter))cur.push(letter);}
-  else{cur=cur.filter(l=>l!==letter);}
-  cur.sort();
-  answers[id]=cur.join('');
-  renderQuestions(currentPassage);
-  saveAll();updatePalette();
-}
 function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
 function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
 
@@ -967,17 +936,15 @@ function updatePalette(){
   for(let i=1;i<=40;i++){
     const e=document.getElementById('pal'+i);if(!e)continue;
     e.classList.remove('done','flagged');
-    let q=QUESTIONS.find(q=>q.id===i)||QUESTIONS.find(q=>q.type==='multi2'&&q.id===i-1);
-    if(!q)continue;
-    if(flags[q.id])e.classList.add('flagged');
-    else if(answers[q.id]&&answers[q.id].trim())e.classList.add('done');
+    if(flags[i])e.classList.add('flagged');
+    else if(answers[i]&&answers[i].trim())e.classList.add('done');
   }
 }
 function jumpToQ(id){
-  const q=QUESTIONS.find(q=>q.id===id)||QUESTIONS.find(q=>q.type==='multi2'&&q.id===id-1);if(!q)return;
+  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
   if(q.passage!==currentPassage)switchPassage(q.passage);
   setTimeout(()=>{
-    const el=document.getElementById('qblock'+q.id);
+    const el=document.getElementById('qblock'+id);
     if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
     document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
     const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
@@ -1008,11 +975,8 @@ function initScrollProgress(){
 
 function flashUnanswered(){
   QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
-    const ids=q.type==='multi2'?[q.id,q.id+1]:[q.id];
-    ids.forEach(i=>{
-      const el=document.getElementById('pal'+i);
-      if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
-    });
+    const el=document.getElementById('pal'+q.id);
+    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
   });
 }
 
@@ -1047,7 +1011,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_t6_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_t2_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ═══════════════════════════════════════════
 // HIGHLIGHTING
@@ -1106,12 +1070,11 @@ function showResults(){
   let correct=0,wrong=0,skip=0;
   const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
   QUESTIONS.forEach(q=>{
-    const w=q.type==='multi2'?2:1;
     const ua=(answers[q.id]||'').trim();
     const ok=isCorrect(q,ua);
-    if(!ua){skip+=w;bp[q.passage].skip+=w;}
-    else if(ok){correct+=w;bp[q.passage].correct+=w;}
-    else{wrong+=w;bp[q.passage].wrong+=w;}
+    if(!ua){skip++;bp[q.passage].skip++;}
+    else if(ok){correct++;bp[q.passage].correct++;}
+    else{wrong++;bp[q.passage].wrong++;}
   });
   let band=2.5,desc='Intermittent User';
   for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
@@ -1139,6 +1102,19 @@ function showResults(){
     </div>`;
   }).join('');
   document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
@@ -1172,10 +1148,6 @@ function applyReviewMarkup(){
     }else if(q.type==='mcq'){
       document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
       if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
-    }else if(q.type==='multi2'){
-      const block=document.getElementById('qblock'+q.id);
-      if(block)block.querySelectorAll('input[type="checkbox"]').forEach(c=>c.disabled=true);
-      if(q.hint&&block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint+' (Correct: '+q.answer.split('').join(', ')+')'));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}
     }
   });
 }
@@ -1185,7 +1157,7 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_t6_answers','ielts_t6_flags','ielts_t6_timer','ielts_t6_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_t2_answers','ielts_t2_flags','ielts_t2_timer','ielts_t2_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
@@ -1210,9 +1182,13 @@ function renderQuestions(pIdx){
     if(q.instruction&&q.instruction!==lastInstr){
       h+=`<div class="q-section-title">${q.instruction}</div>`;
       lastInstr=q.instruction;
-      // Passage 3: word bank before Q31
-      if(pIdx===2 && q.id===31){
-        h+=renderWordBankP3();
+      // Passage 2: people bank before Q21 matching section
+      if(pIdx===1 && q.id===21){
+        h+=renderPersonBank(PEOPLE_P2,'List of People — A, B or C (you may use any letter more than once)');
+      }
+      // Passage 3: headings bank before Q27
+      if(pIdx===2 && q.id===27){
+        h+=renderHeadingsBank();
       }
     }
     h+=renderQ(q);
@@ -1223,15 +1199,9 @@ function renderQuestions(pIdx){
 // ═══════════════════════════════════════════
 // EXTRA BANK HELPERS (per-test)
 // ═══════════════════════════════════════════
-function renderWordBankP3(){
-  let h=`<div class="word-bank"><div class="word-bank-title">Word Bank — A to J</div><div class="word-bank-grid">`;
-  WORDS_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
-  h+=`</div></div>`;return h;
-}
-
 function renderHeadingsBank(){
-  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to ix</div><div class="word-bank-grid">`;
-  // no headings bank //[].forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to viii (Paragraph A = vii, given)</div><div class="word-bank-grid">`;
+  HEADINGS_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
   h+=`</div></div>`;return h;
 }
 </script>

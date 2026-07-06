@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandPath — IELTS Academic Reading Mock Test 10</title>
+<title>BandPath — IELTS Academic Reading Mock Test 6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
       <span class="start-brand-name">Band<span>Path</span></span>
     </div>
     <div class="start-logo">IELTS Academic Reading</div>
-    <div class="start-title">Mock Test 10</div>
+    <div class="start-title">Mock Test 6</div>
     <div class="start-subtitle">Computer-Delivered Format</div>
     <div class="start-info">
       <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
@@ -362,7 +362,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
   <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
     <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
-    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
   </div>
 </div>
 
@@ -399,7 +399,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 <div id="results-screen">
   <div class="res-header">
     <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
-    <h1>Academic Reading — Results (Mock Test 10)</h1>
+    <h1>Academic Reading — Results (Mock Test 6)</h1>
     <div class="band-circle">
       <div class="band-num" id="res-band">—</div>
       <div class="band-lbl">Band</div>
@@ -421,7 +421,7 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   <div class="res-actions">
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
-    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
@@ -433,58 +433,50 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
-  heading:'Otter',
+  heading:'A Brief History of Humans and Food',
   subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 1–13.',
   qRange:[1,13],
   paragraphs:[
-    {label:'A',text:`Otters have long, thin bodies and short legs – ideal for pushing through dense undergrowth or hunting in tunnels. An adult male may be up to 4 feet long and 30lbs. Females are smaller typically. The Eurasian otter's nose is about the smallest among the otter species and has a characteristic shape described as a shallow 'W'. An otter's tail (or rudder, or stern) is stout at the base and tapers towards the tip where it flattens. This forms part of the propulsion unit when swimming fast underwater. Otter fur consists of two types of hair: stout guard hairs which form a waterproof outer covering, and under-fur which is dense and fine, equivalent to an otter's thermal underwear. The fur must be kept in good condition by grooming. Seawater reduces the waterproofing and insulating qualities of otter fur when saltwater in the fur. This is why freshwater pools are important to otters living on the coast. After swimming, they wash the salts off in pools and the squirm on the ground to rub dry against vegetation.`},
-    {label:'B',text:`The scent is used for hunting on land, for communication and for detecting danger. Otterine sense of smell is likely to be similar in sensitivity to dogs. Otters have small eyes and are probably short-sighted on land. But they do have the ability to modify the shape of the lens in the eye to make it more spherical, and hence overcome the refraction of water. In clear water and good light, otters can hunt fish by sight. The otter's eyes and nostrils are placed high on its head so that it can see and breathe even when the rest of the body is submerged.`},
-    {label:'',text:`Underwater, the otter holds its legs against the body, except for steering, and the hind end of the body is flexed in a series of vertical undulations. River otters have webbing which extends for much of the length of each digit, though not to the very end. Giant otters and sea otters have even more prominent webs, while the Asian short-clawed otter has no webbing – they hunt for shrimps in ditches and paddy fields so they don't need the swimming speed. Otter's ears are tiny for streamlining, but they still have very sensitive hearing and are protected by valves which close them against water pressure.`},
-    {label:'C',text:`A number of constraints and preferences limit suitable habitats of otters. Water is a must and the rivers must be large enough to support a healthy population of fish. Being such shy and wary creatures, they will prefer territories where man's activities do not impinge greatly. Of course, there must also be no other otter already in residence – this has only become significant again recently as populations start to recover. Coastal otters have a much more abundant food supply and range for males and females may be just a few kilometres of coastline. Because male range overlaps with two or three females – not bad! Otters will eat anything that they can get hold of – there are records of sparrows and snakes and slugs being gobbled. Apart from fish, the most common prey are crayfish, crabs and water birds. Small mammals are occasionally taken, most commonly rabbits but sometimes even moles.`},
-    {label:'D',text:`Eurasian otters will breed any time where food is readily available. In places where the condition is more severe, Sweden for example where the lakes are frozen for much of winter, cubs are born in spring. This ensures that they are well grown before severe weather returns. In the Shetlands, cubs are born in summer when fish is more abundant. Though otters can breed every year, some do not. Again, this depends on food availability. Other factors such as food range and quality of the female may have an effect. Gestation for Eurasian otter is 63 days, with the exception of Lutra canadensis whose embryos may undergo delayed implantation. Otters normally give birth in more secure dens to avoid disturbances. Nests are lined with bedding to keep the cub's warm while mummy is away feeding.`},
-    {label:'E',text:`Otters normally give birth in more secure dens to avoid disturbances. Nests are lined with bedding (reeds, waterside plants, grass) to keep the cub's warm while she is away feeding. Litter Size varies between 1 and 5. For some unknown reason, coastal otters tend to produce smaller litters.`},
-    {label:'',text:`At five weeks they open their eyes – a tiny cub of 700g. At seven weeks they're weaned onto solid food. At ten weeks they leave the nest, blinking into daylight for the first time. After three months they finally meet the water and learn to swim. After eight months they are hunting, though the mother still provides a lot of food herself. Finally, after nine months she can chase them all away with a clear conscience, and relax – until the next fella shows up.`},
-    {label:'F',text:`The plight of the British otter was recognised in the early 60s, but it wasn't until the late 70s that the chief cause was discovered. Pesticides, such as dieldrin and aldrin, were first used in 1955 in agriculture and other industries – these chemicals are very persistent and had already been recognised as the cause of huge declines in the population of peregrine falcons, sparrow hawks and other predators. The pesticides entered the river systems and the food chain – micro-organisms, fish and finally otters, with every step increasing the concentration of the chemicals. From 1962 the chemicals were phased out, but while some species recovered quickly, otter numbers did not – and continued to fall into the 80s. This was probably due mainly to habitat destruction and road deaths. Acting on populations fragmented by the sudden decimation in the 50s and 60s, the loss of just a handful of otters in one area can make an entire population unviable and spell the end.`},
-    {label:'G',text:`Otter numbers are recovering all around Britain – populations are growing again in the few areas where they had remained and have expanded from those areas into the rest of the country. This is almost entirely due to legislation, conservation efforts, slowing down and reversing the destruction of suitable otter habitat and reintroductions from captive breeding programs. Releasing captive-bred otters is seen by many as a last resort. The argument runs that where there is no suitable habitat for them they will not survive after release and where there is suitable habitat, natural populations should be able to expand into the area. However, reintroducing animals into a fragmented and fragile population may add just enough impetus for it to stabilise and expand, rather than die out. This is what the Otter Trust accomplished in Norfolk, where the otter population may have been as low as twenty animals at the beginning of the 1980s. The Otter Trust has now finished its captive breeding program entirely, great news because it means it is no longer needed.`},
+    {label:'',text:`During the journey from our hunter-gatherer ancestors to the present day there have been three seismic changes that have had an impact on the food we eat: the discovery of cooking, the emergence of agriculture and the invention of methods of preserving food.`},
+    {label:'',text:`The 19th-century scientist Charles Darwin thought that cooking, after language, was the greatest discovery made by man. All of us eat some raw food, for instance fruit and vegetables, but the great majority of food we eat is cooked. Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves against attack by insects or other herbivorous animals. These toxic chemicals are referred to as 'plant secondary compounds', because they are not directly involved in the plant's normal growth, development and reproduction, and are produced purely as chemical defences. They give many of the plants we consume, such as coffee or brussels sprouts, their bitter taste.`},
+    {label:'',text:`Cooked food is often more digestible, because heat breaks down tough cellulose cell walls in plants or tough connective tissue in animals. Chewing raw turnip, a plate of uncooked rice, or a raw leg of lamb is much harder work than eating the cooked equivalent. The energy expended in chewing to break down the tough material is replaced by energy from the fuel that is used in cooking the food, so the ratio of energy gained to energy expended by the body is greater when food is cooked.`},
+    {label:'',text:`Until the development of agriculture, hunter-gatherers spent up to seven hours a day gathering food. This all began to change around 10,500 years ago with the advent of farming, which led to some dramatic changes in human societies. People began to create a variety of new tools to help with survival, and in turn populations increased in size. These changes led to the possibility of specialisation of different tasks within society. It was around this time that writing became more sophisticated and allowed people to maintain records of the harvest and taxes. Eventually, formalised structures of government were established as people settled in one area.`},
+    {label:'',text:`The arrival of agriculture meant that, for the first time, our ancestors had more food than they could eat immediately. This, combined with the seasonality of production, led them to discover methods of preserving food: smoking, drying, adding acid by fermentation or adding salt. These four methods all share one feature in common: they make the food a more hostile environment for bacteria that can cause it to spoil. They also tend to slow down any natural chemical reactions in the food that would cause decay.`},
+    {label:'',text:`Although foods today are still preserved in the ancient ways, two more recent methods of preserving food have become more common: canning and freezing. Canning was invented by a Frenchman, Nicholas Appert, in the early 19th century. He sealed food in bottles fabricated from glass and then heated them in boiling water to cook the contents. Appert's method had great advantages over older methods of food preservation: it could be applied to a wide range of foods, and the flavour of the food as well as the texture were similar to the freshly cooked product. His idea was soon copied by Englishman Peter Durand. Until this point containers had weighed too much to be widely used, but he produced the first ones which were light and resistant to damage. Two years later, in 1812, two Englishmen, Bryan Donkin and John Hall, started the commercial canning of food, although the real take-off in popularity of canning had to wait until the can opener was invented in 1855. Up to this time, cans were opened with a chisel which was used to break open the top when hit with a hammer. Canning is an extremely effective way of preserving food: one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition.`},
+    {label:'',text:`In the 21st century, the dominance of canning as a method of food preservation has been overtaken by another technology: freezing. Chilling food to keep it fresh is an old idea. The earliest mentions of icehouses, thick-walled buildings, half underground, date back to 1,700 BC in northwest Iran. In early 16th-century Italy, water was mixed with chemicals to lower its freezing point to -18 degrees Celsius, and several centuries later frozen fish and other goods were transported by ship from Australia to England. But the modern frozen food industry was started in the 1920s by an American, Clarence Birdseye. While Birdseye was on a fishing trip with the Inuit in the Canadian Arctic, he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected. Nevertheless, the big growth in demand for frozen food came about with the arrival of freezers in the homes of ordinary people. The advantages of frozen over canned food include the fact that the flavour and consistency are often identical to the equivalent fresh product, and that freezing can be used to preserve a huge variety of foods.`},
   ]
 },
 {
   title:'READING PASSAGE 2',
-  heading:'Living in Noisy World',
-  subheading:'',
+  heading:'Why Do We Need the Arts?',
+  subheading:'Sometimes people question why we need "the arts"; what functions do art, music, dance and literature serve?',
   timeHint:'You should spend about 20 minutes on Questions 14–26.',
   qRange:[14,26],
   paragraphs:[
-    {label:'A. Decibel Hell',text:`It's not difficult for a person to encounter sound at levels that can cause adverse health effects. During a single day, people living in a typical urban environment can experience a wide range of sounds in many locations, even once-quiet locales have become polluted with noise. In fact, it's difficult today to escape sound completely. In its 1999 Guidelines for Community Noise, the World Health Organization (WHO) declared, "Worldwide, noise-induced hearing impairment is the most prevalent irreversible occupational hazard, and it is estimated that 120 million people worldwide have disabling hearing difficulties." Growing evidence also points to many other health effects of too much volume.`},
-    {label:'',text:`Mark Stephenson, a Cincinnati, Ohio-based senior research audiologist at the National Institute for Occupational Safety and Health (NIOSH), says his agency's definition of hazardous noise is sound that exceeds the time-weighted average of 85 dBA, meaning the average noise exposure measured over a typical eight-hour workday. Other measures and definitions are used for other purposes.`},
-    {label:'B. Growing Volume',text:`In the United States, about 30 million workers are exposed to hazardous sound levels on the job, according to NIOSH. Industries having a high number of workers exposed to loud sounds include construction, agriculture, mining, manufacturing, utilities, transportation, and the military.`},
-    {label:'',text:`Noise in U.S. industry is an extremely difficult problem to monitor, acknowledges Craig Moulton, a senior industrial hygienist for the Occupational Safety and Health Administration (OSHA). "Still," he says, "OSHA does require that any employer with workers overexposed to noise provide protection for those employees against the harmful effects of noise. Additionally, employers must implement a continuing, effective hearing conservation program as outlined in OSHA's Noise Standard."`},
-    {label:'C. Scary Sound Effects',text:`Numerous scientific studies over the years have confirmed that exposure to certain levels of sound can damage hearing. Prolonged exposure can actually change the structure of the hair cells in the inner ear, resulting in hearing loss. It can also cause tinnitus, a ringing, roaring, buzzing, or clicking on the ears.`},
-    {label:'',text:`NIOSH studies from the mid to late 1990s show that 90% of coal miners have hearing impairment by age 52 – compared to 9% of the general population – and 70% of male metal/nonmetal miners will experience hearing impairment by age 60 (Stephenson notes that from adolescence onward, females tend to have better hearing than males). Neitzel says nearly half of all construction workers have some degree of hearing loss. "NIOSH research also reveals that by age twenty-five, the average carpenter's hearing is equivalent to an otherwise healthy fifty-year-old male who hasn't been exposed to noise," he says.`},
-    {label:'',text:`William Luxford, medical director of the House Ear Clinic of St. Vincent Medical Center in Los Angeles, points out one piece of good news: "It's true that continuous noise exposure will lead to the continuation of hearing loss, but as soon as the exposure is stopped, the hearing loss stops. So a change in environment can improve a person's hearing health."`},
-    {label:'',text:`Research is catching up with this anecdotal evidence. In the July 2001 issue of Pediatrics, researchers from the Centers for Disease Control and Prevention reported that, based on audiometric testing of 5,249 children as part of the Third National Health and Nutrition Examination Survey, an estimated 12.5% of American children have noise-induced hearing threshold shifts – or dulled hearing – in one or both ears. Most children with noise-induced hearing threshold shifts have only limited hearing damage, but continued exposure to excessive noise can lead to difficulties with high-frequency sound discrimination. The report listed stereos, music concerts, toys (such as toy telephones and certain rattles), lawnmowers, and fireworks as producing potentially harmful sounds.`},
-    {label:'D. Beyond the Ears',text:`The effects of sound don't stop with the ears. Nonauditory effects of noise exposure are those effects that don't cause hearing loss but still can be measured, such as elevated blood pressure, loss of sleep, increased heart rate, cardiovascular constriction, labored breathing, and changes in brain chemistry.`},
-    {label:'',text:`The nonauditory effects of noise were noted as early as 1930 in a study published by E.L. Smith and D.L. Laird in volume 2 of the Journal of the Acoustical Society of America. The results showed that exposure to noise caused stomach contractions in healthy human beings. Reports on noise's nonauditory effects published since that pioneering study have been both contradictory and controversial in some areas.`},
-    {label:'',text:`Bronzaft and the school principal persuaded the school board to have acoustical tile installed in the classrooms adjacent to the tracks. The Transit Authority also treated the tracks near the school to make them less noisy. A follow-up study published in the September 1981 issue of the Journal of Environmental Psychology found that children's reading scores improved after these interventions were put in place.`},
-    {label:'E. Fighting for Quiet',text:`Anti-noise activists say that Europe and several countries in Asia are more advanced than the United States in terms of combating noise. "Population pressure has prompted Europe to move more quickly on the noise issue that the United States has," Hume says. In the European Union, countries with cities of at least 250,000 people are creating noise maps of those cities to help leaders determine noise pollution policies. Paris has already prepared its first noise maps. The map data, which must be finished by 2007, will be fed into computer models that will help test the sound impact of street designs or new buildings before construction begins.`},
-    {label:'',text:`Activists in other countries say they too want the United States to play a more leading role on the noise issue. But as in other areas of environmental health, merely having a more powerful government agency in place that can set more regulations is not the ultimate answer, according to other experts. Bronzaft stresses that governments worldwide need to increase funding for noise research and do a better job coordinating their noise pollution efforts so they can establish health and environmental policies based on solid scientific research. "Governments have a responsibility to protect their citizens by curbing noise pollution," she says.`},
+    {label:'A',text:`Imagine a world in which people spend hours working in offices or factories, and then go home in the evening to sit down to dinner, after which they sleep until it's time to get up and work again. In this world, people do not read or watch TV, listen to music, play computer games or have pictures to decorate their homes. In fact, there are no pictures in this world – not even advertisements are illustrated, but all are words, and very plain ones at that, with no playfulness left in them. The buildings are completely functional without a single decorative feature anywhere, and there is no music to dance to and enjoy. Such a world is a world without the arts in any form.`},
+    {label:'B',text:`To ask what the arts are good for is not exactly the same as asking what their purpose is. The arts do not have to have a purpose – they do not exist in order to teach, to make a moral point, to entertain, to distract, to amuse, to support a revolution, to disgust, to challenge, to stimulate or to cheer; they exist chiefly for their own sake. It is artists, not the arts as such, that may have an aim in mind, and their aim may be to do any of the things just listed. But equally, artists may just make a work of art because they feel compelled to. Because the work is its own justification, no aim or goal is necessarily required to explain or, still less, to justify its existence.`},
+    {label:'C',text:`But to say that the arts do not have to serve an aim beyond themselves, even though they may sometimes do so, is not to say that they are good for nothing. On the contrary, as such an important part of human experience, they are good for many things. The distinction here lies between things that are instrumental and things that are ends in themselves. An instrument exists for something beyond itself – namely, for what it can be used to do. We know that pictures are used as instruments in advertising, and the objective is always to persuade us to buy something. Similarly, music can be written chiefly to accompany dancing, or as a soundtrack to a movie. A play can be written to point out to the theatre audience a social injustice or other problems that should be dealt with. But even though the arts can sometimes be instrumental, that fact is not essential to their nature. What the arts are 'good for' arises from their being an end in themselves, or more accurately, representing many different things that are valuable for their own sakes – such as, for instance, the creation of beauty.`},
+    {label:'D',text:`The phrase 'the arts' includes painting, sculpture, music, literature, dance and theatre performance, and whatever else (to quote the famous US artist Andy Warhol) anyone can get away with in calling their creation a contribution to 'the arts'. But the generalisation that the arts, whatever else they are, are always an end in themselves, applies to them all. The arts are one major form of response to the world. They are often an attempt to capture an aspect of the world, to draw attention to something about it to comment on it, to present a surprising or fresh angle on it, to represent it for the sake of exploring something about it, or enjoying or celebrating it. They can help people to focus on, for example, the colour or shape of an object, its eccentricity or typicality, and the interest or perhaps disgust it provokes in them.`},
+    {label:'E',text:`For a loose comparison, think of laughing at a joke. We do not laugh so that we can achieve a further goal – in order to be healthy or relaxed, say, even if we thereby succeed in being healthier or more relaxed – but simply because the joke has elicited that reaction. But although it is merely a reaction, laughing is, in fact, good for something nevertheless; it does make people feel better. The arts are a reaction in the same way. French artist Cézanne painted Mont Sainte-Victoire repeatedly because he was fascinated by it, not because he thought that painting it would say something about politics or society or human hopes. Being fascinated by something, attracted to it, repelled by it, keen to reveal an unusual aspect of it, are all responses to that thing; the making of the arts is one outstanding way of expressing such responses.`},
+    {label:'F',text:`But the arts are a response not only to things in the world but also to experience of the world, which lies inside the artist himself. And they are also often an expression of what presses from within the artist without being elicited by externals. Music is a prime example. A symphony, unless it is devised to represent bird song, rain, the sea and the like, is an abstract expression of a composer's conception. We may be able to describe what the Russian composer Tchaikovsky is doing in his ballet music, but how can we describe what he is expressing in his piano concertos? Composers may experiment with melody and rhythm in very abstract, sometimes mathematical, ways.`},
+    {label:'G',text:`When artists get to work responding to and expressing ideas, whether or not they also want to make a point, entertain, distract, support a revolution and the rest, they are producing something that someone else will react to in some way. They seek to connect with their audience and express an idea or emotion which has the capacity to enrich our experience of life itself.`},
   ]
 },
 {
   title:'READING PASSAGE 3',
-  heading:'The Art of Deception',
-  subheading:'Do tiny changes of facial expression show whether someone is telling lies?',
+  heading:'The Significant Role of Mother Tongue Language in Education',
+  subheading:'',
   timeHint:'You should spend about 20 minutes on Questions 27–40.',
   qRange:[27,40],
   paragraphs:[
-    {label:'',text:`Forty years ago, the research psychologist Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question, the answer to which has kept him busy ever since. Suppose the group wanted to know, a particular patient swears they are telling the truth. They look and sound sincere. So here is the question: is there any way you can be sure they are telling the truth? Ekman did not know the answer then, but wanted to find out.`},
-    {label:'',text:`As part of his research, he had already filmed a series of 12-minute interviews with psychiatric patients. In a subsequent conversation, one of the patients told him that she had lied to him. So, Ekman sat and looked at the film but saw nothing noteworthy. Then he slowed it down and looked again. Then he slowed it even further. And suddenly, there, across just two frames of the film, he saw it: an intense expression of extreme anguish. It lasted less than a 15th of a second, but once he had spotted the first expression, he soon found three more examples in that same interview. He termed his discovery "micro-expression": very rapid intense demonstrations of emotion that the subject intended to be concealed.`},
-    {label:'',text:`Over the course of the next four decades, Ekman successfully demonstrated a proposition first suggested by Charles Darwin: that the ways in which we express rage, disgust, contempt, fear, surprise, happiness and sadness are universal. The facial muscles triggered by those seven basic emotions are, he has shown, essentially standard, regardless of language and culture, from the US to Japan and Brazil to Papua New Guinea. What is more, expressions of emotion are impossible to suppress and, particularly when we are lying, micro-expressions of powerfully felt emotions will inevitably flit across our face before we get the chance to stop them.`},
-    {label:'',text:`Fortunately for liars, most people will fail to spot these fleeting signals of inner torment. Of the 15,000 Ekman has tested, only 50 people, whom he calls "naturals", have been able to do it. But given a little more training, Ekman says, almost anyone can develop the skill. He should know, since these tests were completed in the mid-1980s and the first publication of his research, he has been called in by the FBI and CIA (among countless more law-enforcement and other agencies around the world), not just to solve cases, but to teach them how to use his technique for themselves. He has held workshops for defense and prosecution lawyers, health professionals, even jealous spouses, all of them wanting to know exactly when someone is not being 100 percent candid.`},
-    {label:'',text:`Most recently, Ekman's research has resulted in a new television series about the exploits of the fictional Dr Cal Lightman, a scientist who studies involuntary body language to discover not only if you are lying, but why might you have been motivated to do so. According to the publicity blurb, Lightman is a human lie detector, even more accurate than a polygraph test. Ekman concedes he was skeptical when the producer first approached him with the idea of turning his life's work into a TV series, and initially would have stopped the project if he could. In particular, he was fearful that the show would exaggerate the effectiveness of his techniques and create the quite inaccurate impression among audiences that criminals could no longer hope to get away with lying. In the worst-case scenario, he was concerned about unfair convictions, that one day someone not properly trained in his techniques might be sitting on a jury and wrongly find someone guilty of a crime simply on the basis of a television programme.`},
-    {label:'',text:`In the end though, he was won over because the series is unusual in several respects. It is the first time, as far as Ekman is aware, that a commercial TV drama has been based on the work of just one scientist. That scientist is also deeply involved in the project, talking through plot ideas and checking five successive drafts of each script to ensure details are correct. He was also impressed with the producer's manifestly serious and well-intentioned reasons for making the programme. Now that the first series has been completed, he believes probably 80-90 per cent of the show is based on fact and that's good enough for what is, after all, a drama, not a documentary.`},
-    {label:'',text:`Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully are completely unrelated. He has been asked by people running for high office if he could teach them to become more credible with the public but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A "true" lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They are supposed to deceive you, it's part of the game, and the same is true of flattery. He prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.`},
+    {label:'',text:`One consequence of population mobility is an increasing diversity within schools. To illustrate, in the city of Toronto in Canada, 58% of kindergarten pupils come from homes where English is not the language of communication. Schools in Europe and North America have experienced this diversity for years, but educational policies and practices vary widely between countries and even within countries. Some political parties and groups search for ways to 'solve the problem' of diverse communities and their integration in schools and society. They see few positive consequences for the host society and worry that diversity threatens the identity of the host society. Consequently, they promote unfortunate educational policies that will make the 'problem' disappear. If students retain their culture and language, they are viewed as less capable of identifying with the mainstream culture and learning the mainstream language of the society.`},
+    {label:'',text:`The challenge for educators and policy-makers is to shape the evolution of national identity in such a way that the rights of all citizens (including school children) are respected, and the cultural, linguistic and economic resources of the nation are maximized. To waste the resources of the nation by discouraging children from developing their mother tongues is quite simply unintelligent from the point of view of national self-interest. A first step in providing an appropriate education for culturally and linguistically diverse children is to examine what the existing research says about the role of children's mother tongues in their educational development.`},
+    {label:'',text:`In fact, the research is very clear. When children continue to develop their abilities in two or more languages throughout primary school, they gain a deeper understanding of language and how to use it effectively. They have more practice in processing language, especially when they develop literacy in both. More than 150 research studies conducted during the past 35 years strongly support what Goethe, the famous eighteenth-century German philosopher, once said: that the person who knows only one language does not truly know that language. Research suggests that bilingual children may also develop more flexibility in their thinking as a result of processing information through two different languages.`},
+    {label:'',text:`Children who come to school with a solid foundation in their mother tongue develop stronger literacy abilities in the school language. When parents and other caregivers (e.g. grandparents) are able to spend time with their children and tell stories or discuss issues with them in a way that develops their mother tongue, children come to school well-prepared to learn the school language and succeed educationally. Children's knowledge and skills transfer across languages from the mother tongue to the school language. Transfer across languages can be two-way: both languages nurture each other when the educational environment permits children access to both languages.`},
+    {label:'',text:`Some educators and parents are suspicious of mother tongue-based teaching programs because they worry that they take time away from the majority language. For example, in a bilingual program where 50% of the time is spent teaching through children's home language and 50% through the majority language, surely children won't progress as far in the latter? One of the most strongly established findings of educational research, however, is that well-implemented bilingual programs can promote literacy and subject-matter knowledge in a minority language without any negative effects on children's development in the majority language. Within Europe, the Foyer program in Belgium, which develops children's speaking and literacy abilities in three languages (their mother tongue, Dutch and French), most clearly illustrates the benefits of bilingual and trilingual education (see Cummins, 2000).`},
+    {label:'',text:`It is easy to understand how this happens. When children are learning through a minority language, they are learning concepts and intellectual skills too. Pupils who know how to tell the time in their mother tongue understand the concept of telling time. In order to tell time in the majority language they do not need to re-learn the concept. Similarly, at more advanced stages, there is transfer across languages in other skills, such as knowing how to distinguish the main idea from the supporting details of a written passage or story, and distinguishing fact from opinion. Studies of secondary school pupils are providing interesting findings in this area, and it would be worth extending this research.`},
+    {label:'',text:`Many people marvel at how quickly bilingual children seem to 'pick up' conversational skills in the majority language at school (although it takes much longer for them to catch up with native speakers in academic language skills). However, educators are often much less aware of how quickly children can lose their ability to use their mother tongue, even in the home context. The extent and rapidity of language loss will vary according to the concentration of families from a particular linguistic group in the neighborhood. Where the mother tongue is used extensively in the community, then language loss among young children will be less. However, where language communities are not concentrated in particular neighborhoods, children can lose their ability to communicate in their mother tongue within two to three years of starting school. They may retain receptive skills in the language but they will use the majority language in speaking with their peers and siblings and in responding to their parents. By the time children become adolescents, the linguistic division between parents and children has become an emotional chasm. Pupils frequently become alienated from the cultures of both home and school, with predictable results.`},
   ]
 }
 ];
@@ -492,24 +484,12 @@ const PASSAGES=[
 // ═══════════════════════════════════════════
 // PEOPLE / WORD BANKS
 // ═══════════════════════════════════════════
-const PEOPLE_P2=[
-  {letter:'A',word:'WHO'},
-  {letter:'B',word:'William Luxford (the House Ear Clinic)'},
-  {letter:'C',word:'Craig Moulton (OSHA)'},
-  {letter:'D',word:'Arline Bronzaft'},
-  {letter:'E',word:'Centers for Disease Control and Prevention'}
-];
-
-const WORDBANK_P3=[
-  {letter:'A',word:'consequence'},
-  {letter:'B',word:'crimes'},
-  {letter:'C',word:'false beliefs'},
-  {letter:'D',word:'motives'},
-  {letter:'E',word:'acting'},
-  {letter:'F',word:'accuracy'},
-  {letter:'G',word:'acting'},
-  {letter:'H',word:'research'},
-  {letter:'I',word:'ratings'}
+const WORDS_P3=[
+  {letter:'C',word:'dislocation'},
+  {letter:'D',word:'rate'},
+  {letter:'F',word:'family'},
+  {letter:'I',word:'ability'},
+  {letter:'J',word:'area'}
 ];
 
 // ═══════════════════════════════════════════
@@ -517,271 +497,253 @@ const WORDBANK_P3=[
 // ═══════════════════════════════════════════
 const QUESTIONS=[
 // ── PASSAGE 1 ──────────────────────────────
-// Q1-9: Which paragraph A-G
-{id:1,passage:0,type:'fill',
- instruction:'Questions 1–9: Reading Passage 1 has seven paragraphs, A–G. Which paragraph contains the following information? Write the correct letter, A–G. You may use any letter more than once.',
- text:'A description of how otters regulate vision underwater',
- answers:['b','B'],answer:'B',
- hint:'Paragraph B: otters "have the ability to modify the shape of the lens in the eye to make it more spherical, and hence overcome the refraction of water."'},
+// Q1-5: TRUE/FALSE/NOT GIVEN
+{id:1,passage:0,type:'tfng',
+ instruction:'Questions 1–5: TRUE / FALSE / NOT GIVEN',
+ text:'According to Darwin, cooking was the most significant development in human history.',
+ answer:'FALSE',
+ hint:'Darwin thought cooking was the greatest discovery "after language" — meaning language was more significant. The statement says cooking was MOST significant, which contradicts this.'},
 
-{id:2,passage:0,type:'fill',instruction:'',
- text:"The fit-for-purpose characteristics of otter's body shape",
- answers:['a','A'],answer:'A',
- hint:'Paragraph A: "long, thin bodies and short legs – ideal for pushing through dense undergrowth or hunting in tunnels."'},
+{id:2,passage:0,type:'tfng',instruction:'',
+ text:'The process of cooking gets rid of some plant poisons.',
+ answer:'TRUE',
+ hint:'Passage: "Cooking can turn plants that are inedible into edible food by destroying toxic chemicals that plants often manufacture to protect themselves."'},
 
-{id:3,passage:0,type:'fill',instruction:'',
- text:'A reference to an underdeveloped sense',
- answers:['b','B'],answer:'B',
- hint:'Paragraph B: "Otters have small eyes and are probably short-sighted on land" — an underdeveloped sense.'},
+{id:3,passage:0,type:'tfng',instruction:'',
+ text:'Eating cooked food is more energy efficient than eating raw food.',
+ answer:'TRUE',
+ hint:'Passage: "the ratio of energy gained to energy expended by the body is greater when food is cooked."'},
 
-{id:4,passage:0,type:'fill',instruction:'',
- text:'An explanation of why agriculture failed in otter conservation efforts',
- answers:['f','F'],answer:'F',
- hint:'Paragraph F: pesticides "first used in 1955 in agriculture and other industries" entered the food chain and harmed otter populations.'},
+{id:4,passage:0,type:'tfng',instruction:'',
+ text:'Clarence Birdseye had previously worked in the Australian food industry.',
+ answer:'NOT GIVEN',
+ hint:'The passage says Birdseye was an American who went fishing with the Inuit in Canada. No previous job in Australia is mentioned.'},
 
-{id:5,passage:0,type:'fill',instruction:'',
- text:"A description of some of the otter's social characteristics",
- answers:['c','C'],answer:'C',
- hint:'Paragraph C: territory preferences, male range overlapping "with two or three females," shy and wary nature.'},
+{id:5,passage:0,type:'tfng',instruction:'',
+ text:'Birdseye\'s trip with the Inuit confirmed what he already believed about rapid freezing.',
+ answer:'FALSE',
+ hint:'Passage: "he observed that very rapid freezing creates smaller ice crystals and therefore causes less damage to food. This was something he had not expected." — it surprised him.'},
 
-{id:6,passage:0,type:'fill',instruction:'',
- text:'A description of how baby otters grow',
- answers:['e','E'],answer:'E',
- hint:'Paragraph E: "At five weeks they open their eyes... After nine months she can chase them all away."'},
+// Q6-13: Notes completion ONE WORD ONLY
+{id:6,passage:0,type:'fill',
+ instruction:'Questions 6–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Agriculture led to the development of equipment and larger _______ .',
+ answers:['populations','population'],answer:'population',
+ hint:'Passage: "populations increased in size" — agriculture brought larger populations.'},
 
 {id:7,passage:0,type:'fill',instruction:'',
- text:'The conflicting opinions on how to preserve',
- answers:['g','G'],answer:'G',
- hint:'Paragraph G: debate over reintroducing captive-bred otters — "seen by many as a last resort" versus the case for expanding natural populations.'},
+ text:'Agriculture gave people the ability to keep _______ as writing developed.',
+ answers:['records'],answer:'records',
+ hint:'Passage: "allowed people to maintain records of the harvest and taxes."'},
 
 {id:8,passage:0,type:'fill',instruction:'',
- text:'A reference to the legislative act',
- answers:['g','G'],answer:'G',
- hint:'Paragraph G: recovery "almost entirely due to legislation, conservation efforts."'},
+ text:'Early methods of food preservation included: smoking, drying and combining food with acid or _______ .',
+ answers:['salt'],answer:'salt',
+ hint:'Passage: "smoking, drying, adding acid by fermentation or adding salt."'},
 
 {id:9,passage:0,type:'fill',instruction:'',
- text:'An explanation of how otters compensate for heat loss',
- answers:['a','A'],answer:'A',
- hint:'Paragraph A: under-fur "dense and fine, equivalent to an otter\'s thermal underwear" — compensating for heat loss.'},
+ text:'Nicholas Appert put food into containers made of _______ .',
+ answers:['glass'],answer:'glass',
+ hint:'Passage: "He sealed food in bottles fabricated from glass."'},
 
-// Q10-13: Short answer, NO MORE THAN THREE WORDS AND/OR A NUMBER
-{id:10,passage:0,type:'fill',
- instruction:'Questions 10–13: Answer the questions below. Choose NO MORE THAN THREE WORDS AND/OR A NUMBER from the passage for each answer.',
- text:'What affects the outer fur of otters?',
- answers:['salt water','seawater','sea water'],answer:'salt water',
- hint:'"Seawater reduces the waterproofing and insulating qualities of otter fur when saltwater in the fur."'},
+{id:10,passage:0,type:'fill',instruction:'',
+ text:'Appert\'s method resulted in preserved food that had the same taste and _______ as fresh food.',
+ answers:['texture'],answer:'texture',
+ hint:'Passage: "the flavour of the food as well as the texture were similar to the freshly cooked product."'},
 
 {id:11,passage:0,type:'fill',instruction:'',
- text:'What skill is not necessary for Asian short-clawed otters?',
- answers:['swimming speed'],answer:'swimming speed',
- hint:'"The Asian short-clawed otter has no webbing – they hunt for shrimps in ditches and paddy fields so they don\'t need the swimming speed."'},
+ text:'Peter Durand introduced cans which had the advantage of being _______ and hard to break.',
+ answers:['light'],answer:'light',
+ hint:'Passage: "he produced the first ones which were light and resistant to damage."'},
 
 {id:12,passage:0,type:'fill',instruction:'',
- text:'Which type of otters has the shortest range?',
- answers:['coastal otters','coastal'],answer:'coastal otters',
- hint:'"Coastal otters... range for males and females may be just a few kilometres of coastline" — the shortest range mentioned.'},
+ text:'In 1855, the metal can opener replaced the _______ which had been used with a hammer to open cans.',
+ answers:['chisel'],answer:'chisel',
+ hint:'Passage: "cans were opened with a chisel which was used to break open the top when hit with a hammer."'},
 
 {id:13,passage:0,type:'fill',instruction:'',
- text:'Which type of animals do otters hunt occasionally?',
- answers:['small mammals'],answer:'small mammals',
- hint:'"Small mammals are occasionally taken, most commonly rabbits but sometimes even moles."'},
+ text:'Some food was still found to be edible after more than a hundred years — e.g. an old can of _______ .',
+ answers:['meat'],answer:'meat',
+ hint:'Passage: "one can which contained meat dating from 1824 was opened in 1939 and the contents were still in good condition."'},
 
 // ── PASSAGE 2 ──────────────────────────────
-// Q14-18: Summary completion, NO MORE THAN TWO WORDS
+// Q14-18: Which paragraph A-G
 {id:14,passage:1,type:'fill',
- instruction:'Questions 14–18: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
- text:'Noise is the sound beyond the average of _______ referring to the agency\'s definition.',
- answers:['85 dba','85dba','85 dBA'],answer:'85 dBA',
- hint:'NIOSH: hazardous noise "exceeds the time-weighted average of 85 dBA."'},
+ instruction:'Questions 14–18: Reading Passage 2 has seven paragraphs A–G. Which paragraph contains the following information?',
+ text:'A claim that artists may have no clear objective when creating a piece of art.',
+ answers:['b','B'],answer:'B',
+ hint:'Paragraph B: "artists may just make a work of art because they feel compelled to" — no clear objective required.'},
 
 {id:15,passage:1,type:'fill',instruction:'',
- text:'Scientific studies have confirmed that exposure to certain levels of sound can cause damage to _______ on certain senior age.',
- answers:['hearing'],answer:'hearing',
- hint:'"90% of coal miners have hearing impairment by age 52... 70% of male metal/nonmetal miners will experience hearing impairment by age 60."'},
+ text:'A description of how artists hope to benefit other people.',
+ answers:['g','G'],answer:'G',
+ hint:'Paragraph G: "They seek to connect with their audience and express an idea or emotion which has the capacity to enrich our experience of life itself."'},
 
 {id:16,passage:1,type:'fill',instruction:'',
- text:'From the testing of 5,249 children, those who are constantly exposed to excessive noise may have trouble in _______ sound discrimination.',
- answers:['high-frequency','high frequency'],answer:'high-frequency',
- hint:'"Continued exposure to excessive noise can lead to difficulties with high-frequency sound discrimination."'},
+ text:'A comparison between the arts and things made to perform a particular function.',
+ answers:['c','C'],answer:'C',
+ hint:'Paragraph C distinguishes between things that are "instrumental" (existing for something beyond themselves) and arts that are "ends in themselves."'},
 
 {id:17,passage:1,type:'fill',instruction:'',
- text:'Exposure to noise may lead to the unease of _______ in healthy people.',
- answers:['stomach problems','stomach problem','stomach contractions'],answer:'stomach problems',
- hint:'"The results showed that exposure to noise caused stomach contractions in healthy human beings."'},
+ text:'A claim that it\'s possible to convince the world that anything you have made is a work of art.',
+ answers:['d','D'],answer:'D',
+ hint:'Paragraph D: "whatever else... anyone can get away with in calling their creation a contribution to \'the arts\'" — quoting Andy Warhol.'},
 
 {id:18,passage:1,type:'fill',instruction:'',
- text:'Europe has taken steps on the noise issue; big cities of over 250,000 people are creating _______ to help create noise pollution policies.',
- answers:['noise maps','noise map'],answer:'noise maps',
- hint:'"Countries with cities of at least 250,000 people are creating noise maps of those cities to help leaders determine noise pollution policies."'},
+ text:'An example of something that has an unintentional benefit for us.',
+ answers:['e','E'],answer:'E',
+ hint:'Paragraph E: laughing at a joke — we don\'t laugh to become healthy, but it makes us feel better anyway. The arts work the same way — an unintentional benefit.'},
 
-// Q19-23: Match researcher to finding (bank rendered before Q19)
+// Q19-22: Summary fill ONE WORD ONLY
 {id:19,passage:1,type:'fill',
- instruction:'Questions 19–23: Look at the following researchers and the list of findings below. Match each researcher with the correct finding. Write the correct letter, A–E.',
- text:'People can change the environment to improve hearing health.',
- answers:['b','B'],answer:'B',
- hint:'William Luxford (B): "a change in environment can improve a person\'s hearing health."'},
+ instruction:'Questions 19–22: Complete the summary below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Such as the inter-dependent relationship between music and _______ , or between the visual arts and the advertising business.',
+ answers:['movie','movies'],answer:'movie',
+ hint:'Paragraph C: "music can be written chiefly to accompany dancing, or as a soundtrack to a movie."'},
 
 {id:20,passage:1,type:'fill',instruction:'',
- text:'The government should continue the research on anti-noise researches with the fund.',
- answers:['d','D'],answer:'D',
- hint:'Arline Bronzaft (D): "governments worldwide need to increase funding for noise research."'},
+ text:'Or between the visual arts and the _______ business.',
+ answers:['advertising'],answer:'advertising',
+ hint:'Paragraph C: "pictures are used as instruments in advertising, and the objective is always to persuade us to buy something."'},
 
 {id:21,passage:1,type:'fill',instruction:'',
- text:'Companies should be required to protect the employees to avoid noise.',
- answers:['c','C'],answer:'C',
- hint:'Craig Moulton/OSHA (C): "OSHA does require that any employer with workers overexposed to noise provide protection for those employees."'},
+ text:'A dramatist may use a _______ to draw our attention to various issues in society.',
+ answers:['play'],answer:'play',
+ hint:'Paragraph C: "A play can be written to point out to the theatre audience a social injustice or other problems."'},
 
 {id:22,passage:1,type:'fill',instruction:'',
- text:"Noise has posed an effect on American children's hearing ability.",
- answers:['e','E'],answer:'E',
- hint:'Centers for Disease Control and Prevention (E): testing of 5,249 children found "12.5% of American children have noise-induced hearing threshold shifts."'},
+ text:'Apart from these obvious practical benefits, there are other benefits, such as the _______ we find in an artist\'s work.',
+ answers:['beauty'],answer:'beauty',
+ hint:'Paragraph C: "representing many different things that are valuable for their own sakes – such as, for instance, the creation of beauty."'},
 
-{id:23,passage:1,type:'fill',instruction:'',
- text:'Noise has seriously affected human beings where they live worldwide.',
- answers:['a','A'],answer:'A',
- hint:'WHO (A): "120 million people worldwide have disabling hearing difficulties."'},
-
-// Q24-26: MCQ
-{id:24,passage:1,type:'mcq',
- instruction:'Questions 24–26: Choose the correct letter, A, B, C or D.',
- text:'The board of schools built close to the tracks are convinced to',
- answer:'C',
+// Q23-24: Choose TWO — effects of arts in paragraph D
+{id:23,passage:1,type:'multi2',
+ instruction:'Questions 23–24: Choose TWO letters A–E. In paragraph D, which TWO effects does the writer say the arts can have?',
+ text:'Select TWO correct answers.',
+ answer:'BD',
  options:[
-   'A. moved the classrooms away from the noisy track',
-   'B. regulated the track usage to a less extent',
-   'C. utilised a special material into classroom buildings lessening the effect of outside noise',
-   'D. organised a team for a follow-up study'
+   'A. They can interest people from all over the world.',
+   'B. They can make us see things from a different perspective.',
+   'C. They can inspire us to take up an artistic activity ourselves.',
+   'D. They can encourage us to think about our reactions to things around us.',
+   'E. They can draw our attention to serious global issues.'
  ],
- hint:'"Bronzaft and the school principal persuaded the school board to have acoustical tile installed in the classrooms adjacent to the tracks."'},
+ hint:'B = "present a surprising or fresh angle on it" — different perspective. D = "the interest or perhaps disgust it provokes in them" — thinking about reactions. Both from Paragraph D.'},
 
-{id:25,passage:1,type:'mcq',instruction:'',
- text:"In European countries, the big cities' research on noise focuses on",
- answer:'D',
+// Q25-26: Choose TWO — statements about composers and music
+{id:25,passage:1,type:'multi2',
+ instruction:'Questions 25–26: Choose TWO letters A–E. Which TWO statements about composers and music does the writer make?',
+ text:'Select TWO correct answers.',
+ answer:'AC',
  options:[
-   'A. How to record pollution details of the city on maps',
-   'B. the impact of noise on population shift in the European cities',
-   'C. how wide can a city be to avoid noise pollution',
-   'D. helping the authorities better make a decision on management of the city'
+   'A. Music tends to spring from the composer\'s individual experiences.',
+   'B. Composers need to structure music very carefully.',
+   'C. Music can be quite unrelated to the natural world.',
+   'D. Music finds its best expression in a symphony.',
+   'E. Composers are good at depicting the world around us.'
  ],
- hint:'Noise maps are made "to help leaders determine noise pollution policies" — decision-making support, not just recording data.'},
-
-{id:26,passage:1,type:'mcq',instruction:'',
- text:'What is the best title in paragraph 1?',
- answer:'C',
- options:[
-   'A. How people cope with noise pollutions',
-   'B. the fight against the noise with the powerful technology',
-   'C. The Effects of Living in a Noisy World',
-   'D. The Effects of noise on children\'s learning'
- ],
- hint:'The opening section surveys the broad health effects of noise exposure on everyone — matching the passage\'s own title, "Living in a Noisy World."'},
+ hint:'A = Paragraph F: music is "also often an expression of what presses from within the artist." C = Paragraph F: a symphony "is an abstract expression of a composer\'s conception" — unrelated to the natural world.'},
 
 // ── PASSAGE 3 ──────────────────────────────
-// Q27-31: MCQ
+// Q27-30: MCQ
 {id:27,passage:2,type:'mcq',
- instruction:'Questions 27–31: Choose the correct letter, A, B, C or D.',
- text:'According to the writer, Ekman became interested in lying after a question from his',
+ instruction:'Questions 27–30: Choose the correct letter A, B, C or D.',
+ text:'What point is the writer making in the second paragraph?',
  answer:'C',
  options:[
-   'A. peers.',
-   'B. patients.',
-   'C. students.',
-   'D. teachers.'
+   'A. Some present studies on children\'s mother tongues are misleading.',
+   'B. A culturally rich education programme benefits some children more than others.',
+   'C. Bilingual children can make a valuable contribution to the wealth of a country.',
+   'D. The law on mother tongue use at school should be strengthened.'
  ],
- hint:'"Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question" — his students/trainees.'},
+ hint:'Paragraph 2: "To waste the resources of the nation by discouraging children from developing their mother tongues is quite simply unintelligent" — bilingual children are a national resource = C.'},
 
 {id:28,passage:2,type:'mcq',instruction:'',
- text:'The writer refers to the 12-minute interviews in order to',
- answer:'B',
- options:[
-   'A. illustrate how frequently patients lie.',
-   "B. describe the origins of Ekman's theories.",
-   "C. compare Ekman's research to previous studies.",
-   "D. show how patients' behaviour is affected by filming."
- ],
- hint:'The interviews are where Ekman first discovered "micro-expressions" — the origin of his life\'s research.'},
-
-{id:29,passage:2,type:'mcq',instruction:'',
- text:"What is the writer's point in the third paragraph?",
+ text:'Why does the writer refer to something that Goethe said?',
  answer:'A',
  options:[
-   'A. Micro-expressions are common to all people.',
-   'B. Recent research has refuted an old idea.',
-   'C. With practice we can learn to control our micro-expression.',
-   'D. Human society is too complex to allow for generalisations.'
+   'A. To lend weight to his argument.',
+   'B. To contradict some research.',
+   'C. To introduce a new concept.',
+   'D. To update current thinking.'
  ],
- hint:'"The facial muscles triggered by those seven basic emotions are... essentially standard, regardless of language and culture" — universal to all people.'},
+ hint:'The writer uses Goethe\'s quote to support and reinforce the research findings — "to lend weight to his argument" (A).'},
+
+{id:29,passage:2,type:'mcq',instruction:'',
+ text:'The writer believes that when young children have a firm grasp of their mother tongue',
+ answer:'B',
+ options:[
+   'A. They can teach older family members what they learn at school.',
+   'B. They go on to do much better throughout their time at school.',
+   'C. They can read stories about their cultural background.',
+   'D. They develop stronger relationships with their family than with their peers.'
+ ],
+ hint:'Passage: "Children who come to school with a solid foundation in their mother tongue develop stronger literacy abilities in the school language... and succeed educationally." = B.'},
 
 {id:30,passage:2,type:'mcq',instruction:'',
- text:"What are we told about Ekman's conclusions from his tests?",
- answer:'B',
+ text:'Why are some people suspicious about mother tongue-based teaching programmes?',
+ answer:'D',
  options:[
-   "A. It's natural for people to lie.",
-   'B. Few untrained people can detect lying.',
-   'C. Most liars suffer from periods of depression.',
-   'D. All of his subjects were trained to identify micro-expressions.'
+   'A. They worry that children will be slow to learn to read in either language.',
+   'B. They think that children will confuse words in the two languages.',
+   'C. They believe that the programmes will make children less interested in their lessons.',
+   'D. They fear that the programmes will use up valuable time in the school day.'
  ],
- hint:'"Of the 15,000 Ekman has tested, only 50 people, whom he calls \'naturals\', have been able to do it" without training.'},
+ hint:'Passage: "they worry that they take time away from the majority language" — using up valuable school time = D.'},
 
-{id:31,passage:2,type:'mcq',instruction:'',
- text:"What point does the writer make about Ekman's techniques in the fourth paragraph?",
- answer:'B',
- options:[
-   'A. They take a decade to teach.',
-   'B. They have been in great demand.',
-   'C. They have aroused the suspicions of some agencies.',
-   'D. They can be used by a limited range of occupations.'
- ],
- hint:'Called in by "the FBI and CIA... countless more law-enforcement and other agencies," and held workshops for lawyers, health professionals, even jealous spouses — high demand across many fields.'},
+// Q31-35: Summary fill using word bank A-J
+{id:31,passage:2,type:'fill',
+ instruction:'Questions 31–35: Complete the summary using the list of words A–J below.',
+ text:'Bilingual children acquire the _______ to converse in the majority language remarkably quickly.',
+ answers:['i','I'],answer:'I',
+ hint:'Passage: "bilingual children seem to \'pick up\' conversational skills in the majority language" — the ability (I) to converse.'},
 
-// Q32-36: Summary using word bank A-I (bank rendered before Q32)
-{id:32,passage:2,type:'fill',
- instruction:'Questions 32–36: Complete the summary using the list of words, A–I, below.',
- text:"Initially, Ekman was unenthusiastic about the TV project because he feared the possibility of encouraging viewers' _______ .",
- answers:['c','C'],answer:'C',
- hint:'Word bank C = false beliefs. He feared the show would "create the quite inaccurate impression among audiences that criminals could no longer hope to get away with lying."'},
+{id:32,passage:2,type:'fill',instruction:'',
+ text:'The fact that the mother tongue can disappear at a similar _______ is less well understood.',
+ answers:['d','D'],answer:'D',
+ hint:'Passage: "The extent and rapidity of language loss" — rate/speed of disappearance. = D: rate.'},
 
 {id:33,passage:2,type:'fill',instruction:'',
- text:'For example, he was worried that one day the programme could result in _______ not being carried out.',
- answers:['e','E'],answer:'E',
- hint:'Word bank E, per the answer key — relates to his fear of "unfair convictions" arising from someone misusing the show\'s ideas on a jury.'},
+ text:'This phenomenon depends on the proportion of people with the same linguistic background settled in a particular _______ .',
+ answers:['j','J'],answer:'J',
+ hint:'Passage: "the concentration of families from a particular linguistic group in the neighborhood" — the area/neighborhood. = J: area.'},
 
 {id:34,passage:2,type:'fill',instruction:'',
- text:"Ultimately though, he has given the show his blessing because he is not aware of any other comparable programme based on a single person's _______ .",
- answers:['h','H'],answer:'H',
- hint:'Word bank H = research. "A commercial TV drama has been based on the work of just one scientist" — Ekman\'s own research.'},
+ text:'If this is limited, children are likely to lose the active use of their mother tongue, and thus no longer employ it even with _______ .',
+ answers:['f','F'],answer:'F',
+ hint:'Passage: "they will use the majority language in speaking with their peers and siblings and in responding to their parents" — even with family. = F: family.'},
 
 {id:35,passage:2,type:'fill',instruction:'',
- text:"The _______ of the show's producer have been another pleasant surprise considering the genre of the programme.",
- answers:['d','D'],answer:'D',
- hint:'Word bank D = motives. "The producer\'s manifestly serious and well-intentioned reasons for making the programme" = motives.'},
+ text:'It follows that teenage children in these circumstances experience a sense of _______ in relation to all aspects of their lives.',
+ answers:['c','C'],answer:'C',
+ hint:'Passage: "Pupils frequently become alienated from the cultures of both home and school" — a sense of dislocation. = C: dislocation.'},
 
-{id:36,passage:2,type:'fill',instruction:'',
- text:"Ekman is happy with the show's overall _______ .",
- answers:['f','F'],answer:'F',
- hint:'Word bank F = accuracy. "He believes probably 80-90 per cent of the show is based on fact" = accuracy.'},
+// Q36-40: YES/NO/NOT GIVEN
+{id:36,passage:2,type:'yesno',
+ instruction:'Questions 36–40: Do the following statements agree with the views of the writer? Write YES, NO or NOT GIVEN.',
+ text:'Less than half the children who attend kindergarten in Toronto have English as their mother tongue.',
+ answer:'YES',
+ hint:'Passage: "58% of kindergarten pupils come from homes where English is not the language of communication" — so more than half do NOT have English as mother tongue, meaning fewer than half DO. = YES.'},
 
-// Q37-40: YES/NO/NOT GIVEN
-{id:37,passage:2,type:'yesno',
- instruction:'Questions 37–40: Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.',
- text:'Ekman regrets the lies he told as a child.',
+{id:37,passage:2,type:'yesno',instruction:'',
+ text:'Research proves that learning the host country language at school can have an adverse effect on a child\'s mother tongue.',
  answer:'NOT GIVEN',
- hint:'He "professes to have been a terrible liar ever since he was a small boy" — no mention of regret.'},
+ hint:'The passage says bilingual programmes do NOT have negative effects on the majority language, but doesn\'t explicitly claim the reverse — that majority language learning damages the mother tongue.'},
 
 {id:38,passage:2,type:'yesno',instruction:'',
- text:'People who are good at lying tend to be good at detecting lies.',
- answer:'NO',
- hint:'"The ability to detect a lie and the ability to lie successfully are completely unrelated."'},
+ text:'The Foyer programme is to be adopted by the French education system.',
+ answer:'NOT GIVEN',
+ hint:'The Foyer programme is in Belgium (Dutch and French), but the passage makes no mention of France adopting it.'},
 
 {id:39,passage:2,type:'yesno',instruction:'',
- text:'Ekman has worked with poker players to help them lie more convincingly.',
+ text:'Bilingual children are taught to tell the time earlier than monolingual children.',
  answer:'NOT GIVEN',
- hint:'Poker players are mentioned only as an example of people who aren\'t "true liars" since deception is part of the game — no mention of Ekman working with them.'},
+ hint:'The passage uses telling the time as an example of concept transfer between languages, not as evidence that bilingual children learn to tell time earlier.'},
 
 {id:40,passage:2,type:'yesno',instruction:'',
- text:'Ekman is more interested in the types of lies with serious consequences.',
+ text:'Bilingual children can eventually apply reading comprehension strategies acquired in one language when reading in the other.',
  answer:'YES',
- hint:'"He prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out."'},
+ hint:'Passage: "there is transfer across languages in other skills, such as knowing how to distinguish the main idea from the supporting details of a written passage or story." = YES.'},
 ];
 
 const BAND_TABLE=[
@@ -841,6 +803,16 @@ function isCorrect(q,userAnswer){
 // ═══════════════════════════════════════════
 let currentPassage=0,answers={},flags={},timerSec=3600,
     timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-6';
+const testStartTime=Date.now();
+
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
 
 // ═══════════════════════════════════════════
 // BEGIN TEST
@@ -897,16 +869,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_t10_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_t10_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_t10_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_t10_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_t6_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t6_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t6_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t6_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_t10_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_t10_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_t10_timer',timerSec);
+    localStorage.setItem('ielts_t6_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t6_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t6_timer',timerSec);
   }catch(e){}
 }
 
@@ -958,9 +930,19 @@ function renderQ(q){
   }else if(q.type==='mcq'){
     const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
     inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
+  }else if(q.type==='multi2'){
+    const sel=val?val.split(''):[];
+    const opts=(q.options||[]).map((o,i)=>{
+      const l=String.fromCharCode(65+i);
+      const checked=sel.includes(l);
+      const dis=(!checked&&sel.length>=2)?' disabled':'';
+      return`<label class="q-option${checked?' selected':''}"><input type="checkbox" value="${l}"${checked?' checked':''}${dis} onchange="setMulti2(${q.id},'${l}',this.checked)"><span>${o}</span></label>`;
+    }).join('');
+    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
   }
+  const qLabel=q.type==='multi2'?`Questions ${q.id}–${q.id+1}`:`Question ${q.id}`;
   return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
-    <div class="q-num">Question ${q.id}</div>${inner}
+    <div class="q-num">${qLabel}</div>${inner}
     <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
   </div>`;
 }
@@ -971,6 +953,15 @@ function renderQ(q){
 function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
 function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
 function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
+function setMulti2(id,letter,checked){
+  let cur=(answers[id]||'').split('').filter(Boolean);
+  if(checked){if(!cur.includes(letter))cur.push(letter);}
+  else{cur=cur.filter(l=>l!==letter);}
+  cur.sort();
+  answers[id]=cur.join('');
+  renderQuestions(currentPassage);
+  saveAll();updatePalette();
+}
 function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
 function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
 
@@ -986,15 +977,17 @@ function updatePalette(){
   for(let i=1;i<=40;i++){
     const e=document.getElementById('pal'+i);if(!e)continue;
     e.classList.remove('done','flagged');
-    if(flags[i])e.classList.add('flagged');
-    else if(answers[i]&&answers[i].trim())e.classList.add('done');
+    let q=QUESTIONS.find(q=>q.id===i)||QUESTIONS.find(q=>q.type==='multi2'&&q.id===i-1);
+    if(!q)continue;
+    if(flags[q.id])e.classList.add('flagged');
+    else if(answers[q.id]&&answers[q.id].trim())e.classList.add('done');
   }
 }
 function jumpToQ(id){
-  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
+  const q=QUESTIONS.find(q=>q.id===id)||QUESTIONS.find(q=>q.type==='multi2'&&q.id===id-1);if(!q)return;
   if(q.passage!==currentPassage)switchPassage(q.passage);
   setTimeout(()=>{
-    const el=document.getElementById('qblock'+id);
+    const el=document.getElementById('qblock'+q.id);
     if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
     document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
     const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
@@ -1025,8 +1018,11 @@ function initScrollProgress(){
 
 function flashUnanswered(){
   QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
-    const el=document.getElementById('pal'+q.id);
-    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+    const ids=q.type==='multi2'?[q.id,q.id+1]:[q.id];
+    ids.forEach(i=>{
+      const el=document.getElementById('pal'+i);
+      if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+    });
   });
 }
 
@@ -1061,7 +1057,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_t10_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_t6_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ═══════════════════════════════════════════
 // HIGHLIGHTING
@@ -1120,11 +1116,12 @@ function showResults(){
   let correct=0,wrong=0,skip=0;
   const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
   QUESTIONS.forEach(q=>{
+    const w=q.type==='multi2'?2:1;
     const ua=(answers[q.id]||'').trim();
     const ok=isCorrect(q,ua);
-    if(!ua){skip++;bp[q.passage].skip++;}
-    else if(ok){correct++;bp[q.passage].correct++;}
-    else{wrong++;bp[q.passage].wrong++;}
+    if(!ua){skip+=w;bp[q.passage].skip+=w;}
+    else if(ok){correct+=w;bp[q.passage].correct+=w;}
+    else{wrong+=w;bp[q.passage].wrong+=w;}
   });
   let band=2.5,desc='Intermittent User';
   for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
@@ -1152,6 +1149,19 @@ function showResults(){
     </div>`;
   }).join('');
   document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
@@ -1185,6 +1195,10 @@ function applyReviewMarkup(){
     }else if(q.type==='mcq'){
       document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
       if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
+    }else if(q.type==='multi2'){
+      const block=document.getElementById('qblock'+q.id);
+      if(block)block.querySelectorAll('input[type="checkbox"]').forEach(c=>c.disabled=true);
+      if(q.hint&&block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint+' (Correct: '+q.answer.split('').join(', ')+')'));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}
     }
   });
 }
@@ -1194,7 +1208,7 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_t10_answers','ielts_t10_flags','ielts_t10_timer','ielts_t10_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_t6_answers','ielts_t6_flags','ielts_t6_timer','ielts_t6_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
@@ -1219,18 +1233,29 @@ function renderQuestions(pIdx){
     if(q.instruction&&q.instruction!==lastInstr){
       h+=`<div class="q-section-title">${q.instruction}</div>`;
       lastInstr=q.instruction;
-      // Passage 2: researchers bank before Q19
-      if(pIdx===1 && q.id===19){
-        h+=renderPersonBank(PEOPLE_P2,'List of People or Organisations — A, B, C, D or E (you may use any letter more than once)');
-      }
-      // Passage 3: word bank before Q32
-      if(pIdx===2 && q.id===32){
-        h+=renderWordBank(WORDBANK_P3,'Word Bank — A to I');
+      // Passage 3: word bank before Q31
+      if(pIdx===2 && q.id===31){
+        h+=renderWordBankP3();
       }
     }
     h+=renderQ(q);
   });
   document.getElementById('questions-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// EXTRA BANK HELPERS (per-test)
+// ═══════════════════════════════════════════
+function renderWordBankP3(){
+  let h=`<div class="word-bank"><div class="word-bank-title">Word Bank — A to J</div><div class="word-bank-grid">`;
+  WORDS_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+
+function renderHeadingsBank(){
+  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to ix</div><div class="word-bank-grid">`;
+  // no headings bank //[].forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
 }
 </script>
 </body>

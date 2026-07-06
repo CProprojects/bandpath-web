@@ -17,8 +17,13 @@ create table if not exists public.users (
   exam_date date,
   streak_count int not null default 0,
   last_active_at timestamptz,
+  xp_total int not null default 0,
   created_at timestamptz not null default now()
 );
+
+-- Columns added after the table's initial creation (CREATE TABLE IF NOT
+-- EXISTS is a no-op on existing tables, so these need explicit ALTERs).
+alter table public.users add column if not exists xp_total int not null default 0;
 
 alter table public.users enable row level security;
 
@@ -96,9 +101,14 @@ create table if not exists public.daily_activity (
   user_id uuid not null references public.users (id) on delete cascade,
   date date not null,
   tests_completed int not null default 0,
+  words_reviewed int not null default 0,
+  xp_earned int not null default 0,
   created_at timestamptz not null default now(),
   unique (user_id, date)
 );
+
+alter table public.daily_activity add column if not exists words_reviewed int not null default 0;
+alter table public.daily_activity add column if not exists xp_earned int not null default 0;
 
 create index if not exists daily_activity_user_id_idx on public.daily_activity (user_id);
 
@@ -117,6 +127,42 @@ create policy "users can upsert own activity"
 drop policy if exists "users can update own activity" on public.daily_activity;
 create policy "users can update own activity"
   on public.daily_activity for update
+  using (auth.uid() = user_id);
+
+-- ─────────────────────────────────────────────
+-- vocab_progress (per-user spaced-repetition state; word content itself
+-- lives in code at src/lib/vocab.ts, keyed by word_id = "<testId>:<word>")
+-- ─────────────────────────────────────────────
+create table if not exists public.vocab_progress (
+  user_id uuid not null references public.users (id) on delete cascade,
+  word_id text not null,
+  status text not null default 'learning' check (status in ('learning', 'review', 'mastered')),
+  interval_days int not null default 0,
+  correct_count int not null default 0,
+  wrong_count int not null default 0,
+  next_review_at date not null default current_date,
+  last_reviewed_at timestamptz,
+  created_at timestamptz not null default now(),
+  primary key (user_id, word_id)
+);
+
+create index if not exists vocab_progress_due_idx on public.vocab_progress (user_id, next_review_at);
+
+alter table public.vocab_progress enable row level security;
+
+drop policy if exists "users can view own vocab progress" on public.vocab_progress;
+create policy "users can view own vocab progress"
+  on public.vocab_progress for select
+  using (auth.uid() = user_id);
+
+drop policy if exists "users can insert own vocab progress" on public.vocab_progress;
+create policy "users can insert own vocab progress"
+  on public.vocab_progress for insert
+  with check (auth.uid() = user_id);
+
+drop policy if exists "users can update own vocab progress" on public.vocab_progress;
+create policy "users can update own vocab progress"
+  on public.vocab_progress for update
   using (auth.uid() = user_id);
 
 -- ─────────────────────────────────────────────

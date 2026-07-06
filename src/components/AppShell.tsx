@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { SignOutButton } from "@/components/SignOutButton";
-import { HomeIcon, TestsIcon, UpgradeIcon } from "@/components/NavIcons";
+import { HomeIcon, TestsIcon, VocabIcon, UpgradeIcon } from "@/components/NavIcons";
 
 const NAV = [
   { href: "/dashboard", label: "Home", Icon: HomeIcon },
   { href: "/tests", label: "Tests", Icon: TestsIcon },
+  { href: "/vocabulary", label: "Vocabulary", Icon: VocabIcon },
   { href: "/upgrade", label: "Upgrade", Icon: UpgradeIcon },
 ];
 

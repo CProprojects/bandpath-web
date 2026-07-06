@@ -66,6 +66,10 @@ export async function POST(request: Request) {
   nextReviewAt.setDate(nextReviewAt.getDate() + next.nextReviewInDays);
 
   const alreadyAwarded = existing?.xp_awarded ?? false;
+  // A word only pays out XP the first time it's answered CORRECTLY — a
+  // skipped or wrong attempt does not spend that word's one-time XP, so
+  // the student can come back, get it right, and still earn it.
+  const xpAwarded = !alreadyAwarded && correct ? XP_PER_WORD : 0;
 
   await supabase.from("vocab_progress").upsert(
     {
@@ -77,12 +81,10 @@ export async function POST(request: Request) {
       wrong_count: next.wrongCount,
       next_review_at: nextReviewAt.toISOString().slice(0, 10),
       last_reviewed_at: new Date().toISOString(),
-      xp_awarded: true,
+      xp_awarded: alreadyAwarded || !!correct,
     },
     { onConflict: "user_id,word_id" }
   );
-
-  const xpAwarded = alreadyAwarded ? 0 : XP_PER_WORD;
   const activity = await recordDailyActivity(supabase, user.id, {
     xpDelta: xpAwarded,
     wordsReviewed: 1,

@@ -4,6 +4,8 @@ import { getWordById } from "@/lib/vocab";
 import { nextReviewState } from "@/lib/srs";
 import { recordDailyActivity } from "@/lib/activity";
 
+const XP_PER_WORD = 2;
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { wordId, stage, correct } = body as {
@@ -29,12 +31,12 @@ export async function POST(request: Request) {
 
   const { data: existing } = await supabase
     .from("vocab_progress")
-    .select("status, interval_days, correct_count, wrong_count")
+    .select("status, interval_days, correct_count, wrong_count, xp_awarded")
     .eq("user_id", user.id)
     .eq("word_id", wordId)
     .maybeSingle();
 
-  if (stage === "learn") {
+  if (stage === "learn" || stage === "quiz") {
     if (!existing) {
       await supabase.from("vocab_progress").insert({
         user_id: user.id,
@@ -44,27 +46,14 @@ export async function POST(request: Request) {
         next_review_at: today,
       });
     }
+    // No XP here — a word only pays out once, on first full completion
+    // (see the "spelling" branch below), so redoing a part for practice
+    // doesn't let students farm XP on words they already know.
     return NextResponse.json({ ok: true, xpAwarded: 0 });
   }
 
-  if (stage === "quiz") {
-    if (!existing) {
-      await supabase.from("vocab_progress").insert({
-        user_id: user.id,
-        word_id: wordId,
-        status: "learning",
-        interval_days: 0,
-        next_review_at: today,
-      });
-    }
-    const xpAwarded = correct ? 5 : 0;
-    if (xpAwarded > 0) {
-      await recordDailyActivity(supabase, user.id, { xpDelta: xpAwarded });
-    }
-    return NextResponse.json({ ok: true, xpAwarded });
-  }
-
-  // stage === "spelling" — this is the authoritative SRS checkpoint
+  // stage === "spelling" — the last step of a word; this is also the
+  // authoritative SRS checkpoint that reschedules the next review.
   const current = {
     status: (existing?.status ?? "learning") as "learning" | "review" | "mastered",
     intervalDays: existing?.interval_days ?? 0,
@@ -76,6 +65,8 @@ export async function POST(request: Request) {
   const nextReviewAt = new Date();
   nextReviewAt.setDate(nextReviewAt.getDate() + next.nextReviewInDays);
 
+  const alreadyAwarded = existing?.xp_awarded ?? false;
+
   await supabase.from("vocab_progress").upsert(
     {
       user_id: user.id,
@@ -86,11 +77,12 @@ export async function POST(request: Request) {
       wrong_count: next.wrongCount,
       next_review_at: nextReviewAt.toISOString().slice(0, 10),
       last_reviewed_at: new Date().toISOString(),
+      xp_awarded: true,
     },
     { onConflict: "user_id,word_id" }
   );
 
-  const xpAwarded = correct ? 10 : 0;
+  const xpAwarded = alreadyAwarded ? 0 : XP_PER_WORD;
   const activity = await recordDailyActivity(supabase, user.id, {
     xpDelta: xpAwarded,
     wordsReviewed: 1,

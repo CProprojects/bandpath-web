@@ -32,7 +32,17 @@ async function postProgress(wordId: string, stage: "learn" | "quiz" | "spelling"
   return res.json();
 }
 
-export function VocabSession({ testId, title }: { testId?: string; title: string }) {
+export function VocabSession({
+  testId,
+  part,
+  title,
+  backHref,
+}: {
+  testId?: string;
+  part?: number;
+  title: string;
+  backHref?: string;
+}) {
   const [stage, setStage] = useState<Stage>("loading");
   const [words, setWords] = useState<VocabWord[]>([]);
   const [index, setIndex] = useState(0);
@@ -40,14 +50,18 @@ export function VocabSession({ testId, title }: { testId?: string; title: string
   const [streakCount, setStreakCount] = useState<number | null>(null);
 
   useEffect(() => {
-    const url = testId ? `/api/vocab/session?testId=${testId}` : "/api/vocab/session";
+    const params = new URLSearchParams();
+    if (testId) params.set("testId", testId);
+    if (part !== undefined) params.set("part", String(part));
+    const qs = params.toString();
+    const url = qs ? `/api/vocab/session?${qs}` : "/api/vocab/session";
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setWords(data.words ?? []);
         setStage(data.words?.length ? "learn" : "empty");
       });
-  }, [testId]);
+  }, [testId, part]);
 
   if (stage === "loading") {
     return <p className="mt-8 text-white/50">Loading today&apos;s words…</p>;
@@ -150,12 +164,12 @@ export function VocabSession({ testId, title }: { testId?: string; title: string
         >
           Vocabulary Hub
         </Link>
-        {testId && (
+        {backHref && (
           <Link
-            href={`/tests/${testId}`}
+            href={backHref}
             className="rounded-xl bg-bp-accent px-5 py-2.5 text-sm font-bold text-[#06243c]"
           >
-            Back to Test
+            Choose Another Part
           </Link>
         )}
       </div>

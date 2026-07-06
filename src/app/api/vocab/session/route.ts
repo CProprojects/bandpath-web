@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { VOCAB_WORDS, getWordsForTest } from "@/lib/vocab";
+import { VOCAB_WORDS, getWordsForTest, getPart } from "@/lib/vocab";
 import { DAILY_WORD_CAP } from "@/lib/srs";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const testId = searchParams.get("testId") ?? undefined;
+  const partParam = searchParams.get("part");
 
   const supabase = await createClient();
   const {
@@ -14,6 +15,14 @@ export async function GET(request: Request) {
 
   if (!user) {
     return NextResponse.json({ error: "Not logged in." }, { status: 401 });
+  }
+
+  // A specific part was requested: return that exact batch of 6-8 words,
+  // no SRS filtering — this is deliberate, replayable practice by part.
+  if (testId && partParam !== null) {
+    const partIndex = Number(partParam);
+    const words = getPart(testId, partIndex) ?? [];
+    return NextResponse.json({ words, dueCount: 0, newCount: words.length, totalInPool: words.length });
   }
 
   const pool = testId ? getWordsForTest(testId) : VOCAB_WORDS;

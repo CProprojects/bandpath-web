@@ -142,9 +142,12 @@ create table if not exists public.vocab_progress (
   wrong_count int not null default 0,
   next_review_at date not null default current_date,
   last_reviewed_at timestamptz,
+  xp_awarded boolean not null default false,
   created_at timestamptz not null default now(),
   primary key (user_id, word_id)
 );
+
+alter table public.vocab_progress add column if not exists xp_awarded boolean not null default false;
 
 create index if not exists vocab_progress_due_idx on public.vocab_progress (user_id, next_review_at);
 

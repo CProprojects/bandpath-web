@@ -190,6 +190,33 @@ export function getWordsForTest(testId: string): VocabWord[] {
   return VOCAB_WORDS.filter((w) => w.testId === testId);
 }
 
+const TARGET_PART_SIZE = 7;
+
+// Splits a test's words into parts of roughly 6-8 words each, so a student
+// never faces more than a small batch in one sitting.
+export function getPartsForTest(testId: string): VocabWord[][] {
+  const words = getWordsForTest(testId);
+  if (words.length === 0) return [];
+
+  const numParts = Math.max(1, Math.round(words.length / TARGET_PART_SIZE));
+  const base = Math.floor(words.length / numParts);
+  const remainder = words.length % numParts;
+
+  const parts: VocabWord[][] = [];
+  let offset = 0;
+  for (let i = 0; i < numParts; i++) {
+    const size = base + (i < remainder ? 1 : 0);
+    parts.push(words.slice(offset, offset + size));
+    offset += size;
+  }
+  return parts;
+}
+
+export function getPart(testId: string, partIndex: number): VocabWord[] | undefined {
+  const parts = getPartsForTest(testId);
+  return parts[partIndex];
+}
+
 export function getWordById(id: string): VocabWord | undefined {
   return VOCAB_WORDS.find((w) => w.id === id);
 }

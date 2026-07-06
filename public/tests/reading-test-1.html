@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BandPath — IELTS Academic Reading Mock Test 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f2f6fb;--bg3:#e6edf6;--text:#12233b;--text2:#3a4a63;--text3:#7488a3;
+  --border:#d3deea;--accent:#0090c4;--accent2:#1e9e56;
+  --header:#0f2744;--flag:#e0870f;--correct:#1e9e56;--wrong:#d64545;
+  --palette-done:#1e9e56;--palette-flag:#e0870f;--palette-active:#0090c4;
+  --hl-yellow:#ffe066;--hl-yellow-text:#1a1a2e;
+  --hl-green:#a8f0c6;--hl-green-text:#0a2e1a;
+  --ruler-bg:rgba(0,144,196,.1);--ruler-border:rgba(0,144,196,.3);
+  --shadow:0 2px 12px rgba(15,39,68,.08);
+  --glow:0 0 0 rgba(0,0,0,0);
+  --card-grad:var(--bg2);
+}
+body.dark{
+  --bg:#0f2744;--bg2:#162d4a;--bg3:#1e3a57;--text:#eaf2fb;--text2:#9fb4cc;--text3:#6b83a0;
+  --border:#1e3a57;--accent:#00C4FF;--accent2:#2ed573;--header:#0a1d33;
+  --flag:#ffa502;--correct:#2ed573;--wrong:#ff6b6b;
+  --palette-done:#2ed573;--palette-flag:#ffa502;--palette-active:#00C4FF;
+  --hl-yellow:#c99a12;--hl-yellow-text:#fff8e1;
+  --hl-green:#1a7a44;--hl-green-text:#d6ffe6;
+  --ruler-bg:rgba(0,196,255,.1);--ruler-border:rgba(0,196,255,.4);
+  --shadow:0 8px 30px rgba(0,0,0,.45);
+  --glow:0 0 22px -6px rgba(0,196,255,.5);
+  --card-grad:linear-gradient(165deg,rgba(30,58,87,.55),rgba(22,45,74,.85));
+}
+body{font-family:'Plus Jakarta Sans',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:16px;transition:background .25s,color .25s;overflow:hidden}
+body.dark{background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+svg.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* START SCREEN */
+#start-screen{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#start-screen::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,255,.22),transparent 65%);filter:blur(10px);pointer-events:none}
+.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);backdrop-filter:blur(12px)}
+body:not(.dark) .start-box{background:var(--bg);box-shadow:0 24px 64px rgba(15,39,68,.28)}
+.start-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.start-brand-badge{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.32);box-shadow:0 0 34px -8px rgba(0,196,255,.6)}
+.start-brand-name{font-size:27px;font-weight:800;letter-spacing:-.5px;color:#fff}
+body:not(.dark) .start-brand-name{color:var(--text)}
+.start-brand-name span{color:#00C4FF}
+.start-logo{font-size:12px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.start-title{font-size:25px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.2;letter-spacing:-.3px}
+.start-subtitle{font-size:14px;color:var(--text3);margin-bottom:30px}
+.start-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 8px}
+body.dark .info-card{background:rgba(22,45,74,.5)}
+.info-val{font-size:27px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+.info-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.start-rules{text-align:left;background:var(--bg2);border-radius:14px;padding:16px 20px;margin-bottom:30px}
+body.dark .start-rules{background:rgba(10,29,51,.5);border:1px solid var(--border)}
+.start-rules p{font-size:13px;color:var(--text2);line-height:1.85;padding-left:4px;display:flex;gap:9px;align-items:flex-start}
+.start-rules p svg{margin-top:3px;color:var(--accent)}
+#start-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c;border:none;padding:16px 48px;border-radius:14px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.3px;transition:opacity .15s,transform .15s,box-shadow .15s;width:100%;box-shadow:0 16px 36px -12px rgba(0,196,255,.7)}
+#start-btn:hover{transform:translateY(-2px);box-shadow:0 22px 44px -12px rgba(0,196,255,.8)}
+body:not(.dark) #start-btn{color:#fff;background:linear-gradient(120deg,#0090c4,#0f2744)}
+
+/* HEADER */
+#header{background:var(--header);padding:0 14px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:1000;height:54px;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.06)}
+#logo-area{display:flex;align-items:center;gap:9px;min-width:120px}
+#logo-area .lg-badge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 16px -5px rgba(0,196,255,.55)}
+#logo-area .lg-name{font-weight:800;font-size:16px;color:#fff;letter-spacing:-.3px}
+#logo-area .lg-name span{color:#00C4FF}
+#passage-tabs{display:flex;gap:3px;background:rgba(255,255,255,.07);border-radius:9px;padding:3px}
+.ptab{background:transparent;color:rgba(255,255,255,.68);border:none;padding:6px 15px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+.ptab:hover{color:#fff;background:rgba(255,255,255,.1)}
+.ptab.active{background:#00C4FF;color:#06243c;font-weight:700;box-shadow:0 0 16px -4px rgba(0,196,255,.7)}
+#header-right{display:flex;align-items:center;gap:7px}
+#timer-box{display:flex;align-items:center;gap:7px;background:rgba(255,107,107,.16);color:#ff8a8a;border:1px solid rgba(255,107,107,.35);font-size:18px;font-weight:800;padding:5px 15px;border-radius:9px;letter-spacing:1.5px;min-width:104px;text-align:center;justify-content:center;font-variant-numeric:tabular-nums}
+#timer-box svg{opacity:.85}
+#timer-box.warn{background:rgba(255,165,2,.16);color:#ffb938;border-color:rgba(255,165,2,.4)}
+#timer-box.critical{background:rgba(255,107,107,.2);color:#ff6b6b;border-color:rgba(255,107,107,.5);animation:blink .9s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.hbtn{background:rgba(255,255,255,.1);color:#fff;border:none;width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.hbtn:hover{background:rgba(0,196,255,.22)}
+
+/* SETTINGS */
+#settings-panel{display:none;position:fixed;top:58px;right:12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;z-index:2000;min-width:230px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+#settings-panel h3{font-size:13px;margin-bottom:14px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.sg{margin-bottom:14px}
+.sg label{display:block;font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.sg-row{display:flex;gap:6px;flex-wrap:wrap}
+.sbtn{border:2px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.sbtn-fs{min-width:34px;text-align:center}
+
+/* MAIN LAYOUT */
+#main{margin-top:52px;display:flex;height:calc(100vh - 96px);overflow:hidden}
+#passage-panel{flex:1;min-width:200px;overflow-y:auto;padding:22px 28px 22px 24px;background:var(--bg);position:relative}
+#splitter{width:7px;background:var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s;user-select:none}
+#splitter:hover,#splitter.dragging{background:var(--accent)}
+#splitter::after{content:'';width:4px;height:26px;border-radius:3px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/4px 7px repeat-y;color:var(--text3);opacity:.65;pointer-events:none}
+#splitter:hover::after,#splitter.dragging::after{color:#fff;opacity:.9}
+#questions-panel{flex:1;min-width:200px;overflow-y:auto;padding:16px;background:var(--bg2)}
+
+/* PASSAGE */
+.passage-meta{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.8}
+.passage-time-hint{font-size:12px;color:var(--text3);margin-bottom:10px;padding:5px 10px;background:var(--bg3);border-radius:5px;border-left:3px solid var(--accent)}
+.passage-heading{font-size:21px;font-weight:800;margin-bottom:4px;line-height:1.25;color:var(--text)}
+.passage-subheading{font-size:14px;font-style:italic;color:var(--text3);margin-bottom:18px;line-height:1.5}
+.passage-divider{border:none;border-top:2px solid var(--border);margin-bottom:18px}
+.passage-text p{margin-bottom:16px;line-height:1.85;color:var(--text);text-align:justify}
+.para-label{font-weight:800;color:var(--accent);margin-right:6px;font-size:15px}
+.footnote{font-size:13px;color:var(--text3);margin-top:18px;border-top:1px solid var(--border);padding-top:10px;font-style:italic}
+
+/* HIGHLIGHT */
+.hl-yellow{background:var(--hl-yellow);border-radius:2px;padding:1px 0;color:var(--hl-yellow-text)}
+.hl-green{background:var(--hl-green);border-radius:2px;padding:1px 0;color:var(--hl-green-text)}
+#ctx-menu{display:none;position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:9px;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:3000;min-width:190px;overflow:hidden;padding:4px 0}
+.ctx-item{padding:9px 16px;cursor:pointer;font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;transition:background .1s;justify-content:space-between}
+.ctx-item:hover{background:var(--bg3)}
+.ctx-item-left{display:flex;align-items:center;gap:9px}
+.ctx-dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0}
+.ctx-key{font-size:10px;opacity:.5;font-family:monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;border:1px solid var(--border)}
+
+/* WORD BANK */
+.word-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.word-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.word-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.wb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.wb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* QUESTIONS */
+.q-section-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 6px;padding:7px 11px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent)}
+.q-range-label{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
+.q-instruction{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6;padding:9px 12px;background:var(--bg);border-left:3px solid var(--flag);border-radius:0 6px 6px 0}
+.q-block{margin-bottom:11px;padding:11px 13px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;position:relative;transition:border-color .15s,box-shadow .15s}
+.q-block:hover{box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.q-block.flagged{border-left:4px solid var(--flag)}
+.q-block.answered{border-left:4px solid var(--accent2)}
+.q-num{font-weight:700;font-size:12px;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.q-text{font-size:14px;color:var(--text);margin-bottom:9px;line-height:1.55}
+.q-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:7px 11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;transition:border-color .15s}
+.q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,144,196,.12)}
+.q-options{display:flex;flex-direction:column;gap:5px}
+.q-option{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);border:1.5px solid transparent;transition:all .12s}
+.q-option:hover{background:var(--bg3)}
+.q-option input{margin-top:2px;cursor:pointer;accent-color:var(--accent);width:15px;height:15px;flex-shrink:0}
+.q-option.selected{background:rgba(0,144,196,.08);border-color:rgba(0,144,196,.28)}
+body.dark .q-option.selected{background:rgba(0,196,255,.1);border-color:rgba(0,196,255,.3)}
+.tfng-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tfng-btn{border:1.5px solid var(--border);background:var(--bg2);color:var(--text);padding:6px 13px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;transition:all .12s;letter-spacing:.3px}
+.tfng-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tfng-btn.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.flag-btn{position:absolute;top:9px;right:9px;background:none;border:none;cursor:pointer;font-size:15px;color:var(--text3);padding:2px 5px;border-radius:4px;line-height:1;transition:color .15s}
+.flag-btn:hover{color:var(--flag)}
+.flag-btn.active{color:var(--flag)}
+
+/* MATCH person bank */
+.person-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.person-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.person-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.pb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.pb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* PALETTE */
+#palette-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1.5px solid var(--border);padding:5px 10px;z-index:800;display:flex;align-items:center;gap:4px;overflow-x:auto;height:44px}
+#palette-bar::-webkit-scrollbar{height:3px}
+#palette-bar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.pal-label{font-size:10px;color:var(--text3);font-weight:700;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px}
+.pal-num{width:25px;height:25px;border-radius:5px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s}
+.pal-num:hover{border-color:var(--accent);color:var(--accent)}
+.pal-num.done{background:var(--palette-done);color:#fff;border-color:var(--palette-done)}
+.pal-num.flagged{background:var(--palette-flag);color:#fff;border-color:var(--palette-flag)}
+.pal-num.active{border:2.5px solid var(--palette-active);box-shadow:0 0 0 2px rgba(0,196,255,.25),0 0 12px -2px rgba(0,196,255,.6)}
+body.dark .pal-num.done{box-shadow:0 0 12px -3px rgba(46,213,115,.6)}
+body.dark .pal-num.flagged{box-shadow:0 0 12px -3px rgba(255,165,2,.6)}
+.pal-legend{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);flex-shrink:0;white-space:nowrap;margin-left:2px}
+.pal-dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
+#submit-btn{display:flex;align-items:center;gap:7px;background:linear-gradient(120deg,#ff7a6b,#e0504a);color:#fff;border:none;padding:7px 18px;border-radius:9px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;letter-spacing:.3px;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 20px -8px rgba(255,107,107,.6)}
+#submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px -8px rgba(255,107,107,.75)}
+
+/* NOTES */
+#notes-toggle{position:fixed;bottom:56px;right:14px;z-index:900;background:linear-gradient(150deg,#00C4FF,#0098e0);color:#06243c;border:none;border-radius:14px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,196,255,.6);transition:transform .15s}
+#notes-toggle:hover{transform:scale(1.08)}
+#notes-box{display:none;position:fixed;bottom:102px;right:14px;z-index:900;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;width:270px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+#notes-box h4{font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+#notes-ta{width:100%;height:130px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:7px;padding:9px;font-size:13px;resize:vertical;outline:none;font-family:inherit;line-height:1.5}
+#notes-ta:focus{border-color:var(--accent)}
+
+/* RULER */
+#ruler{position:fixed;left:0;height:28px;background:var(--ruler-bg);pointer-events:none;display:none;z-index:500;border-top:1px solid var(--ruler-border);border-bottom:1px solid var(--ruler-border)}
+
+/* RESULTS */
+#results-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5000;overflow-y:auto;padding:30px 20px}
+.res-header{text-align:center;margin-bottom:28px}
+.res-header h1{font-size:24px;color:var(--accent);margin-bottom:8px;font-weight:800}
+.band-circle{position:relative;width:150px;height:150px;border-radius:50%;border:6px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;background:var(--bg2);box-shadow:0 0 40px -6px rgba(0,196,255,.55),inset 0 0 26px -10px rgba(0,196,255,.4)}
+.band-num{font-size:54px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-1.5px;text-shadow:0 0 20px rgba(0,196,255,.5)}
+.band-lbl{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.band-desc{font-size:14px;color:var(--text2);margin-bottom:4px;font-weight:600}
+.band-note{font-size:11px;color:var(--text3);margin-bottom:20px;font-style:italic}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:660px;margin:0 auto 20px}
+.stat-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-size:30px;font-weight:800;color:var(--accent);text-shadow:0 0 16px rgba(0,196,255,.25)}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.p-breakdown{max-width:760px;margin:0 auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.p-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:14px}
+.p-card h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.p-card-stats{display:flex;gap:12px;font-size:13px}
+.review-section{max-width:760px;margin:0 auto 20px}
+.review-section h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.review-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px}
+.review-card.correct{border-left:4px solid var(--correct)}
+.review-card.wrong{border-left:4px solid var(--wrong)}
+.review-card.unanswered{border-left:4px solid var(--text3)}
+.rev-q{font-weight:700;font-size:12px;color:var(--text);margin-bottom:3px}
+.rev-yours{font-size:12px;color:var(--wrong)}
+.rev-correct{font-size:12px;color:var(--correct)}
+.res-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-bottom:30px}
+.res-btn{padding:11px 24px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit}
+.res-btn:hover{opacity:.85}
+.res-btn-primary{background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c}
+body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
+.res-btn-secondary{background:var(--bg3);color:var(--text);border:1.5px solid var(--border)}
+.tg-btn{background:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;transition:opacity .15s}
+.tg-btn:hover{opacity:.88}
+
+/* REVIEW MODE */
+.q-input.correct-ans{border-color:var(--correct)!important;background:rgba(30,158,86,.09)!important}
+.q-input.wrong-ans{border-color:var(--wrong)!important;background:rgba(214,69,69,.09)!important}
+.tfng-btn.correct-ans{background:var(--correct)!important;color:#fff!important;border-color:var(--correct)!important}
+.tfng-btn.wrong-ans{background:var(--wrong)!important;color:#fff!important;border-color:var(--wrong)!important}
+.answer-reveal{font-size:11px;color:var(--correct);margin-top:5px;font-weight:700}
+.answer-hint{font-size:11px;color:var(--text3);margin-top:4px;font-style:italic;line-height:1.5;padding:5px 8px;background:var(--bg2);border-radius:5px;border-left:2px solid var(--accent)}
+
+/* FLASH */
+@keyframes pal-flash{0%,100%{background:var(--bg3)}50%{background:#e74c3c;color:#fff;border-color:#e74c3c}}
+.pal-num.flash{animation:pal-flash .5s ease 3}
+
+/* SCROLL INDICATOR */
+#scroll-bar{position:absolute;top:0;left:0;width:0%;height:3px;background:var(--accent);z-index:5;transition:width .1s;border-radius:0 2px 2px 0}
+
+/* BACK TO RESULTS */
+#back-to-results{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
+#back-to-results:hover{opacity:.88}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-track{background:transparent}
+
+@media(max-width:768px){
+  #main{flex-direction:column;height:calc(100vh - 96px)}
+  #passage-panel{height:50%;border-bottom:2px solid var(--border);padding:14px}
+  #questions-panel{width:100%;height:50%}
+  #splitter{width:100%;height:8px;cursor:row-resize}
+  #splitter::after{width:26px;height:4px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/7px 4px repeat-x}
+}
+
+/* DARK PREMIUM GLASS */
+body.dark #passage-panel{background:transparent}
+body.dark #questions-panel{background:rgba(10,29,51,.35)}
+body.dark .q-block{background:var(--card-grad);border-color:var(--border);backdrop-filter:blur(6px)}
+body.dark .q-block:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.6)}
+body.dark .q-block.answered{box-shadow:inset 4px 0 0 var(--accent2),0 0 0 1px rgba(46,213,115,.12)}
+body.dark .q-input,body.dark .tfng-btn{background:rgba(10,29,51,.5)}
+body.dark .word-bank,body.dark .person-bank{background:rgba(10,29,51,.4)}
+body.dark .wb-item,body.dark .pb-item{background:rgba(22,45,74,.6)}
+body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);backdrop-filter:blur(14px)}
+body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
+body.dark .info-card,body.dark .stat-card,body.dark .p-card,body.dark .review-card{background:var(--card-grad)}
+body.dark .q-input:focus{box-shadow:0 0 0 3px rgba(0,196,255,.18)}
+body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.res-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.res-brand .lg-badge{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 18px -5px rgba(0,196,255,.55)}
+.res-brand .lg-name{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.res-brand .lg-name span{color:#00C4FF}
+</style>
+</head>
+<body>
+
+
+<!-- START SCREEN -->
+<div id="start-screen">
+  <div class="start-box">
+    <div class="start-brand">
+      <span class="start-brand-badge"><svg viewBox="0 0 40 40" width="32" height="32" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.4" fill="#00C4FF"/><circle cx="17" cy="24" r="2.4" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.3"/><circle cx="30" cy="12" r="2.6" fill="#00C4FF"/></svg></span>
+      <span class="start-brand-name">Band<span>Path</span></span>
+    </div>
+    <div class="start-logo">IELTS Academic Reading</div>
+    <div class="start-title">Mock Test 1</div>
+    <div class="start-subtitle">Computer-Delivered Format</div>
+    <div class="start-info">
+      <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
+      <div class="info-card"><div class="info-val">40</div><div class="info-lbl">Questions</div></div>
+      <div class="info-card"><div class="info-val">60</div><div class="info-lbl">Minutes</div></div>
+    </div>
+    <div class="start-rules">
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Read each passage carefully and answer all 40 questions.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Highlight text by selecting it and right-clicking or using Shift+Y / Shift+G.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Flag any question to return to it later.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Your answers are saved automatically.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>The timer starts when you click Begin.</span></p>
+    </div>
+    <button id="start-btn" onclick="beginTest()"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg>Begin Test</button>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="applyHighlight('yellow')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#ffe066;border:1px solid #cca800"></span>Yellow highlight</div>
+    <span class="ctx-key">Shift+Y</span>
+  </div>
+  <div class="ctx-item" onclick="applyHighlight('green')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#a8f0c6;border:1px solid #2e7d52"></span>Green highlight</div>
+    <span class="ctx-key">Shift+G</span>
+  </div>
+  <div class="ctx-item" onclick="removeHighlight()">
+    <div class="ctx-item-left"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><path d="M18 6 6 18M6 6l12 12"/></svg>Remove highlight</div>
+    <span class="ctx-key">Shift+R</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo-area"><span class="lg-badge"><svg viewBox="0 0 40 40" width="21" height="21" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+  <div id="passage-tabs">
+    <button class="ptab active" onclick="switchPassage(0)">Passage 1</button>
+    <button class="ptab" onclick="switchPassage(1)">Passage 2</button>
+    <button class="ptab" onclick="switchPassage(2)">Passage 3</button>
+  </div>
+  <div id="header-right">
+    <div id="timer-box"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg><span id="timer-txt">60:00</span></div>
+    <button class="hbtn" onclick="toggleFullscreen()" title="Fullscreen"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+    <button class="hbtn" onclick="toggleSettings()" title="Settings"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings-panel">
+  <h3>Settings</h3>
+  <div class="sg">
+    <label>Theme</label>
+    <div class="sg-row">
+      <button class="sbtn" onclick="setTheme('light',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Light</button>
+      <button class="sbtn" onclick="setTheme('dark',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>Dark</button>
+    </div>
+  </div>
+  <div class="sg">
+    <label>Font Size</label>
+    <div class="sg-row">
+      <button class="sbtn sbtn-fs active" onclick="setFont(15,this)" style="font-size:12px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(18,this)" style="font-size:16px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(22,this)" style="font-size:20px">A</button>
+    </div>
+  </div>
+  <div class="sg" style="display:flex;align-items:center;justify-content:space-between">
+    <label style="margin:0">Reading Ruler</label>
+    <input type="checkbox" id="ruler-toggle" onchange="toggleRuler()" style="width:18px;height:18px;cursor:pointer;accent-color:var(--accent)">
+  </div>
+  <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
+    <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
+    <button onclick="goHome()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+  </div>
+</div>
+
+<div id="ruler"></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="passage-panel"><div id="scroll-bar"></div><div id="passage-content"></div></div>
+  <div id="splitter"></div>
+  <div id="questions-panel"><div id="questions-content"></div></div>
+</div>
+
+<button id="back-to-results" onclick="backToResults()">← Back to Results</button>
+
+<!-- NOTES -->
+<button id="notes-toggle" onclick="toggleNotes()" title="Notes (Ctrl+N)"><svg class="ic" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+<div id="notes-box">
+  <h4><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Scratch Notes &nbsp;<span style="opacity:.45;font-size:10px">Ctrl+N</span></h4>
+  <textarea id="notes-ta" placeholder="Type notes here..." oninput="saveNotes()"></textarea>
+</div>
+
+<!-- PALETTE -->
+<div id="palette-bar">
+  <span class="pal-label">Q:</span>
+  <div id="palette-nums" style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:3px;align-items:center"></div>
+  <div class="pal-legend" style="margin-left:6px">
+    <span class="pal-dot" style="background:var(--palette-done)"></span>Done&nbsp;
+    <span class="pal-dot" style="background:var(--palette-flag)"></span>Flag
+  </div>
+  <button id="submit-btn" onclick="submitTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Submit Test</button>
+</div>
+
+<!-- RESULTS -->
+<div id="results-screen">
+  <div class="res-header">
+    <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+    <h1>Academic Reading — Results (Mock Test 1)</h1>
+    <div class="band-circle">
+      <div class="band-num" id="res-band">—</div>
+      <div class="band-lbl">Band</div>
+    </div>
+    <div class="band-desc" id="res-band-desc"></div>
+    <div class="band-note">Reading band estimate based on raw score. Actual scores may vary by test version.</div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="res-correct">—</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-wrong">—</div><div class="stat-lbl">Incorrect</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-skip">—</div><div class="stat-lbl">Skipped</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-pct">—</div><div class="stat-lbl">Accuracy</div></div>
+  </div>
+  <div class="p-breakdown" id="p-breakdown"></div>
+  <div class="review-section">
+    <h3>Detailed Review</h3>
+    <div class="review-grid" id="review-grid"></div>
+  </div>
+  <div class="res-actions">
+    <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
+    <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
+    <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+    <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+      More Tests on Telegram
+    </a>
+  </div>
+</div>
+
+<script>
+const PASSAGES=[
+{
+  title:'READING PASSAGE 1',
+  heading:'Sweet Trouble',
+  subheading:'Problems in the Australian sugar industry',
+  timeHint:'You should spend about 20 minutes on Questions 1–13.',
+  qRange:[1,13],
+  paragraphs:[
+    {label:'',text:`The Australian town of Mossman in the state of Queensland sits in a tropical landscape between the rainforest and the Great Barrier Reef. Eco-tourism is important there; more than 80% of Douglas Shire, of which Mossman is the administrative centre, is protected by World Heritage listing. But for most of the town's history, forest and reef have been largely irrelevant: since the sugar mill was built in 1894, the town has relied on sugarcane. Now Mossman is holding its breath. For two years the mill used by all the farms has been close to bankruptcy. It is at the centre of the economic shocks that have shaken Australia's sugar industry, and for lifetime farmers and a long list of cane industry workers a way of life will disappear if the mill closes. Mossman has roughly 160 growers, who now produce less than one million of the nation's annual cane harvest of 30–40 million tonnes. But it is a microcosm of the industry. All across Australia, the cane-growing business is being squeezed between the pincers of economics and the environment.`},
+    {label:'',text:`The ten-year average return to sugar growers throughout the 1990s was about $350 a tonne. In early 2004, sugar prices plummeted, resulting in a 25-year-low average price for Australian sugar of about $232 a tonne. Although figures vary widely across farms and regions, that was about what it cost to grow a tonne of sugar in Australia. To forestall social and economic disaster, the Government offered more than $400 million to encourage growers to leave the industry. By the end of the year, 21 farmers had taken up the offer to leave, but another 1,000 are thought to be seriously considering it, allowing those remaining to buy the vacated land and improve their economies of scale.`},
+    {label:'',text:`Fourth-generation Mossman grower Bill Phillips-Turner is one who plans to fight on. 'The consequences of losing the mill would be catastrophic,' Bill says. 'Sugar has a big economic multiplier effect: for every dollar generated from sugar, an additional $7 is generated in the wider community. Because of limited options around here, most people now employed by the industry would have to leave the area to find work.' The farmer-shareholders have so far saved the mill by accepting substantial cuts to cane payments, but this has come at a big cost to everyone. As chairman of the board of the mill, Bill has presided over some tough and unpopular decisions; the hardest was slashing the mill workforce. Assets were sold and maintenance costs cut. The board has also worked hard to find new ways of doing business. Ethanol production, where sugar is used to produce fuel, has potential, and co-generation, using cane waste to generate electric power, is another possibility. However, the most radical but preferred alternative is to create a future for the mill as a food factory, turning out quality sugar-based foods.`},
+    {label:'',text:`In addition to the economic struggle, there is the environmental one. The sugar industry has the reputation of being environmentally damaging, but it has some surprising supporters. Douglas Shire mayor, Mike Berwick, is a well-known environmentalist, and might be expected to be anti-cane. 'There's no question of the past damage it's done to the reef through chemical and nutrient run-off*,' he says. 'But there's a formula for sustainable cane production and Mossman has nearly reached it.' Another surprise endorsement for cane comes from the Queensland Environmental Protection Agency's sugar liaison officer, Karen Benn. 'I'm less worried about the effect of cane on the environment than I am about other agriculture,' she says. 'There are good growers everywhere, but at Mossman they seem to have taken up the challenges faster.' For example, sediment run-off, previously one of the main environmental problems caused by cane growing, is now nothing like it once was, according to Dr Brian Roberts, co-ordinator of the Douglas Shire Water Quality Improvement Program. 'North Queensland used to hold the record for soil loss,' he says. 'Now ... cane country is accumulating soil.'`},
+    {label:'',text:`However, these improvements have been achieved at a great cost to growers. Now in his 60s, Tom Watters has spent a lifetime on the same farm. Fourteen years ago, he was alerted to the effect his cane could be having on Mackay Creek, the narrow waterway that receives all his run-off, and so Tom planted a 5,000-tree buffer along the edge of the creek, built up the edges of the creek with rocks to prevent erosion, and began exploring farming methods that cause minimal soil disturbance. However, none of these costly initiatives has helped him get better cane prices. Another cane grower, Doug Crees, comments that 'Economically, it [cane growing] doesn't make much sense. But there's more to life than money.' It's this addiction to the way of life that keeps many cane farmers growing an under-performing crop. 'It's a good lifestyle,' Doug says. 'I spend eight months working on the farm and four months looking after our kids while my wife works in town. I've been looking at alternative crops, like forestry and cocoa, and it turns out that working away from the farm is the best diversification we could do. However, I still don't want to do that.'`},
+    {label:'',text:`It is difficult to see how anyone can deal satisfactorily with the passing of a way of life. Cane farmers have been part of eastern Queensland for more than a century, but despite the efforts they have put into fighting the good environmental fight, there is no guarantee that the new way of life evolving there will include cane.`},
+  ],
+  footnote:'* run-off: water that is used for agriculture and then passes into waterways, carrying soil and agricultural chemicals with it'
+},
+{
+  title:'READING PASSAGE 2',
+  heading:'The Year of European Heat',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 14–26.',
+  qRange:[14,26],
+  paragraphs:[
+    {label:'',text:`It was that summer, scientists now realise, when global warming at last made itself unmistakably felt. People in the Northern Hemisphere knew that summer 2003 was remarkable. Britain had record high temperatures; Europe had out-of-control forest fires, great rivers drying to a trickle and thousands of heat-related deaths. But how remarkable that summer was is only now becoming clear.`},
+    {label:'',text:`June, July and August were the warmest three months recorded in western and central Europe. And they were the warmest by a very long way. Like Britain, Portugal, Germany and Switzerland had record national highs. Over a great rectangular block stretching from west of Paris to northern Italy, taking in Switzerland and southern Germany, the average temperature for the summer months was 3.78 °C higher than the long-term norm, says the University of East Anglia's Tyndall Centre for Climate Change Research, one of the world's leading institutions for monitoring and analysing temperature records. That might not seem a lot until you are aware of the usual pattern. But then you realise it is enormous. There is nothing like this in previous data. It is considered so exceptional that Professor Phil Jones, the unit's director, says openly — in a way that few scientists have done — that 2003's extreme temperatures may be directly attributed to global warming caused by human actions, rather than natural climate variations.`},
+    {label:'',text:`Meteorologists have hitherto contented themselves with the formula that recent high temperatures are 'consistent with predictions' of climate change. For the great block of the map in question, the unit has reliable temperature records dating back to 1781. Using as a baseline the average summer temperature between 1961 and 1990, departures from the temperature norm, 'anomalies', can easily be plotted.`},
+    {label:'',text:`Over the past 200 years, there have been at least half a dozen excess temperature anomalies approaching, or even exceeding, 2 °C. But there has been nothing remotely like that year, when the anomaly was nearly 4 °C. 'That is quite remarkable,' Professor Jones says. 'It's very unusual in a statistical sense. If this series had a normal statistical distribution you wouldn't get this number. The return period (i.e. how often it could be expected to recur) would be something like one in 1,000 years. If we look at an excess above the average of nearly 4 °C, then perhaps nearly 3 °C of that is natural variability, because we've seen that in past summers. But the final degree of it is likely to be due to global warming, caused by human action.'`},
+    {label:'',text:`That year's summer had in a sense been one that climate scientists had long been anticipating. Until then, the warming had been manifesting itself mainly in winters that were less cold rather than in summers that were much hotter. Last week, the UN predicted that winters were warming so quickly that some of Europe's lower-level ski resorts will die out.`},
+    {label:'',text:`But sooner or later the unprecedented hot summer was bound to come — and that year it did. Over a large swathe of the western part of the European continent, records were broken in all three months. It wasn't only monthly averages, but daily extremes and the lengths of spells above thresholds. National records were set in at least four countries.`},
+    {label:'',text:`One of the most dramatic features of the summer was the hot nights, especially in the first half of August. The high night-time temperatures were related to the 15,000 extra deaths in France during August, compared with previous years. They gradually increased during the first 12 days of the month, peaking at about 2,000 a day on August 12 and 13 and severely overloading the medical services. Then they dropped dramatically after August 14 when minimum temperatures fell by about 5 °C. The elderly were most affected — their death rate rose 70 per cent.`},
+    {label:'',text:`For Britain, the year as a whole is likely to be the warmest recorded. But despite the temperature record on August 10, the summer itself — defined as the June, July and August period — comes behind 1976 and 1995, when there were longer periods of intense heat. At the moment, the year is likely to be the third-hottest in the global temperature record (which goes back to 1856), behind 1998 and 2002. But when the records for October, November and December are collated, it might move into second place. The ten hottest years in the record have occurred since 1990.`},
+    {label:'',text:`Professor Jones is in no doubt about the astonishing nature of that year's European summer. 'The temperatures recorded that year were out of all proportion to the previous record,' he says. 'It was the warmest summer in the last 500 years and probably way beyond that. It was enormously exceptional.'`},
+    {label:'',text:`His colleagues at the Tyndall Centre are planning a study of it. 'It was a summer that had not been experienced before, either in terms of the temperature extremes that were reached, or the range and diversity of the effects of the extreme heat,' says the centre's executive director, Professor Mike Hulme. 'It will certainly have left its mark on a number of countries as to how they think and plan for climate change, much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK. The 2003 heatwave will have similar repercussions across Europe.'`},
+  ]
+},
+{
+  title:'READING PASSAGE 3',
+  heading:'Improving Patient Safety',
+  subheading:'How improved drug packaging could provide some answers to patient safety issues',
+  timeHint:'You should spend about 20 minutes on Questions 27–40.',
+  qRange:[27,40],
+  paragraphs:[
+    {label:'Packaging',text:`One of the most prominent design issues in pharmacy is that of drug packages and the patient information leaflets (PILs) included in them. Many pharmacists are concerned that current designs are 'accidents waiting to happen'. The UK government shares this concern and, in 2003, the National Patient Safety Agency created a new role, appointing Colum Lowe, who has 14 years' experience as a designer in the private sector, as head of design and human factors.`},
+    {label:'',text:`Packaging design in the pharmaceutical industry is handled by either in-house teams or external design agencies. For packaging design of over-the-counter medicines, which do not have to be dispensed by a pharmacist but can be bought directly from a sales assistant, characteristics such as attractiveness and distinguishability are important and so these are usually commissioned from an external design team. The marketing team prepares the initial brief and the designers come up with six or seven designs. Two or three of these are then tested on a consumer group. In contrast, most designs for prescription-only products are created in-house. In some cases, this may simply involve the company's design team applying the house design and then handing it over to design engineers rather than testing the design on a consumer group. Clearly this process cannot adequately address the needs of the wide variety of patients using medication.`},
+    {label:'Design considerations',text:`In her book <em>Information Design for Patient Safety</em>, Thea Swayne highlighted a multitude of design problems. For example, drugs that look or sound alike can lead to confusion; small type sizes and even the glare on silver foil packaging can lead to names or instructions being misread. One such example is a drug that was accidentally injected into a patient through the spine (intrathecally) rather than through the veins (intravenously). Investigations following this tragedy attributed some blame to the poor choice of typescript used on the drug container. Furthermore, according to Swayne, real situations in which medicines are used include a parent giving a cough medicine to a child in the middle of the night; packaging should be designed for moments such as these rather than for the ideal world of a hospital.`},
+    {label:'Safety and compliance',text:`Child protection is another area that gives designers opportunities to improve safety. According to the Child Accident Prevention Trust, 70% of children admitted to hospital with suspected poisoning have swallowed medicines, and although child-resistant lids have helped, they are not yet fully effective. There is scope for improving what is currently available, according to Richard Mawle, a freelance product designer who feels it is not just children who are blocked by child-proof closures. 'Many child-resistant packs are based on strength but older people may have the same level of strength as a child,' he explained, and suggested that better designs could rely on cognitive skills (e.g. removing the lid using a three-step process).`},
+    {label:'',text:`Mawle also worked on a project which involved applying his skills to packaging and PILs. Commenting on the information presented, he said: 'There can be an awful lot of junk at the beginning of PILs. For example, why are company details towards the beginning of a leaflet when what might be more vital for the patient is that the medicine should not be taken with alcohol?'`},
+    {label:'Design principles and guidelines',text:`Most designers work according to basic principles; for example, certain print styles are known to be more difficult to read than others. Look-alike boxes present the potential for errors and an obvious solution would be to use colours to highlight a larger dosage of a drug. However, according to Thea Swayne, designating a colour to a particular dosage is not recommended because this could lead to the user not reading the text on a box.`},
+    {label:'',text:`Design features can provide the basis for lengthy debates. One argument is that if all packaging was white with black lettering, people would have no choice but to read every box carefully. The problem is that trials of drug packaging are few — common signage studies concern road traffic signs and visual display units. Although some designers take results from such studies into account, proving that a particular feature is beneficial can be difficult. For example, current UK legislation requires packaging to include the name of the medicine in Braille, but, according to Karel van der Waarde, a design consultant to the pharmaceutical industry, 'it is not known how much visually impaired patients will benefit nor how much the reading of visually able patients will be impaired'. Van der Waarde is sceptical about current legislation and says that many regulatory authorities do not have the resources to handle packaging information properly. 'They do not look at the use of packaging in a practical context — they only see one box at a time and not several together as pharmacists would do,' he said.`},
+    {label:'Innovation',text:`On a positive note, a recent innovation exhibition revealed several new designs. 'The popper' aims to help arthritis sufferers remove tablets from blister packs, and 'Pluspoint' is an adrenaline auto-injector (a device that allows diabetics to inject themselves) aimed at overcoming the fact that many patients do not carry their medication due to its prohibitive size. The aim of good design is to try to make things more user-friendly as well as safer. The guidelines in <em>Information Design for Patient Safety</em> are not intended to be legally binding. Rather, the book's purpose is to create a basic design standard and to stimulate innovation. The challenge for the pharmaceutical industry is to adopt such a standard.`},
+  ]
+}
+];
+
+// ─────────────────────────────────────────────
+// PEOPLE / WORD BANKS
+// ─────────────────────────────────────────────
+const PEOPLE_P1=[
+  {letter:'A',word:'Bill Phillips-Turner'},
+  {letter:'B',word:'Mike Berwick'},
+  {letter:'C',word:'Karen Benn'},
+  {letter:'D',word:'Brian Roberts'},
+  {letter:'E',word:'Tom Watters'},
+  {letter:'F',word:'Doug Crees'}
+];
+
+const WORDBANK_P3=[
+  {letter:'A',word:'consumers'},
+  {letter:'B',word:'design engineers'},
+  {letter:'C',word:'external design team'},
+  {letter:'D',word:'in-house design team'},
+  {letter:'E',word:'marketing team'},
+  {letter:'F',word:'pharmaceutical industry'},
+  {letter:'G',word:'pharmacists'}
+];
+
+const PEOPLE_P3=[
+  {letter:'A',word:'Thea Swayne'},
+  {letter:'B',word:'The Child Accident Prevention Trust'},
+  {letter:'C',word:'Richard Mawle'},
+  {letter:'D',word:'Karel van der Waarde'}
+];
+
+// ─────────────────────────────────────────────
+// QUESTIONS
+// ─────────────────────────────────────────────
+const QUESTIONS=[
+// ── PASSAGE 1 ────────────────────────────────
+// Q1–4: Match person A–F
+{id:1,passage:0,type:'fill',
+ instruction:'Questions 1–4: Match each statement with the correct person A–F.',
+ text:'Mossman cane farming practices are close to an environmentally friendly model.',
+ answers:['b','B'],answer:'B',
+ hint:'Mike Berwick (B) says there is "a formula for sustainable cane production and Mossman has nearly reached it."'},
+
+{id:2,passage:0,type:'fill',instruction:'',
+ text:'Financial return is not the only important factor for cane growers.',
+ answers:['f','F'],answer:'F',
+ hint:'Doug Crees (F): "Economically, it doesn\'t make much sense. But there\'s more to life than money."'},
+
+{id:3,passage:0,type:'fill',instruction:'',
+ text:'Cane sugar may not harm the environment as much as other crops do.',
+ answers:['c','C'],answer:'C',
+ hint:'Karen Benn (C): "I\'m less worried about the effect of cane on the environment than I am about other agriculture."'},
+
+{id:4,passage:0,type:'fill',instruction:'',
+ text:'The local population would decline if the sugar-processing plant closed.',
+ answers:['a','A'],answer:'A',
+ hint:'Bill Phillips-Turner (A): "most people now employed by the industry would have to leave the area to find work."'},
+
+// Q5–8: MCQ
+{id:5,passage:0,type:'mcq',
+ instruction:'Questions 5–8: Choose the correct letter A, B, C or D.',
+ text:'In the first paragraph, the writer says that the town is "holding its breath" because',
+ answer:'D',
+ options:[
+   'A. it has environmental problems.',
+   'B. its tourism business is threatened.',
+   'C. most of its people have left the town.',
+   'D. a key processing plant may shut down.'
+ ],
+ hint:'Paragraph 1: "a way of life will disappear if the mill closes" — the mill is the key processing plant.'},
+
+{id:6,passage:0,type:'mcq',instruction:'',
+ text:'According to the writer, cane growers who refuse the government offer are expected to',
+ answer:'A',
+ options:[
+   'A. expand their farms.',
+   'B. sell their land at a low price.',
+   'C. find jobs in other industries.',
+   'D. seek financial help from banks.'
+ ],
+ hint:'Paragraph 2: those remaining are able "to buy the vacated land and improve their economies of scale."'},
+
+{id:7,passage:0,type:'mcq',instruction:'',
+ text:'Which of the following did Bill Phillips-Turner find most difficult to do?',
+ answer:'D',
+ options:[
+   'A. sell mill property',
+   'B. reduce spending on upkeep',
+   'C. lower mill workers\' wages',
+   'D. cut the number of mill staff'
+ ],
+ hint:'Paragraph 3: "the hardest was slashing the mill workforce."'},
+
+{id:8,passage:0,type:'mcq',instruction:'',
+ text:'Cane grower Doug Crees says that he',
+ answer:'B',
+ options:[
+   'A. would prefer to grow cocoa.',
+   'B. wants to remain on his farm.',
+   'C. wants his family to live together.',
+   'D. will look for part-time work in town.'
+ ],
+ hint:'Paragraph 5: Doug says "I still don\'t want to do that" — meaning leave the farm.'},
+
+// Q9–13: TRUE/FALSE/NOT GIVEN
+{id:9,passage:0,type:'tfng',
+ instruction:'Questions 9–13: TRUE / FALSE / NOT GIVEN',
+ text:'In 2004, the cost of producing sugar in Australia was similar to the selling price.',
+ answer:'TRUE',
+ hint:'Paragraph 2: The price fell to about $232 a tonne — "about what it cost to grow a tonne of sugar in Australia."'},
+
+{id:10,passage:0,type:'tfng',instruction:'',
+ text:'Farmers who accepted the Government offer have mostly moved to the city.',
+ answer:'NOT GIVEN',
+ hint:'The passage says 21 farmers took the offer to leave but does not say where they went.'},
+
+{id:11,passage:0,type:'tfng',instruction:'',
+ text:'Fuel production is regarded as the most desirable alternative business for the sugar mill.',
+ answer:'FALSE',
+ hint:'Paragraph 3: Ethanol production "has potential" but "the most radical but preferred alternative is to create a future for the mill as a food factory."'},
+
+{id:12,passage:0,type:'tfng',instruction:'',
+ text:'Tom Watters reduced his use of pesticides.',
+ answer:'NOT GIVEN',
+ hint:'Tom Watters planted trees and built rock barriers, but there is no mention of pesticides in the passage.'},
+
+{id:13,passage:0,type:'tfng',instruction:'',
+ text:'Environmentally friendly farming practices have been profitable for Tom Watters.',
+ answer:'FALSE',
+ hint:'Paragraph 5: "none of these costly initiatives has helped him get better cane prices."'},
+
+// ── PASSAGE 2 ────────────────────────────────
+// Q14–19: TRUE/FALSE/NOT GIVEN
+{id:14,passage:1,type:'tfng',
+ instruction:'Questions 14–19: TRUE / FALSE / NOT GIVEN',
+ text:'In 2003, the average temperature for June to August in parts of Europe was almost 4 °C higher than usual.',
+ answer:'TRUE',
+ hint:'Passage: "the average temperature for the summer months was 3.78 °C higher than the long-term norm" — almost 4 °C.'},
+
+{id:15,passage:1,type:'tfng',instruction:'',
+ text:'According to Phil Jones, the impact people have on the planet was one reason for 2003\'s record summer.',
+ answer:'TRUE',
+ hint:'Passage: Professor Jones says the extreme temperatures "may be directly attributed to global warming caused by human actions."'},
+
+{id:16,passage:1,type:'tfng',instruction:'',
+ text:'Temperatures are recorded twice daily in major cities.',
+ answer:'NOT GIVEN',
+ hint:'The passage discusses temperature records but says nothing about how frequently or where in cities temperatures are taken.'},
+
+{id:17,passage:1,type:'tfng',instruction:'',
+ text:'Professor Phil Jones believes that the exceptional summer temperatures are within normal variation.',
+ answer:'FALSE',
+ hint:'Passage: Jones says "It\'s very unusual in a statistical sense" with a return period of "one in 1,000 years."'},
+
+{id:18,passage:1,type:'tfng',instruction:'',
+ text:'Before 2003, global warming generally caused milder winter months, not warmer summers.',
+ answer:'TRUE',
+ hint:'Passage: "the warming had been manifesting itself mainly in winters that were less cold rather than in summers that were much hotter."'},
+
+{id:19,passage:1,type:'tfng',instruction:'',
+ text:'New ski resorts are being built at higher altitudes in some countries.',
+ answer:'NOT GIVEN',
+ hint:'The passage mentions lower-level ski resorts dying out but says nothing about new resorts being built at higher altitudes.'},
+
+// Q20–21: Short answer (fill)
+{id:20,passage:1,type:'fill',
+ instruction:'Questions 20–21: Answer the questions. Choose NO MORE THAN THREE WORDS AND/OR A NUMBER from the passage.',
+ text:'In Britain, which TWO years had hotter summers than the one under discussion?',
+ answers:['1976 and 1995','1976 & 1995'],answer:'1976 and 1995',
+ hint:'Passage: "the summer itself...comes behind 1976 and 1995, when there were longer periods of intense heat."'},
+
+{id:21,passage:1,type:'fill',instruction:'',
+ text:'Apart from the extreme summer of 2003, what other natural event has affected the way Britain is planning for the future?',
+ answers:['2000 floods','the 2000 floods'],answer:'2000 floods',
+ hint:'Passage: "much as the 2000 floods revolutionised the way the Government is thinking about flooding in the UK."'},
+
+// Q22–25: Summary fill
+{id:22,passage:1,type:'fill',
+ instruction:'Questions 22–25: Complete the summary. Choose ONE WORD AND/OR A NUMBER from the passage.',
+ text:'The three warmest years since global temperature records began in _______ have been 1998, 2002 and 2003.',
+ answers:['1856'],answer:'1856',
+ hint:'Passage: "the third-hottest in the global temperature record (which goes back to 1856)."'},
+
+{id:23,passage:1,type:'fill',instruction:'',
+ text:'It is significant that the warmest ten years have all been after _______.',
+ answers:['1990'],answer:'1990',
+ hint:'Passage: "The ten hottest years in the record have occurred since 1990."'},
+
+{id:24,passage:1,type:'fill',instruction:'',
+ text:'Recorded temperatures in Europe in summer 2003 were the highest for at least _______ years.',
+ answers:['500'],answer:'500',
+ hint:'Passage: "It was the warmest summer in the last 500 years."'},
+
+{id:25,passage:1,type:'fill',instruction:'',
+ text:'Thousands of people died in _______.',
+ answers:['france','France'],answer:'France',
+ hint:'Passage: "the 15,000 extra deaths in France during August, compared with previous years."'},
+
+// Q26: MCQ — best title
+{id:26,passage:1,type:'mcq',
+ instruction:'Question 26: Choose the correct letter A, B, C or D.',
+ text:'Which of the following is the most suitable title for Reading Passage 2?',
+ answer:'D',
+ options:[
+   'A. The Causes of Global Warming',
+   'B. The Effects of Extreme Heat',
+   'C. The History of Temperature Recording',
+   'D. The Year of European Heat'
+ ],
+ hint:'The passage focuses specifically on the 2003 European heatwave — its record temperatures, causes, and effects.'},
+
+// ── PASSAGE 3 ────────────────────────────────
+// Q27–32: Match people A–D (NB: may use more than once)
+{id:27,passage:2,type:'fill',
+ instruction:'Questions 27–32: Match each statement with the correct person or group A–D. You may use any letter more than once.',
+ text:'The elderly would benefit from drug containers that do not require force to open them.',
+ answers:['c','C'],answer:'C',
+ hint:'Richard Mawle (C): "Many child-resistant packs are based on strength but older people may have the same level of strength as a child."'},
+
+{id:28,passage:2,type:'fill',instruction:'',
+ text:'Adapting packaging for the blind may disadvantage people who can see.',
+ answers:['d','D'],answer:'D',
+ hint:'Karel van der Waarde (D): "it is not known how much visually impaired patients will benefit nor how much the reading of visually able patients will be impaired."'},
+
+{id:29,passage:2,type:'fill',instruction:'',
+ text:'Specially designed containers have not been able to eliminate drugs being swallowed accidentally.',
+ answers:['b','B'],answer:'B',
+ hint:'Child Accident Prevention Trust (B): 70% of children admitted with suspected poisoning have swallowed medicines "although child-resistant lids have helped, they are not yet fully effective."'},
+
+{id:30,passage:2,type:'fill',instruction:'',
+ text:'Designers have to consider how drugs are used in the home.',
+ answers:['a','A'],answer:'A',
+ hint:'Thea Swayne (A): "real situations in which medicines are used include a parent giving a cough medicine to a child in the middle of the night; packaging should be designed for moments such as these."'},
+
+{id:31,passage:2,type:'fill',instruction:'',
+ text:'Governing bodies need to compare different drug containers rather than studying individual ones.',
+ answers:['d','D'],answer:'D',
+ hint:'Karel van der Waarde (D): "They do not look at the use of packaging in a practical context — they only see one box at a time and not several together as pharmacists would do."'},
+
+{id:32,passage:2,type:'fill',instruction:'',
+ text:'Information provided with medicine is not listed in the right order.',
+ answers:['c','C'],answer:'C',
+ hint:'Richard Mawle (C): "why are company details towards the beginning of a leaflet when what might be more vital for the patient is that the medicine should not be taken with alcohol?"'},
+
+// Q33–37: Word bank summary (A–G)
+{id:33,passage:2,type:'fill',
+ instruction:'Questions 33–37: Complete the summary using words A–G from the box.',
+ text:'Over-the-counter packaging: a proposal is written by the _______ .',
+ answers:['e','E'],answer:'E',
+ hint:'Passage: "The marketing team prepares the initial brief."'},
+
+{id:34,passage:2,type:'fill',instruction:'',
+ text:'Then several designs are produced by the _______ .',
+ answers:['c','C'],answer:'C',
+ hint:'Passage: "these are usually commissioned from an external design team."'},
+
+{id:35,passage:2,type:'fill',instruction:'',
+ text:'Finally, selected designs are shown to _______ .',
+ answers:['a','A'],answer:'A',
+ hint:'Passage: "Two or three of these are then tested on a consumer group."'},
+
+{id:36,passage:2,type:'fill',instruction:'',
+ text:'Prescription-only drugs: the _______ create the design.',
+ answers:['d','D'],answer:'D',
+ hint:'Passage: "most designs for prescription-only products are created in-house" by the in-house design team.'},
+
+{id:37,passage:2,type:'fill',instruction:'',
+ text:'The design is then passed to _______ .',
+ answers:['b','B'],answer:'B',
+ hint:'Passage: "handing it over to design engineers."'},
+
+// Q38–40: MCQ
+{id:38,passage:2,type:'mcq',
+ instruction:'Questions 38–40: Choose the correct letter A, B, C or D.',
+ text:'In the accident mentioned in the passage, what was the "design consideration" that caused a drug to be given incorrectly?',
+ answer:'B',
+ options:[
+   'A. a printing error',
+   'B. the style of print',
+   'C. an incorrect label',
+   'D. the shape of the bottle'
+ ],
+ hint:'Passage: "Investigations...attributed some blame to the poor choice of typescript used on the drug container."'},
+
+{id:39,passage:2,type:'mcq',instruction:'',
+ text:'What do some people say about the use of only black and white as a design feature?',
+ answer:'C',
+ options:[
+   'A. Consumers would dislike this option.',
+   'B. Drug containers would all look too similar.',
+   'C. People would pay more attention to label information.',
+   'D. Partially sighted people would find these colours more helpful.'
+ ],
+ hint:'Passage: "if all packaging was white with black lettering, people would have no choice but to read every box carefully."'},
+
+{id:40,passage:2,type:'mcq',instruction:'',
+ text:'Why does the writer refer to "the popper" and "Pluspoint"?',
+ answer:'A',
+ options:[
+   'A. to show that progress is being made in pharmaceutical packaging design',
+   'B. to give an example of pharmaceutical design problems that can cause accidents',
+   'C. to prove that a lot of work still needs to be done to improve pharmaceutical packaging design',
+   'D. to point out that patients need to be more informed about pharmaceutical products'
+ ],
+ hint:'Passage: "On a positive note, a recent innovation exhibition revealed several new designs." These products illustrate forward progress.'},
+];
+
+const BAND_TABLE=[
+  {min:39,max:40,band:9,desc:'Expert User'},{min:37,max:38,band:8.5,desc:'Very Good User'},
+  {min:35,max:36,band:8,desc:'Very Good User'},{min:33,max:34,band:7.5,desc:'Good User'},
+  {min:30,max:32,band:7,desc:'Good User'},{min:27,max:29,band:6.5,desc:'Competent User'},
+  {min:23,max:26,band:6,desc:'Competent User'},{min:19,max:22,band:5.5,desc:'Modest User'},
+  {min:15,max:18,band:5,desc:'Modest User'},{min:13,max:14,band:4.5,desc:'Limited User'},
+  {min:10,max:12,band:4,desc:'Limited User'},{min:8,max:9,band:3.5,desc:'Extremely Limited'},
+  {min:6,max:7,band:3,desc:'Extremely Limited'},{min:4,max:5,band:2.5,desc:'Intermittent User'}
+];
+
+// ─────────────────────────────────────────────
+// ICON HELPER
+// ─────────────────────────────────────────────
+function SVG(path,o){o=o||{};const s=o.s||16;return `<svg class="ic" viewBox="0 0 24 24" width="${s}" height="${s}" fill="${o.f||'none'}" stroke="${o.st||'currentColor'}" stroke-width="${o.w||2}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;}
+const ICONS={
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  pin:'<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+
+// ─────────────────────────────────────────────
+// ANSWER GRADING
+// ─────────────────────────────────────────────
+function normalise(str){
+  return str.toLowerCase().trim()
+    .replace(/[-—–]/g,' ').replace(/\s+/g,' ').replace(/\.$/,'');
+}
+const NUM_MAP={'one':'1','two':'2','three':'3','four':'4','five':'5',
+  'six':'6','seven':'7','eight':'8','nine':'9','ten':'10',
+  '1':'one','2':'two','3':'three','4':'four','5':'five',
+  '6':'six','7':'seven','8':'eight','9':'nine','10':'ten'};
+function expandNums(str){
+  return str.replace(/\b(\w+)\b/g,w=>NUM_MAP[w.toLowerCase()]||w);
+}
+function isCorrect(q,userAnswer){
+  if(!userAnswer||!userAnswer.trim())return false;
+  const ua=normalise(userAnswer);
+  const accepted=[];
+  if(q.answers)q.answers.forEach(a=>accepted.push(normalise(a)));
+  else{
+    accepted.push(normalise(q.answer));
+    if(q.altAnswer)accepted.push(normalise(q.altAnswer));
+  }
+  for(const a of accepted){
+    if(ua===a)return true;
+    if(expandNums(ua)===a||ua===expandNums(a))return true;
+  }
+  return false;
+}
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let currentPassage=0,answers={},flags={},timerSec=3600,
+    timerInt=null,testDone=false,reviewModeOn=false;
+const TEST_ID='reading-test-1';
+const testStartTime=Date.now();
+
+// ─────────────────────────────────────────────
+// HOME NAVIGATION (BandPath adapter)
+// ─────────────────────────────────────────────
+function goHome(){
+  if(window.top!==window.self){
+    window.top.location.href='/tests';
+  }else{
+    window.location.href='/tests';
+  }
+}
+
+// ─────────────────────────────────────────────
+// BEGIN TEST
+// ─────────────────────────────────────────────
+function beginTest(){
+  document.getElementById('start-screen').style.display='none';
+  loadSaved();
+  renderPassage(0);renderQuestions(0);buildPalette();startTimer();initScrollProgress();
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+window.onload=()=>{
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    try { tg.ready(); } catch(e) {}
+    try { tg.expand(); } catch(e) {}
+    try { if (tg.enableClosingConfirmation) tg.enableClosingConfirmation(); } catch(e) {}
+    try { if (tg.disableVerticalSwipes)     tg.disableVerticalSwipes(); } catch(e) {}
+    try { if (tg.requestFullscreen)         tg.requestFullscreen(); } catch(e) {}
+  }
+  const th=localStorage.getItem('ielts_theme');
+  if(th==='light'){document.body.className='';}else{document.body.className='dark';}
+  document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>{
+    const isDark=/dark/.test(b.getAttribute('onclick'));
+    b.classList.toggle('active',isDark?document.body.classList.contains('dark'):!document.body.classList.contains('dark'));
+  });
+  const sp=document.getElementById('splitter');
+  const pp=document.getElementById('passage-panel');
+  const qp=document.getElementById('questions-panel');
+  let drag=false;
+  sp.addEventListener('mousedown',e=>{drag=true;sp.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();});
+  document.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    const m=document.getElementById('main'),r=m.getBoundingClientRect();
+    const lw=Math.min(Math.max(e.clientX-r.left,220),r.width-234);
+    pp.style.flex='none';pp.style.width=lw+'px';
+    qp.style.flex='none';qp.style.width=(r.width-7-lw)+'px';
+    updateRulerWidth();
+  });
+  document.addEventListener('mouseup',()=>{if(!drag)return;drag=false;sp.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
+  pp.addEventListener('mousemove',e=>{
+    const r=document.getElementById('ruler');
+    if(r.style.display==='block'){r.style.top=(e.clientY-14)+'px';updateRulerWidth();}
+  });
+  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();}});
+  document.addEventListener('contextmenu',onContextMenu);
+  document.addEventListener('click',e=>{
+    hideCtx();
+    if(!document.getElementById('settings-panel').contains(e.target)&&!e.target.closest('.hbtn[onclick*="toggleSettings"]'))
+      document.getElementById('settings-panel').style.display='none';
+  });
+};
+
+function loadSaved(){
+  try{const s=localStorage.getItem('ielts_ac_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_ac_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_ac_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_ac_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+}
+function saveAll(){
+  try{
+    localStorage.setItem('ielts_ac_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_ac_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_ac_timer',timerSec);
+  }catch(e){}
+}
+
+// ─────────────────────────────────────────────
+// RENDER PASSAGE
+// ─────────────────────────────────────────────
+function renderPassage(idx){
+  const p=PASSAGES[idx];
+  let h=`<div class="passage-meta">${p.title}</div>`;
+  if(p.timeHint)h+=`<div class="passage-time-hint">${SVG(ICONS.clock,{s:13})} ${p.timeHint}</div>`;
+  h+=`<div class="passage-heading">${p.heading}</div>`;
+  if(p.subheading)h+=`<div class="passage-subheading">${p.subheading}</div>`;
+  h+=`<hr class="passage-divider"><div class="passage-text">`;
+  p.paragraphs.forEach(para=>{
+    h+=`<p>${para.label?`<span class="para-label">${para.label}</span>`:''}${para.text}</p>`;
+  });
+  h+=`</div>`;
+  if(p.footnote)h+=`<div class="footnote">${p.footnote}</div>`;
+  document.getElementById('passage-content').innerHTML=h;
+}
+
+// ─────────────────────────────────────────────
+// SHARED BANK RENDERERS
+// ─────────────────────────────────────────────
+function renderPersonBank(people,title){
+  let h=`<div class="person-bank"><div class="person-bank-title">${title}</div><div class="person-bank-grid">`;
+  people.forEach(p=>{h+=`<div class="pb-item"><span class="pb-letter">${p.letter}</span><span>${p.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderWordBank(items,title){
+  let h=`<div class="word-bank"><div class="word-bank-title">${title}</div><div class="word-bank-grid">`;
+  items.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+
+// ─────────────────────────────────────────────
+// RENDER QUESTION BLOCK
+// ─────────────────────────────────────────────
+function renderQ(q){
+  const val=answers[q.id]||'';
+  const fl=!!flags[q.id];
+  let inner='';
+  if(q.type==='fill'){
+    inner=`<div class="q-text">${q.text}</div><input class="q-input" id="q${q.id}" type="text" value="${val.replace(/"/g,'&quot;')}" placeholder="Type your answer…" oninput="setAnswer(${q.id},this.value)">`;
+  }else if(q.type==='yesno'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['YES','NO','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='tfng'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['TRUE','FALSE','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='mcq'){
+    const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
+    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
+  }
+  return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
+    <div class="q-num">Question ${q.id}</div>${inner}
+    <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────────
+// ANSWER HANDLERS
+// ─────────────────────────────────────────────
+function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
+function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
+function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
+function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
+function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
+
+// ─────────────────────────────────────────────
+// PALETTE
+// ─────────────────────────────────────────────
+function buildPalette(){
+  document.getElementById('palette-nums').innerHTML=
+    Array.from({length:40},(_,i)=>`<button class="pal-num" id="pal${i+1}" onclick="jumpToQ(${i+1})">${i+1}</button>`).join('');
+  updatePalette();
+}
+function updatePalette(){
+  for(let i=1;i<=40;i++){
+    const e=document.getElementById('pal'+i);if(!e)continue;
+    e.classList.remove('done','flagged');
+    if(flags[i])e.classList.add('flagged');
+    else if(answers[i]&&answers[i].trim())e.classList.add('done');
+  }
+}
+function jumpToQ(id){
+  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
+  if(q.passage!==currentPassage)switchPassage(q.passage);
+  setTimeout(()=>{
+    const el=document.getElementById('qblock'+id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
+    document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
+    const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
+  },100);
+}
+
+// ─────────────────────────────────────────────
+// PASSAGE SWITCH
+// ─────────────────────────────────────────────
+function switchPassage(idx){
+  currentPassage=idx;
+  renderPassage(idx);renderQuestions(idx);
+  if(reviewModeOn)applyReviewMarkup();
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('passage-panel').scrollTop=0;
+  document.getElementById('questions-panel').scrollTop=0;
+  document.getElementById('scroll-bar').style.width='0%';
+  updatePalette();
+}
+
+function initScrollProgress(){
+  const pp=document.getElementById('passage-panel');
+  pp.addEventListener('scroll',()=>{
+    const s=pp.scrollHeight-pp.clientHeight;
+    document.getElementById('scroll-bar').style.width=(s>0?(pp.scrollTop/s*100):100)+'%';
+  });
+}
+
+function flashUnanswered(){
+  QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
+    const el=document.getElementById('pal'+q.id);
+    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+  });
+}
+
+function backToResults(){
+  document.getElementById('back-to-results').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ─────────────────────────────────────────────
+// TIMER
+// ─────────────────────────────────────────────
+function startTimer(){
+  updateTimerDisplay();
+  timerInt=setInterval(()=>{timerSec--;saveAll();updateTimerDisplay();if(timerSec<=0){clearInterval(timerInt);submitTest();}},1000);
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  const b=document.getElementById('timer-box'),t=document.getElementById('timer-txt');
+  if(t)t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  b.classList.remove('warn','critical');
+  if(timerSec<=300)b.classList.add('critical');
+  else if(timerSec<=600)b.classList.add('warn');
+}
+
+// ─────────────────────────────────────────────
+// SETTINGS
+// ─────────────────────────────────────────────
+function toggleSettings(){const p=document.getElementById('settings-panel');p.style.display=p.style.display==='block'?'none':'block';}
+function setTheme(theme,btn){document.body.className=theme==='dark'?'dark':'';document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');localStorage.setItem('ielts_theme',theme);}
+function setFont(size,btn){document.body.style.fontSize=size+'px';document.querySelectorAll('.sbtn-fs').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;document.getElementById('ruler').style.display=on?'block':'none';if(on)updateRulerWidth();}
+function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
+function saveNotes(){try{localStorage.setItem('ielts_ac_notes',document.getElementById('notes-ta').value);}catch(e){}}
+
+// ─────────────────────────────────────────────
+// HIGHLIGHTING
+// ─────────────────────────────────────────────
+let savedRange=null,activeHlColor='yellow';
+function inPassage(el){return document.getElementById('passage-panel').contains(el);}
+function getSelRange(){const sel=window.getSelection();if(sel&&sel.toString().trim().length>0)return sel.getRangeAt(0).cloneRange();return null;}
+function onContextMenu(e){
+  const sel=window.getSelection();
+  if(sel&&sel.toString().trim().length>0&&inPassage(e.target)){e.preventDefault();savedRange=sel.getRangeAt(0).cloneRange();showCtx(e.clientX,e.clientY);}
+  else hideCtx();
+}
+document.addEventListener('mouseup',e=>{
+  if(!e.shiftKey)return;
+  const r=getSelRange();if(!r)return;
+  const anchor=window.getSelection().anchorNode;
+  if(!anchor||!inPassage(anchor))return;
+  savedRange=r;applyHighlight(activeHlColor);
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();return;}
+  if(!e.shiftKey||e.ctrlKey||e.altKey||e.metaKey)return;
+  const r=getSelRange();
+  if(e.key==='Y'||e.key==='y'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='yellow';applyHighlight('yellow');}}
+  if(e.key==='G'||e.key==='g'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='green';applyHighlight('green');}}
+  if(e.key==='R'||e.key==='r'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;removeHighlight();}}
+  if(['ArrowLeft','ArrowRight'].includes(e.key)){const f=document.activeElement;if(f&&f.classList.contains('tfng-btn')){const s=[...f.closest('.tfng-btns').querySelectorAll('.tfng-btn')];const i=s.indexOf(f);const n=e.key==='ArrowRight'?s[i+1]:s[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+  if(['ArrowUp','ArrowDown'].includes(e.key)){const f=document.activeElement;if(f&&f.type==='radio'){const rs=[...document.querySelectorAll(`[name="${f.name}"]`)];const i=rs.indexOf(f);const n=e.key==='ArrowDown'?rs[i+1]:rs[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+});
+function showCtx(x,y){const m=document.getElementById('ctx-menu');m.style.display='block';m.style.left=Math.min(x,window.innerWidth-200)+'px';m.style.top=Math.min(y,window.innerHeight-130)+'px';}
+function hideCtx(){document.getElementById('ctx-menu').style.display='none';}
+function applyHighlight(color){
+  hideCtx();if(!savedRange)return;activeHlColor=color;
+  const span=document.createElement('span');span.className='hl-'+color;span.setAttribute('data-hl',color);
+  try{savedRange.surroundContents(span);}catch(e){const frag=savedRange.extractContents();span.appendChild(frag);savedRange.insertNode(span);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+function removeHighlight(){
+  hideCtx();if(!savedRange)return;
+  const c=savedRange.commonAncestorContainer,s=c.nodeType===3?c.parentElement:c;
+  if(s&&s.dataset&&s.dataset.hl){const p=s.parentNode;while(s.firstChild)p.insertBefore(s.firstChild,s);p.removeChild(s);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+
+// ─────────────────────────────────────────────
+// SUBMIT & RESULTS
+// ─────────────────────────────────────────────
+function submitTest(){
+  if(testDone)return;
+  const un=QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).length;
+  if(un>0){flashUnanswered();if(!confirm(`${un} question(s) unanswered. Submit anyway?`))return;}
+  clearInterval(timerInt);testDone=true;showResults();
+}
+
+function showResults(){
+  let correct=0,wrong=0,skip=0;
+  const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
+  QUESTIONS.forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(!ua){skip++;bp[q.passage].skip++;}
+    else if(ok){correct++;bp[q.passage].correct++;}
+    else{wrong++;bp[q.passage].wrong++;}
+  });
+  let band=2.5,desc='Intermittent User';
+  for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
+  document.getElementById('res-band').textContent=band;
+  document.getElementById('res-band-desc').textContent=`${desc} — ${correct} correct out of 40`;
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=wrong;
+  document.getElementById('res-skip').textContent=skip;
+  document.getElementById('res-pct').textContent=Math.round(correct/40*100)+'%';
+  document.getElementById('p-breakdown').innerHTML=PASSAGES.map((p,i)=>`
+    <div class="p-card"><h4>${p.title}: ${p.heading}</h4>
+    <div class="p-card-stats">
+      <span style="color:var(--correct);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:13})} ${bp[i].correct}</span>
+      <span style="color:var(--wrong);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.x,{s:13})} ${bp[i].wrong}</span>
+      <span style="color:var(--text3)">— ${bp[i].skip} skipped</span>
+    </div></div>`).join('');
+  document.getElementById('review-grid').innerHTML=QUESTIONS.map(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    const cls=!ua?'unanswered':ok?'correct':'wrong';
+    return`<div class="review-card ${cls}">
+      <div class="rev-q">Q${q.id}</div>
+      <div class="rev-yours">${ua?`Your: ${ua}`:'Not answered'}</div>
+      ${!ua?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`:ok?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} Correct</div>`:`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('results-screen').style.display='block';
+
+  try{
+    window.parent.postMessage({
+      type:'bandpath:test-complete',
+      testId:TEST_ID,
+      testType:'reading',
+      scoreRaw:correct,
+      totalQuestions:40,
+      scoreBand:band,
+      timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
+      answers:answers
+    }, window.location.origin);
+  }catch(e){}
+}
+
+// ─────────────────────────────────────────────
+// REVIEW MODE
+// ─────────────────────────────────────────────
+function reviewMode(){
+  reviewModeOn=true;
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('back-to-results').style.display='block';
+  switchPassage(0);
+}
+
+function applyReviewMarkup(){
+  QUESTIONS.filter(q=>q.passage===currentPassage).forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(q.type==='fill'){
+      const el=document.getElementById('q'+q.id);
+      if(el){
+        el.classList.add(ok?'correct-ans':'wrong-ans');el.disabled=true;
+        el.parentNode.querySelectorAll('.answer-reveal,.answer-hint').forEach(o=>o.remove());
+        if(!ok){const r=document.createElement('div');r.className='answer-reveal';r.innerHTML=SVG(ICONS.check,{s:12})+' ';r.appendChild(document.createTextNode('Correct: '+q.answer));el.parentNode.insertBefore(r,el.nextSibling);}
+        if(q.hint){const h=document.createElement('div');h.className='answer-hint';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const ref=el.parentNode.querySelector('.answer-reveal');el.parentNode.insertBefore(h,(ref?ref:el).nextSibling);}
+      }
+    }else if(q.type==='tfng'||q.type==='yesno'){
+      document.querySelectorAll(`#qblock${q.id} .tfng-btn`).forEach(b=>{
+        if(b.textContent===q.answer)b.classList.add('correct-ans');
+        else if(b.classList.contains('selected'))b.classList.add('wrong-ans');
+      });
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));block.querySelector('.tfng-btns').after(h);}}
+    }else if(q.type==='mcq'){
+      document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// RESTART
+// ─────────────────────────────────────────────
+function restartTest(){
+  if(!confirm('Restart? All answers and the timer will be reset.'))return;
+  ['ielts_ac_answers','ielts_ac_flags','ielts_ac_timer','ielts_ac_notes'].forEach(k=>localStorage.removeItem(k));
+  answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
+  clearInterval(timerInt);timerInt=null;
+  const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
+  document.getElementById('notes-ta').value='';
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('settings-panel').style.display='none';
+  document.getElementById('back-to-results').style.display='none';
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.getElementById('start-screen').style.display='flex';
+}
+
+// ─────────────────────────────────────────────
+// RENDER QUESTIONS (per-test bank injection)
+// ─────────────────────────────────────────────
+function renderQuestions(pIdx){
+  const p=PASSAGES[pIdx];
+  const qs=QUESTIONS.filter(q=>q.passage===pIdx);
+  let h=`<div class="q-range-label">Questions ${p.qRange[0]}–${p.qRange[1]}</div>`;
+
+  // Passage 1: person bank goes before Q1 instruction
+  if(pIdx===0) h+=renderPersonBank(PEOPLE_P1,'List of People — Match A–F');
+
+  let lastInstr='';
+  qs.forEach(q=>{
+    if(q.instruction&&q.instruction!==lastInstr){
+      h+=`<div class="q-section-title">${q.instruction}</div>`;
+      lastInstr=q.instruction;
+      // Passage 3: inject person bank right after Q27 instruction
+      if(pIdx===2 && q.id===27){
+        h+=renderPersonBank(PEOPLE_P3,'List of People or Groups — A–D (you may use any letter more than once)');
+      }
+      // Passage 3: inject word bank right after Q33 instruction
+      if(pIdx===2 && q.id===33){
+        h+=renderWordBankP3();
+      }
+    }
+    h+=renderQ(q);
+  });
+  document.getElementById('questions-content').innerHTML=h;
+}
+
+// ─────────────────────────────────────────────
+// EXTRA BANK HELPERS (per-test)
+// ─────────────────────────────────────────────
+function renderWordBankP3(){
+  let h=`<div class="word-bank"><div class="word-bank-title">Word Bank — Q33–37: Choose A–G</div><div class="word-bank-grid">`;
+  WORDBANK_P3.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+</script>
+</body>
+</html>

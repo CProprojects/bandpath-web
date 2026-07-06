@@ -1,4 +1,7 @@
-import { AppShell } from "@/components/AppShell";
+import { redirect } from "next/navigation";
+import { TestRunner } from "@/components/TestRunner";
+import { createClient } from "@/lib/supabase/server";
+import { getTestById } from "@/lib/tests";
 
 export default async function TestRunnerPage({
   params,
@@ -6,13 +9,32 @@ export default async function TestRunnerPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return (
-    <AppShell active="/tests">
-      <h1 className="text-2xl font-bold text-white md:text-3xl">Test: {id}</h1>
-      <p className="mt-2 text-white/50">
-        Placeholder — this will host the test file in an iframe with postMessage
-        result reporting (Step 5).
-      </p>
-    </AppShell>
-  );
+  const test = getTestById(id);
+
+  if (!test) {
+    redirect("/tests");
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  if (test.requiresPro) {
+    const { data: profile } = await supabase
+      .from("users")
+      .select("plan")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.plan !== "pro") {
+      redirect("/upgrade");
+    }
+  }
+
+  return <TestRunner testId={test.id} testFile={test.file} />;
 }

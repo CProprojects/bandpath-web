@@ -916,16 +916,16 @@ window.onload=()=>{
 };
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_ac_answers');if(s)answers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_ac_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_ac_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_ac_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+  try{const s=localStorage.getItem('ielts_'+TEST_ID+'_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_'+TEST_ID+'_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_'+TEST_ID+'_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_'+TEST_ID+'_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_ac_answers',JSON.stringify(answers));
-    localStorage.setItem('ielts_ac_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_ac_timer',timerSec);
+    localStorage.setItem('ielts_'+TEST_ID+'_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_'+TEST_ID+'_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_'+TEST_ID+'_timer',timerSec);
   }catch(e){}
 }
 
@@ -1080,7 +1080,7 @@ function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;
 function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_ac_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_'+TEST_ID+'_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ─────────────────────────────────────────────
 // HIGHLIGHTING
@@ -1226,7 +1226,7 @@ function applyReviewMarkup(){
 // ─────────────────────────────────────────────
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_ac_answers','ielts_ac_flags','ielts_ac_timer','ielts_ac_notes'].forEach(k=>localStorage.removeItem(k));
+  ['ielts_'+TEST_ID+'_answers','ielts_'+TEST_ID+'_flags','ielts_'+TEST_ID+'_timer','ielts_'+TEST_ID+'_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
   const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');

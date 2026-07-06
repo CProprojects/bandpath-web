@@ -550,11 +550,12 @@ const BAND_TABLE=[
 let currentSection=0, userAnswers={}, flags={}, timerSec=1800,
     timerInt=null, testDone=false, reviewModeOn=false;
 let audioElements=[null,null,null,null];
+const AUDIO_BASE='https://sgglqnsujxgdbwmxzgdh.supabase.co/storage/v1/object/public/audio/';
 let audioURLs=[
-  'listening_test1_s1.mp3',
-  'listening_test1_s2.mp3',
-  'listening_test1_s3.mp3',
-  'listening_test1_s4.mp3'
+  AUDIO_BASE+'listening_test1_s1.mp3',
+  AUDIO_BASE+'listening_test1_s2.mp3',
+  AUDIO_BASE+'listening_test1_s3.mp3',
+  AUDIO_BASE+'listening_test1_s4.mp3'
 ];
 let sectionPlayed=[false,false,false,false];
 let sectionDone=[false,false,false,false];
@@ -609,20 +610,20 @@ function beginTest(){
 }
 
 function loadSaved(){
-  try{const s=localStorage.getItem('ielts_ls1_answers');if(s)userAnswers=JSON.parse(s);}catch(e){}
-  try{const f=localStorage.getItem('ielts_ls1_flags');if(f)flags=JSON.parse(f);}catch(e){}
-  try{const n=localStorage.getItem('ielts_ls1_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
-  try{const t=localStorage.getItem('ielts_ls1_timer');if(t){const v=parseInt(t);if(v>0&&v<=1800)timerSec=v;}}catch(e){}
-  try{const sp=localStorage.getItem('ielts_ls1_played');if(sp)sectionPlayed=JSON.parse(sp);}catch(e){}
-  try{const sd=localStorage.getItem('ielts_ls1_done');if(sd)sectionDone=JSON.parse(sd);}catch(e){}
+  try{const s=localStorage.getItem('ielts_'+TEST_ID+'_answers');if(s)userAnswers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_'+TEST_ID+'_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_'+TEST_ID+'_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_'+TEST_ID+'_timer');if(t){const v=parseInt(t);if(v>0&&v<=1800)timerSec=v;}}catch(e){}
+  try{const sp=localStorage.getItem('ielts_'+TEST_ID+'_played');if(sp)sectionPlayed=JSON.parse(sp);}catch(e){}
+  try{const sd=localStorage.getItem('ielts_'+TEST_ID+'_done');if(sd)sectionDone=JSON.parse(sd);}catch(e){}
 }
 function saveAll(){
   try{
-    localStorage.setItem('ielts_ls1_answers',JSON.stringify(userAnswers));
-    localStorage.setItem('ielts_ls1_flags',JSON.stringify(flags));
-    localStorage.setItem('ielts_ls1_timer',timerSec);
-    localStorage.setItem('ielts_ls1_played',JSON.stringify(sectionPlayed));
-    localStorage.setItem('ielts_ls1_done',JSON.stringify(sectionDone));
+    localStorage.setItem('ielts_'+TEST_ID+'_answers',JSON.stringify(userAnswers));
+    localStorage.setItem('ielts_'+TEST_ID+'_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_'+TEST_ID+'_timer',timerSec);
+    localStorage.setItem('ielts_'+TEST_ID+'_played',JSON.stringify(sectionPlayed));
+    localStorage.setItem('ielts_'+TEST_ID+'_done',JSON.stringify(sectionDone));
   }catch(e){}
 }
 
@@ -1180,7 +1181,7 @@ function backToResults(){
 // ─────────────────────────────────────────────
 function restartTest(){
   if(!confirm('Restart? All answers and the timer will be reset.'))return;
-  ['ielts_ls1_answers','ielts_ls1_flags','ielts_ls1_timer','ielts_ls1_notes','ielts_ls1_played','ielts_ls1_done']
+  ['ielts_'+TEST_ID+'_answers','ielts_'+TEST_ID+'_flags','ielts_'+TEST_ID+'_timer','ielts_'+TEST_ID+'_notes','ielts_'+TEST_ID+'_played','ielts_'+TEST_ID+'_done']
     .forEach(k=>localStorage.removeItem(k));
   userAnswers={};flags={};timerSec=1800;testDone=false;reviewModeOn=false;currentSection=0;
   sectionPlayed=[false,false,false,false];sectionDone=[false,false,false,false];
@@ -1223,7 +1224,7 @@ function setTheme(theme,btn){document.body.className=theme==='dark'?'dark':'';do
 function setFont(size,btn){document.body.style.fontSize=size+'px';document.querySelectorAll('.sbtn-fs').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
 function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
-function saveNotes(){try{localStorage.setItem('ielts_ls1_notes',document.getElementById('notes-ta').value);}catch(e){}}
+function saveNotes(){try{localStorage.setItem('ielts_'+TEST_ID+'_notes',document.getElementById('notes-ta').value);}catch(e){}}
 
 // ─────────────────────────────────────────────
 // SPLITTER

@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BandPath — IELTS Academic Reading Mock Test 11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f2f6fb;--bg3:#e6edf6;--text:#12233b;--text2:#3a4a63;--text3:#7488a3;
+  --border:#d3deea;--accent:#0090c4;--accent2:#1e9e56;
+  --header:#0f2744;--flag:#e0870f;--correct:#1e9e56;--wrong:#d64545;
+  --palette-done:#1e9e56;--palette-flag:#e0870f;--palette-active:#0090c4;
+  --hl-yellow:#ffe066;--hl-yellow-text:#1a1a2e;
+  --hl-green:#a8f0c6;--hl-green-text:#0a2e1a;
+  --ruler-bg:rgba(0,144,196,.1);--ruler-border:rgba(0,144,196,.3);
+  --shadow:0 2px 12px rgba(15,39,68,.08);
+  --glow:0 0 0 rgba(0,0,0,0);
+  --card-grad:var(--bg2);
+}
+body.dark{
+  --bg:#0f2744;--bg2:#162d4a;--bg3:#1e3a57;--text:#eaf2fb;--text2:#9fb4cc;--text3:#6b83a0;
+  --border:#1e3a57;--accent:#00C4FF;--accent2:#2ed573;--header:#0a1d33;
+  --flag:#ffa502;--correct:#2ed573;--wrong:#ff6b6b;
+  --palette-done:#2ed573;--palette-flag:#ffa502;--palette-active:#00C4FF;
+  --hl-yellow:#c99a12;--hl-yellow-text:#fff8e1;
+  --hl-green:#1a7a44;--hl-green-text:#d6ffe6;
+  --ruler-bg:rgba(0,196,255,.1);--ruler-border:rgba(0,196,255,.4);
+  --shadow:0 8px 30px rgba(0,0,0,.45);
+  --glow:0 0 22px -6px rgba(0,196,255,.5);
+  --card-grad:linear-gradient(165deg,rgba(30,58,87,.55),rgba(22,45,74,.85));
+}
+body{font-family:'Plus Jakarta Sans',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:16px;transition:background .25s,color .25s;overflow:hidden}
+body.dark{background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+svg.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* START SCREEN */
+#start-screen{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#start-screen::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,255,.22),transparent 65%);filter:blur(10px);pointer-events:none}
+.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);backdrop-filter:blur(12px)}
+body:not(.dark) .start-box{background:var(--bg);box-shadow:0 24px 64px rgba(15,39,68,.28)}
+.start-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.start-brand-badge{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.32);box-shadow:0 0 34px -8px rgba(0,196,255,.6)}
+.start-brand-name{font-size:27px;font-weight:800;letter-spacing:-.5px;color:#fff}
+body:not(.dark) .start-brand-name{color:var(--text)}
+.start-brand-name span{color:#00C4FF}
+.start-logo{font-size:12px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.start-title{font-size:25px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.2;letter-spacing:-.3px}
+.start-subtitle{font-size:14px;color:var(--text3);margin-bottom:30px}
+.start-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 8px}
+body.dark .info-card{background:rgba(22,45,74,.5)}
+.info-val{font-size:27px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+.info-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.start-rules{text-align:left;background:var(--bg2);border-radius:14px;padding:16px 20px;margin-bottom:30px}
+body.dark .start-rules{background:rgba(10,29,51,.5);border:1px solid var(--border)}
+.start-rules p{font-size:13px;color:var(--text2);line-height:1.85;padding-left:4px;display:flex;gap:9px;align-items:flex-start}
+.start-rules p svg{margin-top:3px;color:var(--accent)}
+#start-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c;border:none;padding:16px 48px;border-radius:14px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.3px;transition:opacity .15s,transform .15s,box-shadow .15s;width:100%;box-shadow:0 16px 36px -12px rgba(0,196,255,.7)}
+#start-btn:hover{transform:translateY(-2px);box-shadow:0 22px 44px -12px rgba(0,196,255,.8)}
+body:not(.dark) #start-btn{color:#fff;background:linear-gradient(120deg,#0090c4,#0f2744)}
+
+/* HEADER */
+#header{background:var(--header);padding:0 14px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:1000;height:54px;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.06)}
+#logo-area{display:flex;align-items:center;gap:9px;min-width:120px}
+#logo-area .lg-badge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 16px -5px rgba(0,196,255,.55)}
+#logo-area .lg-name{font-weight:800;font-size:16px;color:#fff;letter-spacing:-.3px}
+#logo-area .lg-name span{color:#00C4FF}
+#passage-tabs{display:flex;gap:3px;background:rgba(255,255,255,.07);border-radius:9px;padding:3px}
+.ptab{background:transparent;color:rgba(255,255,255,.68);border:none;padding:6px 15px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+.ptab:hover{color:#fff;background:rgba(255,255,255,.1)}
+.ptab.active{background:#00C4FF;color:#06243c;font-weight:700;box-shadow:0 0 16px -4px rgba(0,196,255,.7)}
+#header-right{display:flex;align-items:center;gap:7px}
+#timer-box{display:flex;align-items:center;gap:7px;background:rgba(255,107,107,.16);color:#ff8a8a;border:1px solid rgba(255,107,107,.35);font-size:18px;font-weight:800;padding:5px 15px;border-radius:9px;letter-spacing:1.5px;min-width:104px;text-align:center;justify-content:center;font-variant-numeric:tabular-nums}
+#timer-box svg{opacity:.85}
+#timer-box.warn{background:rgba(255,165,2,.16);color:#ffb938;border-color:rgba(255,165,2,.4)}
+#timer-box.critical{background:rgba(255,107,107,.2);color:#ff6b6b;border-color:rgba(255,107,107,.5);animation:blink .9s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.hbtn{background:rgba(255,255,255,.1);color:#fff;border:none;width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.hbtn:hover{background:rgba(0,196,255,.22)}
+
+/* SETTINGS */
+#settings-panel{display:none;position:fixed;top:58px;right:12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;z-index:2000;min-width:230px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+#settings-panel h3{font-size:13px;margin-bottom:14px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.sg{margin-bottom:14px}
+.sg label{display:block;font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.sg-row{display:flex;gap:6px;flex-wrap:wrap}
+.sbtn{border:2px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.sbtn-fs{min-width:34px;text-align:center}
+
+/* MAIN LAYOUT */
+#main{margin-top:52px;display:flex;height:calc(100vh - 96px);overflow:hidden}
+#passage-panel{flex:1;min-width:200px;overflow-y:auto;padding:22px 28px 22px 24px;background:var(--bg);position:relative}
+#splitter{width:7px;background:var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s;user-select:none}
+#splitter:hover,#splitter.dragging{background:var(--accent)}
+#splitter::after{content:'';width:4px;height:26px;border-radius:3px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/4px 7px repeat-y;color:var(--text3);opacity:.65;pointer-events:none}
+#splitter:hover::after,#splitter.dragging::after{color:#fff;opacity:.9}
+#questions-panel{flex:1;min-width:200px;overflow-y:auto;padding:16px;background:var(--bg2)}
+
+/* PASSAGE */
+.passage-meta{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.8}
+.passage-time-hint{font-size:12px;color:var(--text3);margin-bottom:10px;padding:5px 10px;background:var(--bg3);border-radius:5px;border-left:3px solid var(--accent)}
+.passage-heading{font-size:21px;font-weight:800;margin-bottom:4px;line-height:1.25;color:var(--text)}
+.passage-subheading{font-size:14px;font-style:italic;color:var(--text3);margin-bottom:18px;line-height:1.5}
+.passage-divider{border:none;border-top:2px solid var(--border);margin-bottom:18px}
+.passage-text p{margin-bottom:16px;line-height:1.85;color:var(--text);text-align:justify}
+.para-label{font-weight:800;color:var(--accent);margin-right:6px;font-size:15px}
+.footnote{font-size:13px;color:var(--text3);margin-top:18px;border-top:1px solid var(--border);padding-top:10px;font-style:italic}
+
+/* HIGHLIGHT */
+.hl-yellow{background:var(--hl-yellow);border-radius:2px;padding:1px 0;color:var(--hl-yellow-text)}
+.hl-green{background:var(--hl-green);border-radius:2px;padding:1px 0;color:var(--hl-green-text)}
+#ctx-menu{display:none;position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:9px;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:3000;min-width:190px;overflow:hidden;padding:4px 0}
+.ctx-item{padding:9px 16px;cursor:pointer;font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;transition:background .1s;justify-content:space-between}
+.ctx-item:hover{background:var(--bg3)}
+.ctx-item-left{display:flex;align-items:center;gap:9px}
+.ctx-dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0}
+.ctx-key{font-size:10px;opacity:.5;font-family:monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;border:1px solid var(--border)}
+
+/* WORD BANK */
+.word-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.word-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.word-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.wb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.wb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* QUESTIONS */
+.q-section-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 6px;padding:7px 11px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent)}
+.q-range-label{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
+.q-instruction{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6;padding:9px 12px;background:var(--bg);border-left:3px solid var(--flag);border-radius:0 6px 6px 0}
+.q-block{margin-bottom:11px;padding:11px 13px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;position:relative;transition:border-color .15s,box-shadow .15s}
+.q-block:hover{box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.q-block.flagged{border-left:4px solid var(--flag)}
+.q-block.answered{border-left:4px solid var(--accent2)}
+.q-num{font-weight:700;font-size:12px;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.q-text{font-size:14px;color:var(--text);margin-bottom:9px;line-height:1.55}
+.q-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:7px 11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;transition:border-color .15s}
+.q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,144,196,.12)}
+.q-options{display:flex;flex-direction:column;gap:5px}
+.q-option{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);border:1.5px solid transparent;transition:all .12s}
+.q-option:hover{background:var(--bg3)}
+.q-option input{margin-top:2px;cursor:pointer;accent-color:var(--accent);width:15px;height:15px;flex-shrink:0}
+.q-option.selected{background:rgba(0,144,196,.08);border-color:rgba(0,144,196,.28)}
+body.dark .q-option.selected{background:rgba(0,196,255,.1);border-color:rgba(0,196,255,.3)}
+.tfng-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tfng-btn{border:1.5px solid var(--border);background:var(--bg2);color:var(--text);padding:6px 13px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;transition:all .12s;letter-spacing:.3px}
+.tfng-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tfng-btn.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.flag-btn{position:absolute;top:9px;right:9px;background:none;border:none;cursor:pointer;font-size:15px;color:var(--text3);padding:2px 5px;border-radius:4px;line-height:1;transition:color .15s}
+.flag-btn:hover{color:var(--flag)}
+.flag-btn.active{color:var(--flag)}
+
+/* MATCH person bank */
+.person-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.person-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.person-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.pb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.pb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* PALETTE */
+#palette-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1.5px solid var(--border);padding:5px 10px;z-index:800;display:flex;align-items:center;gap:4px;overflow-x:auto;height:44px}
+#palette-bar::-webkit-scrollbar{height:3px}
+#palette-bar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.pal-label{font-size:10px;color:var(--text3);font-weight:700;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px}
+.pal-num{width:25px;height:25px;border-radius:5px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s}
+.pal-num:hover{border-color:var(--accent);color:var(--accent)}
+.pal-num.done{background:var(--palette-done);color:#fff;border-color:var(--palette-done)}
+.pal-num.flagged{background:var(--palette-flag);color:#fff;border-color:var(--palette-flag)}
+.pal-num.active{border:2.5px solid var(--palette-active);box-shadow:0 0 0 2px rgba(0,196,255,.25),0 0 12px -2px rgba(0,196,255,.6)}
+body.dark .pal-num.done{box-shadow:0 0 12px -3px rgba(46,213,115,.6)}
+body.dark .pal-num.flagged{box-shadow:0 0 12px -3px rgba(255,165,2,.6)}
+.pal-legend{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);flex-shrink:0;white-space:nowrap;margin-left:2px}
+.pal-dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
+#submit-btn{display:flex;align-items:center;gap:7px;background:linear-gradient(120deg,#ff7a6b,#e0504a);color:#fff;border:none;padding:7px 18px;border-radius:9px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;letter-spacing:.3px;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 20px -8px rgba(255,107,107,.6)}
+#submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px -8px rgba(255,107,107,.75)}
+
+/* NOTES */
+#notes-toggle{position:fixed;bottom:56px;right:14px;z-index:900;background:linear-gradient(150deg,#00C4FF,#0098e0);color:#06243c;border:none;border-radius:14px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,196,255,.6);transition:transform .15s}
+#notes-toggle:hover{transform:scale(1.08)}
+#notes-box{display:none;position:fixed;bottom:102px;right:14px;z-index:900;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;width:270px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+#notes-box h4{font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+#notes-ta{width:100%;height:130px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:7px;padding:9px;font-size:13px;resize:vertical;outline:none;font-family:inherit;line-height:1.5}
+#notes-ta:focus{border-color:var(--accent)}
+
+/* RULER */
+#ruler{position:fixed;left:0;height:28px;background:var(--ruler-bg);pointer-events:none;display:none;z-index:500;border-top:1px solid var(--ruler-border);border-bottom:1px solid var(--ruler-border)}
+
+/* RESULTS */
+#results-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5000;overflow-y:auto;padding:30px 20px}
+.res-header{text-align:center;margin-bottom:28px}
+.res-header h1{font-size:24px;color:var(--accent);margin-bottom:8px;font-weight:800}
+.band-circle{position:relative;width:150px;height:150px;border-radius:50%;border:6px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;background:var(--bg2);box-shadow:0 0 40px -6px rgba(0,196,255,.55),inset 0 0 26px -10px rgba(0,196,255,.4)}
+.band-num{font-size:54px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-1.5px;text-shadow:0 0 20px rgba(0,196,255,.5)}
+.band-lbl{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.band-desc{font-size:14px;color:var(--text2);margin-bottom:4px;font-weight:600}
+.band-note{font-size:11px;color:var(--text3);margin-bottom:20px;font-style:italic}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:660px;margin:0 auto 20px}
+.stat-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-size:30px;font-weight:800;color:var(--accent);text-shadow:0 0 16px rgba(0,196,255,.25)}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.p-breakdown{max-width:760px;margin:0 auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.p-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:14px}
+.p-card h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.p-card-stats{display:flex;gap:12px;font-size:13px}
+.review-section{max-width:760px;margin:0 auto 20px}
+.review-section h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.review-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px}
+.review-card.correct{border-left:4px solid var(--correct)}
+.review-card.wrong{border-left:4px solid var(--wrong)}
+.review-card.unanswered{border-left:4px solid var(--text3)}
+.rev-q{font-weight:700;font-size:12px;color:var(--text);margin-bottom:3px}
+.rev-yours{font-size:12px;color:var(--wrong)}
+.rev-correct{font-size:12px;color:var(--correct)}
+.res-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-bottom:30px}
+.res-btn{padding:11px 24px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit}
+.res-btn:hover{opacity:.85}
+.res-btn-primary{background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c}
+body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
+.res-btn-secondary{background:var(--bg3);color:var(--text);border:1.5px solid var(--border)}
+.tg-btn{background:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;transition:opacity .15s}
+.tg-btn:hover{opacity:.88}
+
+/* REVIEW MODE */
+.q-input.correct-ans{border-color:var(--correct)!important;background:rgba(30,158,86,.09)!important}
+.q-input.wrong-ans{border-color:var(--wrong)!important;background:rgba(214,69,69,.09)!important}
+.tfng-btn.correct-ans{background:var(--correct)!important;color:#fff!important;border-color:var(--correct)!important}
+.tfng-btn.wrong-ans{background:var(--wrong)!important;color:#fff!important;border-color:var(--wrong)!important}
+.answer-reveal{font-size:11px;color:var(--correct);margin-top:5px;font-weight:700}
+.answer-hint{font-size:11px;color:var(--text3);margin-top:4px;font-style:italic;line-height:1.5;padding:5px 8px;background:var(--bg2);border-radius:5px;border-left:2px solid var(--accent)}
+
+/* FLASH */
+@keyframes pal-flash{0%,100%{background:var(--bg3)}50%{background:#e74c3c;color:#fff;border-color:#e74c3c}}
+.pal-num.flash{animation:pal-flash .5s ease 3}
+
+/* SCROLL INDICATOR */
+#scroll-bar{position:absolute;top:0;left:0;width:0%;height:3px;background:var(--accent);z-index:5;transition:width .1s;border-radius:0 2px 2px 0}
+
+/* BACK TO RESULTS */
+#back-to-results{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
+#back-to-results:hover{opacity:.88}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-track{background:transparent}
+
+@media(max-width:768px){
+  #main{flex-direction:column;height:calc(100vh - 96px)}
+  #passage-panel{height:50%;border-bottom:2px solid var(--border);padding:14px}
+  #questions-panel{width:100%;height:50%}
+  #splitter{width:100%;height:8px;cursor:row-resize}
+  #splitter::after{width:26px;height:4px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/7px 4px repeat-x}
+}
+
+/* DARK PREMIUM GLASS */
+body.dark #passage-panel{background:transparent}
+body.dark #questions-panel{background:rgba(10,29,51,.35)}
+body.dark .q-block{background:var(--card-grad);border-color:var(--border);backdrop-filter:blur(6px)}
+body.dark .q-block:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.6)}
+body.dark .q-block.answered{box-shadow:inset 4px 0 0 var(--accent2),0 0 0 1px rgba(46,213,115,.12)}
+body.dark .q-input,body.dark .tfng-btn{background:rgba(10,29,51,.5)}
+body.dark .word-bank,body.dark .person-bank{background:rgba(10,29,51,.4)}
+body.dark .wb-item,body.dark .pb-item{background:rgba(22,45,74,.6)}
+body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);backdrop-filter:blur(14px)}
+body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
+body.dark .info-card,body.dark .stat-card,body.dark .p-card,body.dark .review-card{background:var(--card-grad)}
+body.dark .q-input:focus{box-shadow:0 0 0 3px rgba(0,196,255,.18)}
+body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.res-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.res-brand .lg-badge{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 18px -5px rgba(0,196,255,.55)}
+.res-brand .lg-name{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.res-brand .lg-name span{color:#00C4FF}
+</style>
+</head>
+<body>
+
+
+<!-- START SCREEN -->
+<div id="start-screen">
+  <div class="start-box">
+    <div class="start-brand">
+      <span class="start-brand-badge"><svg viewBox="0 0 40 40" width="32" height="32" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.4" fill="#00C4FF"/><circle cx="17" cy="24" r="2.4" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.3"/><circle cx="30" cy="12" r="2.6" fill="#00C4FF"/></svg></span>
+      <span class="start-brand-name">Band<span>Path</span></span>
+    </div>
+    <div class="start-logo">IELTS Academic Reading</div>
+    <div class="start-title">Mock Test 11</div>
+    <div class="start-subtitle">Computer-Delivered Format</div>
+    <div class="start-info">
+      <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
+      <div class="info-card"><div class="info-val">40</div><div class="info-lbl">Questions</div></div>
+      <div class="info-card"><div class="info-val">60</div><div class="info-lbl">Minutes</div></div>
+    </div>
+    <div class="start-rules">
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Read each passage carefully and answer all 40 questions.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Highlight text by selecting it and right-clicking or using Shift+Y / Shift+G.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Flag any question to return to it later.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Your answers are saved automatically.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>The timer starts when you click Begin.</span></p>
+    </div>
+    <button id="start-btn" onclick="beginTest()"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg>Begin Test</button>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="applyHighlight('yellow')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#ffe066;border:1px solid #cca800"></span>Yellow highlight</div>
+    <span class="ctx-key">Shift+Y</span>
+  </div>
+  <div class="ctx-item" onclick="applyHighlight('green')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#a8f0c6;border:1px solid #2e7d52"></span>Green highlight</div>
+    <span class="ctx-key">Shift+G</span>
+  </div>
+  <div class="ctx-item" onclick="removeHighlight()">
+    <div class="ctx-item-left"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><path d="M18 6 6 18M6 6l12 12"/></svg>Remove highlight</div>
+    <span class="ctx-key">Shift+R</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo-area"><span class="lg-badge"><svg viewBox="0 0 40 40" width="21" height="21" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+  <div id="passage-tabs">
+    <button class="ptab active" onclick="switchPassage(0)">Passage 1</button>
+    <button class="ptab" onclick="switchPassage(1)">Passage 2</button>
+    <button class="ptab" onclick="switchPassage(2)">Passage 3</button>
+  </div>
+  <div id="header-right">
+    <div id="timer-box"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg><span id="timer-txt">60:00</span></div>
+    <button class="hbtn" onclick="toggleFullscreen()" title="Fullscreen"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+    <button class="hbtn" onclick="toggleSettings()" title="Settings"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings-panel">
+  <h3>Settings</h3>
+  <div class="sg">
+    <label>Theme</label>
+    <div class="sg-row">
+      <button class="sbtn" onclick="setTheme('light',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Light</button>
+      <button class="sbtn" onclick="setTheme('dark',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>Dark</button>
+    </div>
+  </div>
+  <div class="sg">
+    <label>Font Size</label>
+    <div class="sg-row">
+      <button class="sbtn sbtn-fs active" onclick="setFont(15,this)" style="font-size:12px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(18,this)" style="font-size:16px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(22,this)" style="font-size:20px">A</button>
+    </div>
+  </div>
+  <div class="sg" style="display:flex;align-items:center;justify-content:space-between">
+    <label style="margin:0">Reading Ruler</label>
+    <input type="checkbox" id="ruler-toggle" onchange="toggleRuler()" style="width:18px;height:18px;cursor:pointer;accent-color:var(--accent)">
+  </div>
+  <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
+    <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
+    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+  </div>
+</div>
+
+<div id="ruler"></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="passage-panel"><div id="scroll-bar"></div><div id="passage-content"></div></div>
+  <div id="splitter"></div>
+  <div id="questions-panel"><div id="questions-content"></div></div>
+</div>
+
+<button id="back-to-results" onclick="backToResults()">← Back to Results</button>
+
+<!-- NOTES -->
+<button id="notes-toggle" onclick="toggleNotes()" title="Notes (Ctrl+N)"><svg class="ic" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+<div id="notes-box">
+  <h4><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Scratch Notes &nbsp;<span style="opacity:.45;font-size:10px">Ctrl+N</span></h4>
+  <textarea id="notes-ta" placeholder="Type notes here..." oninput="saveNotes()"></textarea>
+</div>
+
+<!-- PALETTE -->
+<div id="palette-bar">
+  <span class="pal-label">Q:</span>
+  <div id="palette-nums" style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:3px;align-items:center"></div>
+  <div class="pal-legend" style="margin-left:6px">
+    <span class="pal-dot" style="background:var(--palette-done)"></span>Done&nbsp;
+    <span class="pal-dot" style="background:var(--palette-flag)"></span>Flag
+  </div>
+  <button id="submit-btn" onclick="submitTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Submit Test</button>
+</div>
+
+<!-- RESULTS -->
+<div id="results-screen">
+  <div class="res-header">
+    <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+    <h1>Academic Reading — Results (Mock Test 11)</h1>
+    <div class="band-circle">
+      <div class="band-num" id="res-band">—</div>
+      <div class="band-lbl">Band</div>
+    </div>
+    <div class="band-desc" id="res-band-desc"></div>
+    <div class="band-note">Reading band estimate based on raw score. Actual scores may vary by test version.</div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="res-correct">—</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-wrong">—</div><div class="stat-lbl">Incorrect</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-skip">—</div><div class="stat-lbl">Skipped</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-pct">—</div><div class="stat-lbl">Accuracy</div></div>
+  </div>
+  <div class="p-breakdown" id="p-breakdown"></div>
+  <div class="review-section">
+    <h3>Detailed Review</h3>
+    <div class="review-grid" id="review-grid"></div>
+  </div>
+  <div class="res-actions">
+    <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
+    <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
+    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+      More Tests on Telegram
+    </a>
+  </div>
+</div>
+
+<script>
+const PASSAGES=[
+{
+  title:'READING PASSAGE 1',
+  heading:'How the first trans-Atlantic telegraph cable was laid',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 1–13.',
+  qRange:[1,13],
+  paragraphs:[
+    {label:'',text:`On August 16 1858, the first telegraphic message crossed the Atlantic Ocean. Travelling along a recently laid cable, the message from Britain's Queen Victoria to US President James Buchanan took just 16 hours. Prior to this, communication across the Atlantic would have been by ship – and taken around 10 days.`},
+    {label:'',text:`People had been communicating via overland telegraph since 1844 and messages had been passing between Britain and France since 1850 when the first submarine cable was laid in the English Channel. But the attempt to span the Atlantic Ocean was the most daring attempt yet – and was the talk of the age, the 19th-century equivalent of the Apollo space mission. The idea that one could seemingly cheat time and space was inspiring and it changed the way people thought about the world and their place in it.`},
+    {label:'',text:`The driving force behind the trans-Atlantic telegraph cable was an American businessman called Cyrus Field. In 1856, he and Englishmen John Watkins Brett and Charles Tilson Bright formed the Atlantic Telegraph company. They raised £350,000 mostly from businessmen in London, Liverpool, Manchester and Glasgow. They also secured £14,000 annually from the British government plus the loan of ships and a similar amount from the US government.`},
+    {label:'',text:`Getting the cable made proved to be difficult. The distance between the west coast of Ireland and Newfoundland is over 3,700km, and Field was unable to find a company that was capable of supplying the required cable in the desired time frame. As a result, two companies were engaged to fulfil the order. The cable had a core of seven copper wires down which the signal would pass. These were insulated with several layers of gutta-percha (a natural plastic made from tree sap) and then armoured with iron wire. When it was complete, the weight of the cable proved too great for any single ship. It was therefore loaded onto two: the British ship, HMS Agamemnon and the American ship, USS Niagara.`},
+    {label:'',text:`The first attempt to lay the cable began on August 5 1857 with both ships departing from the west coast of Ireland, near Ballycarbery Castle. The venture did not go according to plan. The cable snapped on the first day, but was recovered from the bottom and repaired. A few days later, mid-Atlantic, the cable snapped again, this time in water 3km deep. It was lost and the expedition abandoned.`},
+    {label:'',text:`The next summer in 1858 they tried again. On this expedition, the two great ships met mid-Atlantic, each carrying half the cable. The two ends were joined together and the ships sailed away from each other. The cable broke three times and each time they were forced to start again. On July 29, with little hope of success, the cable was joined for the fourth time and the ships sailed for home. This time they succeeded. The cable was landed in Newfoundland on August 4 and in Ireland the following day. And a week or so later Queen Victoria sent that first trans-Atlantic message to President Buchanan.`},
+    {label:'',text:`The celebrations were tremendous. One US newspaper proclaimed: "New York has seldom seen a more complete holiday than that on September 1 1858, in celebration of the successful laying of the Atlantic cable. The enthusiasm of an entire nation was expressed in this jubilee of its metropolis, and the era of a closer connection with Europe was well ushered in by a day of genuine rejoicing and gaiety."`},
+    {label:'',text:`Celebrations were, however, short-lived: the cable performed badly and failed after just three weeks. The project was put on hold, but the concept had been proved possible. By 1865, further research had been carried out into the problems which had plagued the earlier cables. In addition, cables had been successfully laid in the Mediterranean and in the Persian Gulf. The cables that were used were better engineered, with thicker cores and better insulation allowing faster transmission speeds.`},
+    {label:'',text:`In 1865, Field incorporated a second company to raise enough funds to try again. He chartered the largest ship in the world at the time, the SS Great Eastern, which could carry the entire Atlantic cable. Huge salt-water tanks and other state-of-the-art machinery were fitted to ensure it remained in mint condition during its journey. All went well until, in heavy winds 1000km off the coast of Newfoundland, the cable rubbed on the side of the ship, snapped and plunged to the deep ocean floor.`},
+    {label:'',text:`Not one to quit, Field vowed to return the following year. This final 1866 expedition proved to be successful and the cable was put into commercial service on July 28. One month later, the 1865 cable was brought to the surface and repaired, providing a second Atlantic telegraph link.`},
+    {label:'',text:`The service had obvious and immediate impact. People in government were able to respond more swiftly to evolving situations. News travelled more quickly, which boosted trade on both sides of the Atlantic. It also had a profound effect on things such as family life and cultural ties. For example, it was no longer so difficult for immigrants in America to keep in touch with their families back home.`},
+    {label:'',text:`The roller-coaster of cable-laying highs and lows between 1857 and 1866 caught the imaginations of a generation the way the space race did in the 20th century. There was immense public interest in the endeavour and in telegraphy more generally. At the time, telegraphic science was reported widely in the newspapers and the fortunes of the telegraph companies were followed closely. Discussions of the issues and solutions to spanning the Atlantic with cable became everyday topics of conversation, and endless articles in the newspapers ensured that the project stayed in people's thoughts.`},
+  ]
+},
+{
+  title:'READING PASSAGE 2',
+  heading:'Removing Unwanted Noise',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 14–26.',
+  qRange:[14,26],
+  paragraphs:[
+    {label:'A',text:`A noisy restaurant, a busy road, or a windy day are all situations that can be intensely frustrating for the hearing impaired when trying to understand what other people are saying. Some 10 million people in the UK suffer from hearing difficulties and, helpful as hearing aids are, those who wear them often complain that background noise continues to interfere with their understanding. But what if hearing aid wearers could choose to filter out all the troublesome sounds and focus just on the voices they want to hear?`},
+    {label:'',text:`Engineer Dr Richard Turner believes that this is fast becoming a possibility. He is developing a system that identifies the distracting noise and 'rubs it out'. 'The poor performance in noise of current hearing devices is a major reason why six million people in the UK who would benefit from hearing aids do not use them,' he said. Moreover, as the population ages, a greater number of people will be hindered by the inability to hear clearly. In addition, hearing-impaired patients who have been fitted with cochlear implants – devices implanted to help those whose auditory hair cells have died – suffer from similar limitations.`},
+    {label:'B',text:`The solution lies in the statistics of sound, as Turner explained: 'Many interfering noises are immediately recognisable. Raindrops patter on a surface, a fire crackles, talkers babble at a party and the wind howls. But what makes these different noises sound the way they do? No two rain sounds are identical because the precise arrangement of falling water droplets is never repeated. Nonetheless, there must be statistical similarities in the sounds of these raindrops compared with, say, the crackle of a fire.' He believes that for this reason, the brain may be able to group similar types of sounds together based on their specific characteristics.`},
+    {label:'',text:`Turner and his colleagues have analysed this process mathematically and then developed algorithms that mimic what the brain is doing. The mathematical system that they have developed is capable of being 'trained' – a process that uses new methods from the field of machine learning – so that it can recognise new sounds. 'Rather surprisingly, it seems that a relatively small set of statistics is sufficient to describe a large number of sounds' he says. Crucially, the system that Turner and his team have come up with is capable of telling the difference between speech and other types of sound.`},
+    {label:'C',text:`'What we can now do is to erase background noise and pass these cleaned-up sounds to a listener to improve their perception in difficult surroundings,' said Turner. The idea is that future devices will have several different modes in which they can operate. These might include a mode for travelling in a car or on a train, a mode for places like a noisy party or a busy restaurant, a mode that can be used outdoors in windy weather, and so on. The device might intelligently select an appropriate mode based on the characteristics of the incoming sound.`},
+    {label:'D',text:`'In a sense we are developing the technology to underpin intelligent hearing devices,' said Turner. An additional possibility would be for users to override the selection made by the device and select a processing mode based upon what sorts of noise they wish to erase. They could even guide the processing on their device using an interface on a mobile phone through wireless communication. Turner anticipates that his team will need two more years of simulating the effect of modifications that clean up sound before they start to work with device specialists. 'If these preliminary tests go well, then we'll be looking to work with hearing device companies to try to adapt their processing in order to incorporate these machine learning techniques.'`},
+    {label:'E',text:`Tinnitus sufferers, who are plagued by a constant ringing in their ears, could also benefit from the technology. At present, people with tinnitus sometimes use environmental sound generators as a distraction from the ringing in their ears. But such generators offer only a limited selection of sounds – a gently flowing stream, waves lapping on the seashore, or leaves rustling. With the new technology, individual patients could select the best sound to distract them from their tinnitus.`},
+    {label:'F',text:`The technology not only holds promise for helping the hearing impaired, but it also has the potential to improve phone calls – anyone who has ever tried to hold a conversation with someone phoning from a crowded room will recognise the possible benefits of such a facility. Systems that can deal with unwanted audio content would also be welcomed by the increasing numbers of people using video-sharing websites. For example, a video containing a conversation that takes place by a busy roadside on a windy day could be made more intelligible by isolating the speech from the noises – users could even be offered the chance to de-noise their video during the upload process.`},
+  ]
+},
+{
+  title:'READING PASSAGE 3',
+  heading:'The Bug Picture',
+  subheading:'Lara Zanarini gives her view on insects',
+  timeHint:'You should spend about 20 minutes on Questions 27–40.',
+  qRange:[27,40],
+  paragraphs:[
+    {label:'',text:`How many other species do we share our planet with? The truth is that scientists don't have the slightest idea. Some early guesses of 30 million or even 100 million have been replaced in the last few years with more reliable ones of somewhere between five to ten million species. But despite this massive uncertainty there is one thing which is indisputable: the vast majority of Earth's inhabitants are invertebrate – without a backbone – and most of those are insects.`},
+    {label:'',text:`It is therefore not very surprising that these creatures have a pre-eminent impact on the functioning of global ecosystems. Creatures like us – and I don't just mean primates (such as apes and monkeys), but all vertebrates (back-boned animals) – make up less than three percent of all species.`},
+    {label:'',text:`Yet it is these very animals that most people hold dear, especially those with a passing resemblance to ourselves. I use a slide in my lectures which has images of all sorts of insects along with one face-on image of a female slender loris, a wide-eyed furry primate, with a baby on its back. No prizes for guessing the first, and probably the only, thing audiences look at. It seems we can't help ourselves. Appealing they may be, but in the great ecological scheme of things, they are fairly useless. If you really want to understand the world around you – you need to take a serious look at insects.`},
+    {label:'',text:`Pollination, the process by which flying insects transfer grains of pollen from one plant to another and so aid their reproduction, is perhaps one of the most essential partnerships ever to have evolved. This plant-insect version of 'I'll scratch your back if you scratch mine', has been around for 100 million years and it has given the world a rich diversity, and not just of flowering plants. Twenty thousand species of bee are responsible for the continued survival of the angiosperms, which includes a very long list of fruit and vegetables from pumpkins, plums and peas to cherries, cucumbers and cocoa.`},
+    {label:'',text:`What about herbivory and carnivory – plant- and meat-eating? Ecology really doesn't get much more basic than this. The light energy from the sun is converted to chemical energy and the plants – the producers – that carry out this astonishing transformation are fed on by primary consumers – the herbivores. They in turn are eaten by secondary consumers – the carnivores. But it may come as a surprise to many that all the herds of grazing ungulates – cows, goats and sheep – are entirely 'out-munched', perhaps by a factor of ten to one, by myriads of tiny insects. What about the meat-eaters? Again, insects consume many times more animal flesh than all vertebrate carnivores put together, and ants alone are the major carnivorous species in any habitat you could mention.`},
+    {label:'',text:`If this sounds implausible, consider that although insects are individually small, there are an awful lot of them – an estimated ten million, million, million (10¹⁹) with an impressively large biomass*. Insects are also the major food source for countless species. Many trillions of creatures a year are eaten by insect-eating species of birds, bats and a multitude of other furry and feathery animals. Space prevents me from extolling the role of insects in global decomposition and nutrient recycling.`},
+    {label:'',text:`But there is a problem looming – the first effects of which we are already feeling. Almost every study that has been done to date points to a steady decline in insect species' richness and abundance. The loss of natural habitat and the prodigious amounts of pesticides used in agriculture are taking their toll. The decreases seen in well-studied insect groups such as bees and butterflies are surely taking place in many other groups as well. At what point does the web of life become so frayed that it starts to disintegrate? We may find out sooner rather than later.`},
+    {label:'',text:`It is thought that the world's tropical forests hold more than half of all extant species. If these complex habitats are being felled and degraded at even the slowest rate that has been suggested, it will still only be a matter of a few hundred years before they are lost. It is therefore an inescapable conclusion that our planet could lose more than half of all its living species in the time it takes for a tiny acorn to become a veteran oak tree.`},
+    {label:'',text:`There's no doubt about it – we are the most intelligent and capable species yet to evolve on Earth. In a very short time after our appearance we covered the entire globe, establishing colonies wherever it was possible to survive. A few of us have walked on the surface of the Moon and visited the deepest abysses of the oceans. We spend vast sums of money to probe the very make-up of matter and remotely examine other parts of our solar system. We want to understand the science of everything from the infinitesimally small to the astronomically large. This truly is 'big' science and of course it's expensive. But do we have to do it right now? What about understanding the environment a bit better? Perhaps what we actually need is a bit more 'bug' science.`},
+  ],
+  footnote:'* biomass: the total quantity or weight of organisms in a certain area'
+}
+];
+
+// ═══════════════════════════════════════════
+// PEOPLE / WORD BANKS
+// ═══════════════════════════════════════════
+const HEADINGS_P2=[
+  {letter:'i',word:'How hearing loss may be caused by certain types of sounds'},
+  {letter:'ii',word:"Uses for Turner's research in media and communications"},
+  {letter:'iii',word:'Creating a model for the classification of sounds'},
+  {letter:'iv',word:'Potential developments that still require further research'},
+  {letter:'v',word:'A drawback in the help currently available to those with hearing problems'},
+  {letter:'vi',word:'Providing the hearing-impaired with training in new technology'},
+  {letter:'vii',word:'A more effective way to take attention away from a hearing problem'},
+  {letter:'viii',word:'Analysing the sounds produced in the process of speaking'},
+  {letter:'ix',word:'The possibility of a hearing aid that can adjust itself to different environments'}
+];
+
+const ENDINGS_P3=[
+  {letter:'A',word:'a fall in the total number and variety of insects in the world.'},
+  {letter:'B',word:'the number of plants that are pollinated by insects.'},
+  {letter:'C',word:'how many different animal species are currently in existence.'},
+  {letter:'D',word:"how long it will be before the Earth's biodiversity is drastically reduced."},
+  {letter:'E',word:"the predominance of invertebrates among the Earth's species."},
+  {letter:'F',word:'the declining numbers of bees and butterflies.'}
+];
+
+// ═══════════════════════════════════════════
+// QUESTIONS
+// ═══════════════════════════════════════════
+const QUESTIONS=[
+// ── PASSAGE 1 ──────────────────────────────
+// Q1-9: Which paragraph A-G
+// Q1-6: TRUE/FALSE/NOT GIVEN
+{id:1,passage:0,type:'tfng',
+ instruction:'Questions 1–6: Do the following statements agree with the information given in Reading Passage 1? Write TRUE, FALSE or NOT GIVEN.',
+ text:'Field failed to find a company that could produce all of the cable needed by the specified date.',
+ answer:'TRUE',
+ hint:'"Field was unable to find a company that was capable of supplying the required cable in the desired time frame."'},
+
+{id:2,passage:0,type:'tfng',instruction:'',
+ text:'HMS Agamemnon and USS Niagara set sail from different locations on August 5, 1857.',
+ answer:'FALSE',
+ hint:'"Both ships departing from the west coast of Ireland, near Ballycarbery Castle" — the same location.'},
+
+{id:3,passage:0,type:'tfng',instruction:'',
+ text:'On the 1858 expedition, the cable broke three times because of a manufacturing fault.',
+ answer:'NOT GIVEN',
+ hint:'"The cable broke three times and each time they were forced to start again" — no reason is given for why it broke.'},
+
+{id:4,passage:0,type:'tfng',instruction:'',
+ text:'The newspaper quoted in the passage disapproved of the enthusiasm that met the 1858 expedition.',
+ answer:'FALSE',
+ hint:'The newspaper praised the "genuine rejoicing and gaiety" — approval, not disapproval.'},
+
+{id:5,passage:0,type:'tfng',instruction:'',
+ text:'Many articles appeared in the press between 1857 and 1866 about the science behind the telegraph.',
+ answer:'TRUE',
+ hint:'"Telegraphic science was reported widely in the newspapers... endless articles in the newspapers ensured that the project stayed in people\'s thoughts."'},
+
+{id:6,passage:0,type:'tfng',instruction:'',
+ text:'Between 1857 and 1866, people talked about the problems related to the telegraph project on a regular basis.',
+ answer:'TRUE',
+ hint:'"Discussions of the issues and solutions to spanning the Atlantic with cable became everyday topics of conversation."'},
+
+// Q7-13: Notes completion, ONE WORD ONLY
+{id:7,passage:0,type:'fill',
+ instruction:'Questions 7–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'The first attempts to lay cable: the central wires of the cable were made of _______ .',
+ answers:['copper'],answer:'copper',
+ hint:'"The cable had a core of seven copper wires down which the signal would pass."'},
+
+{id:8,passage:0,type:'fill',instruction:'',
+ text:'The cable was put onto two ships due to its _______ .',
+ answers:['weight'],answer:'weight',
+ hint:'"The weight of the cable proved too great for any single ship."'},
+
+{id:9,passage:0,type:'fill',instruction:'',
+ text:"Events between 1858 and 1866: further research led to the cable's thickness and _______ being improved.",
+ answers:['insulation'],answer:'insulation',
+ hint:'"The cables that were used were better engineered, with thicker cores and better insulation allowing faster transmission speeds."'},
+
+{id:10,passage:0,type:'fill',instruction:'',
+ text:'Field set up another company to get the _______ for another attempt.',
+ answers:['funds'],answer:'funds',
+ hint:'"Field incorporated a second company to raise enough funds to try again."'},
+
+{id:11,passage:0,type:'fill',instruction:'',
+ text:'The changes the trans-Atlantic telegraph brought about: members of the _______ could react more quickly to events.',
+ answers:['government'],answer:'government',
+ hint:'"People in government were able to respond more swiftly to evolving situations."'},
+
+{id:12,passage:0,type:'fill',instruction:'',
+ text:'News could be relayed faster, thus improving _______ .',
+ answers:['trade'],answer:'trade',
+ hint:'"News travelled more quickly, which boosted trade on both sides of the Atlantic."'},
+
+{id:13,passage:0,type:'fill',instruction:'',
+ text:'It became easier for US _______ to maintain contact with their families.',
+ answers:['immigrants'],answer:'immigrants',
+ hint:'"It was no longer so difficult for immigrants in America to keep in touch with their families back home."'},
+
+// ── PASSAGE 2 ──────────────────────────────
+// Q14-19: Headings i-ix (bank rendered before Q14)
+{id:14,passage:1,type:'fill',
+ instruction:'Questions 14–19: The text has six sections, A–F. Choose the correct heading for each section from the list of headings below. Write the correct number, i–ix.',
+ text:'Section A',
+ answers:['v'],answer:'v',
+ hint:'Section A describes hearing aid wearers still struggling with background noise — "A drawback in the help currently available to those with hearing problems" (v).'},
+
+{id:15,passage:1,type:'fill',instruction:'',
+ text:'Section B',
+ answers:['iii'],answer:'iii',
+ hint:'Section B: Turner groups sounds by their statistical characteristics — "Creating a model for the classification of sounds" (iii).'},
+
+{id:16,passage:1,type:'fill',instruction:'',
+ text:'Section C',
+ answers:['ix'],answer:'ix',
+ hint:'Section C: devices with modes that adapt to car, party, or windy-outdoor sound environments — "a hearing aid that can adjust itself to different environments" (ix).'},
+
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Section D',
+ answers:['iv'],answer:'iv',
+ hint:'Section D: Turner "anticipates... two more years of simulating" before working with device specialists — further research needed (iv).'},
+
+{id:18,passage:1,type:'fill',instruction:'',
+ text:'Section E',
+ answers:['vii'],answer:'vii',
+ hint:'Section E: better, more selectable distraction sounds for tinnitus sufferers — "A more effective way to take attention away from a hearing problem" (vii).'},
+
+{id:19,passage:1,type:'fill',instruction:'',
+ text:'Section F',
+ answers:['ii'],answer:'ii',
+ hint:'Section F: applications for phone calls and video-sharing websites — "Uses for Turner\'s research in media and communications" (ii).'},
+
+// Q20-23: Summary completion, NO MORE THAN TWO WORDS
+{id:20,passage:1,type:'fill',
+ instruction:'Questions 20–23: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'Although sounds are never _______ , he believes they do share some similarities.',
+ answers:['repeated'],answer:'repeated',
+ hint:'"No two rain sounds are identical because the precise arrangement of falling water droplets is never repeated."'},
+
+{id:21,passage:1,type:'fill',instruction:'',
+ text:'He and his colleagues have worked on a mathematical system using _______ which replicate how we hear sounds.',
+ answers:['algorithms'],answer:'algorithms',
+ hint:'"Turner and his colleagues... developed algorithms that mimic what the brain is doing."'},
+
+{id:22,passage:1,type:'fill',instruction:'',
+ text:'Many different sounds can be described using a limited number of _______ .',
+ answers:['statistics'],answer:'statistics',
+ hint:'"It seems that a relatively small set of statistics is sufficient to describe a large number of sounds."'},
+
+{id:23,passage:1,type:'fill',instruction:'',
+ text:'They have now developed a system that can distinguish _______ from other sounds.',
+ answers:['speech'],answer:'speech',
+ hint:'"The system... is capable of telling the difference between speech and other types of sound."'},
+
+// Q24-26: MCQ
+{id:24,passage:1,type:'mcq',
+ instruction:'Questions 24–26: Choose the correct letter, A, B, C or D.',
+ text:"Turner's team are now planning a new development involving a device which could",
+ answer:'B',
+ options:[
+   'A. allow sound to be heard at a greater distance.',
+   'B. adapt itself to different kinds of background noise.',
+   'C. allow a user to remove all types of sound completely.',
+   'D. adapt itself to disorders involving other senses.'
+ ],
+ hint:'"Future devices will have several different modes... The device might intelligently select an appropriate mode based on the characteristics of the incoming sound."'},
+
+{id:25,passage:1,type:'mcq',instruction:'',
+ text:'In section E, a stream, waves and leaves are examples of the sounds that tinnitus sufferers',
+ answer:'A',
+ options:[
+   'A. can currently use to help their condition.',
+   'B. might choose to use if they were available.',
+   'C. hear in their ears as a result of their condition.',
+   'D. find to be the most natural solutions to their problem.'
+ ],
+ hint:'"At present, people with tinnitus sometimes use environmental sound generators... a gently flowing stream, waves lapping on the seashore, or leaves rustling" — already in current use.'},
+
+{id:26,passage:1,type:'mcq',instruction:'',
+ text:"The writer refers to 'a busy roadside on a windy day' in section F to illustrate that",
+ answer:'A',
+ options:[
+   'A. unwanted noise could be erased from video recordings.',
+   'B. some environments are difficult for the hearing-impaired.',
+   'C. when noises are combined in a video they are difficult to erase.',
+   'D. people must cooperate in order to learn how to apply the technology.'
+ ],
+ hint:'"A video containing a conversation that takes place by a busy roadside on a windy day could be made more intelligible by isolating the speech from the noises."'},
+
+// ── PASSAGE 3 ──────────────────────────────
+// Q27-31: YES/NO/NOT GIVEN
+{id:27,passage:2,type:'yesno',
+ instruction:'Questions 27–31: Do the following statements agree with the views of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.',
+ text:'Early guesses probably greatly over-estimated the total number of species on Earth.',
+ answer:'YES',
+ hint:'"Some early guesses of 30 million or even 100 million have been replaced... with more reliable ones of somewhere between five to ten million species" — the early guesses were too high.'},
+
+{id:28,passage:2,type:'yesno',instruction:'',
+ text:'Primates play a significant role in the ecology of our planet.',
+ answer:'NO',
+ hint:'"Appealing they may be, but in the great ecological scheme of things, they are fairly useless" — referring to primates like the slender loris.'},
+
+{id:29,passage:2,type:'yesno',instruction:'',
+ text:'We still have a great deal to learn about the importance of pollination.',
+ answer:'NOT GIVEN',
+ hint:'The writer describes pollination\'s importance in detail but never states how much more there is left to learn about it.'},
+
+{id:30,passage:2,type:'yesno',instruction:'',
+ text:"Some people may be unaware that the world's insects consume more food overall than mammals.",
+ answer:'YES',
+ hint:'"It may come as a surprise to many that all the herds of grazing ungulates... are entirely \'out-munched\'... by myriads of tiny insects."'},
+
+{id:31,passage:2,type:'yesno',instruction:'',
+ text:'It will take a long time for us to learn the effects of habitat loss and extensive pesticide use.',
+ answer:'NO',
+ hint:'"We may find out sooner rather than later" — the opposite of taking a long time.'},
+
+// Q32-36: Complete each sentence with the correct ending (bank rendered before Q32)
+{id:32,passage:2,type:'fill',
+ instruction:'Questions 32–36: Complete each sentence with the correct ending, A–F, below.',
+ text:'Scientists have recently revised their views regarding',
+ answers:['c','C'],answer:'C',
+ hint:'Ending C: "how many different animal species are currently in existence" — early guesses of species numbers have been revised.'},
+
+{id:33,passage:2,type:'fill',instruction:'',
+ text:'There is absolutely no doubt about',
+ answers:['e','E'],answer:'E',
+ hint:'Ending E: "the predominance of invertebrates among the Earth\'s species" — "one thing which is indisputable."'},
+
+{id:34,passage:2,type:'fill',instruction:'',
+ text:'Almost every study done so far has indicated',
+ answers:['a','A'],answer:'A',
+ hint:'Ending A: "a fall in the total number and variety of insects in the world" — "points to a steady decline in insect species\' richness and abundance."'},
+
+{id:35,passage:2,type:'fill',instruction:'',
+ text:'A lot of research on insect groups has focused on',
+ answers:['f','F'],answer:'F',
+ hint:'Ending F: "the declining numbers of bees and butterflies" — "well-studied insect groups such as bees and butterflies."'},
+
+{id:36,passage:2,type:'fill',instruction:'',
+ text:'The rate at which tropical forests are being lost can help us calculate',
+ answers:['d','D'],answer:'D',
+ hint:'Ending D: "how long it will be before the Earth\'s biodiversity is drastically reduced" — losing tropical forests means losing "more than half of all its living species."'},
+
+// Q37-40: MCQ
+{id:37,passage:2,type:'mcq',
+ instruction:'Questions 37–40: Choose the correct letter, A, B, C or D.',
+ text:'In the third paragraph, the writer refers to a particular slide to emphasise',
+ answer:'C',
+ options:[
+   'A. the predominance of insects in the world.',
+   'B. a common misunderstanding about global biodiversity.',
+   'C. our instinctive reaction towards certain types of animals.',
+   'D. the main distinction between vertebrates and invertebrates.'
+ ],
+ hint:'"No prizes for guessing the first, and probably the only, thing audiences look at. It seems we can\'t help ourselves" — an instinctive reaction.'},
+
+{id:38,passage:2,type:'mcq',instruction:'',
+ text:"What does 'they' in the third paragraph refer to?",
+ answer:'D',
+ options:[
+   'A. lectures about animals given by the writer',
+   'B. audiences who attend events focused on insect life',
+   'C. images which depict various different types of species',
+   'D. creatures which appear comparatively similar to humans'
+ ],
+ hint:'"Appealing they may be, but... they are fairly useless" refers back to primates like the loris — "those with a passing resemblance to ourselves."'},
+
+{id:39,passage:2,type:'mcq',instruction:'',
+ text:"What does the writer imply about 'big' science in the final paragraph?",
+ answer:'A',
+ options:[
+   'A. It should not be our priority at the moment.',
+   'B. It serves no useful purpose in the long term.',
+   'C. It will cost an unreasonable amount in the future.',
+   'D. It results from our natural curiosity about the world.'
+ ],
+ hint:'"But do we have to do it right now?... Perhaps what we actually need is a bit more \'bug\' science" — big science should wait.'},
+
+{id:40,passage:2,type:'mcq',instruction:'',
+ text:'What point does the writer make overall about insects?',
+ answer:'B',
+ options:[
+   'A. Certain insect species are more at risk than others.',
+   'B. Insects are more important than many people realise.',
+   'C. There is an interdependence between different insect species.',
+   'D. The ecological role of insects is likely to change in the near future.'
+ ],
+ hint:'The whole passage argues insects are ecologically dominant and essential, despite being widely overlooked in favour of more "appealing" vertebrates.'},
+];
+
+const BAND_TABLE=[
+  {min:39,max:40,band:9,desc:'Expert User'},{min:37,max:38,band:8.5,desc:'Very Good User'},
+  {min:35,max:36,band:8,desc:'Very Good User'},{min:33,max:34,band:7.5,desc:'Good User'},
+  {min:30,max:32,band:7,desc:'Good User'},{min:27,max:29,band:6.5,desc:'Competent User'},
+  {min:23,max:26,band:6,desc:'Competent User'},{min:19,max:22,band:5.5,desc:'Modest User'},
+  {min:15,max:18,band:5,desc:'Modest User'},{min:13,max:14,band:4.5,desc:'Limited User'},
+  {min:10,max:12,band:4,desc:'Limited User'},{min:8,max:9,band:3.5,desc:'Extremely Limited'},
+  {min:6,max:7,band:3,desc:'Extremely Limited'},{min:4,max:5,band:2.5,desc:'Intermittent User'}
+];
+
+// ═══════════════════════════════════════════
+// ICON HELPER
+// ═══════════════════════════════════════════
+function SVG(path,o){o=o||{};const s=o.s||16;return `<svg class="ic" viewBox="0 0 24 24" width="${s}" height="${s}" fill="${o.f||'none'}" stroke="${o.st||'currentColor'}" stroke-width="${o.w||2}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;}
+const ICONS={
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  pin:'<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+
+// ═══════════════════════════════════════════
+// ANSWER GRADING
+// ═══════════════════════════════════════════
+function normalise(str){
+  return str.toLowerCase().trim()
+    .replace(/[-–—]/g,' ').replace(/\s+/g,' ').replace(/\.$/,'');
+}
+const NUM_MAP={'one':'1','two':'2','three':'3','four':'4','five':'5',
+  'six':'6','seven':'7','eight':'8','nine':'9','ten':'10',
+  '1':'one','2':'two','3':'three','4':'four','5':'five',
+  '6':'six','7':'seven','8':'eight','9':'nine','10':'ten'};
+function expandNums(str){
+  return str.replace(/\b(\w+)\b/g,w=>NUM_MAP[w.toLowerCase()]||w);
+}
+function isCorrect(q,userAnswer){
+  if(!userAnswer||!userAnswer.trim())return false;
+  const ua=normalise(userAnswer);
+  const accepted=[];
+  if(q.answers)q.answers.forEach(a=>accepted.push(normalise(a)));
+  else{
+    accepted.push(normalise(q.answer));
+    if(q.altAnswer)accepted.push(normalise(q.altAnswer));
+  }
+  for(const a of accepted){
+    if(ua===a)return true;
+    if(expandNums(ua)===a||ua===expandNums(a))return true;
+  }
+  return false;
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentPassage=0,answers={},flags={},timerSec=3600,
+    timerInt=null,testDone=false,reviewModeOn=false;
+
+// ═══════════════════════════════════════════
+// BEGIN TEST
+// ═══════════════════════════════════════════
+function beginTest(){
+  document.getElementById('start-screen').style.display='none';
+  loadSaved();
+  renderPassage(0);renderQuestions(0);buildPalette();startTimer();initScrollProgress();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload=()=>{
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    try { tg.ready(); } catch(e) {}
+    try { tg.expand(); } catch(e) {}
+    try { if (tg.enableClosingConfirmation) tg.enableClosingConfirmation(); } catch(e) {}
+    try { if (tg.disableVerticalSwipes)     tg.disableVerticalSwipes(); } catch(e) {}
+    try { if (tg.requestFullscreen)         tg.requestFullscreen(); } catch(e) {}
+  }
+  const th=localStorage.getItem('ielts_theme');
+  if(th==='light'){document.body.className='';}else{document.body.className='dark';}
+  document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>{
+    const isDark=/dark/.test(b.getAttribute('onclick'));
+    b.classList.toggle('active',isDark?document.body.classList.contains('dark'):!document.body.classList.contains('dark'));
+  });
+  const sp=document.getElementById('splitter');
+  const pp=document.getElementById('passage-panel');
+  const qp=document.getElementById('questions-panel');
+  let drag=false;
+  sp.addEventListener('mousedown',e=>{drag=true;sp.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();});
+  document.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    const m=document.getElementById('main'),r=m.getBoundingClientRect();
+    const lw=Math.min(Math.max(e.clientX-r.left,220),r.width-234);
+    pp.style.flex='none';pp.style.width=lw+'px';
+    qp.style.flex='none';qp.style.width=(r.width-7-lw)+'px';
+    updateRulerWidth();
+  });
+  document.addEventListener('mouseup',()=>{if(!drag)return;drag=false;sp.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
+  pp.addEventListener('mousemove',e=>{
+    const r=document.getElementById('ruler');
+    if(r.style.display==='block'){r.style.top=(e.clientY-14)+'px';updateRulerWidth();}
+  });
+  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();}});
+  document.addEventListener('contextmenu',onContextMenu);
+  document.addEventListener('click',e=>{
+    hideCtx();
+    if(!document.getElementById('settings-panel').contains(e.target)&&!e.target.closest('.hbtn[onclick*="toggleSettings"]'))
+      document.getElementById('settings-panel').style.display='none';
+  });
+};
+
+function loadSaved(){
+  try{const s=localStorage.getItem('ielts_t11_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t11_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t11_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t11_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+}
+function saveAll(){
+  try{
+    localStorage.setItem('ielts_t11_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t11_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t11_timer',timerSec);
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════
+// RENDER PASSAGE
+// ═══════════════════════════════════════════
+function renderPassage(idx){
+  const p=PASSAGES[idx];
+  let h=`<div class="passage-meta">${p.title}</div>`;
+  if(p.timeHint)h+=`<div class="passage-time-hint">${SVG(ICONS.clock,{s:13})} ${p.timeHint}</div>`;
+  h+=`<div class="passage-heading">${p.heading}</div>`;
+  if(p.subheading)h+=`<div class="passage-subheading">${p.subheading}</div>`;
+  h+=`<hr class="passage-divider"><div class="passage-text">`;
+  p.paragraphs.forEach(para=>{
+    h+=`<p>${para.label?`<span class="para-label">${para.label}</span>`:''}${para.text}</p>`;
+  });
+  h+=`</div>`;
+  if(p.footnote)h+=`<div class="footnote">${p.footnote}</div>`;
+  document.getElementById('passage-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// SHARED BANK RENDERERS
+// ═══════════════════════════════════════════
+function renderPersonBank(people,title){
+  let h=`<div class="person-bank"><div class="person-bank-title">${title}</div><div class="person-bank-grid">`;
+  people.forEach(p=>{h+=`<div class="pb-item"><span class="pb-letter">${p.letter}</span><span>${p.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderWordBank(items,title){
+  let h=`<div class="word-bank"><div class="word-bank-title">${title}</div><div class="word-bank-grid">`;
+  items.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTION BLOCK
+// ═══════════════════════════════════════════
+function renderQ(q){
+  const val=answers[q.id]||'';
+  const fl=!!flags[q.id];
+  let inner='';
+  if(q.type==='fill'){
+    inner=`<div class="q-text">${q.text}</div><input class="q-input" id="q${q.id}" type="text" value="${val.replace(/"/g,'&quot;')}" placeholder="Type your answer…" oninput="setAnswer(${q.id},this.value)">`;
+  }else if(q.type==='yesno'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['YES','NO','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='tfng'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['TRUE','FALSE','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='mcq'){
+    const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
+    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
+  }
+  return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
+    <div class="q-num">Question ${q.id}</div>${inner}
+    <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════
+// ANSWER HANDLERS
+// ═══════════════════════════════════════════
+function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
+function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
+function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
+function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
+function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
+
+// ═══════════════════════════════════════════
+// PALETTE
+// ═══════════════════════════════════════════
+function buildPalette(){
+  document.getElementById('palette-nums').innerHTML=
+    Array.from({length:40},(_,i)=>`<button class="pal-num" id="pal${i+1}" onclick="jumpToQ(${i+1})">${i+1}</button>`).join('');
+  updatePalette();
+}
+function updatePalette(){
+  for(let i=1;i<=40;i++){
+    const e=document.getElementById('pal'+i);if(!e)continue;
+    e.classList.remove('done','flagged');
+    if(flags[i])e.classList.add('flagged');
+    else if(answers[i]&&answers[i].trim())e.classList.add('done');
+  }
+}
+function jumpToQ(id){
+  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
+  if(q.passage!==currentPassage)switchPassage(q.passage);
+  setTimeout(()=>{
+    const el=document.getElementById('qblock'+id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
+    document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
+    const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
+  },100);
+}
+
+// ═══════════════════════════════════════════
+// PASSAGE SWITCH
+// ═══════════════════════════════════════════
+function switchPassage(idx){
+  currentPassage=idx;
+  renderPassage(idx);renderQuestions(idx);
+  if(reviewModeOn)applyReviewMarkup();
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('passage-panel').scrollTop=0;
+  document.getElementById('questions-panel').scrollTop=0;
+  document.getElementById('scroll-bar').style.width='0%';
+  updatePalette();
+}
+
+function initScrollProgress(){
+  const pp=document.getElementById('passage-panel');
+  pp.addEventListener('scroll',()=>{
+    const s=pp.scrollHeight-pp.clientHeight;
+    document.getElementById('scroll-bar').style.width=(s>0?(pp.scrollTop/s*100):100)+'%';
+  });
+}
+
+function flashUnanswered(){
+  QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
+    const el=document.getElementById('pal'+q.id);
+    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+  });
+}
+
+function backToResults(){
+  document.getElementById('back-to-results').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+function startTimer(){
+  updateTimerDisplay();
+  timerInt=setInterval(()=>{timerSec--;saveAll();updateTimerDisplay();if(timerSec<=0){clearInterval(timerInt);submitTest();}},1000);
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  const b=document.getElementById('timer-box'),t=document.getElementById('timer-txt');
+  if(t)t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  b.classList.remove('warn','critical');
+  if(timerSec<=300)b.classList.add('critical');
+  else if(timerSec<=600)b.classList.add('warn');
+}
+
+// ═══════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════
+function toggleSettings(){const p=document.getElementById('settings-panel');p.style.display=p.style.display==='block'?'none':'block';}
+function setTheme(theme,btn){document.body.className=theme==='dark'?'dark':'';document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');localStorage.setItem('ielts_theme',theme);}
+function setFont(size,btn){document.body.style.fontSize=size+'px';document.querySelectorAll('.sbtn-fs').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;document.getElementById('ruler').style.display=on?'block':'none';if(on)updateRulerWidth();}
+function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
+function saveNotes(){try{localStorage.setItem('ielts_t11_notes',document.getElementById('notes-ta').value);}catch(e){}}
+
+// ═══════════════════════════════════════════
+// HIGHLIGHTING
+// ═══════════════════════════════════════════
+let savedRange=null,activeHlColor='yellow';
+function inPassage(el){return document.getElementById('passage-panel').contains(el);}
+function getSelRange(){const sel=window.getSelection();if(sel&&sel.toString().trim().length>0)return sel.getRangeAt(0).cloneRange();return null;}
+function onContextMenu(e){
+  const sel=window.getSelection();
+  if(sel&&sel.toString().trim().length>0&&inPassage(e.target)){e.preventDefault();savedRange=sel.getRangeAt(0).cloneRange();showCtx(e.clientX,e.clientY);}
+  else hideCtx();
+}
+document.addEventListener('mouseup',e=>{
+  if(!e.shiftKey)return;
+  const r=getSelRange();if(!r)return;
+  const anchor=window.getSelection().anchorNode;
+  if(!anchor||!inPassage(anchor))return;
+  savedRange=r;applyHighlight(activeHlColor);
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();return;}
+  if(!e.shiftKey||e.ctrlKey||e.altKey||e.metaKey)return;
+  const r=getSelRange();
+  if(e.key==='Y'||e.key==='y'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='yellow';applyHighlight('yellow');}}
+  if(e.key==='G'||e.key==='g'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='green';applyHighlight('green');}}
+  if(e.key==='R'||e.key==='r'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;removeHighlight();}}
+  if(['ArrowLeft','ArrowRight'].includes(e.key)){const f=document.activeElement;if(f&&f.classList.contains('tfng-btn')){const s=[...f.closest('.tfng-btns').querySelectorAll('.tfng-btn')];const i=s.indexOf(f);const n=e.key==='ArrowRight'?s[i+1]:s[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+  if(['ArrowUp','ArrowDown'].includes(e.key)){const f=document.activeElement;if(f&&f.type==='radio'){const rs=[...document.querySelectorAll(`[name="${f.name}"]`)];const i=rs.indexOf(f);const n=e.key==='ArrowDown'?rs[i+1]:rs[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+});
+function showCtx(x,y){const m=document.getElementById('ctx-menu');m.style.display='block';m.style.left=Math.min(x,window.innerWidth-200)+'px';m.style.top=Math.min(y,window.innerHeight-130)+'px';}
+function hideCtx(){document.getElementById('ctx-menu').style.display='none';}
+function applyHighlight(color){
+  hideCtx();if(!savedRange)return;activeHlColor=color;
+  const span=document.createElement('span');span.className='hl-'+color;span.setAttribute('data-hl',color);
+  try{savedRange.surroundContents(span);}catch(e){const frag=savedRange.extractContents();span.appendChild(frag);savedRange.insertNode(span);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+function removeHighlight(){
+  hideCtx();if(!savedRange)return;
+  const c=savedRange.commonAncestorContainer,s=c.nodeType===3?c.parentElement:c;
+  if(s&&s.dataset&&s.dataset.hl){const p=s.parentNode;while(s.firstChild)p.insertBefore(s.firstChild,s);p.removeChild(s);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+
+// ═══════════════════════════════════════════
+// SUBMIT & RESULTS
+// ═══════════════════════════════════════════
+function submitTest(){
+  if(testDone)return;
+  const un=QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).length;
+  if(un>0){flashUnanswered();if(!confirm(`${un} question(s) unanswered. Submit anyway?`))return;}
+  clearInterval(timerInt);testDone=true;showResults();
+}
+
+function showResults(){
+  let correct=0,wrong=0,skip=0;
+  const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
+  QUESTIONS.forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(!ua){skip++;bp[q.passage].skip++;}
+    else if(ok){correct++;bp[q.passage].correct++;}
+    else{wrong++;bp[q.passage].wrong++;}
+  });
+  let band=2.5,desc='Intermittent User';
+  for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
+  document.getElementById('res-band').textContent=band;
+  document.getElementById('res-band-desc').textContent=`${desc} — ${correct} correct out of 40`;
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=wrong;
+  document.getElementById('res-skip').textContent=skip;
+  document.getElementById('res-pct').textContent=Math.round(correct/40*100)+'%';
+  document.getElementById('p-breakdown').innerHTML=PASSAGES.map((p,i)=>`
+    <div class="p-card"><h4>${p.title}: ${p.heading}</h4>
+    <div class="p-card-stats">
+      <span style="color:var(--correct);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:13})} ${bp[i].correct}</span>
+      <span style="color:var(--wrong);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.x,{s:13})} ${bp[i].wrong}</span>
+      <span style="color:var(--text3)">— ${bp[i].skip} skipped</span>
+    </div></div>`).join('');
+  document.getElementById('review-grid').innerHTML=QUESTIONS.map(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    const cls=!ua?'unanswered':ok?'correct':'wrong';
+    return`<div class="review-card ${cls}">
+      <div class="rev-q">Q${q.id}</div>
+      <div class="rev-yours">${ua?`Your: ${ua}`:'Not answered'}</div>
+      ${!ua?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`:ok?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} Correct</div>`:`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// REVIEW MODE
+// ═══════════════════════════════════════════
+function reviewMode(){
+  reviewModeOn=true;
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('back-to-results').style.display='block';
+  switchPassage(0);
+}
+
+function applyReviewMarkup(){
+  QUESTIONS.filter(q=>q.passage===currentPassage).forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(q.type==='fill'){
+      const el=document.getElementById('q'+q.id);
+      if(el){
+        el.classList.add(ok?'correct-ans':'wrong-ans');el.disabled=true;
+        el.parentNode.querySelectorAll('.answer-reveal,.answer-hint').forEach(o=>o.remove());
+        if(!ok){const r=document.createElement('div');r.className='answer-reveal';r.innerHTML=SVG(ICONS.check,{s:12})+' ';r.appendChild(document.createTextNode('Correct: '+q.answer));el.parentNode.insertBefore(r,el.nextSibling);}
+        if(q.hint){const h=document.createElement('div');h.className='answer-hint';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const ref=el.parentNode.querySelector('.answer-reveal');el.parentNode.insertBefore(h,(ref?ref:el).nextSibling);}
+      }
+    }else if(q.type==='tfng'||q.type==='yesno'){
+      document.querySelectorAll(`#qblock${q.id} .tfng-btn`).forEach(b=>{
+        if(b.textContent===q.answer)b.classList.add('correct-ans');
+        else if(b.classList.contains('selected'))b.classList.add('wrong-ans');
+      });
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));block.querySelector('.tfng-btns').after(h);}}
+    }else if(q.type==='mcq'){
+      document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// RESTART
+// ═══════════════════════════════════════════
+function restartTest(){
+  if(!confirm('Restart? All answers and the timer will be reset.'))return;
+  ['ielts_t11_answers','ielts_t11_flags','ielts_t11_timer','ielts_t11_notes'].forEach(k=>localStorage.removeItem(k));
+  answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
+  clearInterval(timerInt);timerInt=null;
+  const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
+  document.getElementById('notes-ta').value='';
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('settings-panel').style.display='none';
+  document.getElementById('back-to-results').style.display='none';
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.getElementById('start-screen').style.display='flex';
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTIONS (per-test bank injection)
+// ═══════════════════════════════════════════
+function renderQuestions(pIdx){
+  const p=PASSAGES[pIdx];
+  const qs=QUESTIONS.filter(q=>q.passage===pIdx);
+  let h=`<div class="q-range-label">Questions ${p.qRange[0]}–${p.qRange[1]}</div>`;
+
+  let lastInstr='';
+  qs.forEach(q=>{
+    if(q.instruction&&q.instruction!==lastInstr){
+      h+=`<div class="q-section-title">${q.instruction}</div>`;
+      lastInstr=q.instruction;
+      // Passage 2: headings bank before Q14
+      if(pIdx===1 && q.id===14){
+        h+=renderWordBank(HEADINGS_P2,'List of Headings — i to ix');
+      }
+      // Passage 3: sentence-ending bank before Q32
+      if(pIdx===2 && q.id===32){
+        h+=renderPersonBank(ENDINGS_P3,'Sentence Endings — A to F');
+      }
+    }
+    h+=renderQ(q);
+  });
+  document.getElementById('questions-content').innerHTML=h;
+}
+</script>
+</body>
+</html>

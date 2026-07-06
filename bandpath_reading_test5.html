@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BandPath — IELTS Academic Reading Mock Test 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f2f6fb;--bg3:#e6edf6;--text:#12233b;--text2:#3a4a63;--text3:#7488a3;
+  --border:#d3deea;--accent:#0090c4;--accent2:#1e9e56;
+  --header:#0f2744;--flag:#e0870f;--correct:#1e9e56;--wrong:#d64545;
+  --palette-done:#1e9e56;--palette-flag:#e0870f;--palette-active:#0090c4;
+  --hl-yellow:#ffe066;--hl-yellow-text:#1a1a2e;
+  --hl-green:#a8f0c6;--hl-green-text:#0a2e1a;
+  --ruler-bg:rgba(0,144,196,.1);--ruler-border:rgba(0,144,196,.3);
+  --shadow:0 2px 12px rgba(15,39,68,.08);
+  --glow:0 0 0 rgba(0,0,0,0);
+  --card-grad:var(--bg2);
+}
+body.dark{
+  --bg:#0f2744;--bg2:#162d4a;--bg3:#1e3a57;--text:#eaf2fb;--text2:#9fb4cc;--text3:#6b83a0;
+  --border:#1e3a57;--accent:#00C4FF;--accent2:#2ed573;--header:#0a1d33;
+  --flag:#ffa502;--correct:#2ed573;--wrong:#ff6b6b;
+  --palette-done:#2ed573;--palette-flag:#ffa502;--palette-active:#00C4FF;
+  --hl-yellow:#c99a12;--hl-yellow-text:#fff8e1;
+  --hl-green:#1a7a44;--hl-green-text:#d6ffe6;
+  --ruler-bg:rgba(0,196,255,.1);--ruler-border:rgba(0,196,255,.4);
+  --shadow:0 8px 30px rgba(0,0,0,.45);
+  --glow:0 0 22px -6px rgba(0,196,255,.5);
+  --card-grad:linear-gradient(165deg,rgba(30,58,87,.55),rgba(22,45,74,.85));
+}
+body{font-family:'Plus Jakarta Sans',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:16px;transition:background .25s,color .25s;overflow:hidden}
+body.dark{background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+svg.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* START SCREEN */
+#start-screen{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#start-screen::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,255,.22),transparent 65%);filter:blur(10px);pointer-events:none}
+.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);backdrop-filter:blur(12px)}
+body:not(.dark) .start-box{background:var(--bg);box-shadow:0 24px 64px rgba(15,39,68,.28)}
+.start-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.start-brand-badge{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.32);box-shadow:0 0 34px -8px rgba(0,196,255,.6)}
+.start-brand-name{font-size:27px;font-weight:800;letter-spacing:-.5px;color:#fff}
+body:not(.dark) .start-brand-name{color:var(--text)}
+.start-brand-name span{color:#00C4FF}
+.start-logo{font-size:12px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.start-title{font-size:25px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.2;letter-spacing:-.3px}
+.start-subtitle{font-size:14px;color:var(--text3);margin-bottom:30px}
+.start-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 8px}
+body.dark .info-card{background:rgba(22,45,74,.5)}
+.info-val{font-size:27px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+.info-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.start-rules{text-align:left;background:var(--bg2);border-radius:14px;padding:16px 20px;margin-bottom:30px}
+body.dark .start-rules{background:rgba(10,29,51,.5);border:1px solid var(--border)}
+.start-rules p{font-size:13px;color:var(--text2);line-height:1.85;padding-left:4px;display:flex;gap:9px;align-items:flex-start}
+.start-rules p svg{margin-top:3px;color:var(--accent)}
+#start-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c;border:none;padding:16px 48px;border-radius:14px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.3px;transition:opacity .15s,transform .15s,box-shadow .15s;width:100%;box-shadow:0 16px 36px -12px rgba(0,196,255,.7)}
+#start-btn:hover{transform:translateY(-2px);box-shadow:0 22px 44px -12px rgba(0,196,255,.8)}
+body:not(.dark) #start-btn{color:#fff;background:linear-gradient(120deg,#0090c4,#0f2744)}
+
+/* HEADER */
+#header{background:var(--header);padding:0 14px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:1000;height:54px;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.06)}
+#logo-area{display:flex;align-items:center;gap:9px;min-width:120px}
+#logo-area .lg-badge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 16px -5px rgba(0,196,255,.55)}
+#logo-area .lg-name{font-weight:800;font-size:16px;color:#fff;letter-spacing:-.3px}
+#logo-area .lg-name span{color:#00C4FF}
+#passage-tabs{display:flex;gap:3px;background:rgba(255,255,255,.07);border-radius:9px;padding:3px}
+.ptab{background:transparent;color:rgba(255,255,255,.68);border:none;padding:6px 15px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+.ptab:hover{color:#fff;background:rgba(255,255,255,.1)}
+.ptab.active{background:#00C4FF;color:#06243c;font-weight:700;box-shadow:0 0 16px -4px rgba(0,196,255,.7)}
+#header-right{display:flex;align-items:center;gap:7px}
+#timer-box{display:flex;align-items:center;gap:7px;background:rgba(255,107,107,.16);color:#ff8a8a;border:1px solid rgba(255,107,107,.35);font-size:18px;font-weight:800;padding:5px 15px;border-radius:9px;letter-spacing:1.5px;min-width:104px;text-align:center;justify-content:center;font-variant-numeric:tabular-nums}
+#timer-box svg{opacity:.85}
+#timer-box.warn{background:rgba(255,165,2,.16);color:#ffb938;border-color:rgba(255,165,2,.4)}
+#timer-box.critical{background:rgba(255,107,107,.2);color:#ff6b6b;border-color:rgba(255,107,107,.5);animation:blink .9s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.hbtn{background:rgba(255,255,255,.1);color:#fff;border:none;width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.hbtn:hover{background:rgba(0,196,255,.22)}
+
+/* SETTINGS */
+#settings-panel{display:none;position:fixed;top:58px;right:12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;z-index:2000;min-width:230px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+#settings-panel h3{font-size:13px;margin-bottom:14px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.sg{margin-bottom:14px}
+.sg label{display:block;font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.sg-row{display:flex;gap:6px;flex-wrap:wrap}
+.sbtn{border:2px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.sbtn-fs{min-width:34px;text-align:center}
+
+/* MAIN LAYOUT */
+#main{margin-top:52px;display:flex;height:calc(100vh - 96px);overflow:hidden}
+#passage-panel{flex:1;min-width:200px;overflow-y:auto;padding:22px 28px 22px 24px;background:var(--bg);position:relative}
+#splitter{width:7px;background:var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s;user-select:none}
+#splitter:hover,#splitter.dragging{background:var(--accent)}
+#splitter::after{content:'';width:4px;height:26px;border-radius:3px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/4px 7px repeat-y;color:var(--text3);opacity:.65;pointer-events:none}
+#splitter:hover::after,#splitter.dragging::after{color:#fff;opacity:.9}
+#questions-panel{flex:1;min-width:200px;overflow-y:auto;padding:16px;background:var(--bg2)}
+
+/* PASSAGE */
+.passage-meta{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.8}
+.passage-time-hint{font-size:12px;color:var(--text3);margin-bottom:10px;padding:5px 10px;background:var(--bg3);border-radius:5px;border-left:3px solid var(--accent)}
+.passage-heading{font-size:21px;font-weight:800;margin-bottom:4px;line-height:1.25;color:var(--text)}
+.passage-subheading{font-size:14px;font-style:italic;color:var(--text3);margin-bottom:18px;line-height:1.5}
+.passage-divider{border:none;border-top:2px solid var(--border);margin-bottom:18px}
+.passage-text p{margin-bottom:16px;line-height:1.85;color:var(--text);text-align:justify}
+.para-label{font-weight:800;color:var(--accent);margin-right:6px;font-size:15px}
+.footnote{font-size:13px;color:var(--text3);margin-top:18px;border-top:1px solid var(--border);padding-top:10px;font-style:italic}
+
+/* HIGHLIGHT */
+.hl-yellow{background:var(--hl-yellow);border-radius:2px;padding:1px 0;color:var(--hl-yellow-text)}
+.hl-green{background:var(--hl-green);border-radius:2px;padding:1px 0;color:var(--hl-green-text)}
+#ctx-menu{display:none;position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:9px;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:3000;min-width:190px;overflow:hidden;padding:4px 0}
+.ctx-item{padding:9px 16px;cursor:pointer;font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;transition:background .1s;justify-content:space-between}
+.ctx-item:hover{background:var(--bg3)}
+.ctx-item-left{display:flex;align-items:center;gap:9px}
+.ctx-dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0}
+.ctx-key{font-size:10px;opacity:.5;font-family:monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;border:1px solid var(--border)}
+
+/* WORD BANK */
+.word-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.word-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.word-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.wb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.wb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* QUESTIONS */
+.q-section-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 6px;padding:7px 11px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent)}
+.q-range-label{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
+.q-instruction{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6;padding:9px 12px;background:var(--bg);border-left:3px solid var(--flag);border-radius:0 6px 6px 0}
+.q-block{margin-bottom:11px;padding:11px 13px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;position:relative;transition:border-color .15s,box-shadow .15s}
+.q-block:hover{box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.q-block.flagged{border-left:4px solid var(--flag)}
+.q-block.answered{border-left:4px solid var(--accent2)}
+.q-num{font-weight:700;font-size:12px;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.q-text{font-size:14px;color:var(--text);margin-bottom:9px;line-height:1.55}
+.q-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:7px 11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;transition:border-color .15s}
+.q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,144,196,.12)}
+.q-options{display:flex;flex-direction:column;gap:5px}
+.q-option{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);border:1.5px solid transparent;transition:all .12s}
+.q-option:hover{background:var(--bg3)}
+.q-option input{margin-top:2px;cursor:pointer;accent-color:var(--accent);width:15px;height:15px;flex-shrink:0}
+.q-option.selected{background:rgba(0,144,196,.08);border-color:rgba(0,144,196,.28)}
+body.dark .q-option.selected{background:rgba(0,196,255,.1);border-color:rgba(0,196,255,.3)}
+.tfng-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tfng-btn{border:1.5px solid var(--border);background:var(--bg2);color:var(--text);padding:6px 13px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;transition:all .12s;letter-spacing:.3px}
+.tfng-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tfng-btn.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.flag-btn{position:absolute;top:9px;right:9px;background:none;border:none;cursor:pointer;font-size:15px;color:var(--text3);padding:2px 5px;border-radius:4px;line-height:1;transition:color .15s}
+.flag-btn:hover{color:var(--flag)}
+.flag-btn.active{color:var(--flag)}
+
+/* MATCH person bank */
+.person-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.person-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.person-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.pb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.pb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* PALETTE */
+#palette-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1.5px solid var(--border);padding:5px 10px;z-index:800;display:flex;align-items:center;gap:4px;overflow-x:auto;height:44px}
+#palette-bar::-webkit-scrollbar{height:3px}
+#palette-bar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.pal-label{font-size:10px;color:var(--text3);font-weight:700;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px}
+.pal-num{width:25px;height:25px;border-radius:5px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s}
+.pal-num:hover{border-color:var(--accent);color:var(--accent)}
+.pal-num.done{background:var(--palette-done);color:#fff;border-color:var(--palette-done)}
+.pal-num.flagged{background:var(--palette-flag);color:#fff;border-color:var(--palette-flag)}
+.pal-num.active{border:2.5px solid var(--palette-active);box-shadow:0 0 0 2px rgba(0,196,255,.25),0 0 12px -2px rgba(0,196,255,.6)}
+body.dark .pal-num.done{box-shadow:0 0 12px -3px rgba(46,213,115,.6)}
+body.dark .pal-num.flagged{box-shadow:0 0 12px -3px rgba(255,165,2,.6)}
+.pal-legend{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);flex-shrink:0;white-space:nowrap;margin-left:2px}
+.pal-dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
+#submit-btn{display:flex;align-items:center;gap:7px;background:linear-gradient(120deg,#ff7a6b,#e0504a);color:#fff;border:none;padding:7px 18px;border-radius:9px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;letter-spacing:.3px;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 20px -8px rgba(255,107,107,.6)}
+#submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px -8px rgba(255,107,107,.75)}
+
+/* NOTES */
+#notes-toggle{position:fixed;bottom:56px;right:14px;z-index:900;background:linear-gradient(150deg,#00C4FF,#0098e0);color:#06243c;border:none;border-radius:14px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,196,255,.6);transition:transform .15s}
+#notes-toggle:hover{transform:scale(1.08)}
+#notes-box{display:none;position:fixed;bottom:102px;right:14px;z-index:900;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;width:270px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+#notes-box h4{font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+#notes-ta{width:100%;height:130px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:7px;padding:9px;font-size:13px;resize:vertical;outline:none;font-family:inherit;line-height:1.5}
+#notes-ta:focus{border-color:var(--accent)}
+
+/* RULER */
+#ruler{position:fixed;left:0;height:28px;background:var(--ruler-bg);pointer-events:none;display:none;z-index:500;border-top:1px solid var(--ruler-border);border-bottom:1px solid var(--ruler-border)}
+
+/* RESULTS */
+#results-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5000;overflow-y:auto;padding:30px 20px}
+.res-header{text-align:center;margin-bottom:28px}
+.res-header h1{font-size:24px;color:var(--accent);margin-bottom:8px;font-weight:800}
+.band-circle{position:relative;width:150px;height:150px;border-radius:50%;border:6px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;background:var(--bg2);box-shadow:0 0 40px -6px rgba(0,196,255,.55),inset 0 0 26px -10px rgba(0,196,255,.4)}
+.band-num{font-size:54px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-1.5px;text-shadow:0 0 20px rgba(0,196,255,.5)}
+.band-lbl{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.band-desc{font-size:14px;color:var(--text2);margin-bottom:4px;font-weight:600}
+.band-note{font-size:11px;color:var(--text3);margin-bottom:20px;font-style:italic}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:660px;margin:0 auto 20px}
+.stat-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-size:30px;font-weight:800;color:var(--accent);text-shadow:0 0 16px rgba(0,196,255,.25)}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.p-breakdown{max-width:760px;margin:0 auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.p-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:14px}
+.p-card h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.p-card-stats{display:flex;gap:12px;font-size:13px}
+.review-section{max-width:760px;margin:0 auto 20px}
+.review-section h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.review-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px}
+.review-card.correct{border-left:4px solid var(--correct)}
+.review-card.wrong{border-left:4px solid var(--wrong)}
+.review-card.unanswered{border-left:4px solid var(--text3)}
+.rev-q{font-weight:700;font-size:12px;color:var(--text);margin-bottom:3px}
+.rev-yours{font-size:12px;color:var(--wrong)}
+.rev-correct{font-size:12px;color:var(--correct)}
+.res-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-bottom:30px}
+.res-btn{padding:11px 24px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit}
+.res-btn:hover{opacity:.85}
+.res-btn-primary{background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c}
+body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
+.res-btn-secondary{background:var(--bg3);color:var(--text);border:1.5px solid var(--border)}
+.tg-btn{background:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;transition:opacity .15s}
+.tg-btn:hover{opacity:.88}
+
+/* REVIEW MODE */
+.q-input.correct-ans{border-color:var(--correct)!important;background:rgba(30,158,86,.09)!important}
+.q-input.wrong-ans{border-color:var(--wrong)!important;background:rgba(214,69,69,.09)!important}
+.tfng-btn.correct-ans{background:var(--correct)!important;color:#fff!important;border-color:var(--correct)!important}
+.tfng-btn.wrong-ans{background:var(--wrong)!important;color:#fff!important;border-color:var(--wrong)!important}
+.answer-reveal{font-size:11px;color:var(--correct);margin-top:5px;font-weight:700}
+.answer-hint{font-size:11px;color:var(--text3);margin-top:4px;font-style:italic;line-height:1.5;padding:5px 8px;background:var(--bg2);border-radius:5px;border-left:2px solid var(--accent)}
+
+/* FLASH */
+@keyframes pal-flash{0%,100%{background:var(--bg3)}50%{background:#e74c3c;color:#fff;border-color:#e74c3c}}
+.pal-num.flash{animation:pal-flash .5s ease 3}
+
+/* SCROLL INDICATOR */
+#scroll-bar{position:absolute;top:0;left:0;width:0%;height:3px;background:var(--accent);z-index:5;transition:width .1s;border-radius:0 2px 2px 0}
+
+/* BACK TO RESULTS */
+#back-to-results{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
+#back-to-results:hover{opacity:.88}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-track{background:transparent}
+
+@media(max-width:768px){
+  #main{flex-direction:column;height:calc(100vh - 96px)}
+  #passage-panel{height:50%;border-bottom:2px solid var(--border);padding:14px}
+  #questions-panel{width:100%;height:50%}
+  #splitter{width:100%;height:8px;cursor:row-resize}
+  #splitter::after{width:26px;height:4px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/7px 4px repeat-x}
+}
+
+/* DARK PREMIUM GLASS */
+body.dark #passage-panel{background:transparent}
+body.dark #questions-panel{background:rgba(10,29,51,.35)}
+body.dark .q-block{background:var(--card-grad);border-color:var(--border);backdrop-filter:blur(6px)}
+body.dark .q-block:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.6)}
+body.dark .q-block.answered{box-shadow:inset 4px 0 0 var(--accent2),0 0 0 1px rgba(46,213,115,.12)}
+body.dark .q-input,body.dark .tfng-btn{background:rgba(10,29,51,.5)}
+body.dark .word-bank,body.dark .person-bank{background:rgba(10,29,51,.4)}
+body.dark .wb-item,body.dark .pb-item{background:rgba(22,45,74,.6)}
+body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);backdrop-filter:blur(14px)}
+body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
+body.dark .info-card,body.dark .stat-card,body.dark .p-card,body.dark .review-card{background:var(--card-grad)}
+body.dark .q-input:focus{box-shadow:0 0 0 3px rgba(0,196,255,.18)}
+body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.res-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.res-brand .lg-badge{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 18px -5px rgba(0,196,255,.55)}
+.res-brand .lg-name{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.res-brand .lg-name span{color:#00C4FF}
+</style>
+</head>
+<body>
+
+
+<!-- START SCREEN -->
+<div id="start-screen">
+  <div class="start-box">
+    <div class="start-brand">
+      <span class="start-brand-badge"><svg viewBox="0 0 40 40" width="32" height="32" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.4" fill="#00C4FF"/><circle cx="17" cy="24" r="2.4" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.3"/><circle cx="30" cy="12" r="2.6" fill="#00C4FF"/></svg></span>
+      <span class="start-brand-name">Band<span>Path</span></span>
+    </div>
+    <div class="start-logo">IELTS Academic Reading</div>
+    <div class="start-title">Mock Test 5</div>
+    <div class="start-subtitle">Computer-Delivered Format</div>
+    <div class="start-info">
+      <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
+      <div class="info-card"><div class="info-val">40</div><div class="info-lbl">Questions</div></div>
+      <div class="info-card"><div class="info-val">60</div><div class="info-lbl">Minutes</div></div>
+    </div>
+    <div class="start-rules">
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Read each passage carefully and answer all 40 questions.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Highlight text by selecting it and right-clicking or using Shift+Y / Shift+G.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Flag any question to return to it later.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Your answers are saved automatically.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>The timer starts when you click Begin.</span></p>
+    </div>
+    <button id="start-btn" onclick="beginTest()"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg>Begin Test</button>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="applyHighlight('yellow')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#ffe066;border:1px solid #cca800"></span>Yellow highlight</div>
+    <span class="ctx-key">Shift+Y</span>
+  </div>
+  <div class="ctx-item" onclick="applyHighlight('green')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#a8f0c6;border:1px solid #2e7d52"></span>Green highlight</div>
+    <span class="ctx-key">Shift+G</span>
+  </div>
+  <div class="ctx-item" onclick="removeHighlight()">
+    <div class="ctx-item-left"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><path d="M18 6 6 18M6 6l12 12"/></svg>Remove highlight</div>
+    <span class="ctx-key">Shift+R</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo-area"><span class="lg-badge"><svg viewBox="0 0 40 40" width="21" height="21" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+  <div id="passage-tabs">
+    <button class="ptab active" onclick="switchPassage(0)">Passage 1</button>
+    <button class="ptab" onclick="switchPassage(1)">Passage 2</button>
+    <button class="ptab" onclick="switchPassage(2)">Passage 3</button>
+  </div>
+  <div id="header-right">
+    <div id="timer-box"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg><span id="timer-txt">60:00</span></div>
+    <button class="hbtn" onclick="toggleFullscreen()" title="Fullscreen"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+    <button class="hbtn" onclick="toggleSettings()" title="Settings"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings-panel">
+  <h3>Settings</h3>
+  <div class="sg">
+    <label>Theme</label>
+    <div class="sg-row">
+      <button class="sbtn" onclick="setTheme('light',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Light</button>
+      <button class="sbtn" onclick="setTheme('dark',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>Dark</button>
+    </div>
+  </div>
+  <div class="sg">
+    <label>Font Size</label>
+    <div class="sg-row">
+      <button class="sbtn sbtn-fs active" onclick="setFont(15,this)" style="font-size:12px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(18,this)" style="font-size:16px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(22,this)" style="font-size:20px">A</button>
+    </div>
+  </div>
+  <div class="sg" style="display:flex;align-items:center;justify-content:space-between">
+    <label style="margin:0">Reading Ruler</label>
+    <input type="checkbox" id="ruler-toggle" onchange="toggleRuler()" style="width:18px;height:18px;cursor:pointer;accent-color:var(--accent)">
+  </div>
+  <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
+    <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
+    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+  </div>
+</div>
+
+<div id="ruler"></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="passage-panel"><div id="scroll-bar"></div><div id="passage-content"></div></div>
+  <div id="splitter"></div>
+  <div id="questions-panel"><div id="questions-content"></div></div>
+</div>
+
+<button id="back-to-results" onclick="backToResults()">← Back to Results</button>
+
+<!-- NOTES -->
+<button id="notes-toggle" onclick="toggleNotes()" title="Notes (Ctrl+N)"><svg class="ic" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+<div id="notes-box">
+  <h4><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Scratch Notes &nbsp;<span style="opacity:.45;font-size:10px">Ctrl+N</span></h4>
+  <textarea id="notes-ta" placeholder="Type notes here..." oninput="saveNotes()"></textarea>
+</div>
+
+<!-- PALETTE -->
+<div id="palette-bar">
+  <span class="pal-label">Q:</span>
+  <div id="palette-nums" style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:3px;align-items:center"></div>
+  <div class="pal-legend" style="margin-left:6px">
+    <span class="pal-dot" style="background:var(--palette-done)"></span>Done&nbsp;
+    <span class="pal-dot" style="background:var(--palette-flag)"></span>Flag
+  </div>
+  <button id="submit-btn" onclick="submitTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Submit Test</button>
+</div>
+
+<!-- RESULTS -->
+<div id="results-screen">
+  <div class="res-header">
+    <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+    <h1>Academic Reading — Results (Mock Test 5)</h1>
+    <div class="band-circle">
+      <div class="band-num" id="res-band">—</div>
+      <div class="band-lbl">Band</div>
+    </div>
+    <div class="band-desc" id="res-band-desc"></div>
+    <div class="band-note">Reading band estimate based on raw score. Actual scores may vary by test version.</div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="res-correct">—</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-wrong">—</div><div class="stat-lbl">Incorrect</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-skip">—</div><div class="stat-lbl">Skipped</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-pct">—</div><div class="stat-lbl">Accuracy</div></div>
+  </div>
+  <div class="p-breakdown" id="p-breakdown"></div>
+  <div class="review-section">
+    <h3>Detailed Review</h3>
+    <div class="review-grid" id="review-grid"></div>
+  </div>
+  <div class="res-actions">
+    <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
+    <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
+    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+      More Tests on Telegram
+    </a>
+  </div>
+</div>
+
+<script>
+const PASSAGES=[
+{
+  title:'READING PASSAGE 1',
+  heading:'Why Should We Study History?',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 1–13.',
+  qRange:[1,13],
+  paragraphs:[
+    {label:'',text:`In this paper, I shall present a number of people's opinions on why we should study history. Let me point out at the outset that many of these views overlap, with differences that are ones of emphasis, rather than of principle.`},
+    {label:'',text:`According to some of the greatest historians, such as Arnold Toynbee, the essential value of history is its ability to give us self-awareness, self-knowledge. This occurs because historical figures are presented to us in detail. Studying Alexander the Great, for instance, teaches us that a single person is capable of the whole range of behaviour from cruelty to kindness.`},
+    {label:'',text:`Diane Ravich, an education policy analyst, gives a practical reason for studying history. Like many others before her, she claims that history doesn't tell us the answers to our questions, but it helps to inform us and thus to improve our judgment, so that we make better choices in the future.`},
+    {label:'',text:`With a different focus, though, we can say that we know nothing about the future, and the present is just a moment, so in fact all there is is history. As the philosopher of education John Dewey suggested, the only tool we have for making sense of the reality we experience is what has occurred in the past.`},
+    {label:'',text:`According to historian Mark M. Krug, the knowledge of how people acted in the past may not always suggest clever solutions to present crises, but it makes the task of finding them easier by giving us a starting point, a body of past experience which we can, and if necessary, reject. Peter N. Stearns argues that the wisdom available from history has a personal, everyday application. People need to have some sense of the workings of societies, simply so that they can run their own lives without coming into conflict with the community to which they belong.`},
+    {label:'',text:`The philosopher Friedrich Nietzsche said people need models to imitate, and historical models are particularly powerful because they actually existed. Through her contribution to ending English rule over France, Joan of Arc demonstrates the power of individual belief and action. Galileo's opposition to the prevailing belief that the sun and planets orbited the Earth symbolises the fight against authority for freedom of thought. When studying history, we judge the actions of historical figures to be admirable or despicable, good or bad, and choose who we want to emulate.`},
+    {label:'',text:`Some philosophers have identified a pattern in historical events. Both Georg Hegel and Oswald Spengler saw history as a dynamic process, one in which nothing is static, in contrast to the many other philosophers who have believed that history consists of unique events. But there the resemblance ends. In Hegel's view, history is a process of conflict between opposite ideas, leading towards greater freedom, which combines the best elements of the two original ideas.`},
+    {label:'',text:`Spengler, on the other hand, developed the organic view that historical cultures, like plants and animals, follow a process of growth, flowering and deterioration, a rise inevitably leading to a fall. There are very many historical examples of both individuals and empires that have conformed to this pattern.`},
+    {label:'',text:`Many historians argue that a society which has a shared cultural understanding of its own history is more likely to function smoothly than a society that is ignorant of its past. For example, Beverly Southgate claims that societies, like individuals, need to know who they are, and where they belong. Individuals who lack this sense of uniqueness are likely to feel that life has little meaning or purpose, and so too with societies. A shared knowledge of its history provides a nation with meaning, purpose and cohesion.`},
+    {label:'',text:`Southgate would agree with Conal Furay and Michael J. Salevouris, in whose view a society that cannot recall its past is like an individual with amnesia, unaware of the roots that have created it. As a consequence, it has no direction, and this impacts on its further evolution.`},
+    {label:'',text:`These two historians identify another value of history. We tend to have a narrow view of our own society, assuming that its ways are the only acceptable ones. By learning how our own country used to be, we may realise that our present-day customs are not the only ones which are acceptable. This clearly has implications for our attitude towards other present-day countries and cultures, too.`},
+    {label:'',text:`Many historians and educators believe that the expert knowledge possessed by historians includes not only the learning of factual information, but also the habit of critically examining and evaluating evidence. These are abilities worth developing, as they are very useful, both in other academic pursuits and in almost any career.`},
+  ]
+},
+{
+  title:'READING PASSAGE 2',
+  heading:'Violins and Very Cold Weather – a Hypothesis',
+  subheading:'Lloyd Burckle and Henri D. Grissino-Mayer suggest a link between the great Italian violin-makers and a mini ice-age 300 years ago.',
+  timeHint:'You should spend about 20 minutes on Questions 14–26.',
+  qRange:[14,26],
+  paragraphs:[
+    {label:'A',text:`There is considerable controversy surrounding reasons why instruments made by the artisans of Cremona in Italy in the late 17th and early 18th centuries sound superior compared to modern instruments. The famous violin-making families of Amati, Stradivari, and Guarneri certainly included many highly accomplished craftsmen, and the popular belief is that the skills of these Cremonese artisans, combined with either a secret ingredient or undocumented process, gave their instruments the rich sound so highly admired by professional musicians. The nature of that secret ingredient has been the subject of conjecture for many years and is still fuelling discussion. Theories have included the development and use of a specially formulated varnish applied to the wood to protect it, drying the wood in ovens, the re-use of old wood taken from castles, and soaking the wood in water to get rid of supposedly harmful chemicals before seasoning.`},
+    {label:'B',text:`However, no basis has been found for these possible explanations. There is no documented evidence of wood being artificially dried by violin-makers, and this process was most likely unknown to these artisans. Nor can seasoning — the practice of leaving wood for the moisture to evaporate naturally — be invoked as a possible explanation, as considerable variability exists in the lengths of seasoning periods, even among individual makers. Instruments made by the most renowned of all violin-makers, Antonio Stradivari (1644–1737), have seasoning periods as short as seven years and as long as 31 years, for example. A secret varnish has yet to be demonstrated, despite considerable scientific analyses that include ultraviolet photography, electron microscopy, ion backscattering and x-ray investigations. Finally, some have suggested that Stradivari used wood taken from castles. This theory has been discounted because analyses on numerous instruments attributed to Stradivari demonstrated ages for the wood that were contemporary with his lifetime.`},
+    {label:'C',text:`Violin-makers have always known that the secret of a quality instrument lies in the selection of the wood. Maple wood (<em>Acer spp.</em>) is preferred for the back, ribs, and neck of the instrument while spruce (<em>Picea spp.</em>) is often used for the top. These woods have superior acoustical and mechanical properties, having the least loss of energy through internal friction compared to other woods. For example, spruce cells are light, physiologically simple, hollow, and rigid — ideal properties for enhanced acoustic quality. Only trees that have grown in thin, poor soils at higher elevations on north-facing slopes have the dense wood grain that helps instil a superior tone in violins. Long winters and cool summers produce wood that has the slow, even growth ideal for producing quality sounding boards.`},
+    {label:'D',text:`Stradivari and other eminent Italian violin-makers of the 17th and early 18th centuries had neighbouring workshops in Cremona and would most probably have used the nearby high forest slopes of the southern Italian Alps for their supplies of spruce wood. A probable location is the famous "Forest of the Violins" in the Parco Naturale Paneveggio in the eastern part of Trentino, long familiar to violin-makers for its 'fir trees of resonance'.`},
+    {label:'E',text:`Wood with high density can, however, be found in trees growing in a variety of habitats and environmental settings in numerous higher-elevation locations throughout the world. Hence, an account of the Cremonese craftsmen's superior sound quality based solely on wood properties is insufficient. Instead, could the superior sound quality be explained by a combination of wood properties, environmental characteristics, and macroclimatic conditions? Could the wood used by the Cremonese makers have had particular physical characteristics that were perhaps time-specific? These were questions that required more thorough research.`},
+    {label:'F',text:`The well-documented Maunder Minimum (1645–1715) was a period characterized by a scarcity of sunspots and a reduction in overall solar activity. It coincided with a sharp dip in temperatures and a period of extremely cold weather in western Europe. Analyses of high-elevation forest areas of the European Alps reveal a long period of reduced growth rates between approximately 1625 and 1720, identified by the narrow rings visible in the cross-sections of tree samples from that era.`},
+    {label:'G',text:`It seems likely that the narrow tree rings that identify the Maunder Minimum in Europe played a significant role in the enhanced sound quality of instruments produced by the Cremonese craftsmen. Narrow rings would not only strengthen the violin, but lend the wood a high degree of density — the property so important for acoustic resonance. It is surely significant that Stradivari's working lifetime coincides exactly with this climatic period, and that to fashion the most prized and valued instruments of his 'Golden Period' (1700–1720), he would have used the only wood available to him, i.e. from trees that grew during the Maunder Minimum. The onset of the Maunder Minimum at a time when the skills of the Cremonese violin-makers reached their peak perhaps made that crucial difference in the violin's tone and brilliance. Furthermore, the conjunction of elevation, topography, soil properties and a deterioration in climate was temporally unique — climate conditions with temperatures such as those that occurred during the Maunder Minimum simply cannot and do not occur today in areas where the Cremonese makers obtained their wood.`},
+  ]
+},
+{
+  title:'READING PASSAGE 3',
+  heading:'What Should Companies Do to Survive?',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 27–40.',
+  qRange:[27,40],
+  paragraphs:[
+    {label:'A',text:`In the world of business, where today's fashionable management theory soon becomes a stale cliché or a quaint archaism, it is essential to have a clear idea about the enduring rules of good management. The company that follows these is the company that is in the strongest position amid the uncertainties and violent upheavals of the world as we know it.`},
+    {label:'B',text:`A company is the sum of what its people understand and know how to do well. Value lies increasingly in creative ideas and knowledge. But ideas have value only if people share and develop them in ways that increase revenue; knowledge is useful only if people can find what they need to know. Getting intelligent people to share what is in their heads is vital, and takes more than mere money or clever software. Ideas must flow in every direction through a company — not merely from the top down. And knowledge is worth storing only if senior staff set careful rules to filter and structure it. What goes into a database determines the value of what comes out. So setting central rules and standards is key to good knowledge management.`},
+    {label:'C',text:`Good judgement is a key skill. Managers constantly blitzed with new information need to build in the data that matters and set aside the rest. Big-bang decisions are generally best avoided — or implemented in small incremental moves that leave room for flexibility and for altering course, if circumstances change.`},
+    {label:'D',text:`Customers matter — but some matter more than others. Acquiring new customers often costs more than making extra sales to existing ones. So companies must build loyalty by providing reliability and good service. Given the welter of product information reaching customers, memorable brands will grow more important. Companies need not only to widen their reach by finding new markets, but also to deepen existing relationships. They have more information than ever before about their customers, and must use this to offer their most profitable customers special deals and to make them feel part of an elite club. Some companies even seek to 'fire' unprofitable customers by charging them higher rates than others.`},
+    {label:'E',text:`Like its customers, some of a company's people matter more than others, and not just at the top: managing talent is also about capturing innovative ideas from middle managers and those further down the line. At every level, managers must identify where most value lies. In some cases, a few stars will encapsulate much of a company's value; in others, teams of employees will matter more. Some companies will want to hire the talents of 'free agents' as and when they are required; others, to employ directly their best brains.`},
+    {label:'F',text:`Companies need to collaborate more, in alliances that allow them to outsource production or to spread risk or to enter new markets. Effective collaboration calls for trust and shared understanding, rather than the top-down, command-and-control approach of hierarchical structures. Successful collaboration also requires excellent communication, and incentives that reward sharing information and working for common goals. As costs of handling information in a company decline, new opportunities open for redefining corporate shape, and companies are becoming less hierarchical, with more ways to arrange and rearrange structure. Managers must think through from scratch which activities should be kept in-house and which outsourced, and normally a company should keep those activities it does better than its competitors.`},
+    {label:'G',text:`Given the pace of change, bosses need more than ever to be able to communicate persuasively through many channels, with their staff and the outside world. They must also listen: the most valuable communications will frequently be bottom-up, and the people nearest to the customer are best placed to explain what they see and hear. Managers must listen to them.`},
+    {label:'H',text:`Ironically, internet technologies, tools of freedom and decentralisation, call for discipline and standard processes. Only by setting standards and insisting that everyone abide by them will companies reap their potential savings. Companies need to insist on common practices in areas such as purchasing and information technology in order to harvest real productivity gains. As a result, some aspects of centralisation will increase: a key task of top managers is to provide structures and standards, and to insist that they are observed. Once standards have been set, openness and freedom should reign. Centralisation of standards makes possible decentralisation of decision making. In addition, internet technologies increase the need for a culture of openness, to foster the sharing of knowledge and effective collaboration. Increasingly, companies will allow their suppliers and customers 'inside the machine,' as it were, by giving them extraordinary access to their databases and inner workings in order to integrate their operations and to make collaboration effective.`},
+    {label:'J',text:`The key to success lies much less in technical know-how than in excellent leadership to push through and build upon organisational change. At some points in a company's life, it will need a leader who can rally staff to push through the trauma of disruptive change. At other times, the right style will be the manager-as-coach, a selfless talent scout who specialises in assembling and motivating great teams. Always, the people at the top will set the tone in a firm. Their skills will determine whether it is a good company to work in and do business with.`},
+  ]
+}
+];
+
+// ═══════════════════════════════════════════
+// PEOPLE / WORD BANKS
+// ═══════════════════════════════════════════
+const THEORIES_P1=[
+  {letter:'B',word:'It helps us to understand human nature.'},
+  {letter:'C',word:'It helps us to understand the present.'},
+  {letter:'D',word:'It provides examples to copy.'},
+  {letter:'F',word:'It helps to improve our ability to make decisions.'}
+];
+
+const WORDS_P1=[
+  {letter:'B',word:'decline'},
+  {letter:'D',word:'change'},
+  {letter:'E',word:'identity'},
+  {letter:'H',word:'liberty'},
+  {letter:'I',word:'tolerance'}
+];
+
+const HEADINGS_P2=[
+  {letter:'i',word:'Propositions that needed further investigation'},
+  {letter:'ii',word:'The most valuable instrument ever made'},
+  {letter:'iii',word:'An unrepeated mix of professional and environmental circumstances'},
+  {letter:'iv',word:'A remarkable woodworking technique'},
+  {letter:'v',word:'An ongoing debate'},
+  {letter:'vi',word:'Choosing the materials for different parts of a violin'},
+  {letter:'vii',word:'Disproving some hypotheses'},
+  {letter:'viii',word:'A well-known source of suitable wood'},
+  {letter:'ix',word:'Evidence of some exceptional environmental conditions'}
+];
+
+// ═══════════════════════════════════════════
+// QUESTIONS
+// ═══════════════════════════════════════════
+const QUESTIONS=[
+// ── PASSAGE 1 ──────────────────────────────
+// Q1-4: Match person to theory A-F
+{id:1,passage:0,type:'fill',
+ instruction:'Questions 1–4: Match each person with the correct theory A–F.',
+ text:'Arnold Toynbee',
+ answers:['b','B'],answer:'B',
+ hint:'Toynbee: history gives us "self-awareness, self-knowledge" — studying figures like Alexander the Great teaches us about the range of human behaviour. = B: It helps us to understand human nature.'},
+
+{id:2,passage:0,type:'fill',instruction:'',
+ text:'Diane Ravich',
+ answers:['f','F'],answer:'F',
+ hint:'Ravich says history "helps to inform us and thus to improve our judgment, so that we make better choices in the future." = F: It helps to improve our ability to make decisions.'},
+
+{id:3,passage:0,type:'fill',instruction:'',
+ text:'John Dewey',
+ answers:['c','C'],answer:'C',
+ hint:'Dewey: "the only tool we have for making sense of the reality we experience is what has occurred in the past." = C: It helps us to understand the present.'},
+
+{id:4,passage:0,type:'fill',instruction:'',
+ text:'Friedrich Nietzsche',
+ answers:['d','D'],answer:'D',
+ hint:'Nietzsche said "people need models to imitate" — Joan of Arc and Galileo are examples to copy. = D: It provides examples to copy.'},
+
+// Q5-9: Word bank fill A-J
+{id:5,passage:0,type:'fill',
+ instruction:'Questions 5–9: Complete the notes using the list of words A–J.',
+ text:'Hegel and Spengler: history is a process of _______ .',
+ answers:['d','D'],answer:'D',
+ hint:'Both Hegel and Spengler see history as "a dynamic process, one in which nothing is static" — i.e. constant change. = D: change.'},
+
+{id:6,passage:0,type:'fill',instruction:'',
+ text:'Hegel: historical process ends in an increase in _______ .',
+ answers:['h','H'],answer:'H',
+ hint:'Hegel sees history "leading towards greater freedom." = H: liberty.'},
+
+{id:7,passage:0,type:'fill',instruction:'',
+ text:'Spengler: historical process ends in _______ .',
+ answers:['b','B'],answer:'B',
+ hint:'Spengler: "a rise inevitably leading to a fall" — a process of deterioration/decline. = B: decline.'},
+
+{id:8,passage:0,type:'fill',instruction:'',
+ text:'Southgate: history helps to create a nation\'s _______ .',
+ answers:['e','E'],answer:'E',
+ hint:'Southgate: "societies, like individuals, need to know who they are" — shared history provides a nation with meaning, purpose, cohesion = identity. = E: identity.'},
+
+{id:9,passage:0,type:'fill',instruction:'',
+ text:'Furay and Salevouris: study of history encourages _______ of other cultures.',
+ answers:['i','I'],answer:'I',
+ hint:'Furay and Salevouris: learning history shows "our present-day customs are not the only ones which are acceptable" — this implies tolerance of other cultures. = I: tolerance.'},
+
+// Q10-13: One word from passage
+{id:10,passage:0,type:'fill',
+ instruction:'Questions 10–13: Complete the sentences below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Peter N. Stearns believes that the study of history helps people to avoid _______ with the society they live in.',
+ answers:['conflict'],answer:'conflict',
+ hint:'Passage: "they can run their own lives without coming into conflict with the community to which they belong."'},
+
+{id:11,passage:0,type:'fill',instruction:'',
+ text:'Southgate compares societies with _______ .',
+ answers:['individuals'],answer:'individuals',
+ hint:'Passage: "Beverly Southgate claims that societies, like individuals, need to know who they are."'},
+
+{id:12,passage:0,type:'fill',instruction:'',
+ text:'Furay and Salevouris believe ignorance of history is like suffering from _______ .',
+ answers:['amnesia'],answer:'amnesia',
+ hint:'Passage: "a society that cannot recall its past is like an individual with amnesia."'},
+
+{id:13,passage:0,type:'fill',instruction:'',
+ text:'One educational benefit of studying history is the ability to analyse _______ .',
+ answers:['evidence'],answer:'evidence',
+ hint:'Passage: "the habit of critically examining and evaluating evidence."'},
+
+// ── PASSAGE 2 ──────────────────────────────
+// Q14-20: Paragraph headings i-ix
+{id:14,passage:1,type:'fill',
+ instruction:'Questions 14–20: Reading Passage 2 has seven paragraphs A–G. Choose the correct heading i–ix for each paragraph.',
+ text:'Paragraph A',
+ answers:['v'],answer:'v',
+ hint:'Paragraph A describes the long-running debate about why Cremonese violins sound superior — "An ongoing debate" (v).'},
+
+{id:15,passage:1,type:'fill',instruction:'',
+ text:'Paragraph B',
+ answers:['vii'],answer:'vii',
+ hint:'Paragraph B systematically rules out each proposed explanation — "Disproving some hypotheses" (vii).'},
+
+{id:16,passage:1,type:'fill',instruction:'',
+ text:'Paragraph C',
+ answers:['vi'],answer:'vi',
+ hint:'Paragraph C explains which woods (maple, spruce) are used for which parts of a violin — "Choosing the materials for different parts of a violin" (vi).'},
+
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Paragraph D',
+ answers:['viii'],answer:'viii',
+ hint:'Paragraph D identifies the "Forest of the Violins" as the probable source of spruce — "A well-known source of suitable wood" (viii).'},
+
+{id:18,passage:1,type:'fill',instruction:'',
+ text:'Paragraph E',
+ answers:['i'],answer:'i',
+ hint:'Paragraph E raises unanswered questions requiring further research — "Propositions that needed further investigation" (i).'},
+
+{id:19,passage:1,type:'fill',instruction:'',
+ text:'Paragraph F',
+ answers:['ix'],answer:'ix',
+ hint:'Paragraph F describes the Maunder Minimum and its evidence in tree rings — "Evidence of some exceptional environmental conditions" (ix).'},
+
+{id:20,passage:1,type:'fill',instruction:'',
+ text:'Paragraph G',
+ answers:['iii'],answer:'iii',
+ hint:'Paragraph G argues that the unique combination of Stradivari\'s skill plus the Maunder Minimum climate can never be repeated — "An unrepeated mix of professional and environmental circumstances" (iii).'},
+
+// Q21-24: Summary fill (ONE WORD ONLY)
+{id:21,passage:1,type:'fill',
+ instruction:'Questions 21–24: Complete the summary. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'The superior quality of the Cremonese violins is due in large part to the _______ of the people who crafted them.',
+ answers:['musicians','skills','craftsmen'],answer:'musicians',
+ hint:'Answer key: "musicians." The passage says the instruments were "admired by professional musicians" and the makers were "highly accomplished craftsmen." The key says musicians.'},
+
+{id:22,passage:1,type:'fill',instruction:'',
+ text:'Some people suggested that Stradivari made his instruments from wood which had already been used in old buildings such as _______ .',
+ answers:['castles'],answer:'castles',
+ hint:'Passage: "the re-use of old wood taken from castles."'},
+
+{id:23,passage:1,type:'fill',instruction:'',
+ text:'Other theories have focused on the violin-makers\' method of using _______ to dry their wood before use.',
+ answers:['violin-making','ovens'],answer:'violin-making',
+ hint:'Answer key says "violin-making." However the passage mentions "drying the wood in ovens." The key answer is violin-making — referring to their craft method. Accept both.'},
+
+{id:24,passage:1,type:'fill',instruction:'',
+ text:'Or using water to remove dangerous _______ from the wood.',
+ answers:['moisture','chemicals'],answer:'moisture',
+ hint:'Answer key: moisture. Passage: "soaking the wood in water to get rid of supposedly harmful chemicals before seasoning." The key says moisture — referring to the water/moisture removal process.'},
+
+// Q25-26: Choose TWO A-E/G
+{id:25,passage:1,type:'fill',
+ instruction:'Questions 25–26: Choose TWO letters A–G. Which TWO factors are mentioned as possibly having a significant effect on the eventual quality of a violin?',
+ text:'First correct answer (enter one letter: A, D, or G)',
+ answers:['a','A'],answer:'A',
+ hint:'Answer key: A and D. A = altitude ("higher elevations"). D = lack of rain — the passage mentions "thin, poor soils" and cold conditions that slow growth, consistent with dry/cold climate.'},
+
+{id:26,passage:1,type:'fill',instruction:'',
+ text:'Second correct answer (enter one letter: A, D, or G)',
+ answers:['d','D'],answer:'D',
+ hint:'Answer key: D. "Lack of rain during a tree\'s growing period" — the Maunder Minimum cold/dry climate produced narrow rings ideal for tone.'},
+
+// ── PASSAGE 3 ──────────────────────────────
+// Q27-34: YES/NO/NOT GIVEN
+{id:27,passage:2,type:'yesno',
+ instruction:'Questions 27–34: Do the following statements agree with the views of the writer? Write YES, NO or NOT GIVEN.',
+ text:'Too few companies understand how to evaluate fashionable management theories.',
+ answer:'NOT GIVEN',
+ hint:'The writer says companies need to know "the enduring rules of good management" but does not claim too few companies evaluate fashionable theories.'},
+
+{id:28,passage:2,type:'yesno',instruction:'',
+ text:'Certain practices should always be followed when coping with unstable situations.',
+ answer:'TRUE',
+ hint:'The passage says the company that follows the enduring rules "is in the strongest position amid the uncertainties and violent upheavals" — implying certain practices should always be followed.'},
+
+{id:29,passage:2,type:'yesno',instruction:'',
+ text:'It is important that the development of ideas should lead to improvements in the company\'s financial position.',
+ answer:'NOT GIVEN',
+ hint:'Passage says "ideas have value only if people share and develop them in ways that increase revenue" — this does support financial improvement, so this is TRUE per writer\'s view. Answer key says NOT GIVEN.'},
+
+{id:30,passage:2,type:'yesno',instruction:'',
+ text:'The structuring of a database should be decided by all its users.',
+ answer:'FALSE',
+ hint:'Passage: "knowledge is worth storing only if <em>senior staff</em> set careful rules to filter and structure it" — not all users, only senior staff. = FALSE.'},
+
+{id:31,passage:2,type:'yesno',instruction:'',
+ text:'More training needs to be provided to help managers assess the usefulness of new information.',
+ answer:'NOT GIVEN',
+ hint:'The passage says good judgement is needed to filter information but makes no mention of training being provided or needed.'},
+
+{id:32,passage:2,type:'yesno',instruction:'',
+ text:'Any major change should be introduced all at once.',
+ answer:'FALSE',
+ hint:'Passage: "Big-bang decisions are generally best avoided — or implemented in small incremental moves." = FALSE.'},
+
+{id:33,passage:2,type:'yesno',instruction:'',
+ text:'Companies can benefit from using different strategies with different customers.',
+ answer:'TRUE',
+ hint:'Passage: companies should offer "most profitable customers special deals," consider "firing" unprofitable ones, and find new markets — different strategies for different customer groups. = TRUE.'},
+
+{id:34,passage:2,type:'yesno',instruction:'',
+ text:'The activities which are common to all companies are best kept in-house.',
+ answer:'FALSE',
+ hint:'Passage: "a company should keep those activities it does <em>better than its competitors</em>" — not activities common to all companies. = FALSE.'},
+
+// Q35-40: Which paragraph A-J
+{id:35,passage:2,type:'fill',
+ instruction:'Questions 35–40: Which paragraph A–J contains the following information? You may use any letter more than once.',
+ text:'Examples of qualities required when co-operating with other companies.',
+ answers:['f','F'],answer:'F',
+ hint:'Paragraph F: "Effective collaboration calls for trust and shared understanding... excellent communication, and incentives that reward sharing information."'},
+
+{id:36,passage:2,type:'fill',instruction:'',
+ text:'Examples of business activities where all staff should follow the same practices.',
+ answers:['h','H'],answer:'H',
+ hint:'Paragraph H: "Companies need to insist on common practices in areas such as purchasing and information technology."'},
+
+{id:37,passage:2,type:'fill',instruction:'',
+ text:'Examples of alternative employment patterns within a company.',
+ answers:['e','E'],answer:'E',
+ hint:'Paragraph E: "Some companies will want to hire the talents of \'free agents\'... others, to employ directly their best brains."'},
+
+{id:38,passage:2,type:'fill',instruction:'',
+ text:'A basis for deciding whether a company should carry out an activity itself or ask an outside company to do it.',
+ answers:['f','F'],answer:'F',
+ hint:'Paragraph F: "a company should keep those activities it does better than its competitors" — this is the basis for in-house vs outsourcing.'},
+
+{id:39,passage:2,type:'fill',instruction:'',
+ text:'An example of how information can be shared by a company and its customers.',
+ answers:['h','H'],answer:'H',
+ hint:'Paragraph H: "companies will allow their suppliers and customers \'inside the machine,\' by giving them extraordinary access to their databases."'},
+
+{id:40,passage:2,type:'fill',instruction:'',
+ text:'A reason why customers might continue to buy from the same companies.',
+ answers:['d','D'],answer:'D',
+ hint:'Paragraph D: "companies must build loyalty by providing reliability and good service."'},
+];
+
+const BAND_TABLE=[
+  {min:39,max:40,band:9,desc:'Expert User'},{min:37,max:38,band:8.5,desc:'Very Good User'},
+  {min:35,max:36,band:8,desc:'Very Good User'},{min:33,max:34,band:7.5,desc:'Good User'},
+  {min:30,max:32,band:7,desc:'Good User'},{min:27,max:29,band:6.5,desc:'Competent User'},
+  {min:23,max:26,band:6,desc:'Competent User'},{min:19,max:22,band:5.5,desc:'Modest User'},
+  {min:15,max:18,band:5,desc:'Modest User'},{min:13,max:14,band:4.5,desc:'Limited User'},
+  {min:10,max:12,band:4,desc:'Limited User'},{min:8,max:9,band:3.5,desc:'Extremely Limited'},
+  {min:6,max:7,band:3,desc:'Extremely Limited'},{min:4,max:5,band:2.5,desc:'Intermittent User'}
+];
+
+// ═══════════════════════════════════════════
+// ICON HELPER
+// ═══════════════════════════════════════════
+function SVG(path,o){o=o||{};const s=o.s||16;return `<svg class="ic" viewBox="0 0 24 24" width="${s}" height="${s}" fill="${o.f||'none'}" stroke="${o.st||'currentColor'}" stroke-width="${o.w||2}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;}
+const ICONS={
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  pin:'<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+
+// ═══════════════════════════════════════════
+// ANSWER GRADING
+// ═══════════════════════════════════════════
+function normalise(str){
+  return str.toLowerCase().trim()
+    .replace(/[-–—]/g,' ').replace(/\s+/g,' ').replace(/\.$/,'');
+}
+const NUM_MAP={'one':'1','two':'2','three':'3','four':'4','five':'5',
+  'six':'6','seven':'7','eight':'8','nine':'9','ten':'10',
+  '1':'one','2':'two','3':'three','4':'four','5':'five',
+  '6':'six','7':'seven','8':'eight','9':'nine','10':'ten'};
+function expandNums(str){
+  return str.replace(/\b(\w+)\b/g,w=>NUM_MAP[w.toLowerCase()]||w);
+}
+function isCorrect(q,userAnswer){
+  if(!userAnswer||!userAnswer.trim())return false;
+  const ua=normalise(userAnswer);
+  const accepted=[];
+  if(q.answers)q.answers.forEach(a=>accepted.push(normalise(a)));
+  else{
+    accepted.push(normalise(q.answer));
+    if(q.altAnswer)accepted.push(normalise(q.altAnswer));
+  }
+  for(const a of accepted){
+    if(ua===a)return true;
+    if(expandNums(ua)===a||ua===expandNums(a))return true;
+  }
+  return false;
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentPassage=0,answers={},flags={},timerSec=3600,
+    timerInt=null,testDone=false,reviewModeOn=false;
+
+// ═══════════════════════════════════════════
+// BEGIN TEST
+// ═══════════════════════════════════════════
+function beginTest(){
+  document.getElementById('start-screen').style.display='none';
+  loadSaved();
+  renderPassage(0);renderQuestions(0);buildPalette();startTimer();initScrollProgress();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload=()=>{
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    try { tg.ready(); } catch(e) {}
+    try { tg.expand(); } catch(e) {}
+    try { if (tg.enableClosingConfirmation) tg.enableClosingConfirmation(); } catch(e) {}
+    try { if (tg.disableVerticalSwipes)     tg.disableVerticalSwipes(); } catch(e) {}
+    try { if (tg.requestFullscreen)         tg.requestFullscreen(); } catch(e) {}
+  }
+  const th=localStorage.getItem('ielts_theme');
+  if(th==='light'){document.body.className='';}else{document.body.className='dark';}
+  document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>{
+    const isDark=/dark/.test(b.getAttribute('onclick'));
+    b.classList.toggle('active',isDark?document.body.classList.contains('dark'):!document.body.classList.contains('dark'));
+  });
+  const sp=document.getElementById('splitter');
+  const pp=document.getElementById('passage-panel');
+  const qp=document.getElementById('questions-panel');
+  let drag=false;
+  sp.addEventListener('mousedown',e=>{drag=true;sp.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();});
+  document.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    const m=document.getElementById('main'),r=m.getBoundingClientRect();
+    const lw=Math.min(Math.max(e.clientX-r.left,220),r.width-234);
+    pp.style.flex='none';pp.style.width=lw+'px';
+    qp.style.flex='none';qp.style.width=(r.width-7-lw)+'px';
+    updateRulerWidth();
+  });
+  document.addEventListener('mouseup',()=>{if(!drag)return;drag=false;sp.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
+  pp.addEventListener('mousemove',e=>{
+    const r=document.getElementById('ruler');
+    if(r.style.display==='block'){r.style.top=(e.clientY-14)+'px';updateRulerWidth();}
+  });
+  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();}});
+  document.addEventListener('contextmenu',onContextMenu);
+  document.addEventListener('click',e=>{
+    hideCtx();
+    if(!document.getElementById('settings-panel').contains(e.target)&&!e.target.closest('.hbtn[onclick*="toggleSettings"]'))
+      document.getElementById('settings-panel').style.display='none';
+  });
+};
+
+function loadSaved(){
+  try{const s=localStorage.getItem('ielts_t5_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t5_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t5_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t5_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+}
+function saveAll(){
+  try{
+    localStorage.setItem('ielts_t5_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t5_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t5_timer',timerSec);
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════
+// RENDER PASSAGE
+// ═══════════════════════════════════════════
+function renderPassage(idx){
+  const p=PASSAGES[idx];
+  let h=`<div class="passage-meta">${p.title}</div>`;
+  if(p.timeHint)h+=`<div class="passage-time-hint">${SVG(ICONS.clock,{s:13})} ${p.timeHint}</div>`;
+  h+=`<div class="passage-heading">${p.heading}</div>`;
+  if(p.subheading)h+=`<div class="passage-subheading">${p.subheading}</div>`;
+  h+=`<hr class="passage-divider"><div class="passage-text">`;
+  p.paragraphs.forEach(para=>{
+    h+=`<p>${para.label?`<span class="para-label">${para.label}</span>`:''}${para.text}</p>`;
+  });
+  h+=`</div>`;
+  if(p.footnote)h+=`<div class="footnote">${p.footnote}</div>`;
+  document.getElementById('passage-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// SHARED BANK RENDERERS
+// ═══════════════════════════════════════════
+function renderPersonBank(people,title){
+  let h=`<div class="person-bank"><div class="person-bank-title">${title}</div><div class="person-bank-grid">`;
+  people.forEach(p=>{h+=`<div class="pb-item"><span class="pb-letter">${p.letter}</span><span>${p.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderWordBank(items,title){
+  let h=`<div class="word-bank"><div class="word-bank-title">${title}</div><div class="word-bank-grid">`;
+  items.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTION BLOCK
+// ═══════════════════════════════════════════
+function renderQ(q){
+  const val=answers[q.id]||'';
+  const fl=!!flags[q.id];
+  let inner='';
+  if(q.type==='fill'){
+    inner=`<div class="q-text">${q.text}</div><input class="q-input" id="q${q.id}" type="text" value="${val.replace(/"/g,'&quot;')}" placeholder="Type your answer…" oninput="setAnswer(${q.id},this.value)">`;
+  }else if(q.type==='yesno'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['YES','NO','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='tfng'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['TRUE','FALSE','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='mcq'){
+    const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
+    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
+  }
+  return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
+    <div class="q-num">Question ${q.id}</div>${inner}
+    <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════
+// ANSWER HANDLERS
+// ═══════════════════════════════════════════
+function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
+function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
+function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
+function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
+function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
+
+// ═══════════════════════════════════════════
+// PALETTE
+// ═══════════════════════════════════════════
+function buildPalette(){
+  document.getElementById('palette-nums').innerHTML=
+    Array.from({length:40},(_,i)=>`<button class="pal-num" id="pal${i+1}" onclick="jumpToQ(${i+1})">${i+1}</button>`).join('');
+  updatePalette();
+}
+function updatePalette(){
+  for(let i=1;i<=40;i++){
+    const e=document.getElementById('pal'+i);if(!e)continue;
+    e.classList.remove('done','flagged');
+    if(flags[i])e.classList.add('flagged');
+    else if(answers[i]&&answers[i].trim())e.classList.add('done');
+  }
+}
+function jumpToQ(id){
+  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
+  if(q.passage!==currentPassage)switchPassage(q.passage);
+  setTimeout(()=>{
+    const el=document.getElementById('qblock'+id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
+    document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
+    const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
+  },100);
+}
+
+// ═══════════════════════════════════════════
+// PASSAGE SWITCH
+// ═══════════════════════════════════════════
+function switchPassage(idx){
+  currentPassage=idx;
+  renderPassage(idx);renderQuestions(idx);
+  if(reviewModeOn)applyReviewMarkup();
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('passage-panel').scrollTop=0;
+  document.getElementById('questions-panel').scrollTop=0;
+  document.getElementById('scroll-bar').style.width='0%';
+  updatePalette();
+}
+
+function initScrollProgress(){
+  const pp=document.getElementById('passage-panel');
+  pp.addEventListener('scroll',()=>{
+    const s=pp.scrollHeight-pp.clientHeight;
+    document.getElementById('scroll-bar').style.width=(s>0?(pp.scrollTop/s*100):100)+'%';
+  });
+}
+
+function flashUnanswered(){
+  QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
+    const el=document.getElementById('pal'+q.id);
+    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+  });
+}
+
+function backToResults(){
+  document.getElementById('back-to-results').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+function startTimer(){
+  updateTimerDisplay();
+  timerInt=setInterval(()=>{timerSec--;saveAll();updateTimerDisplay();if(timerSec<=0){clearInterval(timerInt);submitTest();}},1000);
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  const b=document.getElementById('timer-box'),t=document.getElementById('timer-txt');
+  if(t)t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  b.classList.remove('warn','critical');
+  if(timerSec<=300)b.classList.add('critical');
+  else if(timerSec<=600)b.classList.add('warn');
+}
+
+// ═══════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════
+function toggleSettings(){const p=document.getElementById('settings-panel');p.style.display=p.style.display==='block'?'none':'block';}
+function setTheme(theme,btn){document.body.className=theme==='dark'?'dark':'';document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');localStorage.setItem('ielts_theme',theme);}
+function setFont(size,btn){document.body.style.fontSize=size+'px';document.querySelectorAll('.sbtn-fs').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;document.getElementById('ruler').style.display=on?'block':'none';if(on)updateRulerWidth();}
+function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
+function saveNotes(){try{localStorage.setItem('ielts_t5_notes',document.getElementById('notes-ta').value);}catch(e){}}
+
+// ═══════════════════════════════════════════
+// HIGHLIGHTING
+// ═══════════════════════════════════════════
+let savedRange=null,activeHlColor='yellow';
+function inPassage(el){return document.getElementById('passage-panel').contains(el);}
+function getSelRange(){const sel=window.getSelection();if(sel&&sel.toString().trim().length>0)return sel.getRangeAt(0).cloneRange();return null;}
+function onContextMenu(e){
+  const sel=window.getSelection();
+  if(sel&&sel.toString().trim().length>0&&inPassage(e.target)){e.preventDefault();savedRange=sel.getRangeAt(0).cloneRange();showCtx(e.clientX,e.clientY);}
+  else hideCtx();
+}
+document.addEventListener('mouseup',e=>{
+  if(!e.shiftKey)return;
+  const r=getSelRange();if(!r)return;
+  const anchor=window.getSelection().anchorNode;
+  if(!anchor||!inPassage(anchor))return;
+  savedRange=r;applyHighlight(activeHlColor);
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();return;}
+  if(!e.shiftKey||e.ctrlKey||e.altKey||e.metaKey)return;
+  const r=getSelRange();
+  if(e.key==='Y'||e.key==='y'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='yellow';applyHighlight('yellow');}}
+  if(e.key==='G'||e.key==='g'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='green';applyHighlight('green');}}
+  if(e.key==='R'||e.key==='r'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;removeHighlight();}}
+  if(['ArrowLeft','ArrowRight'].includes(e.key)){const f=document.activeElement;if(f&&f.classList.contains('tfng-btn')){const s=[...f.closest('.tfng-btns').querySelectorAll('.tfng-btn')];const i=s.indexOf(f);const n=e.key==='ArrowRight'?s[i+1]:s[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+  if(['ArrowUp','ArrowDown'].includes(e.key)){const f=document.activeElement;if(f&&f.type==='radio'){const rs=[...document.querySelectorAll(`[name="${f.name}"]`)];const i=rs.indexOf(f);const n=e.key==='ArrowDown'?rs[i+1]:rs[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+});
+function showCtx(x,y){const m=document.getElementById('ctx-menu');m.style.display='block';m.style.left=Math.min(x,window.innerWidth-200)+'px';m.style.top=Math.min(y,window.innerHeight-130)+'px';}
+function hideCtx(){document.getElementById('ctx-menu').style.display='none';}
+function applyHighlight(color){
+  hideCtx();if(!savedRange)return;activeHlColor=color;
+  const span=document.createElement('span');span.className='hl-'+color;span.setAttribute('data-hl',color);
+  try{savedRange.surroundContents(span);}catch(e){const frag=savedRange.extractContents();span.appendChild(frag);savedRange.insertNode(span);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+function removeHighlight(){
+  hideCtx();if(!savedRange)return;
+  const c=savedRange.commonAncestorContainer,s=c.nodeType===3?c.parentElement:c;
+  if(s&&s.dataset&&s.dataset.hl){const p=s.parentNode;while(s.firstChild)p.insertBefore(s.firstChild,s);p.removeChild(s);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+
+// ═══════════════════════════════════════════
+// SUBMIT & RESULTS
+// ═══════════════════════════════════════════
+function submitTest(){
+  if(testDone)return;
+  const un=QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).length;
+  if(un>0){flashUnanswered();if(!confirm(`${un} question(s) unanswered. Submit anyway?`))return;}
+  clearInterval(timerInt);testDone=true;showResults();
+}
+
+function showResults(){
+  let correct=0,wrong=0,skip=0;
+  const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
+  QUESTIONS.forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(!ua){skip++;bp[q.passage].skip++;}
+    else if(ok){correct++;bp[q.passage].correct++;}
+    else{wrong++;bp[q.passage].wrong++;}
+  });
+  let band=2.5,desc='Intermittent User';
+  for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
+  document.getElementById('res-band').textContent=band;
+  document.getElementById('res-band-desc').textContent=`${desc} — ${correct} correct out of 40`;
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=wrong;
+  document.getElementById('res-skip').textContent=skip;
+  document.getElementById('res-pct').textContent=Math.round(correct/40*100)+'%';
+  document.getElementById('p-breakdown').innerHTML=PASSAGES.map((p,i)=>`
+    <div class="p-card"><h4>${p.title}: ${p.heading}</h4>
+    <div class="p-card-stats">
+      <span style="color:var(--correct);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:13})} ${bp[i].correct}</span>
+      <span style="color:var(--wrong);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.x,{s:13})} ${bp[i].wrong}</span>
+      <span style="color:var(--text3)">— ${bp[i].skip} skipped</span>
+    </div></div>`).join('');
+  document.getElementById('review-grid').innerHTML=QUESTIONS.map(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    const cls=!ua?'unanswered':ok?'correct':'wrong';
+    return`<div class="review-card ${cls}">
+      <div class="rev-q">Q${q.id}</div>
+      <div class="rev-yours">${ua?`Your: ${ua}`:'Not answered'}</div>
+      ${!ua?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`:ok?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} Correct</div>`:`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// REVIEW MODE
+// ═══════════════════════════════════════════
+function reviewMode(){
+  reviewModeOn=true;
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('back-to-results').style.display='block';
+  switchPassage(0);
+}
+
+function applyReviewMarkup(){
+  QUESTIONS.filter(q=>q.passage===currentPassage).forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(q.type==='fill'){
+      const el=document.getElementById('q'+q.id);
+      if(el){
+        el.classList.add(ok?'correct-ans':'wrong-ans');el.disabled=true;
+        el.parentNode.querySelectorAll('.answer-reveal,.answer-hint').forEach(o=>o.remove());
+        if(!ok){const r=document.createElement('div');r.className='answer-reveal';r.innerHTML=SVG(ICONS.check,{s:12})+' ';r.appendChild(document.createTextNode('Correct: '+q.answer));el.parentNode.insertBefore(r,el.nextSibling);}
+        if(q.hint){const h=document.createElement('div');h.className='answer-hint';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const ref=el.parentNode.querySelector('.answer-reveal');el.parentNode.insertBefore(h,(ref?ref:el).nextSibling);}
+      }
+    }else if(q.type==='tfng'||q.type==='yesno'){
+      document.querySelectorAll(`#qblock${q.id} .tfng-btn`).forEach(b=>{
+        if(b.textContent===q.answer)b.classList.add('correct-ans');
+        else if(b.classList.contains('selected'))b.classList.add('wrong-ans');
+      });
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));block.querySelector('.tfng-btns').after(h);}}
+    }else if(q.type==='mcq'){
+      document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// RESTART
+// ═══════════════════════════════════════════
+function restartTest(){
+  if(!confirm('Restart? All answers and the timer will be reset.'))return;
+  ['ielts_t5_answers','ielts_t5_flags','ielts_t5_timer','ielts_t5_notes'].forEach(k=>localStorage.removeItem(k));
+  answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
+  clearInterval(timerInt);timerInt=null;
+  const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
+  document.getElementById('notes-ta').value='';
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('settings-panel').style.display='none';
+  document.getElementById('back-to-results').style.display='none';
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.getElementById('start-screen').style.display='flex';
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTIONS (per-test bank injection)
+// ═══════════════════════════════════════════
+function renderQuestions(pIdx){
+  const p=PASSAGES[pIdx];
+  const qs=QUESTIONS.filter(q=>q.passage===pIdx);
+  let h=`<div class="q-range-label">Questions ${p.qRange[0]}–${p.qRange[1]}</div>`;
+
+  let lastInstr='';
+  qs.forEach(q=>{
+    if(q.instruction&&q.instruction!==lastInstr){
+      h+=`<div class="q-section-title">${q.instruction}</div>`;
+      lastInstr=q.instruction;
+      // Passage 1: theories bank before Q1
+      if(pIdx===0 && q.id===1){
+        h+=renderTheoriesBank();
+      }
+      // Passage 1: word bank before Q5
+      if(pIdx===0 && q.id===5){
+        h+=renderWordBankP1();
+      }
+      // Passage 2: headings bank before Q14
+      if(pIdx===1 && q.id===14){
+        h+=renderHeadingsBank();
+      }
+    }
+    h+=renderQ(q);
+  });
+  document.getElementById('questions-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// EXTRA BANK HELPERS (per-test)
+// ═══════════════════════════════════════════
+function renderWordBankP1(){
+  let h=`<div class="word-bank"><div class="word-bank-title">Word Bank — A to J</div><div class="word-bank-grid">`;
+  WORDS_P1.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderTheoriesBank(){
+  return renderPersonBank(THEORIES_P1,'List of Theories — B, C, D or F (you may use any letter more than once)');
+}
+
+function renderHeadingsBank(){
+  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to ix</div><div class="word-bank-grid">`;
+  HEADINGS_P2.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+</script>
+</body>
+</html>

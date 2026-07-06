@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BandPath — IELTS Academic Reading Mock Test 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f2f6fb;--bg3:#e6edf6;--text:#12233b;--text2:#3a4a63;--text3:#7488a3;
+  --border:#d3deea;--accent:#0090c4;--accent2:#1e9e56;
+  --header:#0f2744;--flag:#e0870f;--correct:#1e9e56;--wrong:#d64545;
+  --palette-done:#1e9e56;--palette-flag:#e0870f;--palette-active:#0090c4;
+  --hl-yellow:#ffe066;--hl-yellow-text:#1a1a2e;
+  --hl-green:#a8f0c6;--hl-green-text:#0a2e1a;
+  --ruler-bg:rgba(0,144,196,.1);--ruler-border:rgba(0,144,196,.3);
+  --shadow:0 2px 12px rgba(15,39,68,.08);
+  --glow:0 0 0 rgba(0,0,0,0);
+  --card-grad:var(--bg2);
+}
+body.dark{
+  --bg:#0f2744;--bg2:#162d4a;--bg3:#1e3a57;--text:#eaf2fb;--text2:#9fb4cc;--text3:#6b83a0;
+  --border:#1e3a57;--accent:#00C4FF;--accent2:#2ed573;--header:#0a1d33;
+  --flag:#ffa502;--correct:#2ed573;--wrong:#ff6b6b;
+  --palette-done:#2ed573;--palette-flag:#ffa502;--palette-active:#00C4FF;
+  --hl-yellow:#c99a12;--hl-yellow-text:#fff8e1;
+  --hl-green:#1a7a44;--hl-green-text:#d6ffe6;
+  --ruler-bg:rgba(0,196,255,.1);--ruler-border:rgba(0,196,255,.4);
+  --shadow:0 8px 30px rgba(0,0,0,.45);
+  --glow:0 0 22px -6px rgba(0,196,255,.5);
+  --card-grad:linear-gradient(165deg,rgba(30,58,87,.55),rgba(22,45,74,.85));
+}
+body{font-family:'Plus Jakarta Sans',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:16px;transition:background .25s,color .25s;overflow:hidden}
+body.dark{background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+svg.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* START SCREEN */
+#start-screen{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#start-screen::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,255,.22),transparent 65%);filter:blur(10px);pointer-events:none}
+.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);backdrop-filter:blur(12px)}
+body:not(.dark) .start-box{background:var(--bg);box-shadow:0 24px 64px rgba(15,39,68,.28)}
+.start-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.start-brand-badge{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.32);box-shadow:0 0 34px -8px rgba(0,196,255,.6)}
+.start-brand-name{font-size:27px;font-weight:800;letter-spacing:-.5px;color:#fff}
+body:not(.dark) .start-brand-name{color:var(--text)}
+.start-brand-name span{color:#00C4FF}
+.start-logo{font-size:12px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.start-title{font-size:25px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.2;letter-spacing:-.3px}
+.start-subtitle{font-size:14px;color:var(--text3);margin-bottom:30px}
+.start-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 8px}
+body.dark .info-card{background:rgba(22,45,74,.5)}
+.info-val{font-size:27px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+.info-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.start-rules{text-align:left;background:var(--bg2);border-radius:14px;padding:16px 20px;margin-bottom:30px}
+body.dark .start-rules{background:rgba(10,29,51,.5);border:1px solid var(--border)}
+.start-rules p{font-size:13px;color:var(--text2);line-height:1.85;padding-left:4px;display:flex;gap:9px;align-items:flex-start}
+.start-rules p svg{margin-top:3px;color:var(--accent)}
+#start-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c;border:none;padding:16px 48px;border-radius:14px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.3px;transition:opacity .15s,transform .15s,box-shadow .15s;width:100%;box-shadow:0 16px 36px -12px rgba(0,196,255,.7)}
+#start-btn:hover{transform:translateY(-2px);box-shadow:0 22px 44px -12px rgba(0,196,255,.8)}
+body:not(.dark) #start-btn{color:#fff;background:linear-gradient(120deg,#0090c4,#0f2744)}
+
+/* HEADER */
+#header{background:var(--header);padding:0 14px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:1000;height:54px;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.06)}
+#logo-area{display:flex;align-items:center;gap:9px;min-width:120px}
+#logo-area .lg-badge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 16px -5px rgba(0,196,255,.55)}
+#logo-area .lg-name{font-weight:800;font-size:16px;color:#fff;letter-spacing:-.3px}
+#logo-area .lg-name span{color:#00C4FF}
+#passage-tabs{display:flex;gap:3px;background:rgba(255,255,255,.07);border-radius:9px;padding:3px}
+.ptab{background:transparent;color:rgba(255,255,255,.68);border:none;padding:6px 15px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+.ptab:hover{color:#fff;background:rgba(255,255,255,.1)}
+.ptab.active{background:#00C4FF;color:#06243c;font-weight:700;box-shadow:0 0 16px -4px rgba(0,196,255,.7)}
+#header-right{display:flex;align-items:center;gap:7px}
+#timer-box{display:flex;align-items:center;gap:7px;background:rgba(255,107,107,.16);color:#ff8a8a;border:1px solid rgba(255,107,107,.35);font-size:18px;font-weight:800;padding:5px 15px;border-radius:9px;letter-spacing:1.5px;min-width:104px;text-align:center;justify-content:center;font-variant-numeric:tabular-nums}
+#timer-box svg{opacity:.85}
+#timer-box.warn{background:rgba(255,165,2,.16);color:#ffb938;border-color:rgba(255,165,2,.4)}
+#timer-box.critical{background:rgba(255,107,107,.2);color:#ff6b6b;border-color:rgba(255,107,107,.5);animation:blink .9s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.hbtn{background:rgba(255,255,255,.1);color:#fff;border:none;width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.hbtn:hover{background:rgba(0,196,255,.22)}
+
+/* SETTINGS */
+#settings-panel{display:none;position:fixed;top:58px;right:12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;z-index:2000;min-width:230px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+#settings-panel h3{font-size:13px;margin-bottom:14px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.sg{margin-bottom:14px}
+.sg label{display:block;font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.sg-row{display:flex;gap:6px;flex-wrap:wrap}
+.sbtn{border:2px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.sbtn-fs{min-width:34px;text-align:center}
+
+/* MAIN LAYOUT */
+#main{margin-top:52px;display:flex;height:calc(100vh - 96px);overflow:hidden}
+#passage-panel{flex:1;min-width:200px;overflow-y:auto;padding:22px 28px 22px 24px;background:var(--bg);position:relative}
+#splitter{width:7px;background:var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s;user-select:none}
+#splitter:hover,#splitter.dragging{background:var(--accent)}
+#splitter::after{content:'';width:4px;height:26px;border-radius:3px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/4px 7px repeat-y;color:var(--text3);opacity:.65;pointer-events:none}
+#splitter:hover::after,#splitter.dragging::after{color:#fff;opacity:.9}
+#questions-panel{flex:1;min-width:200px;overflow-y:auto;padding:16px;background:var(--bg2)}
+
+/* PASSAGE */
+.passage-meta{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.8}
+.passage-time-hint{font-size:12px;color:var(--text3);margin-bottom:10px;padding:5px 10px;background:var(--bg3);border-radius:5px;border-left:3px solid var(--accent)}
+.passage-heading{font-size:21px;font-weight:800;margin-bottom:4px;line-height:1.25;color:var(--text)}
+.passage-subheading{font-size:14px;font-style:italic;color:var(--text3);margin-bottom:18px;line-height:1.5}
+.passage-divider{border:none;border-top:2px solid var(--border);margin-bottom:18px}
+.passage-text p{margin-bottom:16px;line-height:1.85;color:var(--text);text-align:justify}
+.para-label{font-weight:800;color:var(--accent);margin-right:6px;font-size:15px}
+.footnote{font-size:13px;color:var(--text3);margin-top:18px;border-top:1px solid var(--border);padding-top:10px;font-style:italic}
+
+/* HIGHLIGHT */
+.hl-yellow{background:var(--hl-yellow);border-radius:2px;padding:1px 0;color:var(--hl-yellow-text)}
+.hl-green{background:var(--hl-green);border-radius:2px;padding:1px 0;color:var(--hl-green-text)}
+#ctx-menu{display:none;position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:9px;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:3000;min-width:190px;overflow:hidden;padding:4px 0}
+.ctx-item{padding:9px 16px;cursor:pointer;font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;transition:background .1s;justify-content:space-between}
+.ctx-item:hover{background:var(--bg3)}
+.ctx-item-left{display:flex;align-items:center;gap:9px}
+.ctx-dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0}
+.ctx-key{font-size:10px;opacity:.5;font-family:monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;border:1px solid var(--border)}
+
+/* WORD BANK */
+.word-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.word-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.word-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.wb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.wb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* QUESTIONS */
+.q-section-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 6px;padding:7px 11px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent)}
+.q-range-label{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
+.q-instruction{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6;padding:9px 12px;background:var(--bg);border-left:3px solid var(--flag);border-radius:0 6px 6px 0}
+.q-block{margin-bottom:11px;padding:11px 13px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;position:relative;transition:border-color .15s,box-shadow .15s}
+.q-block:hover{box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.q-block.flagged{border-left:4px solid var(--flag)}
+.q-block.answered{border-left:4px solid var(--accent2)}
+.q-num{font-weight:700;font-size:12px;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.q-text{font-size:14px;color:var(--text);margin-bottom:9px;line-height:1.55}
+.q-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:7px 11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;transition:border-color .15s}
+.q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,144,196,.12)}
+.q-options{display:flex;flex-direction:column;gap:5px}
+.q-option{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);border:1.5px solid transparent;transition:all .12s}
+.q-option:hover{background:var(--bg3)}
+.q-option input{margin-top:2px;cursor:pointer;accent-color:var(--accent);width:15px;height:15px;flex-shrink:0}
+.q-option.selected{background:rgba(0,144,196,.08);border-color:rgba(0,144,196,.28)}
+body.dark .q-option.selected{background:rgba(0,196,255,.1);border-color:rgba(0,196,255,.3)}
+.tfng-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tfng-btn{border:1.5px solid var(--border);background:var(--bg2);color:var(--text);padding:6px 13px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;transition:all .12s;letter-spacing:.3px}
+.tfng-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tfng-btn.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.flag-btn{position:absolute;top:9px;right:9px;background:none;border:none;cursor:pointer;font-size:15px;color:var(--text3);padding:2px 5px;border-radius:4px;line-height:1;transition:color .15s}
+.flag-btn:hover{color:var(--flag)}
+.flag-btn.active{color:var(--flag)}
+
+/* MATCH person bank */
+.person-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.person-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.person-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.pb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.pb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* PALETTE */
+#palette-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1.5px solid var(--border);padding:5px 10px;z-index:800;display:flex;align-items:center;gap:4px;overflow-x:auto;height:44px}
+#palette-bar::-webkit-scrollbar{height:3px}
+#palette-bar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.pal-label{font-size:10px;color:var(--text3);font-weight:700;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px}
+.pal-num{width:25px;height:25px;border-radius:5px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s}
+.pal-num:hover{border-color:var(--accent);color:var(--accent)}
+.pal-num.done{background:var(--palette-done);color:#fff;border-color:var(--palette-done)}
+.pal-num.flagged{background:var(--palette-flag);color:#fff;border-color:var(--palette-flag)}
+.pal-num.active{border:2.5px solid var(--palette-active);box-shadow:0 0 0 2px rgba(0,196,255,.25),0 0 12px -2px rgba(0,196,255,.6)}
+body.dark .pal-num.done{box-shadow:0 0 12px -3px rgba(46,213,115,.6)}
+body.dark .pal-num.flagged{box-shadow:0 0 12px -3px rgba(255,165,2,.6)}
+.pal-legend{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);flex-shrink:0;white-space:nowrap;margin-left:2px}
+.pal-dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
+#submit-btn{display:flex;align-items:center;gap:7px;background:linear-gradient(120deg,#ff7a6b,#e0504a);color:#fff;border:none;padding:7px 18px;border-radius:9px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;letter-spacing:.3px;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 20px -8px rgba(255,107,107,.6)}
+#submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px -8px rgba(255,107,107,.75)}
+
+/* NOTES */
+#notes-toggle{position:fixed;bottom:56px;right:14px;z-index:900;background:linear-gradient(150deg,#00C4FF,#0098e0);color:#06243c;border:none;border-radius:14px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,196,255,.6);transition:transform .15s}
+#notes-toggle:hover{transform:scale(1.08)}
+#notes-box{display:none;position:fixed;bottom:102px;right:14px;z-index:900;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;width:270px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+#notes-box h4{font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+#notes-ta{width:100%;height:130px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:7px;padding:9px;font-size:13px;resize:vertical;outline:none;font-family:inherit;line-height:1.5}
+#notes-ta:focus{border-color:var(--accent)}
+
+/* RULER */
+#ruler{position:fixed;left:0;height:28px;background:var(--ruler-bg);pointer-events:none;display:none;z-index:500;border-top:1px solid var(--ruler-border);border-bottom:1px solid var(--ruler-border)}
+
+/* RESULTS */
+#results-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5000;overflow-y:auto;padding:30px 20px}
+.res-header{text-align:center;margin-bottom:28px}
+.res-header h1{font-size:24px;color:var(--accent);margin-bottom:8px;font-weight:800}
+.band-circle{position:relative;width:150px;height:150px;border-radius:50%;border:6px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;background:var(--bg2);box-shadow:0 0 40px -6px rgba(0,196,255,.55),inset 0 0 26px -10px rgba(0,196,255,.4)}
+.band-num{font-size:54px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-1.5px;text-shadow:0 0 20px rgba(0,196,255,.5)}
+.band-lbl{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.band-desc{font-size:14px;color:var(--text2);margin-bottom:4px;font-weight:600}
+.band-note{font-size:11px;color:var(--text3);margin-bottom:20px;font-style:italic}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:660px;margin:0 auto 20px}
+.stat-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-size:30px;font-weight:800;color:var(--accent);text-shadow:0 0 16px rgba(0,196,255,.25)}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.p-breakdown{max-width:760px;margin:0 auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.p-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:14px}
+.p-card h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.p-card-stats{display:flex;gap:12px;font-size:13px}
+.review-section{max-width:760px;margin:0 auto 20px}
+.review-section h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.review-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px}
+.review-card.correct{border-left:4px solid var(--correct)}
+.review-card.wrong{border-left:4px solid var(--wrong)}
+.review-card.unanswered{border-left:4px solid var(--text3)}
+.rev-q{font-weight:700;font-size:12px;color:var(--text);margin-bottom:3px}
+.rev-yours{font-size:12px;color:var(--wrong)}
+.rev-correct{font-size:12px;color:var(--correct)}
+.res-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-bottom:30px}
+.res-btn{padding:11px 24px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit}
+.res-btn:hover{opacity:.85}
+.res-btn-primary{background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c}
+body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
+.res-btn-secondary{background:var(--bg3);color:var(--text);border:1.5px solid var(--border)}
+.tg-btn{background:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;transition:opacity .15s}
+.tg-btn:hover{opacity:.88}
+
+/* REVIEW MODE */
+.q-input.correct-ans{border-color:var(--correct)!important;background:rgba(30,158,86,.09)!important}
+.q-input.wrong-ans{border-color:var(--wrong)!important;background:rgba(214,69,69,.09)!important}
+.tfng-btn.correct-ans{background:var(--correct)!important;color:#fff!important;border-color:var(--correct)!important}
+.tfng-btn.wrong-ans{background:var(--wrong)!important;color:#fff!important;border-color:var(--wrong)!important}
+.answer-reveal{font-size:11px;color:var(--correct);margin-top:5px;font-weight:700}
+.answer-hint{font-size:11px;color:var(--text3);margin-top:4px;font-style:italic;line-height:1.5;padding:5px 8px;background:var(--bg2);border-radius:5px;border-left:2px solid var(--accent)}
+
+/* FLASH */
+@keyframes pal-flash{0%,100%{background:var(--bg3)}50%{background:#e74c3c;color:#fff;border-color:#e74c3c}}
+.pal-num.flash{animation:pal-flash .5s ease 3}
+
+/* SCROLL INDICATOR */
+#scroll-bar{position:absolute;top:0;left:0;width:0%;height:3px;background:var(--accent);z-index:5;transition:width .1s;border-radius:0 2px 2px 0}
+
+/* BACK TO RESULTS */
+#back-to-results{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
+#back-to-results:hover{opacity:.88}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-track{background:transparent}
+
+@media(max-width:768px){
+  #main{flex-direction:column;height:calc(100vh - 96px)}
+  #passage-panel{height:50%;border-bottom:2px solid var(--border);padding:14px}
+  #questions-panel{width:100%;height:50%}
+  #splitter{width:100%;height:8px;cursor:row-resize}
+  #splitter::after{width:26px;height:4px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/7px 4px repeat-x}
+}
+
+/* DARK PREMIUM GLASS */
+body.dark #passage-panel{background:transparent}
+body.dark #questions-panel{background:rgba(10,29,51,.35)}
+body.dark .q-block{background:var(--card-grad);border-color:var(--border);backdrop-filter:blur(6px)}
+body.dark .q-block:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.6)}
+body.dark .q-block.answered{box-shadow:inset 4px 0 0 var(--accent2),0 0 0 1px rgba(46,213,115,.12)}
+body.dark .q-input,body.dark .tfng-btn{background:rgba(10,29,51,.5)}
+body.dark .word-bank,body.dark .person-bank{background:rgba(10,29,51,.4)}
+body.dark .wb-item,body.dark .pb-item{background:rgba(22,45,74,.6)}
+body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);backdrop-filter:blur(14px)}
+body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
+body.dark .info-card,body.dark .stat-card,body.dark .p-card,body.dark .review-card{background:var(--card-grad)}
+body.dark .q-input:focus{box-shadow:0 0 0 3px rgba(0,196,255,.18)}
+body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.res-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.res-brand .lg-badge{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 18px -5px rgba(0,196,255,.55)}
+.res-brand .lg-name{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.res-brand .lg-name span{color:#00C4FF}
+</style>
+</head>
+<body>
+
+
+<!-- START SCREEN -->
+<div id="start-screen">
+  <div class="start-box">
+    <div class="start-brand">
+      <span class="start-brand-badge"><svg viewBox="0 0 40 40" width="32" height="32" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.4" fill="#00C4FF"/><circle cx="17" cy="24" r="2.4" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.3"/><circle cx="30" cy="12" r="2.6" fill="#00C4FF"/></svg></span>
+      <span class="start-brand-name">Band<span>Path</span></span>
+    </div>
+    <div class="start-logo">IELTS Academic Reading</div>
+    <div class="start-title">Mock Test 3</div>
+    <div class="start-subtitle">Computer-Delivered Format</div>
+    <div class="start-info">
+      <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
+      <div class="info-card"><div class="info-val">40</div><div class="info-lbl">Questions</div></div>
+      <div class="info-card"><div class="info-val">60</div><div class="info-lbl">Minutes</div></div>
+    </div>
+    <div class="start-rules">
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Read each passage carefully and answer all 40 questions.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Highlight text by selecting it and right-clicking or using Shift+Y / Shift+G.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Flag any question to return to it later.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Your answers are saved automatically.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>The timer starts when you click Begin.</span></p>
+    </div>
+    <button id="start-btn" onclick="beginTest()"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg>Begin Test</button>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="applyHighlight('yellow')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#ffe066;border:1px solid #cca800"></span>Yellow highlight</div>
+    <span class="ctx-key">Shift+Y</span>
+  </div>
+  <div class="ctx-item" onclick="applyHighlight('green')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#a8f0c6;border:1px solid #2e7d52"></span>Green highlight</div>
+    <span class="ctx-key">Shift+G</span>
+  </div>
+  <div class="ctx-item" onclick="removeHighlight()">
+    <div class="ctx-item-left"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><path d="M18 6 6 18M6 6l12 12"/></svg>Remove highlight</div>
+    <span class="ctx-key">Shift+R</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo-area"><span class="lg-badge"><svg viewBox="0 0 40 40" width="21" height="21" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+  <div id="passage-tabs">
+    <button class="ptab active" onclick="switchPassage(0)">Passage 1</button>
+    <button class="ptab" onclick="switchPassage(1)">Passage 2</button>
+    <button class="ptab" onclick="switchPassage(2)">Passage 3</button>
+  </div>
+  <div id="header-right">
+    <div id="timer-box"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg><span id="timer-txt">60:00</span></div>
+    <button class="hbtn" onclick="toggleFullscreen()" title="Fullscreen"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+    <button class="hbtn" onclick="toggleSettings()" title="Settings"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings-panel">
+  <h3>Settings</h3>
+  <div class="sg">
+    <label>Theme</label>
+    <div class="sg-row">
+      <button class="sbtn" onclick="setTheme('light',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Light</button>
+      <button class="sbtn" onclick="setTheme('dark',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>Dark</button>
+    </div>
+  </div>
+  <div class="sg">
+    <label>Font Size</label>
+    <div class="sg-row">
+      <button class="sbtn sbtn-fs active" onclick="setFont(15,this)" style="font-size:12px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(18,this)" style="font-size:16px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(22,this)" style="font-size:20px">A</button>
+    </div>
+  </div>
+  <div class="sg" style="display:flex;align-items:center;justify-content:space-between">
+    <label style="margin:0">Reading Ruler</label>
+    <input type="checkbox" id="ruler-toggle" onchange="toggleRuler()" style="width:18px;height:18px;cursor:pointer;accent-color:var(--accent)">
+  </div>
+  <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
+    <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
+    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+  </div>
+</div>
+
+<div id="ruler"></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="passage-panel"><div id="scroll-bar"></div><div id="passage-content"></div></div>
+  <div id="splitter"></div>
+  <div id="questions-panel"><div id="questions-content"></div></div>
+</div>
+
+<button id="back-to-results" onclick="backToResults()">← Back to Results</button>
+
+<!-- NOTES -->
+<button id="notes-toggle" onclick="toggleNotes()" title="Notes (Ctrl+N)"><svg class="ic" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+<div id="notes-box">
+  <h4><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Scratch Notes &nbsp;<span style="opacity:.45;font-size:10px">Ctrl+N</span></h4>
+  <textarea id="notes-ta" placeholder="Type notes here..." oninput="saveNotes()"></textarea>
+</div>
+
+<!-- PALETTE -->
+<div id="palette-bar">
+  <span class="pal-label">Q:</span>
+  <div id="palette-nums" style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:3px;align-items:center"></div>
+  <div class="pal-legend" style="margin-left:6px">
+    <span class="pal-dot" style="background:var(--palette-done)"></span>Done&nbsp;
+    <span class="pal-dot" style="background:var(--palette-flag)"></span>Flag
+  </div>
+  <button id="submit-btn" onclick="submitTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Submit Test</button>
+</div>
+
+<!-- RESULTS -->
+<div id="results-screen">
+  <div class="res-header">
+    <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+    <h1>Academic Reading — Results (Mock Test 3)</h1>
+    <div class="band-circle">
+      <div class="band-num" id="res-band">—</div>
+      <div class="band-lbl">Band</div>
+    </div>
+    <div class="band-desc" id="res-band-desc"></div>
+    <div class="band-note">Reading band estimate based on raw score. Actual scores may vary by test version.</div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="res-correct">—</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-wrong">—</div><div class="stat-lbl">Incorrect</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-skip">—</div><div class="stat-lbl">Skipped</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-pct">—</div><div class="stat-lbl">Accuracy</div></div>
+  </div>
+  <div class="p-breakdown" id="p-breakdown"></div>
+  <div class="review-section">
+    <h3>Detailed Review</h3>
+    <div class="review-grid" id="review-grid"></div>
+  </div>
+  <div class="res-actions">
+    <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
+    <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
+    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+      More Tests on Telegram
+    </a>
+  </div>
+</div>
+
+<script>
+const PASSAGES=[
+{
+  title:'READING PASSAGE 1',
+  heading:'Tunnelling under the Thames',
+  subheading:'The first tunnel ever to be built under a major river was the tunnel under London\'s River Thames.',
+  timeHint:'You should spend about 20 minutes on Questions 1–13.',
+  qRange:[1,13],
+  paragraphs:[
+    {label:'',text:`At the beginning of the 19th century, the port of London was the busiest in the world. Cargoes that had travelled thousands of miles and survived all the hazards of the sea were unloaded on the banks of the Thames, only for their owners to discover that the most frustrating portion of their journey lay ahead. Consignments intended for the southern parts of Britain had to be lifted onto horse carts, pulled through the docks and across London Bridge, built in the 12th century and as impractical as its early date implies. By 1820, London Bridge had become the centre of the world's largest traffic jam.`},
+    {label:'',text:`It was an intolerable situation, and it was clear that if private enterprise could build another crossing closer to the docks, there would be good money to be made in tolls paid by users. Another bridge was out of the question, as this would deny sailing ships access to the city centre and ambitious men turned their thoughts to tunnelling beneath the Thames instead. This was not such an obvious idea as it might appear. Although increasing demand for coal had meant a great many tunnels had been dug in mines in Britain, working methods remained primitive. Tunnels were dug by men with simple tools, by candlelight. However, in 1807, a group of businessmen set themselves up as the Thames Archway Company. Their ambition was to tunnel below the Thames, but there was little to guide them as there had been no previous attempt to do this. Their chief engineer was Richard Trevithick, designer of the world's first high-pressure steam engine. His men made progress at the beginning, but then things began to go disastrously wrong, with muddy soil pouring into the tunnel. Eventually, the Thames Archway Company had had enough. Its funds were exhausted, Trevithick was sick from exposure to the river water, and its efforts had proved only that a passage under the river exceeded the limits of contemporary mining technology.`},
+    {label:'',text:`At that time, the only machines used in mines were pumps. It took a man of genius to recognise that a different sort of machine was needed, a machine that could prevent the roof and walls of a tunnel from collapsing. This man was Marc Brunel, a Frenchman who had become one of the most prominent engineers in Britain. Not long after the failure of the Thames Archway Company, Brunel saw a rotten piece of wood lying on the riverbank. Examining the wood through a magnifying glass, he observed it was infested with something that looked like a worm. Brunel realised that as it tunnelled through the wood, it would push chewed wood into its mouth and digest it, then excrete a hard substance that lined the new tunnel. Brunel realised that the worm's digging technique could be adapted to produce a new way of tunnelling. His realisation led him to invent a device that has been used in one form or another in most major tunnels built since – the tunnelling shield. It consisted of a heavy iron frame that could be pushed forward a few inches at a time. The front of the frame was made up of a series of iron frames that could be folded back to allow miners to dig the ground ahead. Behind these frames was a wall consisting of a series of iron plates pressed against the tunnel face and supported on a set of horizontal wooden planks, that would prevent the face from collapsing. It was a complex and rather cumbersome machine and not easy to use, but it seemed that it would protect the miners from the worst of the river's water. Brunel's team carefully examined earth samples taken from beneath the riverbed, and subsequently decided to dig the tunnel close to the muddy river bottom, where he could expect to find clay. This would be a more solid and safe substance to dig through than the sand that was found deeper down.`},
+    {label:'',text:`Brunel began work on his tunnel in 1825, but the problems of such an operation soon became apparent. Although the shield itself worked well, water began to drip into the tunnel. This was more of an annoyance than a danger while the pump was working, but this machine proved unreliable and sometimes failed altogether. When the pump broke down, work had to stop as the tunnel quickly flooded. There were occasions when the miners had to abandon their tools and flee for their lives. Even when Brunel's men were able to work, they had to run the constant risk of the pumps failing. They also complained of frequent headaches and dizziness, caused by the poor air quality. The air underground was dirty and stale, contaminated due to the lack of an adequate ventilation system. There were lighting problems too. Illuminating the tunnels by candlelight was a constant challenge. Lamps give off only a very weak glow, and there were a number of accidents because the miners could not see what they were doing. Lastly, a number of Brunel's miners walked off the job because they could not tolerate the excessive temperatures that developed in the cramped conditions underground.`},
+    {label:'',text:`Despite all these setbacks, the tunnel finally emerged on the opposite river bank on August 12, 1841. Brunel's triumph, however, was only partial. The small payment per person made by the thousands of visitors who flocked to see the marvel hardly paid even a penny per foot of the tunnel's construction costs. Brunel had gone bankrupt long before the project was completed, and the government loan he had required to complete the project had to be paid back with interest. As a result, there was not enough funding to make it accessible to horse-drawn vehicles, as intended. Instead, the passageways were filled with souvenir sellers and entertainers. In the end, the tunnel was closed two years later, used at night, before it was finally closed entirely and fell into dereliction for decades.`},
+    {label:'',text:`It was only when the underground railway came to London in the 1880s that the Thames Tunnel found and achieved a measure of real usefulness. It was bought in 1869 by the East London Railway, who found it to be in such excellent condition that it was immediately pressed into service as a route for passenger trains heading east. The tunnel became, and remains, part of the London Underground network.`},
+  ]
+},
+{
+  title:'READING PASSAGE 2',
+  heading:'Skyscraper Farming',
+  subheading:'With a global food crisis predicted, a group of scientists is advocating an innovative alternative to conventional farming that could radically transform the way that food is produced.',
+  timeHint:'You should spend about 20 minutes on Questions 14–26.',
+  qRange:[14,26],
+  paragraphs:[
+    {label:'A',text:`Today's environment scientists are in no doubt that the world's resources of fertile soil are rapidly deteriorating, and that new land for agriculture is becoming ever more sparse. Intensive farming, urbanisation, desertification and sea-level rises are all putting growing pressure on the planet's agricultural land and therefore on food supplies. Currently 24 per cent of the world's 11.5 billion hectares of cultivated land has already undergone human-induced soil degradation particularly through erosion, according to a recent study by the UK Government Office for Science.`},
+    {label:'B',text:`The global population is expected to exceed nine billion by 2050 – up a third from today's level – and studies suggest that food production will have to go up by 70 per cent if we are to feed all of those new mouths. This means that scientists will have to develop new ways of growing crops if we are to avoid a humanitarian crisis. Indeed, UN Food and Agriculture Organization figures suggest that the number of undernourished people is already growing. And with escalating climate change, crop yields in many areas have been projected to decline.`},
+    {label:'C',text:`With this in mind, some scientists and agricultural experts are advocating an innovative alternative to traditional farming whereby skyscrapers packed with shelf-based systems for growing vegetables on each storey – known as 'vertical farms' – could hold the key to revolutionising agriculture. Columbia University professor Dickson Despommier claims that vertical farming could boost crop yields many times over. A single 20-storey vertical farm could theoretically feed 50,000 people, according to Despommier. And if the theory translates into reality as proposed, 160 skyscraper-sized vertical farms could feed the entire population of New York City, while 180 would be needed to feed London, 289 to feed Cairo and 302 to feed Kolkata.`},
+    {label:'D',text:`It's a compelling vision, and one that has already been put into practice in Asia, albeit on a smaller scale. But there are problems, such as 'initial investment and operating costs that are too great,' says a spokesman for Japan's Ministry of Agriculture, Forestry and Fisheries. Nevertheless, Tokyo-based mushroom producer Hokuto Corporation is a model example of how a vertical farm can be profitable. With 28 vertical mushroom farms operating across the country, it produces some 68,000 tonnes of mushrooms annually. 'Vertical mushroom farms have more advantages than ground-level farms,' says Hokuto's Ted Yamanoko. Yamanoko goes on to highlight the relative cost-effectiveness of his organisation's farming practices together with reduced emissions of greenhouse gases.`},
+    {label:'E',text:`And the impact of vertical farms could extend beyond feeding established urban populations. Despommier sees them as being capable of helping centres of displaced persons – such as refugee camps – in much the same way that Mobile Army Surgical Hospital (MASH) units are deployed in emergency situations. 'Developing an emergency-response system for crop production inside specially constructed modular and highly transportable greenhouses would allow for humanitarian interventions, at least for refugees that are forced out of their countries by political turmoil,' he says. 'If you have three or four storeys of food already growing some place, they could become mobile units that could be picked up by helicopters and dropped into the middle of a crisis zone. The food would be ready to pick and eat. It could be designed to supply people with all the nutrition they need to make it through the crisis.'`},
+    {label:'F',text:`But it isn't only about increasing food production. Despommier is concerned about the harm which farming has done to the world's landscape over a relatively short time span, particularly the elimination of hardwood forests. 'Farming is only 12,000 years old,' he points out. Vertical farming would 'allow us for the first time to feed everyone on earth and still return land to its original ecological function.' Natalie Jeremijenko, associate professor at New York University, agrees. 'The challenge that we have now is how we can design urban agriculture systems that not only reduce food miles, but also improve the world's ecosystems,' she says. By significantly reducing the amount of land required for food production, vertical farms could help to enrich biodiversity. And according to Jeremijenko, this can, in turn, help to improve the productivity of conventional farms, as the health of agricultural land is often tied to the health of the surrounding ecosystems. Furthermore, vertical farming could dramatically cut the utilisation of fossil fuels. And also reduce geopolitical tensions in countries where poor farming conditions cause conflict and malnutrition.`},
+  ]
+},
+{
+  title:'READING PASSAGE 3',
+  heading:'The Hazards of Multitasking',
+  subheading:'Doing more than one thing at once – is it always a good idea?',
+  timeHint:'You should spend about 20 minutes on Questions 27–40.',
+  qRange:[27,40],
+  paragraphs:[
+    {label:'',text:`You arrive at the office, review your to-do list and start to feel a headache coming on. You resolve to tackle the items as quickly as possible. While you return calls, you sort email and other letters. You begin keying in slides for tomorrow's presentation. Then your manager comes in wanting an immediate update on sales figures. You have just opened the spreadsheet when a very important customer calls. With the receiver held between your shoulder and your ear, you continue adding up the sales totals until, 15 minutes later, you finally manage, politely, to get rid of the client. You've been multitasking again.`},
+    {label:'',text:`You may believe that anyone who wants to get ahead today should master the art of multitasking. However, a recent study by the Families and Work Institute in New York City has found that 45 per cent of US workers believe that they are asked or expected to work on too many tasks at once. Managers may be surprised to learn that they are actually wasting their workers' time. As it turns out, the human brain cannot really master the computer's art of crunching data in the background while moving between process windows. Instead, a growing number of studies show that trying to juggle jobs rather than completing them sequentially can take longer, and leave workers with a reduced ability to perform each task. In addition, the stress associated with multitasking may contribute to short-term memory difficulties. The combination results in inefficiency, careless thinking and mistakes – not to mention the possible dangers of divided attention for drivers, air traffic controllers, and others who handle machinery.`},
+    {label:'',text:`How can a time management strategy that has become part of the common wisdom actually be so wrong? Exploring that question requires a closer look at an area of consciousness research that examines how the brain focuses attention. One of the modern foundations of current knowledge of multitasking was laid in 1935, when the American psychologist John Ridley Stroop reported that processing information from one task could cause interference with another. Stroop noticed that when study participants were asked to name the colour of a word – such as 'green' – printed in a different colour – red, for example – they experienced difficulty saying the name of the colour. This phenomenon is thought to occur when two tasks get tangled: the brain must suppress one that has been learned so well that it has become automatic (reading), to attend to a second task that requires concentration (naming the colour).`},
+    {label:'',text:`During the past couple of decades, psychologists have probed more deeply into the nature and limitations of multitasking. Psychologist and brain researcher Ernst Pöppel, of the Ludwig Maximilian University in Munich, believes that it is impossible to carry out two or three different tasks simultaneously with the same degree of concentration. He says that seemingly simultaneous awareness and processing of information actually takes place in 'three-second windows'. In these three-second segments, the brain takes in, as a block, all the data about the environment streaming in from the sensory systems; subsequent events are processed in the next window. So a person can concentrate on a conversation for three seconds, then for three seconds on a crying child, and three seconds on a computer screen. While one subject at a time occupies the foreground of consciousness, the others stay in the background until they, in turn, are given access to the central processor.`},
+    {label:'',text:`Another experiment by psychologist David E. Meyer, of the University of Michigan, quantified just how much time we can lose when we shuttle between tasks. The researchers asked test participants to write a report and check their email at the same time. Those individuals who constantly jumped back and forth between the two tasks took about one and a half times as long to finish as those who completed one job before turning to the other. Each switchover from one task to another meant rethinking, and thus involved additional neural resources. In effect, the brain needs time to shut off the rules for one task and to turn on the rules for another. 'Multitasking saves time only when it is a matter of relaxed, routine tasks,' Meyer says. It also takes the brain longer to adapt when switching rapidly back to an interrupted task, rather than waiting longer before switching back.`},
+    {label:'',text:`By its nature multitasking is stressful, and the area in the brain most involved with multitasking is also most affected by the resulting stress. Located behind the forehead, the prefrontal cortex, which neuroscientists call the 'executive' part of the brain, helps us to assess tasks, prioritise them and assign mental resources. It also 'marks' the spot at which a task has been interrupted, so that we can return to it later. This stress can also affect brain cells in another region, the hippocampus, which is important for forming new memories; damage in that area also makes it difficult for a person to acquire new skills.`},
+    {label:'',text:`Psychiatrists Edward Hallowell and John Ratey, of Harvard University, say that multitasking can bring about a brain condition that causes sufferers to constantly seek new information while having difficulties concentrating on its content. All in all, it may be wise to let the email wait while you work on your presentation. You will save time and perform each task better.`},
+  ]
+}
+];
+
+// ═══════════════════════════════════════════
+// PEOPLE / WORD BANKS
+// ═══════════════════════════════════════════
+const HEADINGS_P2=[
+  {letter:'i',word:'Potential production capabilities of vertical farms'},
+  {letter:'ii',word:'Opposition to new ideas about food production'},
+  {letter:'iii',word:'A successful application of vertical farming technology'},
+  {letter:'iv',word:'The potential to provide urgent relief'},
+  {letter:'v',word:'The original inspiration for vertical farming'},
+  {letter:'vi',word:'Various environmental benefits of vertical farming'},
+  {letter:'vii',word:'An increasing problem for farmers worldwide'},
+  {letter:'viii',word:'A return to traditional farming methods'},
+  {letter:'ix',word:'A rising demand for food'}
+];
+
+const PEOPLE_P2=[
+  {letter:'A',word:'Dickson Despommier'},
+  {letter:'B',word:'Ted Yamanoko'},
+  {letter:'C',word:'Natalie Jeremijenko'}
+];
+
+const PEOPLE_P3=[
+  {letter:'A',word:'John Ridley Stroop'},
+  {letter:'B',word:'Ernst Pöppel'},
+  {letter:'C',word:'David E. Meyer'},
+  {letter:'D',word:'Edward Hallowell & John Ratey'}
+];
+
+// ═══════════════════════════════════════════
+// QUESTIONS
+// ═══════════════════════════════════════════
+const QUESTIONS=[
+// ── PASSAGE 1 ──────────────────────────────
+// Q1-8: TRUE/FALSE/NOT GIVEN
+{id:1,passage:0,type:'tfng',
+ instruction:'Questions 1–8: TRUE / FALSE / NOT GIVEN',
+ text:'In the early 19th century, the port of London was considered a safer destination than other ports.',
+ answer:'NOT GIVEN',
+ hint:'The passage says London was the busiest port in the world but makes no comparison about its safety relative to other ports.'},
+
+{id:2,passage:0,type:'tfng',instruction:'',
+ text:'London Bridge provided quick access for cargo being sent to southern Britain.',
+ answer:'FALSE',
+ hint:'The passage says London Bridge was "as impractical as its early date implies" and had become the centre of "the world\'s largest traffic jam" — the opposite of quick access.'},
+
+{id:3,passage:0,type:'tfng',instruction:'',
+ text:'It was generally believed that a new river crossing would be profitable.',
+ answer:'TRUE',
+ hint:'The passage states: "there would be good money to be made in tolls paid by users" — showing profit was expected from a new crossing.'},
+
+{id:4,passage:0,type:'tfng',instruction:'',
+ text:'Building a second bridge crossing was initially considered to be the best solution.',
+ answer:'FALSE',
+ hint:'The passage says "Another bridge was out of the question, as this would deny sailing ships access to the city centre." It was ruled out, not considered best.'},
+
+{id:5,passage:0,type:'tfng',instruction:'',
+ text:'It was believed that coal could be found under the River Thames.',
+ answer:'NOT GIVEN',
+ hint:'The passage mentions coal demand drove tunnel digging in mines, but says nothing about coal being under the Thames.'},
+
+{id:6,passage:0,type:'tfng',instruction:'',
+ text:'The Thames Archway Company was the first group to try tunnelling below the Thames.',
+ answer:'TRUE',
+ hint:'The passage says "there was little to guide them as there had been no previous attempt to do this" — confirming they were first.'},
+
+{id:7,passage:0,type:'tfng',instruction:'',
+ text:'Some of Trevithick\'s men were injured during a mudslide at his tunnel.',
+ answer:'NOT GIVEN',
+ hint:'The passage mentions muddy soil pouring in and Trevithick getting sick, but says nothing about injuries to his men.'},
+
+{id:8,passage:0,type:'tfng',instruction:'',
+ text:'The Thames Archway Company ran out of money to finance the tunnel project.',
+ answer:'TRUE',
+ hint:'The passage states: "Its funds were exhausted" — confirming the company ran out of money.'},
+
+// Q9-13: Notes completion (ONE WORD ONLY)
+{id:9,passage:0,type:'fill',
+ instruction:'Questions 9–13: Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.',
+ text:'Brunel noticed how a kind of _______ made its tunnels in wood.',
+ answers:['worm'],answer:'worm',
+ hint:'Passage: "he observed it was infested with something that looked like a worm... Brunel realised that the worm\'s digging technique could be adapted."'},
+
+{id:10,passage:0,type:'fill',instruction:'',
+ text:'Brunel planned to build a shallow tunnel so the earth would have a higher content of _______.',
+ answers:['clay'],answer:'clay',
+ hint:'Passage: "decided to dig the tunnel close to the muddy river bottom, where he could expect to find clay. This would be a more solid and safe substance."'},
+
+{id:11,passage:0,type:'fill',instruction:'',
+ text:'The miners suffered from _______ because of pollution in the tunnels.',
+ answers:['headaches'],answer:'headaches',
+ hint:'Passage: "They also complained of frequent headaches and dizziness, caused by the poor air quality."'},
+
+{id:12,passage:0,type:'fill',instruction:'',
+ text:'Lighting problems led to several _______.',
+ answers:['accidents'],answer:'accidents',
+ hint:'Passage: "there were a number of accidents because the miners could not see what they were doing."'},
+
+{id:13,passage:0,type:'fill',instruction:'',
+ text:'Brunel did not have enough money to repay his debt to the _______.',
+ answers:['government'],answer:'government',
+ hint:'Passage: "the government loan he had required to complete the project had to be paid back with interest."'},
+
+// ── PASSAGE 2 ──────────────────────────────
+// Q14-19: Paragraph headings (i–ix)
+{id:14,passage:1,type:'fill',
+ instruction:'Questions 14–19: Reading Passage 2 has six paragraphs A–F. Choose the correct heading i–ix for each paragraph.',
+ text:'Paragraph A',
+ answers:['vii'],answer:'vii',
+ hint:'Paragraph A describes the deteriorating state of the world\'s farmland — "An increasing problem for farmers worldwide" (vii).'},
+
+{id:15,passage:1,type:'fill',instruction:'',
+ text:'Paragraph B',
+ answers:['ix'],answer:'ix',
+ hint:'Paragraph B discusses the growing global population and the need for 70% more food — "A rising demand for food" (ix).'},
+
+{id:16,passage:1,type:'fill',instruction:'',
+ text:'Paragraph C',
+ answers:['i'],answer:'i',
+ hint:'Paragraph C gives specific numbers: one 20-storey farm feeding 50,000 people, and how many farms needed per city — "Potential production capabilities of vertical farms" (i).'},
+
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Paragraph D',
+ answers:['iii'],answer:'iii',
+ hint:'Paragraph D gives the example of Hokuto Corporation\'s profitable vertical mushroom farms — "A successful application of vertical farming technology" (iii).'},
+
+{id:18,passage:1,type:'fill',instruction:'',
+ text:'Paragraph E',
+ answers:['iv'],answer:'iv',
+ hint:'Paragraph E describes using vertical farms as emergency food relief for refugees, like MASH units — "The potential to provide urgent relief" (iv).'},
+
+{id:19,passage:1,type:'fill',instruction:'',
+ text:'Paragraph F',
+ answers:['vi'],answer:'vi',
+ hint:'Paragraph F covers biodiversity, ecosystem health, reduced fossil fuels, and reduced geopolitical tension — "Various environmental benefits of vertical farming" (vi).'},
+
+// Q20-22: Sentence completion (NO MORE THAN TWO WORDS)
+{id:20,passage:1,type:'fill',
+ instruction:'Questions 20–22: Complete the sentences below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'A UK Government study found that _______ is a significant factor contributing to worldwide levels of soil degradation.',
+ answers:['erosion'],answer:'erosion',
+ hint:'Paragraph A: "human-induced soil degradation particularly through erosion, according to a recent study by the UK Government Office for Science."'},
+
+{id:21,passage:1,type:'fill',instruction:'',
+ text:'Disadvantages of vertical farming projects include the expense of setting them up, as well as their high _______.',
+ answers:['operating costs'],answer:'operating costs',
+ hint:'Paragraph D: "initial investment and operating costs that are too great."'},
+
+{id:22,passage:1,type:'fill',instruction:'',
+ text:'_______ could potentially be used to take vertical farming facilities to areas where there is a critical food shortage.',
+ answers:['helicopters','Helicopters'],answer:'Helicopters',
+ hint:'Paragraph E: "they could become mobile units that could be picked up by helicopters and dropped into the middle of a crisis zone."'},
+
+// Q23-26: Match statements to people A/B/C
+{id:23,passage:1,type:'fill',
+ instruction:'Questions 23–26: Match each statement with the correct person A, B or C. You may use any letter more than once.',
+ text:'Vertical farming can have financial benefits.',
+ answers:['b','B'],answer:'B',
+ hint:'Ted Yamanoko (B) highlights "the relative cost-effectiveness of his organisation\'s farming practices."'},
+
+{id:24,passage:1,type:'fill',instruction:'',
+ text:'Traditional farming has had a negative effect on the natural world.',
+ answers:['a','A'],answer:'A',
+ hint:'Dickson Despommier (A): "concerned about the harm which farming has done to the world\'s landscape... particularly the elimination of hardwood forests."'},
+
+{id:25,passage:1,type:'fill',instruction:'',
+ text:'Vertical farming could dramatically increase world food production.',
+ answers:['a','A'],answer:'A',
+ hint:'Dickson Despommier (A): "vertical farming could boost crop yields many times over."'},
+
+{id:26,passage:1,type:'fill',instruction:'',
+ text:'Traditional farms may benefit from wider use of vertical farming.',
+ answers:['c','C'],answer:'C',
+ hint:'Natalie Jeremijenko (C): "this can, in turn, help to improve the productivity of conventional farms, as the health of agricultural land is often tied to the health of the surrounding ecosystems."'},
+
+// ── PASSAGE 3 ──────────────────────────────
+// Q27-31: Match theories to people A/B/C/D
+{id:27,passage:2,type:'fill',
+ instruction:'Questions 27–31: Match each theory with the correct person or people A, B, C or D. You may use any letter more than once.',
+ text:'Less attention will be paid to each task when more than one task is attempted at the same time.',
+ answers:['a','A'],answer:'A',
+ hint:'John Ridley Stroop (A) showed that processing one task causes interference with another, meaning less attention is available for each.'},
+
+{id:28,passage:2,type:'fill',instruction:'',
+ text:'Repeated changes of task mean that the brain will take a while to adjust.',
+ answers:['c','C'],answer:'C',
+ hint:'David E. Meyer (C): "the brain needs time to shut off the rules for one task and to turn on the rules for another." Also: "it takes the brain longer to adapt when switching rapidly back."'},
+
+{id:29,passage:2,type:'fill',instruction:'',
+ text:'Using the skills required for one task may make performing another one more difficult.',
+ answers:['a','A'],answer:'A',
+ hint:'John Ridley Stroop (A): "processing information from one task could cause interference with another" — the automatic skill of reading interfered with naming the colour.'},
+
+{id:30,passage:2,type:'fill',instruction:'',
+ text:'When multitasking, the brain can only focus on single tasks for very short periods.',
+ answers:['b','B'],answer:'B',
+ hint:'Ernst Pöppel (B): processing takes place in "three-second windows" — the brain focuses on one thing at a time for just three seconds.'},
+
+{id:31,passage:2,type:'fill',instruction:'',
+ text:'Multitasking can lead to a medical problem.',
+ answers:['d','D'],answer:'D',
+ hint:'Edward Hallowell & John Ratey (D): "multitasking can bring about a brain condition that causes sufferers to constantly seek new information while having difficulties concentrating."'},
+
+// Q32-34: MCQ
+{id:32,passage:2,type:'mcq',
+ instruction:'Questions 32–34: Choose the correct letter A, B, C or D.',
+ text:'What is suggested about the worker in the opening paragraph?',
+ answer:'B',
+ options:[
+   'A. Anxiety deprived him of sleep the previous night.',
+   'B. He feels overwhelmed by his workload.',
+   'C. His manager has expressed disapproval.',
+   'D. He finds his work dull and uninteresting.'
+ ],
+ hint:'The worker "start[s] to feel a headache coming on" facing a long to-do list and constant interruptions — he is overwhelmed by his workload.'},
+
+{id:33,passage:2,type:'mcq',instruction:'',
+ text:'Drivers and air traffic controllers are mentioned in the passage because they',
+ answer:'D',
+ options:[
+   'A. need to perform several tasks at once.',
+   'B. are unable to maintain concentration.',
+   'C. use their time efficiently.',
+   'D. cannot afford to make mistakes.'
+ ],
+ hint:'Passage: "the possible dangers of divided attention for drivers, air traffic controllers, and others who handle machinery" — the danger is that mistakes in these roles can be fatal.'},
+
+{id:34,passage:2,type:'mcq',instruction:'',
+ text:'In John Ridley Stroop\'s experiment, participants found it difficult to',
+ answer:'C',
+ options:[
+   'A. tell one colour from another.',
+   'B. match up pairs of similar colours.',
+   'C. read out the name of one colour printed in another colour.',
+   'D. decide what colour looks most appropriate for a particular word.'
+ ],
+ hint:'Passage: participants were "asked to name the colour of a word — such as \'green\' — printed in a different colour — red" and "experienced difficulty saying the name of the colour."'},
+
+// Q35-39: Summary fill (NO MORE THAN TWO WORDS)
+{id:35,passage:2,type:'fill',
+ instruction:'Questions 35–39: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'The area most affected by multitasking stress is the prefrontal cortex, which is found to the rear of the _______.',
+ answers:['forehead'],answer:'forehead',
+ hint:'Passage: "Located behind the forehead, the prefrontal cortex..."'},
+
+{id:36,passage:2,type:'fill',instruction:'',
+ text:'It is the part of the brain which judges tasks, puts them in order of importance and allocates _______.',
+ answers:['mental resources'],answer:'mental resources',
+ hint:'Passage: "helps us to assess tasks, prioritise them and assign mental resources."'},
+
+{id:37,passage:2,type:'fill',instruction:'',
+ text:'If any _______ in the hippocampus are affected, people may have problems with storing new memories.',
+ answers:['brain cells'],answer:'brain cells',
+ hint:'Passage: "This stress can also affect brain cells in another region, the hippocampus."'},
+
+{id:38,passage:2,type:'fill',instruction:'',
+ text:'Damage to the hippocampus causes problems with storing _______.',
+ answers:['new memories'],answer:'new memories',
+ hint:'Passage: "the hippocampus, which is important for forming new memories."'},
+
+{id:39,passage:2,type:'fill',instruction:'',
+ text:'Hippocampus damage also makes it hard to learn _______.',
+ answers:['new skills'],answer:'new skills',
+ hint:'Passage: "damage in that area also makes it difficult for a person to acquire new skills."'},
+
+// Q40: MCQ
+{id:40,passage:2,type:'mcq',
+ instruction:'Question 40: Choose the correct letter A, B, C or D.',
+ text:'The main aim of this passage is to',
+ answer:'B',
+ options:[
+   'A. describe areas where multitasking is useful.',
+   'B. challenge widely held opinions on multitasking.',
+   'C. show the physical damage that multitasking can cause.',
+   'D. call for better psychological experiments on multitasking.'
+ ],
+ hint:'The passage opens by questioning why multitasking — "part of the common wisdom" — is actually counterproductive. Its main aim is to challenge this widely held belief.'},
+];
+
+const BAND_TABLE=[
+  {min:39,max:40,band:9,desc:'Expert User'},{min:37,max:38,band:8.5,desc:'Very Good User'},
+  {min:35,max:36,band:8,desc:'Very Good User'},{min:33,max:34,band:7.5,desc:'Good User'},
+  {min:30,max:32,band:7,desc:'Good User'},{min:27,max:29,band:6.5,desc:'Competent User'},
+  {min:23,max:26,band:6,desc:'Competent User'},{min:19,max:22,band:5.5,desc:'Modest User'},
+  {min:15,max:18,band:5,desc:'Modest User'},{min:13,max:14,band:4.5,desc:'Limited User'},
+  {min:10,max:12,band:4,desc:'Limited User'},{min:8,max:9,band:3.5,desc:'Extremely Limited'},
+  {min:6,max:7,band:3,desc:'Extremely Limited'},{min:4,max:5,band:2.5,desc:'Intermittent User'}
+];
+
+// ═══════════════════════════════════════════
+// ICON HELPER
+// ═══════════════════════════════════════════
+function SVG(path,o){o=o||{};const s=o.s||16;return `<svg class="ic" viewBox="0 0 24 24" width="${s}" height="${s}" fill="${o.f||'none'}" stroke="${o.st||'currentColor'}" stroke-width="${o.w||2}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;}
+const ICONS={
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  pin:'<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+
+// ═══════════════════════════════════════════
+// ANSWER GRADING
+// ═══════════════════════════════════════════
+function normalise(str){
+  return str.toLowerCase().trim()
+    .replace(/[-–—]/g,' ').replace(/\s+/g,' ').replace(/\.$/,'');
+}
+const NUM_MAP={'one':'1','two':'2','three':'3','four':'4','five':'5',
+  'six':'6','seven':'7','eight':'8','nine':'9','ten':'10',
+  '1':'one','2':'two','3':'three','4':'four','5':'five',
+  '6':'six','7':'seven','8':'eight','9':'nine','10':'ten'};
+function expandNums(str){
+  return str.replace(/\b(\w+)\b/g,w=>NUM_MAP[w.toLowerCase()]||w);
+}
+function isCorrect(q,userAnswer){
+  if(!userAnswer||!userAnswer.trim())return false;
+  const ua=normalise(userAnswer);
+  const accepted=[];
+  if(q.answers)q.answers.forEach(a=>accepted.push(normalise(a)));
+  else{
+    accepted.push(normalise(q.answer));
+    if(q.altAnswer)accepted.push(normalise(q.altAnswer));
+  }
+  for(const a of accepted){
+    if(ua===a)return true;
+    if(expandNums(ua)===a||ua===expandNums(a))return true;
+  }
+  return false;
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentPassage=0,answers={},flags={},timerSec=3600,
+    timerInt=null,testDone=false,reviewModeOn=false;
+
+// ═══════════════════════════════════════════
+// BEGIN TEST
+// ═══════════════════════════════════════════
+function beginTest(){
+  document.getElementById('start-screen').style.display='none';
+  loadSaved();
+  renderPassage(0);renderQuestions(0);buildPalette();startTimer();initScrollProgress();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload=()=>{
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    try { tg.ready(); } catch(e) {}
+    try { tg.expand(); } catch(e) {}
+    try { if (tg.enableClosingConfirmation) tg.enableClosingConfirmation(); } catch(e) {}
+    try { if (tg.disableVerticalSwipes)     tg.disableVerticalSwipes(); } catch(e) {}
+    try { if (tg.requestFullscreen)         tg.requestFullscreen(); } catch(e) {}
+  }
+  const th=localStorage.getItem('ielts_theme');
+  if(th==='light'){document.body.className='';}else{document.body.className='dark';}
+  document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>{
+    const isDark=/dark/.test(b.getAttribute('onclick'));
+    b.classList.toggle('active',isDark?document.body.classList.contains('dark'):!document.body.classList.contains('dark'));
+  });
+  const sp=document.getElementById('splitter');
+  const pp=document.getElementById('passage-panel');
+  const qp=document.getElementById('questions-panel');
+  let drag=false;
+  sp.addEventListener('mousedown',e=>{drag=true;sp.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();});
+  document.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    const m=document.getElementById('main'),r=m.getBoundingClientRect();
+    const lw=Math.min(Math.max(e.clientX-r.left,220),r.width-234);
+    pp.style.flex='none';pp.style.width=lw+'px';
+    qp.style.flex='none';qp.style.width=(r.width-7-lw)+'px';
+    updateRulerWidth();
+  });
+  document.addEventListener('mouseup',()=>{if(!drag)return;drag=false;sp.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
+  pp.addEventListener('mousemove',e=>{
+    const r=document.getElementById('ruler');
+    if(r.style.display==='block'){r.style.top=(e.clientY-14)+'px';updateRulerWidth();}
+  });
+  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();}});
+  document.addEventListener('contextmenu',onContextMenu);
+  document.addEventListener('click',e=>{
+    hideCtx();
+    if(!document.getElementById('settings-panel').contains(e.target)&&!e.target.closest('.hbtn[onclick*="toggleSettings"]'))
+      document.getElementById('settings-panel').style.display='none';
+  });
+};
+
+function loadSaved(){
+  try{const s=localStorage.getItem('ielts_t3_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t3_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t3_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t3_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+}
+function saveAll(){
+  try{
+    localStorage.setItem('ielts_t3_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t3_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t3_timer',timerSec);
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════
+// RENDER PASSAGE
+// ═══════════════════════════════════════════
+function renderPassage(idx){
+  const p=PASSAGES[idx];
+  let h=`<div class="passage-meta">${p.title}</div>`;
+  if(p.timeHint)h+=`<div class="passage-time-hint">${SVG(ICONS.clock,{s:13})} ${p.timeHint}</div>`;
+  h+=`<div class="passage-heading">${p.heading}</div>`;
+  if(p.subheading)h+=`<div class="passage-subheading">${p.subheading}</div>`;
+  h+=`<hr class="passage-divider"><div class="passage-text">`;
+  p.paragraphs.forEach(para=>{
+    h+=`<p>${para.label?`<span class="para-label">${para.label}</span>`:''}${para.text}</p>`;
+  });
+  h+=`</div>`;
+  if(p.footnote)h+=`<div class="footnote">${p.footnote}</div>`;
+  document.getElementById('passage-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// SHARED BANK RENDERERS
+// ═══════════════════════════════════════════
+function renderPersonBank(people,title){
+  let h=`<div class="person-bank"><div class="person-bank-title">${title}</div><div class="person-bank-grid">`;
+  people.forEach(p=>{h+=`<div class="pb-item"><span class="pb-letter">${p.letter}</span><span>${p.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderWordBank(items,title){
+  let h=`<div class="word-bank"><div class="word-bank-title">${title}</div><div class="word-bank-grid">`;
+  items.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTION BLOCK
+// ═══════════════════════════════════════════
+function renderQ(q){
+  const val=answers[q.id]||'';
+  const fl=!!flags[q.id];
+  let inner='';
+  if(q.type==='fill'){
+    inner=`<div class="q-text">${q.text}</div><input class="q-input" id="q${q.id}" type="text" value="${val.replace(/"/g,'&quot;')}" placeholder="Type your answer…" oninput="setAnswer(${q.id},this.value)">`;
+  }else if(q.type==='yesno'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['YES','NO','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='tfng'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['TRUE','FALSE','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='mcq'){
+    const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
+    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
+  }
+  return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
+    <div class="q-num">Question ${q.id}</div>${inner}
+    <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════
+// ANSWER HANDLERS
+// ═══════════════════════════════════════════
+function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
+function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
+function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
+function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
+function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
+
+// ═══════════════════════════════════════════
+// PALETTE
+// ═══════════════════════════════════════════
+function buildPalette(){
+  document.getElementById('palette-nums').innerHTML=
+    Array.from({length:40},(_,i)=>`<button class="pal-num" id="pal${i+1}" onclick="jumpToQ(${i+1})">${i+1}</button>`).join('');
+  updatePalette();
+}
+function updatePalette(){
+  for(let i=1;i<=40;i++){
+    const e=document.getElementById('pal'+i);if(!e)continue;
+    e.classList.remove('done','flagged');
+    if(flags[i])e.classList.add('flagged');
+    else if(answers[i]&&answers[i].trim())e.classList.add('done');
+  }
+}
+function jumpToQ(id){
+  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
+  if(q.passage!==currentPassage)switchPassage(q.passage);
+  setTimeout(()=>{
+    const el=document.getElementById('qblock'+id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
+    document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
+    const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
+  },100);
+}
+
+// ═══════════════════════════════════════════
+// PASSAGE SWITCH
+// ═══════════════════════════════════════════
+function switchPassage(idx){
+  currentPassage=idx;
+  renderPassage(idx);renderQuestions(idx);
+  if(reviewModeOn)applyReviewMarkup();
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('passage-panel').scrollTop=0;
+  document.getElementById('questions-panel').scrollTop=0;
+  document.getElementById('scroll-bar').style.width='0%';
+  updatePalette();
+}
+
+function initScrollProgress(){
+  const pp=document.getElementById('passage-panel');
+  pp.addEventListener('scroll',()=>{
+    const s=pp.scrollHeight-pp.clientHeight;
+    document.getElementById('scroll-bar').style.width=(s>0?(pp.scrollTop/s*100):100)+'%';
+  });
+}
+
+function flashUnanswered(){
+  QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
+    const el=document.getElementById('pal'+q.id);
+    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+  });
+}
+
+function backToResults(){
+  document.getElementById('back-to-results').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+function startTimer(){
+  updateTimerDisplay();
+  timerInt=setInterval(()=>{timerSec--;saveAll();updateTimerDisplay();if(timerSec<=0){clearInterval(timerInt);submitTest();}},1000);
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  const b=document.getElementById('timer-box'),t=document.getElementById('timer-txt');
+  if(t)t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  b.classList.remove('warn','critical');
+  if(timerSec<=300)b.classList.add('critical');
+  else if(timerSec<=600)b.classList.add('warn');
+}
+
+// ═══════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════
+function toggleSettings(){const p=document.getElementById('settings-panel');p.style.display=p.style.display==='block'?'none':'block';}
+function setTheme(theme,btn){document.body.className=theme==='dark'?'dark':'';document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');localStorage.setItem('ielts_theme',theme);}
+function setFont(size,btn){document.body.style.fontSize=size+'px';document.querySelectorAll('.sbtn-fs').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;document.getElementById('ruler').style.display=on?'block':'none';if(on)updateRulerWidth();}
+function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
+function saveNotes(){try{localStorage.setItem('ielts_t3_notes',document.getElementById('notes-ta').value);}catch(e){}}
+
+// ═══════════════════════════════════════════
+// HIGHLIGHTING
+// ═══════════════════════════════════════════
+let savedRange=null,activeHlColor='yellow';
+function inPassage(el){return document.getElementById('passage-panel').contains(el);}
+function getSelRange(){const sel=window.getSelection();if(sel&&sel.toString().trim().length>0)return sel.getRangeAt(0).cloneRange();return null;}
+function onContextMenu(e){
+  const sel=window.getSelection();
+  if(sel&&sel.toString().trim().length>0&&inPassage(e.target)){e.preventDefault();savedRange=sel.getRangeAt(0).cloneRange();showCtx(e.clientX,e.clientY);}
+  else hideCtx();
+}
+document.addEventListener('mouseup',e=>{
+  if(!e.shiftKey)return;
+  const r=getSelRange();if(!r)return;
+  const anchor=window.getSelection().anchorNode;
+  if(!anchor||!inPassage(anchor))return;
+  savedRange=r;applyHighlight(activeHlColor);
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();return;}
+  if(!e.shiftKey||e.ctrlKey||e.altKey||e.metaKey)return;
+  const r=getSelRange();
+  if(e.key==='Y'||e.key==='y'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='yellow';applyHighlight('yellow');}}
+  if(e.key==='G'||e.key==='g'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='green';applyHighlight('green');}}
+  if(e.key==='R'||e.key==='r'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;removeHighlight();}}
+  if(['ArrowLeft','ArrowRight'].includes(e.key)){const f=document.activeElement;if(f&&f.classList.contains('tfng-btn')){const s=[...f.closest('.tfng-btns').querySelectorAll('.tfng-btn')];const i=s.indexOf(f);const n=e.key==='ArrowRight'?s[i+1]:s[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+  if(['ArrowUp','ArrowDown'].includes(e.key)){const f=document.activeElement;if(f&&f.type==='radio'){const rs=[...document.querySelectorAll(`[name="${f.name}"]`)];const i=rs.indexOf(f);const n=e.key==='ArrowDown'?rs[i+1]:rs[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+});
+function showCtx(x,y){const m=document.getElementById('ctx-menu');m.style.display='block';m.style.left=Math.min(x,window.innerWidth-200)+'px';m.style.top=Math.min(y,window.innerHeight-130)+'px';}
+function hideCtx(){document.getElementById('ctx-menu').style.display='none';}
+function applyHighlight(color){
+  hideCtx();if(!savedRange)return;activeHlColor=color;
+  const span=document.createElement('span');span.className='hl-'+color;span.setAttribute('data-hl',color);
+  try{savedRange.surroundContents(span);}catch(e){const frag=savedRange.extractContents();span.appendChild(frag);savedRange.insertNode(span);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+function removeHighlight(){
+  hideCtx();if(!savedRange)return;
+  const c=savedRange.commonAncestorContainer,s=c.nodeType===3?c.parentElement:c;
+  if(s&&s.dataset&&s.dataset.hl){const p=s.parentNode;while(s.firstChild)p.insertBefore(s.firstChild,s);p.removeChild(s);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+
+// ═══════════════════════════════════════════
+// SUBMIT & RESULTS
+// ═══════════════════════════════════════════
+function submitTest(){
+  if(testDone)return;
+  const un=QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).length;
+  if(un>0){flashUnanswered();if(!confirm(`${un} question(s) unanswered. Submit anyway?`))return;}
+  clearInterval(timerInt);testDone=true;showResults();
+}
+
+function showResults(){
+  let correct=0,wrong=0,skip=0;
+  const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
+  QUESTIONS.forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(!ua){skip++;bp[q.passage].skip++;}
+    else if(ok){correct++;bp[q.passage].correct++;}
+    else{wrong++;bp[q.passage].wrong++;}
+  });
+  let band=2.5,desc='Intermittent User';
+  for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
+  document.getElementById('res-band').textContent=band;
+  document.getElementById('res-band-desc').textContent=`${desc} — ${correct} correct out of 40`;
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=wrong;
+  document.getElementById('res-skip').textContent=skip;
+  document.getElementById('res-pct').textContent=Math.round(correct/40*100)+'%';
+  document.getElementById('p-breakdown').innerHTML=PASSAGES.map((p,i)=>`
+    <div class="p-card"><h4>${p.title}: ${p.heading}</h4>
+    <div class="p-card-stats">
+      <span style="color:var(--correct);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:13})} ${bp[i].correct}</span>
+      <span style="color:var(--wrong);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.x,{s:13})} ${bp[i].wrong}</span>
+      <span style="color:var(--text3)">— ${bp[i].skip} skipped</span>
+    </div></div>`).join('');
+  document.getElementById('review-grid').innerHTML=QUESTIONS.map(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    const cls=!ua?'unanswered':ok?'correct':'wrong';
+    return`<div class="review-card ${cls}">
+      <div class="rev-q">Q${q.id}</div>
+      <div class="rev-yours">${ua?`Your: ${ua}`:'Not answered'}</div>
+      ${!ua?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`:ok?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} Correct</div>`:`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// REVIEW MODE
+// ═══════════════════════════════════════════
+function reviewMode(){
+  reviewModeOn=true;
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('back-to-results').style.display='block';
+  switchPassage(0);
+}
+
+function applyReviewMarkup(){
+  QUESTIONS.filter(q=>q.passage===currentPassage).forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(q.type==='fill'){
+      const el=document.getElementById('q'+q.id);
+      if(el){
+        el.classList.add(ok?'correct-ans':'wrong-ans');el.disabled=true;
+        el.parentNode.querySelectorAll('.answer-reveal,.answer-hint').forEach(o=>o.remove());
+        if(!ok){const r=document.createElement('div');r.className='answer-reveal';r.innerHTML=SVG(ICONS.check,{s:12})+' ';r.appendChild(document.createTextNode('Correct: '+q.answer));el.parentNode.insertBefore(r,el.nextSibling);}
+        if(q.hint){const h=document.createElement('div');h.className='answer-hint';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const ref=el.parentNode.querySelector('.answer-reveal');el.parentNode.insertBefore(h,(ref?ref:el).nextSibling);}
+      }
+    }else if(q.type==='tfng'||q.type==='yesno'){
+      document.querySelectorAll(`#qblock${q.id} .tfng-btn`).forEach(b=>{
+        if(b.textContent===q.answer)b.classList.add('correct-ans');
+        else if(b.classList.contains('selected'))b.classList.add('wrong-ans');
+      });
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));block.querySelector('.tfng-btns').after(h);}}
+    }else if(q.type==='mcq'){
+      document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// RESTART
+// ═══════════════════════════════════════════
+function restartTest(){
+  if(!confirm('Restart? All answers and the timer will be reset.'))return;
+  ['ielts_t3_answers','ielts_t3_flags','ielts_t3_timer','ielts_t3_notes'].forEach(k=>localStorage.removeItem(k));
+  answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
+  clearInterval(timerInt);timerInt=null;
+  const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
+  document.getElementById('notes-ta').value='';
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('settings-panel').style.display='none';
+  document.getElementById('back-to-results').style.display='none';
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.getElementById('start-screen').style.display='flex';
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTIONS (per-test bank injection)
+// ═══════════════════════════════════════════
+function renderQuestions(pIdx){
+  const p=PASSAGES[pIdx];
+  const qs=QUESTIONS.filter(q=>q.passage===pIdx);
+  let h=`<div class="q-range-label">Questions ${p.qRange[0]}–${p.qRange[1]}</div>`;
+
+  let lastInstr='';
+  qs.forEach(q=>{
+    if(q.instruction&&q.instruction!==lastInstr){
+      h+=`<div class="q-section-title">${q.instruction}</div>`;
+      lastInstr=q.instruction;
+      // Passage 2: headings bank before Q14
+      if(pIdx===1 && q.id===14){
+        h+=renderHeadingsBank();
+      }
+      // Passage 2: people bank before Q23
+      if(pIdx===1 && q.id===23){
+        h+=renderPersonBank(PEOPLE_P2,'List of People — A, B or C (you may use any letter more than once)');
+      }
+      // Passage 3: people bank before Q27
+      if(pIdx===2 && q.id===27){
+        h+=renderPersonBank(PEOPLE_P3,'List of People — A, B, C or D (you may use any letter more than once)');
+      }
+    }
+    h+=renderQ(q);
+  });
+  document.getElementById('questions-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// EXTRA BANK HELPERS (per-test)
+// ═══════════════════════════════════════════
+function renderHeadingsBank(){
+  let h=`<div class="word-bank"><div class="word-bank-title">List of Headings — i to ix</div><div class="word-bank-grid">`;
+  HEADINGS_P2.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+</script>
+</body>
+</html>

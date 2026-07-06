@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BandPath — IELTS Academic Reading Mock Test 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f2f6fb;--bg3:#e6edf6;--text:#12233b;--text2:#3a4a63;--text3:#7488a3;
+  --border:#d3deea;--accent:#0090c4;--accent2:#1e9e56;
+  --header:#0f2744;--flag:#e0870f;--correct:#1e9e56;--wrong:#d64545;
+  --palette-done:#1e9e56;--palette-flag:#e0870f;--palette-active:#0090c4;
+  --hl-yellow:#ffe066;--hl-yellow-text:#1a1a2e;
+  --hl-green:#a8f0c6;--hl-green-text:#0a2e1a;
+  --ruler-bg:rgba(0,144,196,.1);--ruler-border:rgba(0,144,196,.3);
+  --shadow:0 2px 12px rgba(15,39,68,.08);
+  --glow:0 0 0 rgba(0,0,0,0);
+  --card-grad:var(--bg2);
+}
+body.dark{
+  --bg:#0f2744;--bg2:#162d4a;--bg3:#1e3a57;--text:#eaf2fb;--text2:#9fb4cc;--text3:#6b83a0;
+  --border:#1e3a57;--accent:#00C4FF;--accent2:#2ed573;--header:#0a1d33;
+  --flag:#ffa502;--correct:#2ed573;--wrong:#ff6b6b;
+  --palette-done:#2ed573;--palette-flag:#ffa502;--palette-active:#00C4FF;
+  --hl-yellow:#c99a12;--hl-yellow-text:#fff8e1;
+  --hl-green:#1a7a44;--hl-green-text:#d6ffe6;
+  --ruler-bg:rgba(0,196,255,.1);--ruler-border:rgba(0,196,255,.4);
+  --shadow:0 8px 30px rgba(0,0,0,.45);
+  --glow:0 0 22px -6px rgba(0,196,255,.5);
+  --card-grad:linear-gradient(165deg,rgba(30,58,87,.55),rgba(22,45,74,.85));
+}
+body{font-family:'Plus Jakarta Sans',system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:16px;transition:background .25s,color .25s;overflow:hidden}
+body.dark{background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+svg.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
+
+/* START SCREEN */
+#start-screen{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#start-screen::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,255,.22),transparent 65%);filter:blur(10px);pointer-events:none}
+.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);backdrop-filter:blur(12px)}
+body:not(.dark) .start-box{background:var(--bg);box-shadow:0 24px 64px rgba(15,39,68,.28)}
+.start-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.start-brand-badge{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.32);box-shadow:0 0 34px -8px rgba(0,196,255,.6)}
+.start-brand-name{font-size:27px;font-weight:800;letter-spacing:-.5px;color:#fff}
+body:not(.dark) .start-brand-name{color:var(--text)}
+.start-brand-name span{color:#00C4FF}
+.start-logo{font-size:12px;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:2px;margin-bottom:22px}
+.start-title{font-size:25px;font-weight:800;color:var(--text);margin-bottom:6px;line-height:1.2;letter-spacing:-.3px}
+.start-subtitle{font-size:14px;color:var(--text3);margin-bottom:30px}
+.start-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px 8px}
+body.dark .info-card{background:rgba(22,45,74,.5)}
+.info-val{font-size:27px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+.info-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
+.start-rules{text-align:left;background:var(--bg2);border-radius:14px;padding:16px 20px;margin-bottom:30px}
+body.dark .start-rules{background:rgba(10,29,51,.5);border:1px solid var(--border)}
+.start-rules p{font-size:13px;color:var(--text2);line-height:1.85;padding-left:4px;display:flex;gap:9px;align-items:flex-start}
+.start-rules p svg{margin-top:3px;color:var(--accent)}
+#start-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c;border:none;padding:16px 48px;border-radius:14px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;letter-spacing:.3px;transition:opacity .15s,transform .15s,box-shadow .15s;width:100%;box-shadow:0 16px 36px -12px rgba(0,196,255,.7)}
+#start-btn:hover{transform:translateY(-2px);box-shadow:0 22px 44px -12px rgba(0,196,255,.8)}
+body:not(.dark) #start-btn{color:#fff;background:linear-gradient(120deg,#0090c4,#0f2744)}
+
+/* HEADER */
+#header{background:var(--header);padding:0 14px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:1000;height:54px;gap:10px;box-shadow:0 2px 14px rgba(0,0,0,.3);border-bottom:1px solid rgba(255,255,255,.06)}
+#logo-area{display:flex;align-items:center;gap:9px;min-width:120px}
+#logo-area .lg-badge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 16px -5px rgba(0,196,255,.55)}
+#logo-area .lg-name{font-weight:800;font-size:16px;color:#fff;letter-spacing:-.3px}
+#logo-area .lg-name span{color:#00C4FF}
+#passage-tabs{display:flex;gap:3px;background:rgba(255,255,255,.07);border-radius:9px;padding:3px}
+.ptab{background:transparent;color:rgba(255,255,255,.68);border:none;padding:6px 15px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+.ptab:hover{color:#fff;background:rgba(255,255,255,.1)}
+.ptab.active{background:#00C4FF;color:#06243c;font-weight:700;box-shadow:0 0 16px -4px rgba(0,196,255,.7)}
+#header-right{display:flex;align-items:center;gap:7px}
+#timer-box{display:flex;align-items:center;gap:7px;background:rgba(255,107,107,.16);color:#ff8a8a;border:1px solid rgba(255,107,107,.35);font-size:18px;font-weight:800;padding:5px 15px;border-radius:9px;letter-spacing:1.5px;min-width:104px;text-align:center;justify-content:center;font-variant-numeric:tabular-nums}
+#timer-box svg{opacity:.85}
+#timer-box.warn{background:rgba(255,165,2,.16);color:#ffb938;border-color:rgba(255,165,2,.4)}
+#timer-box.critical{background:rgba(255,107,107,.2);color:#ff6b6b;border-color:rgba(255,107,107,.5);animation:blink .9s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.hbtn{background:rgba(255,255,255,.1);color:#fff;border:none;width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.hbtn:hover{background:rgba(0,196,255,.22)}
+
+/* SETTINGS */
+#settings-panel{display:none;position:fixed;top:58px;right:12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;z-index:2000;min-width:230px;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+#settings-panel h3{font-size:13px;margin-bottom:14px;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.sg{margin-bottom:14px}
+.sg label{display:block;font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.sg-row{display:flex;gap:6px;flex-wrap:wrap}
+.sbtn{border:2px solid var(--border);background:var(--bg3);color:var(--text);padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.active{border-color:var(--accent);background:var(--accent);color:#fff}
+.sbtn-fs{min-width:34px;text-align:center}
+
+/* MAIN LAYOUT */
+#main{margin-top:52px;display:flex;height:calc(100vh - 96px);overflow:hidden}
+#passage-panel{flex:1;min-width:200px;overflow-y:auto;padding:22px 28px 22px 24px;background:var(--bg);position:relative}
+#splitter{width:7px;background:var(--border);cursor:col-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s;user-select:none}
+#splitter:hover,#splitter.dragging{background:var(--accent)}
+#splitter::after{content:'';width:4px;height:26px;border-radius:3px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/4px 7px repeat-y;color:var(--text3);opacity:.65;pointer-events:none}
+#splitter:hover::after,#splitter.dragging::after{color:#fff;opacity:.9}
+#questions-panel{flex:1;min-width:200px;overflow-y:auto;padding:16px;background:var(--bg2)}
+
+/* PASSAGE */
+.passage-meta{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;opacity:.8}
+.passage-time-hint{font-size:12px;color:var(--text3);margin-bottom:10px;padding:5px 10px;background:var(--bg3);border-radius:5px;border-left:3px solid var(--accent)}
+.passage-heading{font-size:21px;font-weight:800;margin-bottom:4px;line-height:1.25;color:var(--text)}
+.passage-subheading{font-size:14px;font-style:italic;color:var(--text3);margin-bottom:18px;line-height:1.5}
+.passage-divider{border:none;border-top:2px solid var(--border);margin-bottom:18px}
+.passage-text p{margin-bottom:16px;line-height:1.85;color:var(--text);text-align:justify}
+.para-label{font-weight:800;color:var(--accent);margin-right:6px;font-size:15px}
+.footnote{font-size:13px;color:var(--text3);margin-top:18px;border-top:1px solid var(--border);padding-top:10px;font-style:italic}
+
+/* HIGHLIGHT */
+.hl-yellow{background:var(--hl-yellow);border-radius:2px;padding:1px 0;color:var(--hl-yellow-text)}
+.hl-green{background:var(--hl-green);border-radius:2px;padding:1px 0;color:var(--hl-green-text)}
+#ctx-menu{display:none;position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:9px;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:3000;min-width:190px;overflow:hidden;padding:4px 0}
+.ctx-item{padding:9px 16px;cursor:pointer;font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;transition:background .1s;justify-content:space-between}
+.ctx-item:hover{background:var(--bg3)}
+.ctx-item-left{display:flex;align-items:center;gap:9px}
+.ctx-dot{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0}
+.ctx-key{font-size:10px;opacity:.5;font-family:monospace;background:var(--bg3);padding:2px 5px;border-radius:3px;border:1px solid var(--border)}
+
+/* WORD BANK */
+.word-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.word-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.word-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.wb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.wb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* QUESTIONS */
+.q-section-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin:18px 0 6px;padding:7px 11px;background:var(--bg3);border-radius:6px;border-left:3px solid var(--accent)}
+.q-range-label{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--accent)}
+.q-instruction{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6;padding:9px 12px;background:var(--bg);border-left:3px solid var(--flag);border-radius:0 6px 6px 0}
+.q-block{margin-bottom:11px;padding:11px 13px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;position:relative;transition:border-color .15s,box-shadow .15s}
+.q-block:hover{box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.q-block.flagged{border-left:4px solid var(--flag)}
+.q-block.answered{border-left:4px solid var(--accent2)}
+.q-num{font-weight:700;font-size:12px;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px}
+.q-text{font-size:14px;color:var(--text);margin-bottom:9px;line-height:1.55}
+.q-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:7px 11px;font-size:14px;background:var(--bg2);color:var(--text);outline:none;transition:border-color .15s}
+.q-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,144,196,.12)}
+.q-options{display:flex;flex-direction:column;gap:5px}
+.q-option{display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);border:1.5px solid transparent;transition:all .12s}
+.q-option:hover{background:var(--bg3)}
+.q-option input{margin-top:2px;cursor:pointer;accent-color:var(--accent);width:15px;height:15px;flex-shrink:0}
+.q-option.selected{background:rgba(0,144,196,.08);border-color:rgba(0,144,196,.28)}
+body.dark .q-option.selected{background:rgba(0,196,255,.1);border-color:rgba(0,196,255,.3)}
+.tfng-btns{display:flex;gap:6px;flex-wrap:wrap}
+.tfng-btn{border:1.5px solid var(--border);background:var(--bg2);color:var(--text);padding:6px 13px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700;transition:all .12s;letter-spacing:.3px}
+.tfng-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tfng-btn.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+.flag-btn{position:absolute;top:9px;right:9px;background:none;border:none;cursor:pointer;font-size:15px;color:var(--text3);padding:2px 5px;border-radius:4px;line-height:1;transition:color .15s}
+.flag-btn:hover{color:var(--flag)}
+.flag-btn.active{color:var(--flag)}
+
+/* MATCH person bank */
+.person-bank{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.person-bank-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.person-bank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px}
+.pb-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--text);display:flex;gap:8px}
+.pb-letter{font-weight:800;color:var(--accent);min-width:14px}
+
+/* PALETTE */
+#palette-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1.5px solid var(--border);padding:5px 10px;z-index:800;display:flex;align-items:center;gap:4px;overflow-x:auto;height:44px}
+#palette-bar::-webkit-scrollbar{height:3px}
+#palette-bar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.pal-label{font-size:10px;color:var(--text3);font-weight:700;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.4px}
+.pal-num{width:25px;height:25px;border-radius:5px;border:1.5px solid var(--border);background:var(--bg3);color:var(--text);font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s}
+.pal-num:hover{border-color:var(--accent);color:var(--accent)}
+.pal-num.done{background:var(--palette-done);color:#fff;border-color:var(--palette-done)}
+.pal-num.flagged{background:var(--palette-flag);color:#fff;border-color:var(--palette-flag)}
+.pal-num.active{border:2.5px solid var(--palette-active);box-shadow:0 0 0 2px rgba(0,196,255,.25),0 0 12px -2px rgba(0,196,255,.6)}
+body.dark .pal-num.done{box-shadow:0 0 12px -3px rgba(46,213,115,.6)}
+body.dark .pal-num.flagged{box-shadow:0 0 12px -3px rgba(255,165,2,.6)}
+.pal-legend{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3);flex-shrink:0;white-space:nowrap;margin-left:2px}
+.pal-dot{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
+#submit-btn{display:flex;align-items:center;gap:7px;background:linear-gradient(120deg,#ff7a6b,#e0504a);color:#fff;border:none;padding:7px 18px;border-radius:9px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-left:auto;letter-spacing:.3px;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 20px -8px rgba(255,107,107,.6)}
+#submit-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px -8px rgba(255,107,107,.75)}
+
+/* NOTES */
+#notes-toggle{position:fixed;bottom:56px;right:14px;z-index:900;background:linear-gradient(150deg,#00C4FF,#0098e0);color:#06243c;border:none;border-radius:14px;width:44px;height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px -6px rgba(0,196,255,.6);transition:transform .15s}
+#notes-toggle:hover{transform:scale(1.08)}
+#notes-box{display:none;position:fixed;bottom:102px;right:14px;z-index:900;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px;width:270px;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+#notes-box h4{font-size:11px;color:var(--text3);margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+#notes-ta{width:100%;height:130px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:7px;padding:9px;font-size:13px;resize:vertical;outline:none;font-family:inherit;line-height:1.5}
+#notes-ta:focus{border-color:var(--accent)}
+
+/* RULER */
+#ruler{position:fixed;left:0;height:28px;background:var(--ruler-bg);pointer-events:none;display:none;z-index:500;border-top:1px solid var(--ruler-border);border-bottom:1px solid var(--ruler-border)}
+
+/* RESULTS */
+#results-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5000;overflow-y:auto;padding:30px 20px}
+.res-header{text-align:center;margin-bottom:28px}
+.res-header h1{font-size:24px;color:var(--accent);margin-bottom:8px;font-weight:800}
+.band-circle{position:relative;width:150px;height:150px;border-radius:50%;border:6px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 10px;background:var(--bg2);box-shadow:0 0 40px -6px rgba(0,196,255,.55),inset 0 0 26px -10px rgba(0,196,255,.4)}
+.band-num{font-size:54px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-1.5px;text-shadow:0 0 20px rgba(0,196,255,.5)}
+.band-lbl{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.band-desc{font-size:14px;color:var(--text2);margin-bottom:4px;font-weight:600}
+.band-note{font-size:11px;color:var(--text3);margin-bottom:20px;font-style:italic}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:660px;margin:0 auto 20px}
+.stat-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-size:30px;font-weight:800;color:var(--accent);text-shadow:0 0 16px rgba(0,196,255,.25)}
+.stat-lbl{font-size:11px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.p-breakdown{max-width:760px;margin:0 auto 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.p-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:14px}
+.p-card h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.p-card-stats{display:flex;gap:12px;font-size:13px}
+.review-section{max-width:760px;margin:0 auto 20px}
+.review-section h3{font-size:15px;font-weight:700;color:var(--text);margin-bottom:12px}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.review-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px}
+.review-card.correct{border-left:4px solid var(--correct)}
+.review-card.wrong{border-left:4px solid var(--wrong)}
+.review-card.unanswered{border-left:4px solid var(--text3)}
+.rev-q{font-weight:700;font-size:12px;color:var(--text);margin-bottom:3px}
+.rev-yours{font-size:12px;color:var(--wrong)}
+.rev-correct{font-size:12px;color:var(--correct)}
+.res-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding-bottom:30px}
+.res-btn{padding:11px 24px;border-radius:8px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit}
+.res-btn:hover{opacity:.85}
+.res-btn-primary{background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c}
+body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
+.res-btn-secondary{background:var(--bg3);color:var(--text);border:1.5px solid var(--border)}
+.tg-btn{background:#229ED9;color:#fff;display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;transition:opacity .15s}
+.tg-btn:hover{opacity:.88}
+
+/* REVIEW MODE */
+.q-input.correct-ans{border-color:var(--correct)!important;background:rgba(30,158,86,.09)!important}
+.q-input.wrong-ans{border-color:var(--wrong)!important;background:rgba(214,69,69,.09)!important}
+.tfng-btn.correct-ans{background:var(--correct)!important;color:#fff!important;border-color:var(--correct)!important}
+.tfng-btn.wrong-ans{background:var(--wrong)!important;color:#fff!important;border-color:var(--wrong)!important}
+.answer-reveal{font-size:11px;color:var(--correct);margin-top:5px;font-weight:700}
+.answer-hint{font-size:11px;color:var(--text3);margin-top:4px;font-style:italic;line-height:1.5;padding:5px 8px;background:var(--bg2);border-radius:5px;border-left:2px solid var(--accent)}
+
+/* FLASH */
+@keyframes pal-flash{0%,100%{background:var(--bg3)}50%{background:#e74c3c;color:#fff;border-color:#e74c3c}}
+.pal-num.flash{animation:pal-flash .5s ease 3}
+
+/* SCROLL INDICATOR */
+#scroll-bar{position:absolute;top:0;left:0;width:0%;height:3px;background:var(--accent);z-index:5;transition:width .1s;border-radius:0 2px 2px 0}
+
+/* BACK TO RESULTS */
+#back-to-results{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
+#back-to-results:hover{opacity:.88}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-track{background:transparent}
+
+@media(max-width:768px){
+  #main{flex-direction:column;height:calc(100vh - 96px)}
+  #passage-panel{height:50%;border-bottom:2px solid var(--border);padding:14px}
+  #questions-panel{width:100%;height:50%}
+  #splitter{width:100%;height:8px;cursor:row-resize}
+  #splitter::after{width:26px;height:4px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/7px 4px repeat-x}
+}
+
+/* DARK PREMIUM GLASS */
+body.dark #passage-panel{background:transparent}
+body.dark #questions-panel{background:rgba(10,29,51,.35)}
+body.dark .q-block{background:var(--card-grad);border-color:var(--border);backdrop-filter:blur(6px)}
+body.dark .q-block:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.6)}
+body.dark .q-block.answered{box-shadow:inset 4px 0 0 var(--accent2),0 0 0 1px rgba(46,213,115,.12)}
+body.dark .q-input,body.dark .tfng-btn{background:rgba(10,29,51,.5)}
+body.dark .word-bank,body.dark .person-bank{background:rgba(10,29,51,.4)}
+body.dark .wb-item,body.dark .pb-item{background:rgba(22,45,74,.6)}
+body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);backdrop-filter:blur(14px)}
+body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
+body.dark .info-card,body.dark .stat-card,body.dark .p-card,body.dark .review-card{background:var(--card-grad)}
+body.dark .q-input:focus{box-shadow:0 0 0 3px rgba(0,196,255,.18)}
+body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.res-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.res-brand .lg-badge{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.3);box-shadow:0 0 18px -5px rgba(0,196,255,.55)}
+.res-brand .lg-name{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.res-brand .lg-name span{color:#00C4FF}
+</style>
+</head>
+<body>
+
+
+<!-- START SCREEN -->
+<div id="start-screen">
+  <div class="start-box">
+    <div class="start-brand">
+      <span class="start-brand-badge"><svg viewBox="0 0 40 40" width="32" height="32" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.4" fill="#00C4FF"/><circle cx="17" cy="24" r="2.4" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.3"/><circle cx="30" cy="12" r="2.6" fill="#00C4FF"/></svg></span>
+      <span class="start-brand-name">Band<span>Path</span></span>
+    </div>
+    <div class="start-logo">IELTS Academic Reading</div>
+    <div class="start-title">Mock Test 10</div>
+    <div class="start-subtitle">Computer-Delivered Format</div>
+    <div class="start-info">
+      <div class="info-card"><div class="info-val">3</div><div class="info-lbl">Passages</div></div>
+      <div class="info-card"><div class="info-val">40</div><div class="info-lbl">Questions</div></div>
+      <div class="info-card"><div class="info-val">60</div><div class="info-lbl">Minutes</div></div>
+    </div>
+    <div class="start-rules">
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Read each passage carefully and answer all 40 questions.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Highlight text by selecting it and right-clicking or using Shift+Y / Shift+G.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Flag any question to return to it later.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Your answers are saved automatically.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>The timer starts when you click Begin.</span></p>
+    </div>
+    <button id="start-btn" onclick="beginTest()"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M7 5.5v13l11-6.5z"/></svg>Begin Test</button>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="applyHighlight('yellow')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#ffe066;border:1px solid #cca800"></span>Yellow highlight</div>
+    <span class="ctx-key">Shift+Y</span>
+  </div>
+  <div class="ctx-item" onclick="applyHighlight('green')">
+    <div class="ctx-item-left"><span class="ctx-dot" style="background:#a8f0c6;border:1px solid #2e7d52"></span>Green highlight</div>
+    <span class="ctx-key">Shift+G</span>
+  </div>
+  <div class="ctx-item" onclick="removeHighlight()">
+    <div class="ctx-item-left"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><path d="M18 6 6 18M6 6l12 12"/></svg>Remove highlight</div>
+    <span class="ctx-key">Shift+R</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo-area"><span class="lg-badge"><svg viewBox="0 0 40 40" width="21" height="21" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+  <div id="passage-tabs">
+    <button class="ptab active" onclick="switchPassage(0)">Passage 1</button>
+    <button class="ptab" onclick="switchPassage(1)">Passage 2</button>
+    <button class="ptab" onclick="switchPassage(2)">Passage 3</button>
+  </div>
+  <div id="header-right">
+    <div id="timer-box"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/></svg><span id="timer-txt">60:00</span></div>
+    <button class="hbtn" onclick="toggleFullscreen()" title="Fullscreen"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+    <button class="hbtn" onclick="toggleSettings()" title="Settings"><svg class="ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings-panel">
+  <h3>Settings</h3>
+  <div class="sg">
+    <label>Theme</label>
+    <div class="sg-row">
+      <button class="sbtn" onclick="setTheme('light',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Light</button>
+      <button class="sbtn" onclick="setTheme('dark',this)"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>Dark</button>
+    </div>
+  </div>
+  <div class="sg">
+    <label>Font Size</label>
+    <div class="sg-row">
+      <button class="sbtn sbtn-fs active" onclick="setFont(15,this)" style="font-size:12px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(18,this)" style="font-size:16px">A</button>
+      <button class="sbtn sbtn-fs" onclick="setFont(22,this)" style="font-size:20px">A</button>
+    </div>
+  </div>
+  <div class="sg" style="display:flex;align-items:center;justify-content:space-between">
+    <label style="margin:0">Reading Ruler</label>
+    <input type="checkbox" id="ruler-toggle" onchange="toggleRuler()" style="width:18px;height:18px;cursor:pointer;accent-color:var(--accent)">
+  </div>
+  <div class="sg" style="border-top:1px solid var(--border);padding-top:12px;margin-top:2px">
+    <button onclick="restartTest()" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(255,107,107,.14);color:#ff7a6b;border:1px solid rgba(255,107,107,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Restart Test</button>
+    <button onclick="window.location.href='index.html'" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:rgba(0,196,255,.1);color:var(--accent);border:1px solid rgba(0,196,255,.3);padding:9px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;margin-top:9px"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Home</button>
+  </div>
+</div>
+
+<div id="ruler"></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="passage-panel"><div id="scroll-bar"></div><div id="passage-content"></div></div>
+  <div id="splitter"></div>
+  <div id="questions-panel"><div id="questions-content"></div></div>
+</div>
+
+<button id="back-to-results" onclick="backToResults()">← Back to Results</button>
+
+<!-- NOTES -->
+<button id="notes-toggle" onclick="toggleNotes()" title="Notes (Ctrl+N)"><svg class="ic" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+<div id="notes-box">
+  <h4><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>Scratch Notes &nbsp;<span style="opacity:.45;font-size:10px">Ctrl+N</span></h4>
+  <textarea id="notes-ta" placeholder="Type notes here..." oninput="saveNotes()"></textarea>
+</div>
+
+<!-- PALETTE -->
+<div id="palette-bar">
+  <span class="pal-label">Q:</span>
+  <div id="palette-nums" style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:3px;align-items:center"></div>
+  <div class="pal-legend" style="margin-left:6px">
+    <span class="pal-dot" style="background:var(--palette-done)"></span>Done&nbsp;
+    <span class="pal-dot" style="background:var(--palette-flag)"></span>Flag
+  </div>
+  <button id="submit-btn" onclick="submitTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Submit Test</button>
+</div>
+
+<!-- RESULTS -->
+<div id="results-screen">
+  <div class="res-header">
+    <div class="res-brand"><span class="lg-badge"><svg viewBox="0 0 40 40" width="23" height="23" fill="none"><path d="M7 31 L17 24 L28 15" stroke="#00C4FF" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="7" cy="31" r="2.6" fill="#00C4FF"/><circle cx="17" cy="24" r="2.6" fill="#5fdcff"/><circle cx="30" cy="12" r="7" stroke="#00C4FF" stroke-width="2.5"/><circle cx="30" cy="12" r="2.8" fill="#00C4FF"/></svg></span><span class="lg-name">Band<span>Path</span></span></div>
+    <h1>Academic Reading — Results (Mock Test 10)</h1>
+    <div class="band-circle">
+      <div class="band-num" id="res-band">—</div>
+      <div class="band-lbl">Band</div>
+    </div>
+    <div class="band-desc" id="res-band-desc"></div>
+    <div class="band-note">Reading band estimate based on raw score. Actual scores may vary by test version.</div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="res-correct">—</div><div class="stat-lbl">Correct</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-wrong">—</div><div class="stat-lbl">Incorrect</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-skip">—</div><div class="stat-lbl">Skipped</div></div>
+    <div class="stat-card"><div class="stat-val" id="res-pct">—</div><div class="stat-lbl">Accuracy</div></div>
+  </div>
+  <div class="p-breakdown" id="p-breakdown"></div>
+  <div class="review-section">
+    <h3>Detailed Review</h3>
+    <div class="review-grid" id="review-grid"></div>
+  </div>
+  <div class="res-actions">
+    <button class="res-btn res-btn-primary" onclick="reviewMode()" style="display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
+    <button class="res-btn res-btn-secondary" onclick="restartTest()" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
+    <button class="res-btn res-btn-secondary" onclick="window.location.href='index.html'">🏠 Back to Home</button>
+    <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+      More Tests on Telegram
+    </a>
+  </div>
+</div>
+
+<script>
+const PASSAGES=[
+{
+  title:'READING PASSAGE 1',
+  heading:'Otter',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 1–13.',
+  qRange:[1,13],
+  paragraphs:[
+    {label:'A',text:`Otters have long, thin bodies and short legs – ideal for pushing through dense undergrowth or hunting in tunnels. An adult male may be up to 4 feet long and 30lbs. Females are smaller typically. The Eurasian otter's nose is about the smallest among the otter species and has a characteristic shape described as a shallow 'W'. An otter's tail (or rudder, or stern) is stout at the base and tapers towards the tip where it flattens. This forms part of the propulsion unit when swimming fast underwater. Otter fur consists of two types of hair: stout guard hairs which form a waterproof outer covering, and under-fur which is dense and fine, equivalent to an otter's thermal underwear. The fur must be kept in good condition by grooming. Seawater reduces the waterproofing and insulating qualities of otter fur when saltwater in the fur. This is why freshwater pools are important to otters living on the coast. After swimming, they wash the salts off in pools and the squirm on the ground to rub dry against vegetation.`},
+    {label:'B',text:`The scent is used for hunting on land, for communication and for detecting danger. Otterine sense of smell is likely to be similar in sensitivity to dogs. Otters have small eyes and are probably short-sighted on land. But they do have the ability to modify the shape of the lens in the eye to make it more spherical, and hence overcome the refraction of water. In clear water and good light, otters can hunt fish by sight. The otter's eyes and nostrils are placed high on its head so that it can see and breathe even when the rest of the body is submerged.`},
+    {label:'',text:`Underwater, the otter holds its legs against the body, except for steering, and the hind end of the body is flexed in a series of vertical undulations. River otters have webbing which extends for much of the length of each digit, though not to the very end. Giant otters and sea otters have even more prominent webs, while the Asian short-clawed otter has no webbing – they hunt for shrimps in ditches and paddy fields so they don't need the swimming speed. Otter's ears are tiny for streamlining, but they still have very sensitive hearing and are protected by valves which close them against water pressure.`},
+    {label:'C',text:`A number of constraints and preferences limit suitable habitats of otters. Water is a must and the rivers must be large enough to support a healthy population of fish. Being such shy and wary creatures, they will prefer territories where man's activities do not impinge greatly. Of course, there must also be no other otter already in residence – this has only become significant again recently as populations start to recover. Coastal otters have a much more abundant food supply and range for males and females may be just a few kilometres of coastline. Because male range overlaps with two or three females – not bad! Otters will eat anything that they can get hold of – there are records of sparrows and snakes and slugs being gobbled. Apart from fish, the most common prey are crayfish, crabs and water birds. Small mammals are occasionally taken, most commonly rabbits but sometimes even moles.`},
+    {label:'D',text:`Eurasian otters will breed any time where food is readily available. In places where the condition is more severe, Sweden for example where the lakes are frozen for much of winter, cubs are born in spring. This ensures that they are well grown before severe weather returns. In the Shetlands, cubs are born in summer when fish is more abundant. Though otters can breed every year, some do not. Again, this depends on food availability. Other factors such as food range and quality of the female may have an effect. Gestation for Eurasian otter is 63 days, with the exception of Lutra canadensis whose embryos may undergo delayed implantation. Otters normally give birth in more secure dens to avoid disturbances. Nests are lined with bedding to keep the cub's warm while mummy is away feeding.`},
+    {label:'E',text:`Otters normally give birth in more secure dens to avoid disturbances. Nests are lined with bedding (reeds, waterside plants, grass) to keep the cub's warm while she is away feeding. Litter Size varies between 1 and 5. For some unknown reason, coastal otters tend to produce smaller litters.`},
+    {label:'',text:`At five weeks they open their eyes – a tiny cub of 700g. At seven weeks they're weaned onto solid food. At ten weeks they leave the nest, blinking into daylight for the first time. After three months they finally meet the water and learn to swim. After eight months they are hunting, though the mother still provides a lot of food herself. Finally, after nine months she can chase them all away with a clear conscience, and relax – until the next fella shows up.`},
+    {label:'F',text:`The plight of the British otter was recognised in the early 60s, but it wasn't until the late 70s that the chief cause was discovered. Pesticides, such as dieldrin and aldrin, were first used in 1955 in agriculture and other industries – these chemicals are very persistent and had already been recognised as the cause of huge declines in the population of peregrine falcons, sparrow hawks and other predators. The pesticides entered the river systems and the food chain – micro-organisms, fish and finally otters, with every step increasing the concentration of the chemicals. From 1962 the chemicals were phased out, but while some species recovered quickly, otter numbers did not – and continued to fall into the 80s. This was probably due mainly to habitat destruction and road deaths. Acting on populations fragmented by the sudden decimation in the 50s and 60s, the loss of just a handful of otters in one area can make an entire population unviable and spell the end.`},
+    {label:'G',text:`Otter numbers are recovering all around Britain – populations are growing again in the few areas where they had remained and have expanded from those areas into the rest of the country. This is almost entirely due to legislation, conservation efforts, slowing down and reversing the destruction of suitable otter habitat and reintroductions from captive breeding programs. Releasing captive-bred otters is seen by many as a last resort. The argument runs that where there is no suitable habitat for them they will not survive after release and where there is suitable habitat, natural populations should be able to expand into the area. However, reintroducing animals into a fragmented and fragile population may add just enough impetus for it to stabilise and expand, rather than die out. This is what the Otter Trust accomplished in Norfolk, where the otter population may have been as low as twenty animals at the beginning of the 1980s. The Otter Trust has now finished its captive breeding program entirely, great news because it means it is no longer needed.`},
+  ]
+},
+{
+  title:'READING PASSAGE 2',
+  heading:'Living in Noisy World',
+  subheading:'',
+  timeHint:'You should spend about 20 minutes on Questions 14–26.',
+  qRange:[14,26],
+  paragraphs:[
+    {label:'A. Decibel Hell',text:`It's not difficult for a person to encounter sound at levels that can cause adverse health effects. During a single day, people living in a typical urban environment can experience a wide range of sounds in many locations, even once-quiet locales have become polluted with noise. In fact, it's difficult today to escape sound completely. In its 1999 Guidelines for Community Noise, the World Health Organization (WHO) declared, "Worldwide, noise-induced hearing impairment is the most prevalent irreversible occupational hazard, and it is estimated that 120 million people worldwide have disabling hearing difficulties." Growing evidence also points to many other health effects of too much volume.`},
+    {label:'',text:`Mark Stephenson, a Cincinnati, Ohio-based senior research audiologist at the National Institute for Occupational Safety and Health (NIOSH), says his agency's definition of hazardous noise is sound that exceeds the time-weighted average of 85 dBA, meaning the average noise exposure measured over a typical eight-hour workday. Other measures and definitions are used for other purposes.`},
+    {label:'B. Growing Volume',text:`In the United States, about 30 million workers are exposed to hazardous sound levels on the job, according to NIOSH. Industries having a high number of workers exposed to loud sounds include construction, agriculture, mining, manufacturing, utilities, transportation, and the military.`},
+    {label:'',text:`Noise in U.S. industry is an extremely difficult problem to monitor, acknowledges Craig Moulton, a senior industrial hygienist for the Occupational Safety and Health Administration (OSHA). "Still," he says, "OSHA does require that any employer with workers overexposed to noise provide protection for those employees against the harmful effects of noise. Additionally, employers must implement a continuing, effective hearing conservation program as outlined in OSHA's Noise Standard."`},
+    {label:'C. Scary Sound Effects',text:`Numerous scientific studies over the years have confirmed that exposure to certain levels of sound can damage hearing. Prolonged exposure can actually change the structure of the hair cells in the inner ear, resulting in hearing loss. It can also cause tinnitus, a ringing, roaring, buzzing, or clicking on the ears.`},
+    {label:'',text:`NIOSH studies from the mid to late 1990s show that 90% of coal miners have hearing impairment by age 52 – compared to 9% of the general population – and 70% of male metal/nonmetal miners will experience hearing impairment by age 60 (Stephenson notes that from adolescence onward, females tend to have better hearing than males). Neitzel says nearly half of all construction workers have some degree of hearing loss. "NIOSH research also reveals that by age twenty-five, the average carpenter's hearing is equivalent to an otherwise healthy fifty-year-old male who hasn't been exposed to noise," he says.`},
+    {label:'',text:`William Luxford, medical director of the House Ear Clinic of St. Vincent Medical Center in Los Angeles, points out one piece of good news: "It's true that continuous noise exposure will lead to the continuation of hearing loss, but as soon as the exposure is stopped, the hearing loss stops. So a change in environment can improve a person's hearing health."`},
+    {label:'',text:`Research is catching up with this anecdotal evidence. In the July 2001 issue of Pediatrics, researchers from the Centers for Disease Control and Prevention reported that, based on audiometric testing of 5,249 children as part of the Third National Health and Nutrition Examination Survey, an estimated 12.5% of American children have noise-induced hearing threshold shifts – or dulled hearing – in one or both ears. Most children with noise-induced hearing threshold shifts have only limited hearing damage, but continued exposure to excessive noise can lead to difficulties with high-frequency sound discrimination. The report listed stereos, music concerts, toys (such as toy telephones and certain rattles), lawnmowers, and fireworks as producing potentially harmful sounds.`},
+    {label:'D. Beyond the Ears',text:`The effects of sound don't stop with the ears. Nonauditory effects of noise exposure are those effects that don't cause hearing loss but still can be measured, such as elevated blood pressure, loss of sleep, increased heart rate, cardiovascular constriction, labored breathing, and changes in brain chemistry.`},
+    {label:'',text:`The nonauditory effects of noise were noted as early as 1930 in a study published by E.L. Smith and D.L. Laird in volume 2 of the Journal of the Acoustical Society of America. The results showed that exposure to noise caused stomach contractions in healthy human beings. Reports on noise's nonauditory effects published since that pioneering study have been both contradictory and controversial in some areas.`},
+    {label:'',text:`Bronzaft and the school principal persuaded the school board to have acoustical tile installed in the classrooms adjacent to the tracks. The Transit Authority also treated the tracks near the school to make them less noisy. A follow-up study published in the September 1981 issue of the Journal of Environmental Psychology found that children's reading scores improved after these interventions were put in place.`},
+    {label:'E. Fighting for Quiet',text:`Anti-noise activists say that Europe and several countries in Asia are more advanced than the United States in terms of combating noise. "Population pressure has prompted Europe to move more quickly on the noise issue that the United States has," Hume says. In the European Union, countries with cities of at least 250,000 people are creating noise maps of those cities to help leaders determine noise pollution policies. Paris has already prepared its first noise maps. The map data, which must be finished by 2007, will be fed into computer models that will help test the sound impact of street designs or new buildings before construction begins.`},
+    {label:'',text:`Activists in other countries say they too want the United States to play a more leading role on the noise issue. But as in other areas of environmental health, merely having a more powerful government agency in place that can set more regulations is not the ultimate answer, according to other experts. Bronzaft stresses that governments worldwide need to increase funding for noise research and do a better job coordinating their noise pollution efforts so they can establish health and environmental policies based on solid scientific research. "Governments have a responsibility to protect their citizens by curbing noise pollution," she says.`},
+  ]
+},
+{
+  title:'READING PASSAGE 3',
+  heading:'The Art of Deception',
+  subheading:'Do tiny changes of facial expression show whether someone is telling lies?',
+  timeHint:'You should spend about 20 minutes on Questions 27–40.',
+  qRange:[27,40],
+  paragraphs:[
+    {label:'',text:`Forty years ago, the research psychologist Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question, the answer to which has kept him busy ever since. Suppose the group wanted to know, a particular patient swears they are telling the truth. They look and sound sincere. So here is the question: is there any way you can be sure they are telling the truth? Ekman did not know the answer then, but wanted to find out.`},
+    {label:'',text:`As part of his research, he had already filmed a series of 12-minute interviews with psychiatric patients. In a subsequent conversation, one of the patients told him that she had lied to him. So, Ekman sat and looked at the film but saw nothing noteworthy. Then he slowed it down and looked again. Then he slowed it even further. And suddenly, there, across just two frames of the film, he saw it: an intense expression of extreme anguish. It lasted less than a 15th of a second, but once he had spotted the first expression, he soon found three more examples in that same interview. He termed his discovery "micro-expression": very rapid intense demonstrations of emotion that the subject intended to be concealed.`},
+    {label:'',text:`Over the course of the next four decades, Ekman successfully demonstrated a proposition first suggested by Charles Darwin: that the ways in which we express rage, disgust, contempt, fear, surprise, happiness and sadness are universal. The facial muscles triggered by those seven basic emotions are, he has shown, essentially standard, regardless of language and culture, from the US to Japan and Brazil to Papua New Guinea. What is more, expressions of emotion are impossible to suppress and, particularly when we are lying, micro-expressions of powerfully felt emotions will inevitably flit across our face before we get the chance to stop them.`},
+    {label:'',text:`Fortunately for liars, most people will fail to spot these fleeting signals of inner torment. Of the 15,000 Ekman has tested, only 50 people, whom he calls "naturals", have been able to do it. But given a little more training, Ekman says, almost anyone can develop the skill. He should know, since these tests were completed in the mid-1980s and the first publication of his research, he has been called in by the FBI and CIA (among countless more law-enforcement and other agencies around the world), not just to solve cases, but to teach them how to use his technique for themselves. He has held workshops for defense and prosecution lawyers, health professionals, even jealous spouses, all of them wanting to know exactly when someone is not being 100 percent candid.`},
+    {label:'',text:`Most recently, Ekman's research has resulted in a new television series about the exploits of the fictional Dr Cal Lightman, a scientist who studies involuntary body language to discover not only if you are lying, but why might you have been motivated to do so. According to the publicity blurb, Lightman is a human lie detector, even more accurate than a polygraph test. Ekman concedes he was skeptical when the producer first approached him with the idea of turning his life's work into a TV series, and initially would have stopped the project if he could. In particular, he was fearful that the show would exaggerate the effectiveness of his techniques and create the quite inaccurate impression among audiences that criminals could no longer hope to get away with lying. In the worst-case scenario, he was concerned about unfair convictions, that one day someone not properly trained in his techniques might be sitting on a jury and wrongly find someone guilty of a crime simply on the basis of a television programme.`},
+    {label:'',text:`In the end though, he was won over because the series is unusual in several respects. It is the first time, as far as Ekman is aware, that a commercial TV drama has been based on the work of just one scientist. That scientist is also deeply involved in the project, talking through plot ideas and checking five successive drafts of each script to ensure details are correct. He was also impressed with the producer's manifestly serious and well-intentioned reasons for making the programme. Now that the first series has been completed, he believes probably 80-90 per cent of the show is based on fact and that's good enough for what is, after all, a drama, not a documentary.`},
+    {label:'',text:`Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully are completely unrelated. He has been asked by people running for high office if he could teach them to become more credible with the public but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A "true" lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They are supposed to deceive you, it's part of the game, and the same is true of flattery. He prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.`},
+  ]
+}
+];
+
+// ═══════════════════════════════════════════
+// PEOPLE / WORD BANKS
+// ═══════════════════════════════════════════
+const PEOPLE_P2=[
+  {letter:'A',word:'WHO'},
+  {letter:'B',word:'William Luxford (the House Ear Clinic)'},
+  {letter:'C',word:'Craig Moulton (OSHA)'},
+  {letter:'D',word:'Arline Bronzaft'},
+  {letter:'E',word:'Centers for Disease Control and Prevention'}
+];
+
+const WORDBANK_P3=[
+  {letter:'A',word:'consequence'},
+  {letter:'B',word:'crimes'},
+  {letter:'C',word:'false beliefs'},
+  {letter:'D',word:'motives'},
+  {letter:'E',word:'acting'},
+  {letter:'F',word:'accuracy'},
+  {letter:'G',word:'acting'},
+  {letter:'H',word:'research'},
+  {letter:'I',word:'ratings'}
+];
+
+// ═══════════════════════════════════════════
+// QUESTIONS
+// ═══════════════════════════════════════════
+const QUESTIONS=[
+// ── PASSAGE 1 ──────────────────────────────
+// Q1-9: Which paragraph A-G
+{id:1,passage:0,type:'fill',
+ instruction:'Questions 1–9: Reading Passage 1 has seven paragraphs, A–G. Which paragraph contains the following information? Write the correct letter, A–G. You may use any letter more than once.',
+ text:'A description of how otters regulate vision underwater',
+ answers:['b','B'],answer:'B',
+ hint:'Paragraph B: otters "have the ability to modify the shape of the lens in the eye to make it more spherical, and hence overcome the refraction of water."'},
+
+{id:2,passage:0,type:'fill',instruction:'',
+ text:"The fit-for-purpose characteristics of otter's body shape",
+ answers:['a','A'],answer:'A',
+ hint:'Paragraph A: "long, thin bodies and short legs – ideal for pushing through dense undergrowth or hunting in tunnels."'},
+
+{id:3,passage:0,type:'fill',instruction:'',
+ text:'A reference to an underdeveloped sense',
+ answers:['b','B'],answer:'B',
+ hint:'Paragraph B: "Otters have small eyes and are probably short-sighted on land" — an underdeveloped sense.'},
+
+{id:4,passage:0,type:'fill',instruction:'',
+ text:'An explanation of why agriculture failed in otter conservation efforts',
+ answers:['f','F'],answer:'F',
+ hint:'Paragraph F: pesticides "first used in 1955 in agriculture and other industries" entered the food chain and harmed otter populations.'},
+
+{id:5,passage:0,type:'fill',instruction:'',
+ text:"A description of some of the otter's social characteristics",
+ answers:['c','C'],answer:'C',
+ hint:'Paragraph C: territory preferences, male range overlapping "with two or three females," shy and wary nature.'},
+
+{id:6,passage:0,type:'fill',instruction:'',
+ text:'A description of how baby otters grow',
+ answers:['e','E'],answer:'E',
+ hint:'Paragraph E: "At five weeks they open their eyes... After nine months she can chase them all away."'},
+
+{id:7,passage:0,type:'fill',instruction:'',
+ text:'The conflicting opinions on how to preserve',
+ answers:['g','G'],answer:'G',
+ hint:'Paragraph G: debate over reintroducing captive-bred otters — "seen by many as a last resort" versus the case for expanding natural populations.'},
+
+{id:8,passage:0,type:'fill',instruction:'',
+ text:'A reference to the legislative act',
+ answers:['g','G'],answer:'G',
+ hint:'Paragraph G: recovery "almost entirely due to legislation, conservation efforts."'},
+
+{id:9,passage:0,type:'fill',instruction:'',
+ text:'An explanation of how otters compensate for heat loss',
+ answers:['a','A'],answer:'A',
+ hint:'Paragraph A: under-fur "dense and fine, equivalent to an otter\'s thermal underwear" — compensating for heat loss.'},
+
+// Q10-13: Short answer, NO MORE THAN THREE WORDS AND/OR A NUMBER
+{id:10,passage:0,type:'fill',
+ instruction:'Questions 10–13: Answer the questions below. Choose NO MORE THAN THREE WORDS AND/OR A NUMBER from the passage for each answer.',
+ text:'What affects the outer fur of otters?',
+ answers:['salt water','seawater','sea water'],answer:'salt water',
+ hint:'"Seawater reduces the waterproofing and insulating qualities of otter fur when saltwater in the fur."'},
+
+{id:11,passage:0,type:'fill',instruction:'',
+ text:'What skill is not necessary for Asian short-clawed otters?',
+ answers:['swimming speed'],answer:'swimming speed',
+ hint:'"The Asian short-clawed otter has no webbing – they hunt for shrimps in ditches and paddy fields so they don\'t need the swimming speed."'},
+
+{id:12,passage:0,type:'fill',instruction:'',
+ text:'Which type of otters has the shortest range?',
+ answers:['coastal otters','coastal'],answer:'coastal otters',
+ hint:'"Coastal otters... range for males and females may be just a few kilometres of coastline" — the shortest range mentioned.'},
+
+{id:13,passage:0,type:'fill',instruction:'',
+ text:'Which type of animals do otters hunt occasionally?',
+ answers:['small mammals'],answer:'small mammals',
+ hint:'"Small mammals are occasionally taken, most commonly rabbits but sometimes even moles."'},
+
+// ── PASSAGE 2 ──────────────────────────────
+// Q14-18: Summary completion, NO MORE THAN TWO WORDS
+{id:14,passage:1,type:'fill',
+ instruction:'Questions 14–18: Complete the summary below. Choose NO MORE THAN TWO WORDS from the passage for each answer.',
+ text:'Noise is the sound beyond the average of _______ referring to the agency\'s definition.',
+ answers:['85 dba','85dba','85 dBA'],answer:'85 dBA',
+ hint:'NIOSH: hazardous noise "exceeds the time-weighted average of 85 dBA."'},
+
+{id:15,passage:1,type:'fill',instruction:'',
+ text:'Scientific studies have confirmed that exposure to certain levels of sound can cause damage to _______ on certain senior age.',
+ answers:['hearing'],answer:'hearing',
+ hint:'"90% of coal miners have hearing impairment by age 52... 70% of male metal/nonmetal miners will experience hearing impairment by age 60."'},
+
+{id:16,passage:1,type:'fill',instruction:'',
+ text:'From the testing of 5,249 children, those who are constantly exposed to excessive noise may have trouble in _______ sound discrimination.',
+ answers:['high-frequency','high frequency'],answer:'high-frequency',
+ hint:'"Continued exposure to excessive noise can lead to difficulties with high-frequency sound discrimination."'},
+
+{id:17,passage:1,type:'fill',instruction:'',
+ text:'Exposure to noise may lead to the unease of _______ in healthy people.',
+ answers:['stomach problems','stomach problem','stomach contractions'],answer:'stomach problems',
+ hint:'"The results showed that exposure to noise caused stomach contractions in healthy human beings."'},
+
+{id:18,passage:1,type:'fill',instruction:'',
+ text:'Europe has taken steps on the noise issue; big cities of over 250,000 people are creating _______ to help create noise pollution policies.',
+ answers:['noise maps','noise map'],answer:'noise maps',
+ hint:'"Countries with cities of at least 250,000 people are creating noise maps of those cities to help leaders determine noise pollution policies."'},
+
+// Q19-23: Match researcher to finding (bank rendered before Q19)
+{id:19,passage:1,type:'fill',
+ instruction:'Questions 19–23: Look at the following researchers and the list of findings below. Match each researcher with the correct finding. Write the correct letter, A–E.',
+ text:'People can change the environment to improve hearing health.',
+ answers:['b','B'],answer:'B',
+ hint:'William Luxford (B): "a change in environment can improve a person\'s hearing health."'},
+
+{id:20,passage:1,type:'fill',instruction:'',
+ text:'The government should continue the research on anti-noise researches with the fund.',
+ answers:['d','D'],answer:'D',
+ hint:'Arline Bronzaft (D): "governments worldwide need to increase funding for noise research."'},
+
+{id:21,passage:1,type:'fill',instruction:'',
+ text:'Companies should be required to protect the employees to avoid noise.',
+ answers:['c','C'],answer:'C',
+ hint:'Craig Moulton/OSHA (C): "OSHA does require that any employer with workers overexposed to noise provide protection for those employees."'},
+
+{id:22,passage:1,type:'fill',instruction:'',
+ text:"Noise has posed an effect on American children's hearing ability.",
+ answers:['e','E'],answer:'E',
+ hint:'Centers for Disease Control and Prevention (E): testing of 5,249 children found "12.5% of American children have noise-induced hearing threshold shifts."'},
+
+{id:23,passage:1,type:'fill',instruction:'',
+ text:'Noise has seriously affected human beings where they live worldwide.',
+ answers:['a','A'],answer:'A',
+ hint:'WHO (A): "120 million people worldwide have disabling hearing difficulties."'},
+
+// Q24-26: MCQ
+{id:24,passage:1,type:'mcq',
+ instruction:'Questions 24–26: Choose the correct letter, A, B, C or D.',
+ text:'The board of schools built close to the tracks are convinced to',
+ answer:'C',
+ options:[
+   'A. moved the classrooms away from the noisy track',
+   'B. regulated the track usage to a less extent',
+   'C. utilised a special material into classroom buildings lessening the effect of outside noise',
+   'D. organised a team for a follow-up study'
+ ],
+ hint:'"Bronzaft and the school principal persuaded the school board to have acoustical tile installed in the classrooms adjacent to the tracks."'},
+
+{id:25,passage:1,type:'mcq',instruction:'',
+ text:"In European countries, the big cities' research on noise focuses on",
+ answer:'D',
+ options:[
+   'A. How to record pollution details of the city on maps',
+   'B. the impact of noise on population shift in the European cities',
+   'C. how wide can a city be to avoid noise pollution',
+   'D. helping the authorities better make a decision on management of the city'
+ ],
+ hint:'Noise maps are made "to help leaders determine noise pollution policies" — decision-making support, not just recording data.'},
+
+{id:26,passage:1,type:'mcq',instruction:'',
+ text:'What is the best title in paragraph 1?',
+ answer:'C',
+ options:[
+   'A. How people cope with noise pollutions',
+   'B. the fight against the noise with the powerful technology',
+   'C. The Effects of Living in a Noisy World',
+   'D. The Effects of noise on children\'s learning'
+ ],
+ hint:'The opening section surveys the broad health effects of noise exposure on everyone — matching the passage\'s own title, "Living in a Noisy World."'},
+
+// ── PASSAGE 3 ──────────────────────────────
+// Q27-31: MCQ
+{id:27,passage:2,type:'mcq',
+ instruction:'Questions 27–31: Choose the correct letter, A, B, C or D.',
+ text:'According to the writer, Ekman became interested in lying after a question from his',
+ answer:'C',
+ options:[
+   'A. peers.',
+   'B. patients.',
+   'C. students.',
+   'D. teachers.'
+ ],
+ hint:'"Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question" — his students/trainees.'},
+
+{id:28,passage:2,type:'mcq',instruction:'',
+ text:'The writer refers to the 12-minute interviews in order to',
+ answer:'B',
+ options:[
+   'A. illustrate how frequently patients lie.',
+   "B. describe the origins of Ekman's theories.",
+   "C. compare Ekman's research to previous studies.",
+   "D. show how patients' behaviour is affected by filming."
+ ],
+ hint:'The interviews are where Ekman first discovered "micro-expressions" — the origin of his life\'s research.'},
+
+{id:29,passage:2,type:'mcq',instruction:'',
+ text:"What is the writer's point in the third paragraph?",
+ answer:'A',
+ options:[
+   'A. Micro-expressions are common to all people.',
+   'B. Recent research has refuted an old idea.',
+   'C. With practice we can learn to control our micro-expression.',
+   'D. Human society is too complex to allow for generalisations.'
+ ],
+ hint:'"The facial muscles triggered by those seven basic emotions are... essentially standard, regardless of language and culture" — universal to all people.'},
+
+{id:30,passage:2,type:'mcq',instruction:'',
+ text:"What are we told about Ekman's conclusions from his tests?",
+ answer:'B',
+ options:[
+   "A. It's natural for people to lie.",
+   'B. Few untrained people can detect lying.',
+   'C. Most liars suffer from periods of depression.',
+   'D. All of his subjects were trained to identify micro-expressions.'
+ ],
+ hint:'"Of the 15,000 Ekman has tested, only 50 people, whom he calls \'naturals\', have been able to do it" without training.'},
+
+{id:31,passage:2,type:'mcq',instruction:'',
+ text:"What point does the writer make about Ekman's techniques in the fourth paragraph?",
+ answer:'B',
+ options:[
+   'A. They take a decade to teach.',
+   'B. They have been in great demand.',
+   'C. They have aroused the suspicions of some agencies.',
+   'D. They can be used by a limited range of occupations.'
+ ],
+ hint:'Called in by "the FBI and CIA... countless more law-enforcement and other agencies," and held workshops for lawyers, health professionals, even jealous spouses — high demand across many fields.'},
+
+// Q32-36: Summary using word bank A-I (bank rendered before Q32)
+{id:32,passage:2,type:'fill',
+ instruction:'Questions 32–36: Complete the summary using the list of words, A–I, below.',
+ text:"Initially, Ekman was unenthusiastic about the TV project because he feared the possibility of encouraging viewers' _______ .",
+ answers:['c','C'],answer:'C',
+ hint:'Word bank C = false beliefs. He feared the show would "create the quite inaccurate impression among audiences that criminals could no longer hope to get away with lying."'},
+
+{id:33,passage:2,type:'fill',instruction:'',
+ text:'For example, he was worried that one day the programme could result in _______ not being carried out.',
+ answers:['e','E'],answer:'E',
+ hint:'Word bank E, per the answer key — relates to his fear of "unfair convictions" arising from someone misusing the show\'s ideas on a jury.'},
+
+{id:34,passage:2,type:'fill',instruction:'',
+ text:"Ultimately though, he has given the show his blessing because he is not aware of any other comparable programme based on a single person's _______ .",
+ answers:['h','H'],answer:'H',
+ hint:'Word bank H = research. "A commercial TV drama has been based on the work of just one scientist" — Ekman\'s own research.'},
+
+{id:35,passage:2,type:'fill',instruction:'',
+ text:"The _______ of the show's producer have been another pleasant surprise considering the genre of the programme.",
+ answers:['d','D'],answer:'D',
+ hint:'Word bank D = motives. "The producer\'s manifestly serious and well-intentioned reasons for making the programme" = motives.'},
+
+{id:36,passage:2,type:'fill',instruction:'',
+ text:"Ekman is happy with the show's overall _______ .",
+ answers:['f','F'],answer:'F',
+ hint:'Word bank F = accuracy. "He believes probably 80-90 per cent of the show is based on fact" = accuracy.'},
+
+// Q37-40: YES/NO/NOT GIVEN
+{id:37,passage:2,type:'yesno',
+ instruction:'Questions 37–40: Do the following statements agree with the claims of the writer in Reading Passage 3? Write YES, NO or NOT GIVEN.',
+ text:'Ekman regrets the lies he told as a child.',
+ answer:'NOT GIVEN',
+ hint:'He "professes to have been a terrible liar ever since he was a small boy" — no mention of regret.'},
+
+{id:38,passage:2,type:'yesno',instruction:'',
+ text:'People who are good at lying tend to be good at detecting lies.',
+ answer:'NO',
+ hint:'"The ability to detect a lie and the ability to lie successfully are completely unrelated."'},
+
+{id:39,passage:2,type:'yesno',instruction:'',
+ text:'Ekman has worked with poker players to help them lie more convincingly.',
+ answer:'NOT GIVEN',
+ hint:'Poker players are mentioned only as an example of people who aren\'t "true liars" since deception is part of the game — no mention of Ekman working with them.'},
+
+{id:40,passage:2,type:'yesno',instruction:'',
+ text:'Ekman is more interested in the types of lies with serious consequences.',
+ answer:'YES',
+ hint:'"He prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out."'},
+];
+
+const BAND_TABLE=[
+  {min:39,max:40,band:9,desc:'Expert User'},{min:37,max:38,band:8.5,desc:'Very Good User'},
+  {min:35,max:36,band:8,desc:'Very Good User'},{min:33,max:34,band:7.5,desc:'Good User'},
+  {min:30,max:32,band:7,desc:'Good User'},{min:27,max:29,band:6.5,desc:'Competent User'},
+  {min:23,max:26,band:6,desc:'Competent User'},{min:19,max:22,band:5.5,desc:'Modest User'},
+  {min:15,max:18,band:5,desc:'Modest User'},{min:13,max:14,band:4.5,desc:'Limited User'},
+  {min:10,max:12,band:4,desc:'Limited User'},{min:8,max:9,band:3.5,desc:'Extremely Limited'},
+  {min:6,max:7,band:3,desc:'Extremely Limited'},{min:4,max:5,band:2.5,desc:'Intermittent User'}
+];
+
+// ═══════════════════════════════════════════
+// ICON HELPER
+// ═══════════════════════════════════════════
+function SVG(path,o){o=o||{};const s=o.s||16;return `<svg class="ic" viewBox="0 0 24 24" width="${s}" height="${s}" fill="${o.f||'none'}" stroke="${o.st||'currentColor'}" stroke-width="${o.w||2}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;}
+const ICONS={
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  pin:'<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/>'
+};
+
+// ═══════════════════════════════════════════
+// ANSWER GRADING
+// ═══════════════════════════════════════════
+function normalise(str){
+  return str.toLowerCase().trim()
+    .replace(/[-–—]/g,' ').replace(/\s+/g,' ').replace(/\.$/,'');
+}
+const NUM_MAP={'one':'1','two':'2','three':'3','four':'4','five':'5',
+  'six':'6','seven':'7','eight':'8','nine':'9','ten':'10',
+  '1':'one','2':'two','3':'three','4':'four','5':'five',
+  '6':'six','7':'seven','8':'eight','9':'nine','10':'ten'};
+function expandNums(str){
+  return str.replace(/\b(\w+)\b/g,w=>NUM_MAP[w.toLowerCase()]||w);
+}
+function isCorrect(q,userAnswer){
+  if(!userAnswer||!userAnswer.trim())return false;
+  const ua=normalise(userAnswer);
+  const accepted=[];
+  if(q.answers)q.answers.forEach(a=>accepted.push(normalise(a)));
+  else{
+    accepted.push(normalise(q.answer));
+    if(q.altAnswer)accepted.push(normalise(q.altAnswer));
+  }
+  for(const a of accepted){
+    if(ua===a)return true;
+    if(expandNums(ua)===a||ua===expandNums(a))return true;
+  }
+  return false;
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentPassage=0,answers={},flags={},timerSec=3600,
+    timerInt=null,testDone=false,reviewModeOn=false;
+
+// ═══════════════════════════════════════════
+// BEGIN TEST
+// ═══════════════════════════════════════════
+function beginTest(){
+  document.getElementById('start-screen').style.display='none';
+  loadSaved();
+  renderPassage(0);renderQuestions(0);buildPalette();startTimer();initScrollProgress();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload=()=>{
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) {
+    try { tg.ready(); } catch(e) {}
+    try { tg.expand(); } catch(e) {}
+    try { if (tg.enableClosingConfirmation) tg.enableClosingConfirmation(); } catch(e) {}
+    try { if (tg.disableVerticalSwipes)     tg.disableVerticalSwipes(); } catch(e) {}
+    try { if (tg.requestFullscreen)         tg.requestFullscreen(); } catch(e) {}
+  }
+  const th=localStorage.getItem('ielts_theme');
+  if(th==='light'){document.body.className='';}else{document.body.className='dark';}
+  document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>{
+    const isDark=/dark/.test(b.getAttribute('onclick'));
+    b.classList.toggle('active',isDark?document.body.classList.contains('dark'):!document.body.classList.contains('dark'));
+  });
+  const sp=document.getElementById('splitter');
+  const pp=document.getElementById('passage-panel');
+  const qp=document.getElementById('questions-panel');
+  let drag=false;
+  sp.addEventListener('mousedown',e=>{drag=true;sp.classList.add('dragging');document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();});
+  document.addEventListener('mousemove',e=>{
+    if(!drag)return;
+    const m=document.getElementById('main'),r=m.getBoundingClientRect();
+    const lw=Math.min(Math.max(e.clientX-r.left,220),r.width-234);
+    pp.style.flex='none';pp.style.width=lw+'px';
+    qp.style.flex='none';qp.style.width=(r.width-7-lw)+'px';
+    updateRulerWidth();
+  });
+  document.addEventListener('mouseup',()=>{if(!drag)return;drag=false;sp.classList.remove('dragging');document.body.style.cursor='';document.body.style.userSelect='';});
+  pp.addEventListener('mousemove',e=>{
+    const r=document.getElementById('ruler');
+    if(r.style.display==='block'){r.style.top=(e.clientY-14)+'px';updateRulerWidth();}
+  });
+  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();}});
+  document.addEventListener('contextmenu',onContextMenu);
+  document.addEventListener('click',e=>{
+    hideCtx();
+    if(!document.getElementById('settings-panel').contains(e.target)&&!e.target.closest('.hbtn[onclick*="toggleSettings"]'))
+      document.getElementById('settings-panel').style.display='none';
+  });
+};
+
+function loadSaved(){
+  try{const s=localStorage.getItem('ielts_t10_answers');if(s)answers=JSON.parse(s);}catch(e){}
+  try{const f=localStorage.getItem('ielts_t10_flags');if(f)flags=JSON.parse(f);}catch(e){}
+  try{const n=localStorage.getItem('ielts_t10_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
+  try{const t=localStorage.getItem('ielts_t10_timer');if(t){const v=parseInt(t);if(v>0&&v<=3600)timerSec=v;}}catch(e){}
+}
+function saveAll(){
+  try{
+    localStorage.setItem('ielts_t10_answers',JSON.stringify(answers));
+    localStorage.setItem('ielts_t10_flags',JSON.stringify(flags));
+    localStorage.setItem('ielts_t10_timer',timerSec);
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════
+// RENDER PASSAGE
+// ═══════════════════════════════════════════
+function renderPassage(idx){
+  const p=PASSAGES[idx];
+  let h=`<div class="passage-meta">${p.title}</div>`;
+  if(p.timeHint)h+=`<div class="passage-time-hint">${SVG(ICONS.clock,{s:13})} ${p.timeHint}</div>`;
+  h+=`<div class="passage-heading">${p.heading}</div>`;
+  if(p.subheading)h+=`<div class="passage-subheading">${p.subheading}</div>`;
+  h+=`<hr class="passage-divider"><div class="passage-text">`;
+  p.paragraphs.forEach(para=>{
+    h+=`<p>${para.label?`<span class="para-label">${para.label}</span>`:''}${para.text}</p>`;
+  });
+  h+=`</div>`;
+  if(p.footnote)h+=`<div class="footnote">${p.footnote}</div>`;
+  document.getElementById('passage-content').innerHTML=h;
+}
+
+// ═══════════════════════════════════════════
+// SHARED BANK RENDERERS
+// ═══════════════════════════════════════════
+function renderPersonBank(people,title){
+  let h=`<div class="person-bank"><div class="person-bank-title">${title}</div><div class="person-bank-grid">`;
+  people.forEach(p=>{h+=`<div class="pb-item"><span class="pb-letter">${p.letter}</span><span>${p.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+function renderWordBank(items,title){
+  let h=`<div class="word-bank"><div class="word-bank-title">${title}</div><div class="word-bank-grid">`;
+  items.forEach(item=>{h+=`<div class="wb-item"><span class="wb-letter">${item.letter}</span><span>${item.word}</span></div>`;});
+  h+=`</div></div>`;return h;
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTION BLOCK
+// ═══════════════════════════════════════════
+function renderQ(q){
+  const val=answers[q.id]||'';
+  const fl=!!flags[q.id];
+  let inner='';
+  if(q.type==='fill'){
+    inner=`<div class="q-text">${q.text}</div><input class="q-input" id="q${q.id}" type="text" value="${val.replace(/"/g,'&quot;')}" placeholder="Type your answer…" oninput="setAnswer(${q.id},this.value)">`;
+  }else if(q.type==='yesno'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['YES','NO','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='tfng'){
+    inner=`<div class="q-text">${q.text}</div><div class="tfng-btns">${['TRUE','FALSE','NOT GIVEN'].map(v=>`<button class="tfng-btn${val===v?' selected':''}" onclick="setTFNG(${q.id},'${v}',this)">${v}</button>`).join('')}</div>`;
+  }else if(q.type==='mcq'){
+    const opts=(q.options||[]).map((o,i)=>{const l=String.fromCharCode(65+i);return`<label class="q-option${val===l?' selected':''}"><input type="radio" name="q${q.id}" value="${l}"${val===l?' checked':''} onchange="setMCQ(${q.id},'${l}')"><span>${o}</span></label>`;}).join('');
+    inner=`<div class="q-text">${q.text}</div><div class="q-options">${opts}</div>`;
+  }
+  return `<div class="q-block${fl?' flagged':''}${val?' answered':''}" id="qblock${q.id}">
+    <div class="q-num">Question ${q.id}</div>${inner}
+    <button class="flag-btn${fl?' active':''}" onclick="toggleFlag(${q.id})" title="Flag">${SVG(ICONS.flag,{s:15})}</button>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════
+// ANSWER HANDLERS
+// ═══════════════════════════════════════════
+function setAnswer(id,val){answers[id]=val;updateBlock(id);saveAll();updatePalette();}
+function setTFNG(id,val,btn){answers[id]=val;btn.closest('.tfng-btns').querySelectorAll('.tfng-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');updateBlock(id);saveAll();updatePalette();}
+function setMCQ(id,val){answers[id]=val;document.querySelectorAll(`[name="q${id}"]`).forEach(r=>{const l=r.closest('.q-option');if(l)l.classList.toggle('selected',r.value===val);});updateBlock(id);saveAll();updatePalette();}
+function updateBlock(id){const b=document.getElementById('qblock'+id);if(b){b.classList.toggle('answered',!!(answers[id]&&answers[id].trim()));b.classList.toggle('flagged',!!(flags[id]));}}
+function toggleFlag(id){flags[id]=!flags[id];const b=document.querySelector(`#qblock${id} .flag-btn`);if(b)b.classList.toggle('active',flags[id]);updateBlock(id);saveAll();updatePalette();}
+
+// ═══════════════════════════════════════════
+// PALETTE
+// ═══════════════════════════════════════════
+function buildPalette(){
+  document.getElementById('palette-nums').innerHTML=
+    Array.from({length:40},(_,i)=>`<button class="pal-num" id="pal${i+1}" onclick="jumpToQ(${i+1})">${i+1}</button>`).join('');
+  updatePalette();
+}
+function updatePalette(){
+  for(let i=1;i<=40;i++){
+    const e=document.getElementById('pal'+i);if(!e)continue;
+    e.classList.remove('done','flagged');
+    if(flags[i])e.classList.add('flagged');
+    else if(answers[i]&&answers[i].trim())e.classList.add('done');
+  }
+}
+function jumpToQ(id){
+  const q=QUESTIONS.find(q=>q.id===id);if(!q)return;
+  if(q.passage!==currentPassage)switchPassage(q.passage);
+  setTimeout(()=>{
+    const el=document.getElementById('qblock'+id);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.boxShadow='0 0 0 3px var(--accent)';setTimeout(()=>el.style.boxShadow='',1600);}
+    document.querySelectorAll('.pal-num').forEach(b=>b.classList.remove('active'));
+    const pb=document.getElementById('pal'+id);if(pb)pb.classList.add('active');
+  },100);
+}
+
+// ═══════════════════════════════════════════
+// PASSAGE SWITCH
+// ═══════════════════════════════════════════
+function switchPassage(idx){
+  currentPassage=idx;
+  renderPassage(idx);renderQuestions(idx);
+  if(reviewModeOn)applyReviewMarkup();
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.getElementById('passage-panel').scrollTop=0;
+  document.getElementById('questions-panel').scrollTop=0;
+  document.getElementById('scroll-bar').style.width='0%';
+  updatePalette();
+}
+
+function initScrollProgress(){
+  const pp=document.getElementById('passage-panel');
+  pp.addEventListener('scroll',()=>{
+    const s=pp.scrollHeight-pp.clientHeight;
+    document.getElementById('scroll-bar').style.width=(s>0?(pp.scrollTop/s*100):100)+'%';
+  });
+}
+
+function flashUnanswered(){
+  QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).forEach(q=>{
+    const el=document.getElementById('pal'+q.id);
+    if(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600);}
+  });
+}
+
+function backToResults(){
+  document.getElementById('back-to-results').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+function startTimer(){
+  updateTimerDisplay();
+  timerInt=setInterval(()=>{timerSec--;saveAll();updateTimerDisplay();if(timerSec<=0){clearInterval(timerInt);submitTest();}},1000);
+}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  const b=document.getElementById('timer-box'),t=document.getElementById('timer-txt');
+  if(t)t.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  b.classList.remove('warn','critical');
+  if(timerSec<=300)b.classList.add('critical');
+  else if(timerSec<=600)b.classList.add('warn');
+}
+
+// ═══════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════
+function toggleSettings(){const p=document.getElementById('settings-panel');p.style.display=p.style.display==='block'?'none':'block';}
+function setTheme(theme,btn){document.body.className=theme==='dark'?'dark':'';document.querySelectorAll('.sbtn[onclick*="setTheme"]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');localStorage.setItem('ielts_theme',theme);}
+function setFont(size,btn){document.body.style.fontSize=size+'px';document.querySelectorAll('.sbtn-fs').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function toggleRuler(){const on=document.getElementById('ruler-toggle').checked;document.getElementById('ruler').style.display=on?'block':'none';if(on)updateRulerWidth();}
+function updateRulerWidth(){const pp=document.getElementById('passage-panel'),r=document.getElementById('ruler');const rect=pp.getBoundingClientRect();r.style.left=rect.left+'px';r.style.width=rect.width+'px';}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+function toggleNotes(){const b=document.getElementById('notes-box');b.style.display=b.style.display==='block'?'none':'block';}
+function saveNotes(){try{localStorage.setItem('ielts_t10_notes',document.getElementById('notes-ta').value);}catch(e){}}
+
+// ═══════════════════════════════════════════
+// HIGHLIGHTING
+// ═══════════════════════════════════════════
+let savedRange=null,activeHlColor='yellow';
+function inPassage(el){return document.getElementById('passage-panel').contains(el);}
+function getSelRange(){const sel=window.getSelection();if(sel&&sel.toString().trim().length>0)return sel.getRangeAt(0).cloneRange();return null;}
+function onContextMenu(e){
+  const sel=window.getSelection();
+  if(sel&&sel.toString().trim().length>0&&inPassage(e.target)){e.preventDefault();savedRange=sel.getRangeAt(0).cloneRange();showCtx(e.clientX,e.clientY);}
+  else hideCtx();
+}
+document.addEventListener('mouseup',e=>{
+  if(!e.shiftKey)return;
+  const r=getSelRange();if(!r)return;
+  const anchor=window.getSelection().anchorNode;
+  if(!anchor||!inPassage(anchor))return;
+  savedRange=r;applyHighlight(activeHlColor);
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='n'){e.preventDefault();toggleNotes();return;}
+  if(!e.shiftKey||e.ctrlKey||e.altKey||e.metaKey)return;
+  const r=getSelRange();
+  if(e.key==='Y'||e.key==='y'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='yellow';applyHighlight('yellow');}}
+  if(e.key==='G'||e.key==='g'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;activeHlColor='green';applyHighlight('green');}}
+  if(e.key==='R'||e.key==='r'){if(r&&inPassage(window.getSelection().anchorNode)){e.preventDefault();savedRange=r;removeHighlight();}}
+  if(['ArrowLeft','ArrowRight'].includes(e.key)){const f=document.activeElement;if(f&&f.classList.contains('tfng-btn')){const s=[...f.closest('.tfng-btns').querySelectorAll('.tfng-btn')];const i=s.indexOf(f);const n=e.key==='ArrowRight'?s[i+1]:s[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+  if(['ArrowUp','ArrowDown'].includes(e.key)){const f=document.activeElement;if(f&&f.type==='radio'){const rs=[...document.querySelectorAll(`[name="${f.name}"]`)];const i=rs.indexOf(f);const n=e.key==='ArrowDown'?rs[i+1]:rs[i-1];if(n){n.focus();n.click();}e.preventDefault();}}
+});
+function showCtx(x,y){const m=document.getElementById('ctx-menu');m.style.display='block';m.style.left=Math.min(x,window.innerWidth-200)+'px';m.style.top=Math.min(y,window.innerHeight-130)+'px';}
+function hideCtx(){document.getElementById('ctx-menu').style.display='none';}
+function applyHighlight(color){
+  hideCtx();if(!savedRange)return;activeHlColor=color;
+  const span=document.createElement('span');span.className='hl-'+color;span.setAttribute('data-hl',color);
+  try{savedRange.surroundContents(span);}catch(e){const frag=savedRange.extractContents();span.appendChild(frag);savedRange.insertNode(span);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+function removeHighlight(){
+  hideCtx();if(!savedRange)return;
+  const c=savedRange.commonAncestorContainer,s=c.nodeType===3?c.parentElement:c;
+  if(s&&s.dataset&&s.dataset.hl){const p=s.parentNode;while(s.firstChild)p.insertBefore(s.firstChild,s);p.removeChild(s);}
+  window.getSelection().removeAllRanges();savedRange=null;
+}
+
+// ═══════════════════════════════════════════
+// SUBMIT & RESULTS
+// ═══════════════════════════════════════════
+function submitTest(){
+  if(testDone)return;
+  const un=QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).length;
+  if(un>0){flashUnanswered();if(!confirm(`${un} question(s) unanswered. Submit anyway?`))return;}
+  clearInterval(timerInt);testDone=true;showResults();
+}
+
+function showResults(){
+  let correct=0,wrong=0,skip=0;
+  const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
+  QUESTIONS.forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(!ua){skip++;bp[q.passage].skip++;}
+    else if(ok){correct++;bp[q.passage].correct++;}
+    else{wrong++;bp[q.passage].wrong++;}
+  });
+  let band=2.5,desc='Intermittent User';
+  for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
+  document.getElementById('res-band').textContent=band;
+  document.getElementById('res-band-desc').textContent=`${desc} — ${correct} correct out of 40`;
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=wrong;
+  document.getElementById('res-skip').textContent=skip;
+  document.getElementById('res-pct').textContent=Math.round(correct/40*100)+'%';
+  document.getElementById('p-breakdown').innerHTML=PASSAGES.map((p,i)=>`
+    <div class="p-card"><h4>${p.title}: ${p.heading}</h4>
+    <div class="p-card-stats">
+      <span style="color:var(--correct);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:13})} ${bp[i].correct}</span>
+      <span style="color:var(--wrong);font-weight:700;display:inline-flex;align-items:center;gap:4px">${SVG(ICONS.x,{s:13})} ${bp[i].wrong}</span>
+      <span style="color:var(--text3)">— ${bp[i].skip} skipped</span>
+    </div></div>`).join('');
+  document.getElementById('review-grid').innerHTML=QUESTIONS.map(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    const cls=!ua?'unanswered':ok?'correct':'wrong';
+    return`<div class="review-card ${cls}">
+      <div class="rev-q">Q${q.id}</div>
+      <div class="rev-yours">${ua?`Your: ${ua}`:'Not answered'}</div>
+      ${!ua?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`:ok?`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} Correct</div>`:`<div class="rev-correct" style="display:flex;align-items:center;gap:4px">${SVG(ICONS.check,{s:12})} ${q.answer}</div>`}
+    </div>`;
+  }).join('');
+  document.getElementById('results-screen').style.display='block';
+}
+
+// ═══════════════════════════════════════════
+// REVIEW MODE
+// ═══════════════════════════════════════════
+function reviewMode(){
+  reviewModeOn=true;
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('back-to-results').style.display='block';
+  switchPassage(0);
+}
+
+function applyReviewMarkup(){
+  QUESTIONS.filter(q=>q.passage===currentPassage).forEach(q=>{
+    const ua=(answers[q.id]||'').trim();
+    const ok=isCorrect(q,ua);
+    if(q.type==='fill'){
+      const el=document.getElementById('q'+q.id);
+      if(el){
+        el.classList.add(ok?'correct-ans':'wrong-ans');el.disabled=true;
+        el.parentNode.querySelectorAll('.answer-reveal,.answer-hint').forEach(o=>o.remove());
+        if(!ok){const r=document.createElement('div');r.className='answer-reveal';r.innerHTML=SVG(ICONS.check,{s:12})+' ';r.appendChild(document.createTextNode('Correct: '+q.answer));el.parentNode.insertBefore(r,el.nextSibling);}
+        if(q.hint){const h=document.createElement('div');h.className='answer-hint';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const ref=el.parentNode.querySelector('.answer-reveal');el.parentNode.insertBefore(h,(ref?ref:el).nextSibling);}
+      }
+    }else if(q.type==='tfng'||q.type==='yesno'){
+      document.querySelectorAll(`#qblock${q.id} .tfng-btn`).forEach(b=>{
+        if(b.textContent===q.answer)b.classList.add('correct-ans');
+        else if(b.classList.contains('selected'))b.classList.add('wrong-ans');
+      });
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));block.querySelector('.tfng-btns').after(h);}}
+    }else if(q.type==='mcq'){
+      document.querySelectorAll(`[name="q${q.id}"]`).forEach(r=>r.disabled=true);
+      if(q.hint){const block=document.getElementById('qblock'+q.id);if(block&&!block.querySelector('.answer-hint')){const h=document.createElement('div');h.className='answer-hint';h.style.marginTop='8px';h.innerHTML=SVG(ICONS.pin,{s:12})+' ';h.appendChild(document.createTextNode(q.hint));const opts=block.querySelector('.q-options');if(opts)opts.after(h);}}
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// RESTART
+// ═══════════════════════════════════════════
+function restartTest(){
+  if(!confirm('Restart? All answers and the timer will be reset.'))return;
+  ['ielts_t10_answers','ielts_t10_flags','ielts_t10_timer','ielts_t10_notes'].forEach(k=>localStorage.removeItem(k));
+  answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
+  clearInterval(timerInt);timerInt=null;
+  const box=document.getElementById('timer-box');const tt=document.getElementById('timer-txt');if(tt)tt.textContent='60:00';box.classList.remove('warn','critical');
+  document.getElementById('notes-ta').value='';
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('settings-panel').style.display='none';
+  document.getElementById('back-to-results').style.display='none';
+  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  document.getElementById('start-screen').style.display='flex';
+}
+
+// ═══════════════════════════════════════════
+// RENDER QUESTIONS (per-test bank injection)
+// ═══════════════════════════════════════════
+function renderQuestions(pIdx){
+  const p=PASSAGES[pIdx];
+  const qs=QUESTIONS.filter(q=>q.passage===pIdx);
+  let h=`<div class="q-range-label">Questions ${p.qRange[0]}–${p.qRange[1]}</div>`;
+
+  let lastInstr='';
+  qs.forEach(q=>{
+    if(q.instruction&&q.instruction!==lastInstr){
+      h+=`<div class="q-section-title">${q.instruction}</div>`;
+      lastInstr=q.instruction;
+      // Passage 2: researchers bank before Q19
+      if(pIdx===1 && q.id===19){
+        h+=renderPersonBank(PEOPLE_P2,'List of People or Organisations — A, B, C, D or E (you may use any letter more than once)');
+      }
+      // Passage 3: word bank before Q32
+      if(pIdx===2 && q.id===32){
+        h+=renderWordBank(WORDBANK_P3,'Word Bank — A to I');
+      }
+    }
+    h+=renderQ(q);
+  });
+  document.getElementById('questions-content').innerHTML=h;
+}
+</script>
+</body>
+</html>

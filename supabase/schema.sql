@@ -40,12 +40,13 @@ language plpgsql
 security definer set search_path = public
 as $$
 begin
-  insert into public.users (id, email, name, full_name, trial_ends_at)
+  insert into public.users (id, email, name, full_name, telegram_id, trial_ends_at)
   values (
     new.id,
     new.email,
     coalesce(new.raw_user_meta_data ->> 'name', split_part(new.email, '@', 1)),
     new.raw_user_meta_data ->> 'full_name',
+    new.raw_user_meta_data ->> 'telegram_id',
     now() + interval '7 days'
   )
   on conflict (id) do nothing;
@@ -141,3 +142,25 @@ drop policy if exists "users can view own subscription" on public.subscriptions;
 create policy "users can view own subscription"
   on public.subscriptions for select
   using (auth.uid() = user_id);
+
+-- ─────────────────────────────────────────────
+-- telegram_login_sessions — bridges the "bot sends you a code" login flow.
+-- Server-only: no RLS policies, only the service role key (which bypasses
+-- RLS) may read/write this table. Anonymous/authenticated clients get none.
+-- ─────────────────────────────────────────────
+create table if not exists public.telegram_login_sessions (
+  id uuid primary key default gen_random_uuid(),
+  session_token text not null unique,
+  telegram_id text,
+  telegram_username text,
+  telegram_first_name text,
+  code text,
+  verified boolean not null default false,
+  expires_at timestamptz not null default (now() + interval '10 minutes'),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists telegram_login_sessions_token_idx
+  on public.telegram_login_sessions (session_token);
+
+alter table public.telegram_login_sessions enable row level security;

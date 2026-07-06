@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
+import { TelegramLoginBox } from "@/components/TelegramLoginBox";
 import { createClient } from "@/lib/supabase/client";
 
 export default function RegisterPage() {
@@ -51,12 +52,22 @@ export default function RegisterPage() {
         </div>
         <h1 className="mt-6 text-center text-xl font-bold text-white">Create your account</h1>
 
+        <div className="mt-6">
+          <TelegramLoginBox />
+        </div>
+
+        <div className="my-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-bp-border" />
+          <span className="text-xs font-semibold text-white/30">OR</span>
+          <div className="h-px flex-1 bg-bp-border" />
+        </div>
+
         {checkEmail ? (
-          <p className="mt-6 text-center text-sm text-bp-success">
+          <p className="text-center text-sm text-bp-success">
             Almost done — check your email for a confirmation link to activate your account.
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
               required
               value={name}

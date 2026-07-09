@@ -1,7 +1,11 @@
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { BandTrendChart } from "@/components/BandTrendChart";
+import { AccuracyByType } from "@/components/AccuracyByType";
+import { ActivityCalendar } from "@/components/ActivityCalendar";
 import { createClient } from "@/lib/supabase/server";
+
+type QuestionResult = { id: number; type: string; correct: boolean; answered: boolean };
 
 export default async function ProgressPage() {
   const supabase = await createClient();
@@ -13,11 +17,21 @@ export default async function ProgressPage() {
     redirect("/login");
   }
 
-  const { data: results } = await supabase
-    .from("test_results")
-    .select("test_type, score_band, completed_at")
-    .eq("user_id", user.id)
-    .order("completed_at", { ascending: true });
+  const thirtyFiveDaysAgo = new Date();
+  thirtyFiveDaysAgo.setDate(thirtyFiveDaysAgo.getDate() - 34);
+
+  const [{ data: results }, { data: activity }] = await Promise.all([
+    supabase
+      .from("test_results")
+      .select("test_type, score_band, completed_at, question_results_json")
+      .eq("user_id", user.id)
+      .order("completed_at", { ascending: true }),
+    supabase
+      .from("daily_activity")
+      .select("date, tests_completed, words_reviewed")
+      .eq("user_id", user.id)
+      .gte("date", thirtyFiveDaysAgo.toISOString().slice(0, 10)),
+  ]);
 
   const toPoints = (type: "reading" | "listening") =>
     (results ?? [])
@@ -31,6 +45,16 @@ export default async function ProgressPage() {
   const readingPoints = toPoints("reading");
   const listeningPoints = toPoints("listening");
 
+  const questionResults: QuestionResult[] = (results ?? []).flatMap(
+    (r) => (r.question_results_json as QuestionResult[] | null) ?? [],
+  );
+
+  const activityDays = (activity ?? []).map((a) => ({
+    date: a.date,
+    testsCompleted: a.tests_completed,
+    wordsReviewed: a.words_reviewed,
+  }));
+
   return (
     <AppShell active="/progress">
       <h1 className="text-2xl font-bold text-white md:text-3xl">Progress</h1>
@@ -39,6 +63,11 @@ export default async function ProgressPage() {
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <BandTrendChart title="Reading Band Trend" points={readingPoints} color="accent" gradientId="bp-progress-reading" />
         <BandTrendChart title="Listening Band Trend" points={listeningPoints} color="success" gradientId="bp-progress-listening" />
+      </div>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <AccuracyByType questionResults={questionResults} />
+        <ActivityCalendar days={activityDays} />
       </div>
     </AppShell>
   );

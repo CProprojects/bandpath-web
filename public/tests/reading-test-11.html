@@ -1126,12 +1126,14 @@ function submitTest(){
 function showResults(){
   let correct=0,wrong=0,skip=0;
   const bp=PASSAGES.map(()=>({correct:0,wrong:0,skip:0}));
+  const qResults=[];
   QUESTIONS.forEach(q=>{
     const ua=(answers[q.id]||'').trim();
     const ok=isCorrect(q,ua);
     if(!ua){skip++;bp[q.passage].skip++;}
     else if(ok){correct++;bp[q.passage].correct++;}
     else{wrong++;bp[q.passage].wrong++;}
+    qResults.push({id:q.id,type:q.type,correct:ok,answered:!!ua});
   });
   let band=2.5,desc='Intermittent User';
   for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
@@ -1169,7 +1171,8 @@ function showResults(){
       totalQuestions:40,
       scoreBand:band,
       timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
-      answers:answers
+      answers:answers,
+      questionResults:qResults
     }, window.location.origin);
   }catch(e){}
 }

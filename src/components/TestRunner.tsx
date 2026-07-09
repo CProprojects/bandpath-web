@@ -3,6 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+type QuestionResult = {
+  id: number;
+  type: string;
+  correct: boolean;
+  answered: boolean;
+};
+
 type TestCompleteMessage = {
   type: "bandpath:test-complete";
   testId: string;
@@ -12,6 +19,7 @@ type TestCompleteMessage = {
   scoreBand: number;
   timeSpentSeconds: number;
   answers: Record<string, string>;
+  questionResults?: QuestionResult[];
 };
 
 export function TestRunner({ testId, testFile }: { testId: string; testFile: string }) {
@@ -32,6 +40,7 @@ export function TestRunner({ testId, testFile }: { testId: string; testFile: str
           scoreBand: e.data.scoreBand,
           timeSpentSeconds: e.data.timeSpentSeconds,
           answers: e.data.answers,
+          questionResults: e.data.questionResults,
         }),
       })
         .then((res) => res.json())

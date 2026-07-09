@@ -4,7 +4,7 @@ import { recordDailyActivity } from "@/lib/activity";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { testId, testType, scoreRaw, scoreBand, timeSpentSeconds, answers } = body;
+  const { testId, testType, scoreRaw, scoreBand, timeSpentSeconds, answers, questionResults } = body;
 
   if (!testId || !testType) {
     return NextResponse.json({ error: "Missing test data." }, { status: 400 });
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
       score_band: scoreBand,
       time_spent_seconds: timeSpentSeconds,
       answers_json: answers,
+      question_results_json: questionResults ?? null,
     })
     .select("id")
     .single();

@@ -530,6 +530,7 @@ const ANSWERS = {
   39:{answer:'corn', answers:['corn']},
   40:{answer:'diet', answers:['diet']},
 };
+const QUESTION_TYPES = {1:'fill',2:'fill',3:'fill',4:'fill',5:'fill',6:'fill',7:'fill',8:'fill',9:'fill',10:'fill',11:'fill',12:'fill',13:'fill',14:'fill',15:'fill',16:'fill',17:'mcq',18:'mcq',19:'mcq',20:'mcq',21:'mcq',22:'mcq',23:'mcq',24:'mcq',25:'fill',26:'fill',27:'fill',28:'fill',29:'fill',30:'fill',31:'fill',32:'fill',33:'fill',34:'fill',35:'fill',36:'fill',37:'fill',38:'fill',39:'fill',40:'fill'};
 
 const SECTION_RANGES = [[1,10],[11,20],[21,30],[31,40]];
 const SECTION_NAMES = ['Part 1 — Birthday Party Arrangements','Part 2 — The Game of Curling','Part 3 — Scientific Techniques & Da Vinci\'s Battle of Anghiari','Part 4 — Sustainability'];
@@ -1044,6 +1045,7 @@ function submitTest(){
 function showResults(){
   let correct=0,wrong=0,skip=0;
   const bp=[{c:0,w:0,s:0},{c:0,w:0,s:0},{c:0,w:0,s:0},{c:0,w:0,s:0}];
+  const qResults=[];
   for(let i=1;i<=40;i++){
     const ua=(userAnswers[i]||'').toString().trim();
     const ok=isCorrect(i,ua);
@@ -1051,6 +1053,7 @@ function showResults(){
     if(!ua){skip++;bp[si].s++;}
     else if(ok){correct++;bp[si].c++;}
     else{wrong++;bp[si].w++;}
+    qResults.push({id:i,type:QUESTION_TYPES[i],correct:ok,answered:!!ua});
   }
   let band=2.5,desc='Intermittent User';
   for(const b of BAND_TABLE){if(correct>=b.min&&correct<=b.max){band=b.band;desc=b.desc;break;}}
@@ -1096,7 +1099,8 @@ function showResults(){
       totalQuestions:40,
       scoreBand:band,
       timeSpentSeconds:Math.round((Date.now()-testStartTime)/1000),
-      answers:userAnswers
+      answers:userAnswers,
+      questionResults:qResults
     }, window.location.origin);
   }catch(e){}
 }

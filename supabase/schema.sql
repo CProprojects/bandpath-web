@@ -76,8 +76,11 @@ create table if not exists public.test_results (
   score_band numeric(2,1),
   time_spent_seconds int,
   answers_json jsonb,
+  question_results_json jsonb,
   completed_at timestamptz not null default now()
 );
+
+alter table public.test_results add column if not exists question_results_json jsonb;
 
 create index if not exists test_results_user_id_idx on public.test_results (user_id);
 

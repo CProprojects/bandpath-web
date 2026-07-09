@@ -17,16 +17,10 @@ export default function LandingPage() {
 
       <div className="mt-8 flex gap-3">
         <Link
-          href="/register"
+          href="/login"
           className="rounded-xl bg-gradient-to-r from-bp-accent to-[#0098e0] px-6 py-3 font-bold text-[#06243c] shadow-[0_16px_36px_-12px_rgba(0,196,255,0.7)]"
         >
-          Start Learning
-        </Link>
-        <Link
-          href="/login"
-          className="rounded-xl border border-bp-border bg-bp-card px-6 py-3 font-semibold text-white"
-        >
-          Log In
+          Start Learning with Telegram
         </Link>
       </div>
 

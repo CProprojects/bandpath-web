@@ -15,7 +15,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  const sessionToken = message.text.trim().split(/\s+/)[1];
+  const startParam = message.text.trim().split(/\s+/)[1];
+
+  if (startParam === "upgrade") {
+    await sendTelegramMessage(
+      message.chat.id,
+      "BandPath Pro isn't purchasable yet, but it's coming soon! We'll let you know as soon as it's ready.",
+    );
+    return NextResponse.json({ ok: true });
+  }
+
+  const sessionToken = startParam;
 
   if (!sessionToken) {
     await sendTelegramMessage(

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { openTelegramDeepLink } from "@/lib/telegramDeepLink";
 
 type Stage = "idle" | "waiting" | "verifying";
 
@@ -23,8 +24,8 @@ export function TelegramLoginBox() {
     }
 
     setSessionToken(data.sessionToken);
-    window.open(data.deepLink, "_blank");
     setStage("waiting");
+    openTelegramDeepLink(data.deepLink);
   }
 
   async function verifyCode(e: React.FormEvent) {
@@ -72,8 +73,8 @@ export function TelegramLoginBox() {
           className="flex flex-col gap-2 rounded-lg border border-bp-border bg-bp-bg p-3"
         >
           <p className="text-xs text-white/50">
-            A tab opened to your bot — press <strong>Start</strong> there, then type the
-            code it sends you below.
+            Telegram should have opened to our bot — press <strong>Start</strong> there,
+            then come back here and type the code it sends you.
           </p>
           <input
             required

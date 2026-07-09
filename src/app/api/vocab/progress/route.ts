@@ -90,5 +90,10 @@ export async function POST(request: Request) {
     wordsReviewed: 1,
   });
 
-  return NextResponse.json({ ok: true, xpAwarded, streakCount: activity.streakCount });
+  return NextResponse.json({
+    ok: true,
+    xpAwarded,
+    streakCount: activity.streakCount,
+    status: next.status,
+  });
 }

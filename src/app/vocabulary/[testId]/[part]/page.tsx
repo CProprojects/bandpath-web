@@ -31,12 +31,15 @@ export default async function VocabularyPartPage({
 
   return (
     <AppShell active="/vocabulary">
-      <VocabSession
-        testId={testId}
-        part={partIndex}
-        title={`${test!.title} · Part ${partIndex + 1}`}
-        backHref={`/vocabulary/${testId}`}
-      />
+      <div className="mx-auto w-full max-w-md">
+        <VocabSession
+          testId={testId}
+          part={partIndex}
+          testTitle={test!.title}
+          partLabel={`Part ${partIndex + 1}`}
+          backHref={`/vocabulary/${testId}`}
+        />
+      </div>
     </AppShell>
   );
 }

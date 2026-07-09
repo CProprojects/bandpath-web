@@ -33,3 +33,23 @@ body {
   color: var(--foreground);
   font-family: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
 }
+
+@keyframes bp-floatglow {
+  0%, 100% { opacity: 0.5; transform: translate(0, 0); }
+  50% { opacity: 0.85; transform: translate(10px, -14px); }
+}
+@keyframes bp-flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  45% { opacity: 0.82; transform: scale(0.94) rotate(-3deg); }
+  70% { opacity: 0.95; transform: scale(1.05); }
+}
+@keyframes bp-popin {
+  0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+  65% { transform: scale(1.15) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes bp-slidein {
+  0% { transform: translateY(18px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.bp-flame { animation: bp-flicker 2.2s ease-in-out infinite; transform-origin: center bottom; }

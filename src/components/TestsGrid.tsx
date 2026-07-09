@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ReadingIcon, ListeningIcon, LockIcon } from "@/components/TestIcons";
+import { BookOpen, Headphones, Lock } from "lucide-react";
 
 export type TestCardData = {
   id: string;
@@ -31,7 +31,7 @@ export function TestsGrid({ tests }: { tests: TestCardData[] }) {
             onClick={() => setFilter(f)}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold capitalize transition-colors ${
               filter === f
-                ? "bg-bp-accent text-[#06243c]"
+                ? "bg-gradient-to-r from-bp-accent to-[#0098e0] text-[#06243c] shadow-[0_8px_20px_-8px_rgba(0,196,255,0.6)]"
                 : "border border-bp-border text-white/60 hover:text-white"
             }`}
           >
@@ -42,19 +42,23 @@ export function TestsGrid({ tests }: { tests: TestCardData[] }) {
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {visible.map((test) => {
-          const Icon = test.type === "reading" ? ReadingIcon : ListeningIcon;
+          const Icon = test.type === "reading" ? BookOpen : Headphones;
 
           const card = (
             <div
-              className={`flex items-center gap-4 rounded-2xl border border-bp-border p-4 transition-colors ${
-                test.locked ? "bg-bp-card/50 opacity-60" : "bg-bp-card hover:border-bp-accent/40"
+              className={`flex items-center gap-4 rounded-2xl border p-4 transition-colors ${
+                test.locked
+                  ? "border-bp-border bg-bp-card/50 opacity-60"
+                  : test.type === "reading"
+                    ? "border-bp-accent/15 bg-bp-card/60 hover:border-bp-accent/40"
+                    : "border-bp-warning/15 bg-bp-card/60 hover:border-bp-warning/40"
               }`}
             >
               <div
                 className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${
                   test.type === "reading"
-                    ? "bg-bp-accent/15 text-bp-accent"
-                    : "bg-bp-warning/15 text-bp-warning"
+                    ? "bg-gradient-to-br from-bp-accent/20 to-bp-accent/5 text-bp-accent"
+                    : "bg-gradient-to-br from-bp-warning/20 to-bp-warning/5 text-bp-warning"
                 }`}
               >
                 <Icon className="h-6 w-6" />
@@ -71,7 +75,7 @@ export function TestsGrid({ tests }: { tests: TestCardData[] }) {
                 </div>
               </div>
               {test.locked ? (
-                <LockIcon className="h-5 w-5 flex-shrink-0 text-white/40" />
+                <Lock className="h-5 w-5 flex-shrink-0 text-white/40" />
               ) : test.bestBand !== undefined ? (
                 <div className="flex-shrink-0 font-bold text-bp-success">
                   {test.bestBand.toFixed(1)}

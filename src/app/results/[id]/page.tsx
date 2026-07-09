@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import { CheckCircle2, Target, Clock } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { createClient } from "@/lib/supabase/server";
 import { getTestById } from "@/lib/tests";
@@ -43,17 +44,23 @@ export default async function ResultDetailPage({
         Completed {new Date(result.completed_at).toLocaleString()}
       </p>
 
-      <div className="mt-6 flex flex-col items-center rounded-2xl border border-bp-border bg-bp-card p-8">
-        <div className="flex h-32 w-32 items-center justify-center rounded-full border-4 border-bp-accent text-4xl font-extrabold text-bp-accent">
+      <div className="relative mt-6 flex flex-col items-center overflow-hidden rounded-2xl border border-bp-accent/20 bg-gradient-to-br from-bp-accent/10 to-bp-card/70 p-8">
+        <div
+          className="pointer-events-none absolute left-1/2 top-6 h-56 w-56 -translate-x-1/2 rounded-full opacity-60 blur-2xl"
+          style={{ background: "radial-gradient(circle, rgba(0,196,255,.22), transparent 65%)" }}
+        />
+        <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-4 border-bp-accent text-4xl font-extrabold text-bp-accent shadow-[0_0_36px_-6px_rgba(0,196,255,0.6)]">
           {result.score_band ?? "—"}
         </div>
-        <div className="mt-2 text-sm text-white/50">Band</div>
+        <div className="relative mt-2 text-sm text-white/50">Band</div>
       </div>
 
       <div className="mt-4 grid grid-cols-3 gap-3">
-        <Stat label="Correct" value={result.score_raw ?? "—"} />
-        <Stat label="Accuracy" value={accuracy !== null ? `${accuracy}%` : "—"} />
+        <Stat icon={CheckCircle2} color="bp-success" label="Correct" value={result.score_raw ?? "—"} />
+        <Stat icon={Target} color="bp-accent" label="Accuracy" value={accuracy !== null ? `${accuracy}%` : "—"} />
         <Stat
+          icon={Clock}
+          color="bp-warning"
           label="Time"
           value={
             result.time_spent_seconds
@@ -66,11 +73,28 @@ export default async function ResultDetailPage({
   );
 }
 
-function Stat({ label, value }: { label: string; value: string | number }) {
+function Stat({
+  icon: Icon,
+  color,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  color: "bp-success" | "bp-accent" | "bp-warning";
+  label: string;
+  value: string | number;
+}) {
+  const colorClasses = {
+    "bp-success": "border-bp-success/20 from-bp-success/15 text-bp-success",
+    "bp-accent": "border-bp-accent/20 from-bp-accent/15 text-bp-accent",
+    "bp-warning": "border-bp-warning/20 from-bp-warning/15 text-bp-warning",
+  }[color];
+
   return (
-    <div className="rounded-xl border border-bp-border bg-bp-card p-4 text-center">
-      <div className="text-2xl font-bold text-bp-accent">{value}</div>
-      <div className="mt-1 text-xs text-white/40">{label}</div>
+    <div className={`rounded-2xl border bg-gradient-to-br to-bp-card/60 p-4 text-center ${colorClasses}`}>
+      <Icon className="mx-auto h-4 w-4" />
+      <div className="mt-1 text-2xl font-extrabold tracking-tight">{value}</div>
+      <div className="mt-1 text-[10px] font-semibold text-white/50">{label}</div>
     </div>
   );
 }

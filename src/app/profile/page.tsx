@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Zap, Flame, FileCheck2, GraduationCap, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { createClient } from "@/lib/supabase/server";
 import { getTestById } from "@/lib/tests";
@@ -40,11 +41,16 @@ export default async function ProfilePage() {
     <AppShell active="/profile">
       <h1 className="text-2xl font-bold text-white md:text-3xl">Profile</h1>
 
-      <div className="mt-6 rounded-2xl border border-bp-border bg-bp-card p-6">
-        <div className="text-xl font-bold text-white">
-          {profile?.name || profile?.full_name || "BandPath User"}
+      <div className="mt-6 rounded-2xl border border-bp-accent/20 bg-gradient-to-br from-bp-accent/10 to-bp-card/70 p-6">
+        <div className="flex items-center gap-4">
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-bp-accent/25 to-bp-accent/5 text-bp-accent">
+            <User className="h-7 w-7" />
+          </div>
+          <div className="text-xl font-bold text-white">
+            {profile?.name || profile?.full_name || "BandPath User"}
+          </div>
         </div>
-        <div className="mt-2 flex flex-wrap gap-2 text-xs">
+        <div className="mt-4 flex flex-wrap gap-2 text-xs">
           {profile?.telegram_id && (
             <span className="rounded-full bg-[#229ED9]/15 px-3 py-1 font-semibold text-[#5fc4ef]">
               Telegram ID: {profile.telegram_id}
@@ -62,23 +68,33 @@ export default async function ProfilePage() {
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-2xl border border-bp-border bg-bp-card p-4 text-center">
-          <div className="text-2xl font-bold text-bp-warning">{profile?.xp_total ?? 0}</div>
-          <div className="mt-1 text-xs text-white/40">total XP</div>
+        <div className="rounded-2xl border border-bp-warning/20 bg-gradient-to-br from-bp-warning/15 to-bp-card/60 p-4 text-center">
+          <Zap className="mx-auto h-5 w-5 text-bp-warning" />
+          <div className="mt-1 text-2xl font-extrabold tracking-tight text-bp-warning">
+            {profile?.xp_total ?? 0}
+          </div>
+          <div className="mt-1 text-[10px] font-semibold text-white/50">Total XP</div>
         </div>
-        <div className="rounded-2xl border border-bp-border bg-bp-card p-4 text-center">
-          <div className="text-2xl font-bold text-bp-accent">{profile?.streak_count ?? 0}</div>
-          <div className="mt-1 text-xs text-white/40">day streak</div>
+        <div className="rounded-2xl border border-bp-warning/20 bg-gradient-to-br from-bp-warning/15 to-bp-card/60 p-4 text-center">
+          <Flame className="bp-flame mx-auto h-5 w-5 text-bp-warning" />
+          <div className="mt-1 text-2xl font-extrabold tracking-tight text-bp-warning">
+            {profile?.streak_count ?? 0}
+          </div>
+          <div className="mt-1 text-[10px] font-semibold text-white/50">Day Streak</div>
         </div>
-        <div className="rounded-2xl border border-bp-border bg-bp-card p-4 text-center">
-          <div className="text-2xl font-bold text-bp-success">{testResults.length}</div>
-          <div className="mt-1 text-xs text-white/40">tests taken</div>
+        <div className="rounded-2xl border border-bp-accent/20 bg-gradient-to-br from-bp-accent/15 to-bp-card/60 p-4 text-center">
+          <FileCheck2 className="mx-auto h-5 w-5 text-bp-accent" />
+          <div className="mt-1 text-2xl font-extrabold tracking-tight text-bp-accent">
+            {testResults.length}
+          </div>
+          <div className="mt-1 text-[10px] font-semibold text-white/50">Tests Taken</div>
         </div>
-        <div className="rounded-2xl border border-bp-border bg-bp-card p-4 text-center">
-          <div className="text-2xl font-bold text-white">
+        <div className="rounded-2xl border border-bp-success/20 bg-gradient-to-br from-bp-success/15 to-bp-card/60 p-4 text-center">
+          <GraduationCap className="mx-auto h-5 w-5 text-bp-success" />
+          <div className="mt-1 text-2xl font-extrabold tracking-tight text-bp-success">
             {masteredWords}/{totalWords}
           </div>
-          <div className="mt-1 text-xs text-white/40">words mastered</div>
+          <div className="mt-1 text-[10px] font-semibold text-white/50">Words Mastered</div>
         </div>
       </div>
 
@@ -86,7 +102,9 @@ export default async function ProfilePage() {
         {readingCount} reading · {listeningCount} listening
       </p>
 
-      <h2 className="mt-10 text-lg font-bold text-white">Test History</h2>
+      <h2 className="mt-8 text-[11px] font-bold uppercase tracking-wider text-white/45">
+        Test History
+      </h2>
       {testResults.length === 0 ? (
         <p className="mt-3 text-sm text-white/40">
           No tests taken yet.{" "}
@@ -96,14 +114,14 @@ export default async function ProfilePage() {
           .
         </p>
       ) : (
-        <div className="mt-4 flex flex-col gap-2">
+        <div className="mt-3 flex flex-col gap-2">
           {testResults.map((r) => {
             const test = getTestById(r.test_id);
             return (
               <Link
                 key={r.id}
                 href={`/results/${r.id}`}
-                className="flex items-center justify-between rounded-2xl border border-bp-border bg-bp-card p-4 transition-colors hover:border-bp-accent/40"
+                className="flex items-center justify-between rounded-2xl border border-bp-border bg-bp-card/60 p-4 transition-colors hover:border-bp-accent/40"
               >
                 <div>
                   <div className="font-semibold text-white">{test?.title ?? r.test_id}</div>

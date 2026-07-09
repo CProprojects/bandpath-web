@@ -1,3 +1,4 @@
+import { CheckCircle2, Crown } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { UpgradeButton } from "@/components/UpgradeButton";
 
@@ -16,18 +17,25 @@ export default function UpgradePage() {
         Get the full BandPath experience — tests, vocabulary, and progress tracking.
       </p>
 
-      <div className="mt-8 max-w-md rounded-2xl border border-bp-accent/30 bg-bp-card p-6 shadow-[0_0_24px_-8px_rgba(0,196,255,0.4)]">
-        <div className="text-lg font-bold text-bp-accent">BandPath Pro</div>
-        <ul className="mt-4 flex flex-col gap-2 text-sm text-white/70">
+      <div className="relative mt-8 max-w-md overflow-hidden rounded-2xl border border-bp-accent/30 bg-gradient-to-br from-bp-accent/10 to-bp-card/80 p-6 shadow-[0_0_32px_-10px_rgba(0,196,255,0.5)]">
+        <div
+          className="pointer-events-none absolute -right-10 -top-14 h-44 w-44 rounded-full opacity-60 blur-2xl"
+          style={{ background: "radial-gradient(circle, rgba(0,196,255,.25), transparent 65%)" }}
+        />
+        <div className="relative flex items-center gap-2">
+          <Crown className="h-5 w-5 text-bp-warning" />
+          <div className="text-lg font-bold text-bp-accent">BandPath Pro</div>
+        </div>
+        <ul className="relative mt-4 flex flex-col gap-2.5 text-sm text-white/75">
           {PERKS.map((perk) => (
-            <li key={perk} className="flex items-start gap-2">
-              <span className="mt-1 text-bp-success">✓</span>
+            <li key={perk} className="flex items-start gap-2.5">
+              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-bp-success" />
               <span>{perk}</span>
             </li>
           ))}
         </ul>
 
-        <div className="mt-6">
+        <div className="relative mt-6">
           <UpgradeButton />
         </div>
       </div>

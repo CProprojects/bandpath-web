@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { Flame, Zap, FileCheck2, TrendingUp, PlayCircle, BookOpen } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { createClient } from "@/lib/supabase/server";
-import { getTestById } from "@/lib/tests";
+import { getTestById, TESTS } from "@/lib/tests";
+import { getAllVocabTestIds, getWordsForTest } from "@/lib/vocab";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -16,22 +17,31 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  const [{ data: profile }, { data: results }] = await Promise.all([
-    supabase
-      .from("users")
-      .select("name, plan, streak_count, xp_total")
-      .eq("id", user.id)
-      .single(),
-    supabase
-      .from("test_results")
-      .select("id, test_id, score_band, completed_at")
-      .eq("user_id", user.id)
-      .order("completed_at", { ascending: false })
-      .limit(3),
-  ]);
+  const [{ data: profile }, { data: results }, { data: allResults }, { data: vocabProgress }] =
+    await Promise.all([
+      supabase
+        .from("users")
+        .select("name, plan, streak_count, xp_total")
+        .eq("id", user.id)
+        .single(),
+      supabase
+        .from("test_results")
+        .select("id, test_id, score_band, completed_at")
+        .eq("user_id", user.id)
+        .order("completed_at", { ascending: false })
+        .limit(3),
+      supabase.from("test_results").select("test_id").eq("user_id", user.id),
+      supabase.from("vocab_progress").select("status").eq("user_id", user.id),
+    ]);
 
   const bands = (results ?? []).map((r) => r.score_band).filter((b): b is number => b != null);
   const bestBand = bands.length ? Math.max(...bands) : null;
+
+  const testsCompleted = new Set((allResults ?? []).map((r) => r.test_id)).size;
+  const totalTests = TESTS.length;
+
+  const totalWords = getAllVocabTestIds().reduce((sum, id) => sum + getWordsForTest(id).length, 0);
+  const masteredWords = (vocabProgress ?? []).filter((r) => r.status === "mastered").length;
 
   return (
     <AppShell active="/dashboard">
@@ -89,6 +99,26 @@ export default async function DashboardPage() {
       </div>
 
       <h2 className="mt-8 text-[11px] font-bold uppercase tracking-wider text-white/45">
+        Your Progress
+      </h2>
+      <div className="mt-3 flex flex-col gap-4 rounded-2xl border border-bp-border bg-bp-card/60 p-5">
+        <ProgressBar
+          icon={FileCheck2}
+          color="bp-accent"
+          label="Tests Completed"
+          value={testsCompleted}
+          total={totalTests}
+        />
+        <ProgressBar
+          icon={BookOpen}
+          color="bp-success"
+          label="Words Mastered"
+          value={masteredWords}
+          total={totalWords}
+        />
+      </div>
+
+      <h2 className="mt-8 text-[11px] font-bold uppercase tracking-wider text-white/45">
         Recent Activity
       </h2>
       {!results || results.length === 0 ? (
@@ -124,5 +154,45 @@ export default async function DashboardPage() {
         </div>
       )}
     </AppShell>
+  );
+}
+
+function ProgressBar({
+  icon: Icon,
+  color,
+  label,
+  value,
+  total,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  color: "bp-accent" | "bp-success";
+  label: string;
+  value: number;
+  total: number;
+}) {
+  const pct = total > 0 ? Math.min(100, Math.round((value / total) * 100)) : 0;
+  const styles =
+    color === "bp-accent"
+      ? { text: "text-bp-accent", bar: "bg-gradient-to-r from-bp-accent to-[#0098e0]", glow: "rgba(0,196,255,0.7)" }
+      : { text: "text-bp-success", bar: "bg-gradient-to-r from-bp-success to-[#1fb85f]", glow: "rgba(46,213,115,0.7)" };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between text-xs">
+        <span className="flex items-center gap-1.5 font-semibold text-white/70">
+          <Icon className={`h-3.5 w-3.5 ${styles.text}`} />
+          {label}
+        </span>
+        <span className={`font-bold ${styles.text}`}>
+          {value}/{total}
+        </span>
+      </div>
+      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/5">
+        <div
+          className={`h-full rounded-full transition-all ${styles.bar}`}
+          style={{ width: `${pct}%`, boxShadow: `0 0 10px 0 ${styles.glow}` }}
+        />
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home, FileText, BookOpen, User, Zap } from "lucide-react";
+import { Home, FileText, BookOpen, BarChart3, User, Zap } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { SignOutButton } from "@/components/SignOutButton";
 
@@ -7,6 +7,7 @@ const NAV = [
   { href: "/dashboard", label: "Home", Icon: Home },
   { href: "/tests", label: "Tests", Icon: FileText },
   { href: "/vocabulary", label: "Vocabulary", Icon: BookOpen },
+  { href: "/progress", label: "Progress", Icon: BarChart3 },
   { href: "/profile", label: "Profile", Icon: User },
   { href: "/upgrade", label: "Upgrade", Icon: Zap },
 ];

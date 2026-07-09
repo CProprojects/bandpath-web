@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Flame, Zap, FileCheck2, TrendingUp, PlayCircle, BookOpen } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { BandTrendChart } from "@/components/BandTrendChart";
 import { createClient } from "@/lib/supabase/server";
 import { getTestById, TESTS } from "@/lib/tests";
 import { getAllVocabTestIds, getWordsForTest } from "@/lib/vocab";
@@ -30,7 +31,11 @@ export default async function DashboardPage() {
         .eq("user_id", user.id)
         .order("completed_at", { ascending: false })
         .limit(3),
-      supabase.from("test_results").select("test_id").eq("user_id", user.id),
+      supabase
+        .from("test_results")
+        .select("test_id, score_band, completed_at")
+        .eq("user_id", user.id)
+        .order("completed_at", { ascending: true }),
       supabase.from("vocab_progress").select("status").eq("user_id", user.id),
     ]);
 
@@ -42,6 +47,14 @@ export default async function DashboardPage() {
 
   const totalWords = getAllVocabTestIds().reduce((sum, id) => sum + getWordsForTest(id).length, 0);
   const masteredWords = (vocabProgress ?? []).filter((r) => r.status === "mastered").length;
+
+  const trendPoints = (allResults ?? [])
+    .filter((r): r is typeof r & { score_band: number } => r.score_band != null)
+    .slice(-8)
+    .map((r) => ({
+      date: new Date(r.completed_at).toLocaleDateString(undefined, { month: "numeric", day: "numeric" }),
+      band: r.score_band,
+    }));
 
   return (
     <AppShell active="/dashboard">
@@ -101,6 +114,9 @@ export default async function DashboardPage() {
       <h2 className="mt-8 text-[11px] font-bold uppercase tracking-wider text-white/45">
         Your Progress
       </h2>
+      <div className="mt-3">
+        <BandTrendChart title="Band Score Trend" points={trendPoints} color="accent" gradientId="bp-home-trend" />
+      </div>
       <div className="mt-3 flex flex-col gap-4 rounded-2xl border border-bp-border bg-bp-card/60 p-5">
         <ProgressBar
           icon={FileCheck2}

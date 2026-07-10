@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { Target } from "lucide-react";
+import { NeonDatePicker } from "@/components/NeonDatePicker";
+
+function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
 
 const BANDS = [4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9];
 
@@ -45,7 +50,7 @@ export function GoalForm({
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-bp-success/20 bg-gradient-to-br from-bp-success/10 to-bp-card/70 p-5">
+    <div className="relative rounded-2xl border border-bp-success/20 bg-gradient-to-br from-bp-success/10 to-bp-card/70 p-5">
       <div className="flex items-center gap-2 text-sm font-bold text-white">
         <Target className="h-4 w-4 text-bp-success" />
         Your Goal
@@ -59,12 +64,7 @@ export function GoalForm({
           <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-wide text-white/40">
             Exam date
           </label>
-          <input
-            type="date"
-            value={examDate}
-            onChange={(e) => setExamDate(e.target.value)}
-            className="w-full rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white outline-none focus:border-bp-accent"
-          />
+          <NeonDatePicker value={examDate} onChange={setExamDate} minDate={todayStr()} placeholder="Not set" />
         </div>
         <div className="flex-1">
           <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-wide text-white/40">

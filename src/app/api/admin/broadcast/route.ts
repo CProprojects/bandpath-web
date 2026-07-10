@@ -2,18 +2,29 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isAdminTelegramId } from "@/lib/admin";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, sendTelegramPhoto, type InlineKeyboard } from "@/lib/telegram";
 
 // Sequential sends at ~25/sec; fine for hundreds of users within the
 // function's max duration. A much larger list would need a background queue.
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
-  const { message } = await request.json();
+  const { message, photoUrl, buttonText, buttonUrl } = await request.json();
 
   if (!message || !String(message).trim()) {
     return NextResponse.json({ error: "Message can't be empty." }, { status: 400 });
   }
+
+  if ((buttonText && !buttonUrl) || (buttonUrl && !buttonText)) {
+    return NextResponse.json({ error: "Button text and URL must be set together." }, { status: 400 });
+  }
+
+  if (photoUrl && String(message).length > 1024) {
+    return NextResponse.json({ error: "Caption can't exceed 1024 characters when a photo is attached." }, { status: 400 });
+  }
+
+  const replyMarkup: InlineKeyboard | undefined =
+    buttonText && buttonUrl ? { inline_keyboard: [[{ text: buttonText, url: buttonUrl }]] } : undefined;
 
   const supabase = await createClient();
   const {
@@ -53,7 +64,11 @@ export async function POST(request: Request) {
   // counts — a large user base would need a background job queue instead.
   for (const { telegram_id } of recipients) {
     try {
-      await sendTelegramMessage(telegram_id!, message);
+      if (photoUrl) {
+        await sendTelegramPhoto(telegram_id!, photoUrl, message, { replyMarkup });
+      } else {
+        await sendTelegramMessage(telegram_id!, message, { replyMarkup });
+      }
       sent++;
     } catch {
       failed++;

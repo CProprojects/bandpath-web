@@ -1,6 +1,7 @@
 const TELEGRAM_API = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
 
-export type InlineKeyboard = { inline_keyboard: { text: string; callback_data: string }[][] };
+type InlineButton = { text: string } & ({ callback_data: string } | { url: string });
+export type InlineKeyboard = { inline_keyboard: InlineButton[][] };
 
 export async function sendTelegramMessage(
   chatId: number | string,
@@ -19,6 +20,30 @@ export async function sendTelegramMessage(
 
   if (!res.ok) {
     throw new Error(`Telegram sendMessage failed: ${await res.text()}`);
+  }
+
+  return res.json();
+}
+
+export async function sendTelegramPhoto(
+  chatId: number | string,
+  photoUrl: string,
+  caption?: string,
+  options?: { replyMarkup?: InlineKeyboard },
+) {
+  const res = await fetch(`${TELEGRAM_API}/sendPhoto`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      photo: photoUrl,
+      ...(caption ? { caption } : {}),
+      ...(options?.replyMarkup ? { reply_markup: options.replyMarkup } : {}),
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Telegram sendPhoto failed: ${await res.text()}`);
   }
 
   return res.json();

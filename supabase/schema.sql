@@ -216,3 +216,25 @@ create index if not exists telegram_login_sessions_token_idx
   on public.telegram_login_sessions (session_token);
 
 alter table public.telegram_login_sessions enable row level security;
+
+-- ─────────────────────────────────────────────
+-- telegram_vocab_sessions — tracks a user's in-progress Learn/Quiz/Spelling
+-- vocab session inside the Telegram bot between stateless webhook calls.
+-- One row per user (Telegram is one active chat per user). Server-only:
+-- no RLS policies, only the service role key may read/write this table.
+-- ─────────────────────────────────────────────
+create table if not exists public.telegram_vocab_sessions (
+  user_id uuid primary key references public.users (id) on delete cascade,
+  chat_id text not null,
+  word_ids text[] not null,
+  stage text not null default 'learn' check (stage in ('learn', 'quiz', 'spelling')),
+  index int not null default 0,
+  quiz_option_ids text[],
+  card_message_id bigint,
+  session_xp int not null default 0,
+  session_mastered int not null default 0,
+  session_correct_spelling int not null default 0,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.telegram_vocab_sessions enable row level security;

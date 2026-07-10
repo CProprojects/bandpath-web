@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Zap, Flame, FileCheck2, GraduationCap, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
+import { GoalForm } from "@/components/GoalForm";
 import { createClient } from "@/lib/supabase/server";
 import { getTestById } from "@/lib/tests";
 import { getAllVocabTestIds, getWordsForTest } from "@/lib/vocab";
@@ -19,7 +20,7 @@ export default async function ProfilePage() {
   const [{ data: profile }, { data: results }, { data: vocabProgress }] = await Promise.all([
     supabase
       .from("users")
-      .select("name, full_name, telegram_id, plan, xp_total, streak_count, created_at")
+      .select("name, full_name, telegram_id, plan, xp_total, streak_count, created_at, exam_date, target_band")
       .eq("id", user.id)
       .single(),
     supabase
@@ -101,6 +102,10 @@ export default async function ProfilePage() {
       <p className="mt-4 text-sm text-white/40">
         {readingCount} reading · {listeningCount} listening
       </p>
+
+      <div className="mt-6">
+        <GoalForm initialExamDate={profile?.exam_date ?? null} initialTargetBand={profile?.target_band ?? null} />
+      </div>
 
       <h2 className="mt-8 text-[11px] font-bold uppercase tracking-wider text-white/45">
         Test History

@@ -87,6 +87,15 @@ body:not(.dark) #start-btn{color:#fff;background:linear-gradient(120deg,#0090c4,
 .sbtn:hover{border-color:var(--accent)}
 .sbtn.active{border-color:var(--accent);background:var(--accent);color:#fff}
 .sbtn-fs{min-width:34px;text-align:center}
+.mode-select{margin-bottom:24px}
+.mode-select-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;text-align:left}
+.mode-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mode-btn{border:2px solid var(--border);background:var(--bg2);border-radius:14px;padding:14px 12px;cursor:pointer;font-family:inherit;text-align:left;transition:all .15s}
+.mode-btn:hover{border-color:var(--accent)}
+.mode-btn.active{border-color:var(--accent);background:var(--bg3)}
+.mode-btn-title{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:var(--text)}
+.mode-btn.active .mode-btn-title{color:var(--accent)}
+.mode-btn-sub{display:block;margin-top:4px;font-size:11.5px;color:var(--text2);line-height:1.4}
 
 /* MAIN LAYOUT */
 #main{margin-top:54px;display:flex;height:calc(100vh - 98px);overflow:hidden}
@@ -304,8 +313,21 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
       <div class="info-card"><div class="info-val">40</div><div class="info-lbl">Questions</div></div>
       <div class="info-card"><div class="info-val">~30</div><div class="info-lbl">Minutes</div></div>
     </div>
+    <div class="mode-select">
+      <div class="mode-select-label">Choose your mode</div>
+      <div class="mode-row">
+        <button class="mode-btn active" id="mode-btn-exam" type="button" onclick="setTestMode('exam',this)">
+          <div class="mode-btn-title"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/></svg>Exam Mode</div>
+          <span class="mode-btn-sub">Real test conditions &mdash; each section plays once</span>
+        </button>
+        <button class="mode-btn" id="mode-btn-practice" type="button" onclick="setTestMode('practice',this)">
+          <div class="mode-btn-title"><svg class="ic" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H4.2"/></svg>Practice Mode</div>
+          <span class="mode-btn-sub">Replay, pause &amp; seek anytime</span>
+        </button>
+      </div>
+    </div>
     <div class="start-rules">
-      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Each audio section plays <strong>ONCE only</strong> — listen carefully.</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span id="rule-mode-desc">Each audio section plays <strong>ONCE only</strong> — listen carefully.</span></p>
       <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Press Play on the left panel when you are ready for each section.</span></p>
       <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Answer questions while listening or immediately after.</span></p>
       <p><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span>Flag questions to revisit — use the palette bar at the bottom.</span></p>
@@ -550,6 +572,7 @@ const BAND_TABLE=[
 // ─────────────────────────────────────────────
 let currentSection=0, userAnswers={}, flags={}, timerSec=1800,
     timerInt=null, testDone=false, reviewModeOn=false;
+let testMode='exam';
 let audioElements=[null,null,null,null];
 const AUDIO_BASE='https://sgglqnsujxgdbwmxzgdh.supabase.co/storage/v1/object/public/audio/';
 let audioURLs=[
@@ -599,6 +622,16 @@ function isCorrect(qid,ua){
 // ─────────────────────────────────────────────
 // BEGIN TEST
 // ─────────────────────────────────────────────
+function setTestMode(mode,btn){
+  testMode=mode;
+  document.getElementById('mode-btn-exam').classList.toggle('active',mode==='exam');
+  document.getElementById('mode-btn-practice').classList.toggle('active',mode==='practice');
+  const rd=document.getElementById('rule-mode-desc');
+  if(rd)rd.innerHTML=mode==='exam'
+    ? 'Each audio section plays <strong>ONCE only</strong> — listen carefully.'
+    : 'Practice mode: replay, pause, and seek each section as many times as you like.';
+}
+
 function beginTest(){
   document.getElementById('start-screen').style.display='none';
   loadSaved();
@@ -611,6 +644,7 @@ function beginTest(){
 }
 
 function loadSaved(){
+  try{const md=localStorage.getItem('ielts_'+TEST_ID+'_mode');if(md)testMode=md;}catch(e){}
   try{const s=localStorage.getItem('ielts_'+TEST_ID+'_answers');if(s)userAnswers=JSON.parse(s);}catch(e){}
   try{const f=localStorage.getItem('ielts_'+TEST_ID+'_flags');if(f)flags=JSON.parse(f);}catch(e){}
   try{const n=localStorage.getItem('ielts_'+TEST_ID+'_notes');if(n)document.getElementById('notes-ta').value=n;}catch(e){}
@@ -619,6 +653,7 @@ function loadSaved(){
   try{const sd=localStorage.getItem('ielts_'+TEST_ID+'_done');if(sd)sectionDone=JSON.parse(sd);}catch(e){}
 }
 function saveAll(){
+  try{localStorage.setItem('ielts_'+TEST_ID+'_mode',testMode);}catch(e){}
   try{
     localStorage.setItem('ielts_'+TEST_ID+'_answers',JSON.stringify(userAnswers));
     localStorage.setItem('ielts_'+TEST_ID+'_flags',JSON.stringify(flags));
@@ -640,24 +675,36 @@ function initAudio(idx,src){
   const pr=document.getElementById('prog-'+idx);
   const prb=document.getElementById('progbar-'+idx);
   const at=document.getElementById('aptime-'+idx);
-  if(sectionPlayed[idx]||sectionDone[idx]){
+  if(testMode==='exam'&&(sectionPlayed[idx]||sectionDone[idx])){
     st.className='ap-status done';st.textContent='Already played';
     pb.disabled=true;sb.disabled=true;
     return;
   }
   st.className='ap-status ready';st.textContent='Ready';
   pb.disabled=false;
+  if(testMode==='practice')document.getElementById('replay-warn-'+idx).style.display='none';
   audio.ontimeupdate=()=>{
     if(audio.duration){
       prb.style.width=(audio.currentTime/audio.duration*100)+'%';
       at.textContent=fmtTime(audio.currentTime)+' / '+fmtTime(audio.duration);
     }
   };
+  pr.onclick=(e)=>{
+    if(testMode!=='practice'||!audio.duration)return;
+    const rect=pr.getBoundingClientRect();
+    const ratio=Math.min(1,Math.max(0,(e.clientX-rect.left)/rect.width));
+    audio.currentTime=ratio*audio.duration;
+  };
   audio.onended=()=>{
     sectionDone[idx]=true;
-    st.className='ap-status done';st.textContent='Completed ✓';
-    pb.disabled=true;sb.disabled=true;
-    document.getElementById('replay-warn-'+idx).style.display='none';
+    if(testMode==='exam'){
+      st.className='ap-status done';st.textContent='Completed ✓';
+      pb.disabled=true;sb.disabled=true;
+      document.getElementById('replay-warn-'+idx).style.display='none';
+    }else{
+      st.className='ap-status ready';st.textContent='Finished — Play to replay';
+      pb.disabled=false;sb.disabled=true;
+    }
     saveAll();
     updateTabDone(idx);
   };
@@ -668,11 +715,12 @@ function initAudio(idx,src){
 function playSection(idx){
   const audio=audioElements[idx];
   if(!audio)return;
-  if(sectionPlayed[idx]){
+  if(testMode==='exam'&&sectionPlayed[idx]){
     alert('This section has already been played. Each section plays once only.');return;
   }
   // Stop any other playing
-  audioElements.forEach((a,i)=>{if(a&&i!==idx&&!a.paused){a.pause();a.currentTime=0;updatePlayerStopped(i);}});
+  audioElements.forEach((a,i)=>{if(a&&i!==idx&&!a.paused){a.pause();if(testMode==='exam')a.currentTime=0;updatePlayerStopped(i);}});
+  if(testMode==='practice'&&audio.ended)audio.currentTime=0;
   sectionPlayed[idx]=true;
   saveAll();
   const pb=document.getElementById('playbtn-'+idx);
@@ -686,7 +734,7 @@ function playSection(idx){
   sb.disabled=false;
   pr.style.display='block';
   at.style.display='block';
-  rw.style.display='block';
+  if(testMode==='exam')rw.style.display='block';
   audio.play().catch(e=>console.log(e));
   // Switch to correct section if not there
   if(currentSection!==idx)switchSection(idx);
@@ -702,9 +750,14 @@ function updatePlayerStopped(idx){
   const st=document.getElementById('status-'+idx);
   const pb=document.getElementById('playbtn-'+idx);
   const sb=document.getElementById('stopbtn-'+idx);
-  if(sectionDone[idx]){st.className='ap-status done';st.textContent='Completed ✓';pb.disabled=true;sb.disabled=true;return;}
-  if(sectionPlayed[idx]){st.className='ap-status done';st.textContent='Stopped (played once)';pb.disabled=true;sb.disabled=true;return;}
-  st.className='ap-status ready';st.textContent='Ready';
+  if(testMode==='exam'){
+    if(sectionDone[idx]){st.className='ap-status done';st.textContent='Completed ✓';pb.disabled=true;sb.disabled=true;return;}
+    if(sectionPlayed[idx]){st.className='ap-status done';st.textContent='Stopped (played once)';pb.disabled=true;sb.disabled=true;return;}
+    st.className='ap-status ready';st.textContent='Ready';
+    pb.disabled=false;sb.disabled=true;
+    return;
+  }
+  st.className='ap-status ready';st.textContent=sectionPlayed[idx]?'Paused — Play to resume':'Ready';
   pb.disabled=false;sb.disabled=true;
 }
 

@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { openTelegramDeepLink } from "@/lib/telegramDeepLink";
 
 type Stage = "idle" | "waiting" | "verifying";
 
@@ -10,22 +9,43 @@ export function TelegramLoginBox() {
   const router = useRouter();
   const [stage, setStage] = useState<Stage>("idle");
   const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [deepLink, setDeepLink] = useState<string | null>(null);
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   async function startTelegramLogin() {
     setError(null);
+
+    // Safari only trusts window.open()/navigation as user-initiated when it
+    // happens synchronously inside the click handler — the `await fetch`
+    // below breaks that on desktop Safari and the popup gets silently
+    // blocked. Opening a blank tab now (still inside the click) and pointing
+    // it at the real link once we have it keeps it tied to the gesture.
+    // Same-tab mobile navigation isn't subject to the popup blocker.
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const pending = isMobile ? null : window.open("", "_blank");
+
     const res = await fetch("/api/auth/telegram/start", { method: "POST" });
     const data = await res.json();
 
     if (!res.ok) {
+      pending?.close();
       setError(data.error || "Could not start Telegram login.");
       return;
     }
 
     setSessionToken(data.sessionToken);
+    setDeepLink(data.deepLink);
     setStage("waiting");
-    openTelegramDeepLink(data.deepLink);
+
+    if (isMobile) {
+      window.location.href = data.deepLink;
+    } else if (pending) {
+      pending.location.href = data.deepLink;
+    } else {
+      // Safari blocked even the blank-tab open — fall back to same-tab.
+      window.open(data.deepLink, "_blank");
+    }
   }
 
   async function verifyCode(e: React.FormEvent) {
@@ -76,6 +96,16 @@ export function TelegramLoginBox() {
             Telegram should have opened to our bot — press <strong>Start</strong> there,
             then come back here and type the code it sends you.
           </p>
+          {deepLink && (
+            <a
+              href={deepLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold text-bp-accent underline underline-offset-2"
+            >
+              Didn&apos;t open automatically? Tap here to open Telegram
+            </a>
+          )}
           <input
             required
             inputMode="numeric"

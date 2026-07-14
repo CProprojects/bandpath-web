@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Send, AlertTriangle } from "lucide-react";
+import { Send, AlertTriangle, Clock, Settings, ShieldAlert } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { WritingChart } from "@/components/WritingChart";
 import type { WritingTestMeta } from "@/lib/writingTests";
+
+const FONT_SIZES = [15, 18, 22] as const;
 
 function wordCount(text: string) {
   return text.trim() ? text.trim().split(/\s+/).length : 0;
@@ -34,6 +36,8 @@ export function WritingTestRunner({ test }: { test: WritingTestMeta }) {
   const [confirming, setConfirming] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [fontSize, setFontSize] = useState<number>(FONT_SIZES[0]);
   const startTimeRef = useRef<number>(Date.now());
   const hasSubmittedRef = useRef(false);
 
@@ -62,6 +66,17 @@ export function WritingTestRunner({ test }: { test: WritingTestMeta }) {
   useEffect(() => {
     localStorage.setItem(storageKey("task2"), task2);
   }, [task2]);
+
+  const settingsRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (settingsRef.current && !settingsRef.current.contains(e.target as Node)) {
+        setSettingsOpen(false);
+      }
+    }
+    if (settingsOpen) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [settingsOpen]);
 
   const submit = useRef<() => void>(() => {});
 
@@ -139,19 +154,57 @@ export function WritingTestRunner({ test }: { test: WritingTestMeta }) {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-bp-bg">
-      <header className="flex flex-shrink-0 flex-wrap items-center justify-between gap-3 border-b border-bp-border px-4 py-3 sm:px-6">
+      <header className="relative flex flex-shrink-0 flex-wrap items-center justify-between gap-3 border-b border-bp-border px-4 py-3 sm:px-6">
         <Logo size={30} />
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div
             className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm font-bold tabular-nums ${
               critical
-                ? "border-bp-danger/50 bg-bp-danger/20 text-bp-danger"
+                ? "animate-pulse border-bp-danger/50 bg-bp-danger/20 text-bp-danger"
                 : warn
                   ? "border-bp-warning/40 bg-bp-warning/15 text-bp-warning"
-                  : "border-bp-border bg-bp-card/60 text-white/80"
+                  : "border-bp-danger/35 bg-bp-danger/15 text-bp-danger/90"
             }`}
           >
+            <Clock className="h-3.5 w-3.5 opacity-85" />
             {formatTime(secondsLeft)}
+          </div>
+          <div ref={settingsRef} className="contents">
+            <button
+              onClick={() => setSettingsOpen((v) => !v)}
+              title="Settings"
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-white transition-colors hover:bg-bp-accent/20"
+            >
+              <Settings className="h-4 w-4" />
+            </button>
+            {settingsOpen && (
+              <div className="absolute right-4 top-[58px] z-[2000] min-w-[210px] rounded-xl border border-bp-border bg-bp-card p-4 shadow-[0_8px_30px_rgba(0,0,0,0.35)] sm:right-6">
+                <h3 className="border-b border-bp-border pb-2.5 text-[13px] font-bold uppercase tracking-wide text-white">
+                  Settings
+                </h3>
+                <div className="mt-3">
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wide text-white/40">
+                    Font Size
+                  </label>
+                  <div className="flex gap-2">
+                    {FONT_SIZES.map((size, i) => (
+                      <button
+                        key={size}
+                        onClick={() => setFontSize(size)}
+                        style={{ fontSize: 12 + i * 4 }}
+                        className={`flex-1 rounded-lg border-2 py-1.5 font-bold transition-colors ${
+                          fontSize === size
+                            ? "border-bp-accent bg-bp-accent/15 text-bp-accent"
+                            : "border-bp-border text-white/60 hover:text-white"
+                        }`}
+                      >
+                        A
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <button
             onClick={() => setConfirming(true)}
@@ -183,26 +236,42 @@ export function WritingTestRunner({ test }: { test: WritingTestMeta }) {
         <div className="mx-auto flex max-w-3xl flex-col gap-5">
           {activeTask === 1 ? (
             <>
-              <p className="text-sm leading-relaxed text-white/70">{test.task1Prompt}</p>
+              <p className="leading-relaxed text-white/70" style={{ fontSize }}>
+                {test.task1Prompt}
+              </p>
               <WritingChart data={test.task1Chart} />
               <TaskEditor
                 value={task1}
                 onChange={setTask1}
                 minWords={test.task1MinWords}
                 placeholder="Write your Task 1 response here…"
+                fontSize={fontSize}
               />
             </>
           ) : (
             <>
-              <p className="text-sm leading-relaxed text-white/70">{test.task2Prompt}</p>
+              <p className="leading-relaxed text-white/70" style={{ fontSize }}>
+                {test.task2Prompt}
+              </p>
               <TaskEditor
                 value={task2}
                 onChange={setTask2}
                 minWords={test.task2MinWords}
                 placeholder="Write your Task 2 response here…"
+                fontSize={fontSize}
               />
             </>
           )}
+
+          <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-dashed border-bp-border bg-bp-card/30 p-3.5">
+            <ShieldAlert className="mt-0.5 h-4 w-4 flex-shrink-0 text-white/30" />
+            <p className="text-[11.5px] leading-relaxed text-white/40">
+              This is an independent IELTS Academic Writing practice test created by BandPath. It is not
+              affiliated with, endorsed by, or connected to IELTS, the British Council, IDP Education, or
+              Cambridge Assessment English. Band scores and feedback are generated by AI for practice purposes
+              only and may not match your official IELTS Writing result.
+            </p>
+          </div>
         </div>
       </main>
 
@@ -253,11 +322,13 @@ function TaskEditor({
   onChange,
   minWords,
   placeholder,
+  fontSize,
 }: {
   value: string;
   onChange: (v: string) => void;
   minWords: number;
   placeholder: string;
+  fontSize: number;
 }) {
   const count = wordCount(value);
   const underMin = count < minWords;
@@ -269,7 +340,8 @@ function TaskEditor({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={14}
-        className="w-full resize-y rounded-2xl border border-bp-border bg-bp-card/60 p-4 text-sm leading-relaxed text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
+        style={{ fontSize }}
+        className="w-full resize-y rounded-2xl border border-bp-border bg-bp-card/60 p-4 leading-relaxed text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
       />
       <div className="mt-2 flex items-center gap-1.5 text-xs font-semibold">
         {underMin && <AlertTriangle className="h-3.5 w-3.5 text-bp-warning" />}

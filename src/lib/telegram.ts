@@ -6,7 +6,7 @@ export type InlineKeyboard = { inline_keyboard: InlineButton[][] };
 export async function sendTelegramMessage(
   chatId: number | string,
   text: string,
-  options?: { replyMarkup?: InlineKeyboard },
+  options?: { replyMarkup?: InlineKeyboard; parseMode?: "HTML" },
 ) {
   const res = await fetch(`${TELEGRAM_API}/sendMessage`, {
     method: "POST",
@@ -15,6 +15,7 @@ export async function sendTelegramMessage(
       chat_id: chatId,
       text,
       ...(options?.replyMarkup ? { reply_markup: options.replyMarkup } : {}),
+      ...(options?.parseMode ? { parse_mode: options.parseMode } : {}),
     }),
   });
 

@@ -61,9 +61,14 @@ export async function POST(request: NextRequest) {
 // Safe Telegram API wrappers — a failed outbound call must never turn the
 // webhook response into a non-200 (Telegram retries aggressively on that).
 // ─────────────────────────────────────────────
-async function safeSend(chatId: number | string, text: string, replyMarkup?: InlineKeyboard) {
+async function safeSend(
+  chatId: number | string,
+  text: string,
+  replyMarkup?: InlineKeyboard,
+  parseMode?: "HTML",
+) {
   try {
-    return await sendTelegramMessage(chatId, text, replyMarkup ? { replyMarkup } : undefined);
+    return await sendTelegramMessage(chatId, text, { replyMarkup, parseMode });
   } catch (e) {
     console.error("[telegram] sendMessage failed:", e);
     return null;
@@ -154,7 +159,12 @@ async function handleStart(admin: SupabaseClient, message: TelegramMessage) {
     })
     .eq("session_token", sessionToken);
 
-  await safeSend(message.chat.id, `Your BandPath login code is: ${code}\n\nEnter it on the website to finish logging in.`);
+  await safeSend(
+    message.chat.id,
+    `Your BandPath login code is:\n\n<code>${code}</code>\n\nTap the code to copy it, then enter it on the website to finish logging in.`,
+    undefined,
+    "HTML",
+  );
 }
 
 // ─────────────────────────────────────────────

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   title: "BandPath — Your smartest path to IELTS Band 7+",
   description:
     "IELTS Academic prep platform with real mock tests, spaced-repetition vocabulary, and band score tracking.",
+};
+
+// colorScheme tells browsers this site is intentionally dark, so browsers
+// with a "force dark mode for all sites" feature (Samsung Internet, some
+// Yandex Browser builds) don't double-invert our already-dark theme.
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#0f2744",
 };
 
 export default function RootLayout({

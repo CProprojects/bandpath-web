@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
 <title>BandPath — IELTS Academic Reading Mock Test 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +42,7 @@ svg.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
 /* START SCREEN */
 #start-screen{position:fixed;inset:0;background:radial-gradient(120% 90% at 50% -10%,#123558 0%,#0c2038 55%,#0a1a30 100%);z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #start-screen::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(0,196,255,.22),transparent 65%);filter:blur(10px);pointer-events:none}
-.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);backdrop-filter:blur(12px)}
+.start-box{position:relative;background:var(--card-grad);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:44px 48px;max-width:560px;width:90%;text-align:center;box-shadow:0 40px 90px -30px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.03);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 body:not(.dark) .start-box{background:var(--bg);box-shadow:0 24px 64px rgba(15,39,68,.28)}
 .start-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
 .start-brand-badge{width:56px;height:56px;border-radius:17px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#0e2c49,#0a2036);border:1px solid rgba(0,196,255,.32);box-shadow:0 0 34px -8px rgba(0,196,255,.6)}
@@ -261,14 +262,14 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
 /* DARK PREMIUM GLASS */
 body.dark #passage-panel{background:transparent}
 body.dark #questions-panel{background:rgba(10,29,51,.35)}
-body.dark .q-block{background:var(--card-grad);border-color:var(--border);backdrop-filter:blur(6px)}
+body.dark .q-block{background:var(--card-grad);border-color:var(--border);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 body.dark .q-block:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.6)}
 body.dark .q-block.answered{box-shadow:inset 4px 0 0 var(--accent2),0 0 0 1px rgba(46,213,115,.12)}
 body.dark .q-input,body.dark .tfng-btn{background:rgba(10,29,51,.5)}
 body.dark .word-bank,body.dark .person-bank{background:rgba(10,29,51,.4)}
 body.dark .wb-item,body.dark .pb-item{background:rgba(22,45,74,.6)}
-body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);backdrop-filter:blur(14px)}
-body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
+body.dark #palette-bar{background:rgba(10,29,51,.85);border-top:1px solid var(--border);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+body.dark #settings-panel,body.dark #notes-box,body.dark #ctx-menu{background:var(--card-grad);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 16px 40px -12px rgba(0,0,0,.7)}
 body.dark .info-card,body.dark .stat-card,body.dark .p-card,body.dark .review-card{background:var(--card-grad)}
 body.dark .q-input:focus{box-shadow:0 0 0 3px rgba(0,196,255,.18)}
 body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}

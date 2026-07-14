@@ -20,7 +20,7 @@ export default async function ProgressPage() {
   const thirtyFiveDaysAgo = new Date();
   thirtyFiveDaysAgo.setDate(thirtyFiveDaysAgo.getDate() - 34);
 
-  const [{ data: results }, { data: activity }] = await Promise.all([
+  const [{ data: results }, { data: activity }, { data: writingResults }] = await Promise.all([
     supabase
       .from("test_results")
       .select("test_type, score_band, completed_at, question_results_json")
@@ -31,6 +31,12 @@ export default async function ProgressPage() {
       .select("date, tests_completed, words_reviewed")
       .eq("user_id", user.id)
       .gte("date", thirtyFiveDaysAgo.toISOString().slice(0, 10)),
+    supabase
+      .from("writing_submissions")
+      .select("overall_band, completed_at")
+      .eq("user_id", user.id)
+      .eq("status", "graded")
+      .order("completed_at", { ascending: true }),
   ]);
 
   const toPoints = (type: "reading" | "listening") =>
@@ -44,6 +50,14 @@ export default async function ProgressPage() {
 
   const readingPoints = toPoints("reading");
   const listeningPoints = toPoints("listening");
+
+  const writingPoints = (writingResults ?? [])
+    .filter((r): r is typeof r & { overall_band: number } => r.overall_band != null)
+    .slice(-8)
+    .map((r) => ({
+      date: new Date(r.completed_at).toLocaleDateString(undefined, { month: "numeric", day: "numeric" }),
+      band: r.overall_band,
+    }));
 
   const questionResults: QuestionResult[] = (results ?? []).flatMap(
     (r) => (r.question_results_json as QuestionResult[] | null) ?? [],
@@ -63,6 +77,7 @@ export default async function ProgressPage() {
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <BandTrendChart title="Reading Band Trend" points={readingPoints} color="accent" gradientId="bp-progress-reading" />
         <BandTrendChart title="Listening Band Trend" points={listeningPoints} color="success" gradientId="bp-progress-listening" />
+        <BandTrendChart title="Writing Band Trend" points={writingPoints} color="warning" gradientId="bp-progress-writing" />
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">

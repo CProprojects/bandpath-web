@@ -1,0 +1,163 @@
+import { notFound, redirect } from "next/navigation";
+import { Clock, PenLine } from "lucide-react";
+import { AppShell } from "@/components/AppShell";
+import { createClient } from "@/lib/supabase/server";
+import { getWritingTestById } from "@/lib/writingTests";
+
+type CriterionFeedback = { band: number; feedback: string };
+type TaskFeedback = {
+  task_achievement: CriterionFeedback;
+  coherence_cohesion: CriterionFeedback;
+  lexical_resource: CriterionFeedback;
+  grammatical_range: CriterionFeedback;
+  band: number;
+};
+
+const CRITERIA: { key: keyof Omit<TaskFeedback, "band">; label: string }[] = [
+  { key: "task_achievement", label: "Task Achievement / Response" },
+  { key: "coherence_cohesion", label: "Coherence & Cohesion" },
+  { key: "lexical_resource", label: "Lexical Resource" },
+  { key: "grammatical_range", label: "Grammatical Range & Accuracy" },
+];
+
+export default async function WritingResultDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  const { data: submission } = await supabase
+    .from("writing_submissions")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .single();
+
+  if (!submission) {
+    notFound();
+  }
+
+  const test = getWritingTestById(submission.test_id);
+
+  if (submission.status === "grading") {
+    return (
+      <AppShell active="/tests">
+        <h1 className="text-2xl font-bold text-white md:text-3xl">{test?.title ?? submission.test_id}</h1>
+        <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-bp-border bg-bp-card/60 p-10 text-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-bp-accent border-t-transparent" />
+          <p className="text-white/60">Still grading — check back in a moment.</p>
+        </div>
+      </AppShell>
+    );
+  }
+
+  if (submission.status === "failed") {
+    return (
+      <AppShell active="/tests">
+        <h1 className="text-2xl font-bold text-white md:text-3xl">{test?.title ?? submission.test_id}</h1>
+        <div className="mt-8 rounded-2xl border border-bp-danger/30 bg-bp-danger/10 p-6 text-center">
+          <p className="text-bp-danger">Grading failed for this submission. Please retake the test and submit again.</p>
+        </div>
+      </AppShell>
+    );
+  }
+
+  const task1: TaskFeedback = submission.task1_feedback;
+  const task2: TaskFeedback = submission.task2_feedback;
+
+  return (
+    <AppShell active="/tests">
+      <h1 className="text-2xl font-bold text-white md:text-3xl">{test?.title ?? submission.test_id}</h1>
+      <p className="mt-1 text-sm text-white/40">
+        Completed {new Date(submission.completed_at).toLocaleString()}
+      </p>
+
+      <div className="relative mt-6 flex flex-col items-center overflow-hidden rounded-2xl border border-bp-accent/20 bg-gradient-to-br from-bp-accent/10 to-bp-card/70 p-8">
+        <div
+          className="pointer-events-none absolute left-1/2 top-6 h-56 w-56 -translate-x-1/2 rounded-full opacity-60 blur-2xl"
+          style={{ background: "radial-gradient(circle, rgba(0,196,255,.22), transparent 65%)" }}
+        />
+        <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-4 border-bp-accent text-4xl font-extrabold text-bp-accent shadow-[0_0_36px_-6px_rgba(0,196,255,0.6)]">
+          {submission.overall_band?.toFixed(1) ?? "—"}
+        </div>
+        <div className="relative mt-2 text-sm text-white/50">Overall Writing Band</div>
+      </div>
+
+      <div className="mt-4 grid grid-cols-3 gap-3">
+        <Stat label="Task 1" value={submission.task1_band?.toFixed(1) ?? "—"} />
+        <Stat label="Task 2" value={submission.task2_band?.toFixed(1) ?? "—"} />
+        <Stat
+          icon={<Clock className="mx-auto h-4 w-4" />}
+          label="Time"
+          value={submission.time_spent_seconds ? `${Math.round(submission.time_spent_seconds / 60)} min` : "—"}
+        />
+      </div>
+
+      <TaskBreakdown title="Task 1" feedback={task1} response={submission.task1_response} wordCount={submission.task1_word_count} />
+      <TaskBreakdown title="Task 2" feedback={task2} response={submission.task2_response} wordCount={submission.task2_word_count} />
+    </AppShell>
+  );
+}
+
+function Stat({ icon, label, value }: { icon?: React.ReactNode; label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-bp-border bg-gradient-to-br to-bp-card/60 p-4 text-center">
+      {icon ?? <PenLine className="mx-auto h-4 w-4 text-bp-accent" />}
+      <div className="mt-1 text-2xl font-extrabold tracking-tight text-white">{value}</div>
+      <div className="mt-1 text-[10px] font-semibold text-white/50">{label}</div>
+    </div>
+  );
+}
+
+function TaskBreakdown({
+  title,
+  feedback,
+  response,
+  wordCount,
+}: {
+  title: string;
+  feedback: TaskFeedback;
+  response: string;
+  wordCount: number;
+}) {
+  return (
+    <div className="mt-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-[11px] font-bold uppercase tracking-wider text-white/45">{title}</h2>
+        <span className="text-lg font-bold text-bp-success">{feedback.band?.toFixed(1) ?? "—"}</span>
+      </div>
+
+      <div className="mt-3 flex flex-col gap-2">
+        {CRITERIA.map(({ key, label }) => {
+          const c = feedback[key];
+          return (
+            <div key={key} className="rounded-2xl border border-bp-border bg-bp-card/60 p-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-white">{label}</span>
+                <span className="text-sm font-bold text-bp-accent">{c.band?.toFixed(1) ?? "—"}</span>
+              </div>
+              <p className="mt-1.5 text-sm text-white/60">{c.feedback}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <details className="mt-3 rounded-2xl border border-bp-border bg-bp-card/40 p-4">
+        <summary className="cursor-pointer text-sm font-semibold text-white/60">
+          Your response ({wordCount} words)
+        </summary>
+        <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-white/70">{response}</p>
+      </details>
+    </div>
+  );
+}

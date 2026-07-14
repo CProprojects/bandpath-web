@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { TestRunner } from "@/components/TestRunner";
+import { WritingTestRunner } from "@/components/WritingTestRunner";
 import { createClient } from "@/lib/supabase/server";
 import { getTestById } from "@/lib/tests";
+import { getWritingTestById } from "@/lib/writingTests";
 
 export default async function TestRunnerPage({
   params,
@@ -10,10 +12,13 @@ export default async function TestRunnerPage({
 }) {
   const { id } = await params;
   const test = getTestById(id);
+  const writingTest = test ? null : getWritingTestById(id);
 
-  if (!test) {
+  if (!test && !writingTest) {
     redirect("/tests");
   }
+
+  const requiresPro = test?.requiresPro ?? writingTest!.requiresPro;
 
   const supabase = await createClient();
   const {
@@ -24,7 +29,7 @@ export default async function TestRunnerPage({
     redirect("/login");
   }
 
-  if (test.requiresPro) {
+  if (requiresPro) {
     const { data: profile } = await supabase
       .from("users")
       .select("plan")
@@ -36,5 +41,9 @@ export default async function TestRunnerPage({
     }
   }
 
-  return <TestRunner testId={test.id} testFile={test.file} />;
+  if (writingTest) {
+    return <WritingTestRunner test={writingTest} />;
+  }
+
+  return <TestRunner testId={test!.id} testFile={test!.file} />;
 }

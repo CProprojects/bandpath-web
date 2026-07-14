@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { BookOpen, Headphones, Lock } from "lucide-react";
+import { BookOpen, Headphones, PenLine, Lock } from "lucide-react";
 
 export type TestCardData = {
   id: string;
   title: string;
-  type: "reading" | "listening";
+  type: "reading" | "listening" | "writing";
   questionCount: number;
   durationMinutes: number;
   difficulty: string;
@@ -15,7 +15,25 @@ export type TestCardData = {
   bestBand: number | undefined;
 };
 
-type Filter = "all" | "reading" | "listening";
+type Filter = "all" | "reading" | "listening" | "writing";
+
+const TYPE_STYLES = {
+  reading: {
+    Icon: BookOpen,
+    border: "border-bp-accent/15 hover:border-bp-accent/40",
+    iconBg: "bg-gradient-to-br from-bp-accent/20 to-bp-accent/5 text-bp-accent",
+  },
+  listening: {
+    Icon: Headphones,
+    border: "border-bp-warning/15 hover:border-bp-warning/40",
+    iconBg: "bg-gradient-to-br from-bp-warning/20 to-bp-warning/5 text-bp-warning",
+  },
+  writing: {
+    Icon: PenLine,
+    border: "border-bp-success/15 hover:border-bp-success/40",
+    iconBg: "bg-gradient-to-br from-bp-success/20 to-bp-success/5 text-bp-success",
+  },
+} as const;
 
 export function TestsGrid({ tests }: { tests: TestCardData[] }) {
   const [filter, setFilter] = useState<Filter>("all");
@@ -24,8 +42,8 @@ export function TestsGrid({ tests }: { tests: TestCardData[] }) {
 
   return (
     <div>
-      <div className="mt-6 flex gap-2">
-        {(["reading", "listening", "all"] as const).map((f) => (
+      <div className="mt-6 flex flex-wrap gap-2">
+        {(["reading", "listening", "writing", "all"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
@@ -42,32 +60,23 @@ export function TestsGrid({ tests }: { tests: TestCardData[] }) {
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {visible.map((test) => {
-          const Icon = test.type === "reading" ? BookOpen : Headphones;
+          const { Icon, border, iconBg } = TYPE_STYLES[test.type];
 
           const card = (
             <div
               className={`flex items-center gap-4 rounded-2xl border p-4 transition-colors ${
-                test.locked
-                  ? "border-bp-border bg-bp-card/50 opacity-60"
-                  : test.type === "reading"
-                    ? "border-bp-accent/15 bg-bp-card/60 hover:border-bp-accent/40"
-                    : "border-bp-warning/15 bg-bp-card/60 hover:border-bp-warning/40"
+                test.locked ? "border-bp-border bg-bp-card/50 opacity-60" : `${border} bg-bp-card/60`
               }`}
             >
-              <div
-                className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${
-                  test.type === "reading"
-                    ? "bg-gradient-to-br from-bp-accent/20 to-bp-accent/5 text-bp-accent"
-                    : "bg-gradient-to-br from-bp-warning/20 to-bp-warning/5 text-bp-warning"
-                }`}
-              >
+              <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${iconBg}`}>
                 <Icon className="h-6 w-6" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="font-semibold text-white">{test.title}</div>
                 <div className="mt-1 flex items-center gap-2 text-xs text-white/40">
                   <span>
-                    {test.questionCount} questions · {test.durationMinutes} min
+                    {test.questionCount} {test.type === "writing" ? "tasks" : "questions"} ·{" "}
+                    {test.durationMinutes} min
                   </span>
                   <span className="rounded-full bg-bp-success/15 px-2 py-0.5 font-semibold text-bp-success">
                     {test.difficulty}

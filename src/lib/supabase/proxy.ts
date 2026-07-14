@@ -1,7 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PROTECTED_PREFIXES = ["/dashboard", "/tests", "/results", "/upgrade", "/admin", "/vocabulary", "/profile", "/progress"];
+// /admin is intentionally excluded — it has its own password-based session
+// (see requireAdmin()), independent of Telegram/student accounts.
+const PROTECTED_PREFIXES = ["/dashboard", "/tests", "/results", "/upgrade", "/vocabulary", "/profile", "/progress"];
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });

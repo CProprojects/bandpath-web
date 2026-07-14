@@ -1,32 +1,16 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { isAdminTelegramId } from "@/lib/admin";
+import { ADMIN_COOKIE, verifyAdminSessionValue } from "@/lib/adminSession";
 
 const MAX_BYTES = 10 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/gif"];
 
-export async function POST(request: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.json({ error: "Not logged in." }, { status: 401 });
+export async function POST(request: NextRequest) {
+  if (!verifyAdminSessionValue(request.cookies.get(ADMIN_COOKIE)?.value)) {
+    return NextResponse.json({ error: "Not authorized." }, { status: 403 });
   }
 
   const admin = createAdminClient();
-
-  const { data: profile } = await admin
-    .from("users")
-    .select("telegram_id")
-    .eq("id", user.id)
-    .single();
-
-  if (!isAdminTelegramId(profile?.telegram_id)) {
-    return NextResponse.json({ error: "Not authorized." }, { status: 403 });
-  }
 
   const formData = await request.formData();
   const file = formData.get("file");

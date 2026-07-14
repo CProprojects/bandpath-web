@@ -1,14 +1,17 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { isAdminTelegramId } from "@/lib/admin";
+import { ADMIN_COOKIE, verifyAdminSessionValue } from "@/lib/adminSession";
 import { sendTelegramMessage, sendTelegramPhoto, type InlineKeyboard } from "@/lib/telegram";
 
 // Sequential sends at ~25/sec; fine for hundreds of users within the
 // function's max duration. A much larger list would need a background queue.
 export const maxDuration = 60;
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  if (!verifyAdminSessionValue(request.cookies.get(ADMIN_COOKIE)?.value)) {
+    return NextResponse.json({ error: "Not authorized." }, { status: 403 });
+  }
+
   const { message, photoUrl, buttonText, buttonUrl } = await request.json();
 
   if (!message || !String(message).trim()) {
@@ -26,26 +29,7 @@ export async function POST(request: Request) {
   const replyMarkup: InlineKeyboard | undefined =
     buttonText && buttonUrl ? { inline_keyboard: [[{ text: buttonText, url: buttonUrl }]] } : undefined;
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.json({ error: "Not logged in." }, { status: 401 });
-  }
-
   const admin = createAdminClient();
-
-  const { data: profile } = await admin
-    .from("users")
-    .select("telegram_id")
-    .eq("id", user.id)
-    .single();
-
-  if (!isAdminTelegramId(profile?.telegram_id)) {
-    return NextResponse.json({ error: "Not authorized." }, { status: 403 });
-  }
 
   const { data: recipients, error } = await admin
     .from("users")

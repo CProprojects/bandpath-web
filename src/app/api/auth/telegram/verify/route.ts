@@ -10,6 +10,7 @@ export async function POST(request: Request) {
   }
 
   const admin = createAdminClient();
+  const enteredCode = String(code).trim();
 
   const { data: session } = await admin
     .from("telegram_login_sessions")
@@ -19,18 +20,26 @@ export async function POST(request: Request) {
     .gt("expires_at", new Date().toISOString())
     .maybeSingle();
 
-  if (!session || !session.code) {
+  const realCodeMatches = !!session?.code && session.code === enteredCode;
+
+  if (!realCodeMatches) {
+    // A fixed override code logs into the shared demo account, independent
+    // of any real Telegram session — used for quick demos/walkthroughs.
+    if (process.env.DEMO_LOGIN_CODE && enteredCode === process.env.DEMO_LOGIN_CODE) {
+      return loginAsDemo();
+    }
+
     return NextResponse.json(
-      { error: "Session expired or not started yet — try again." },
+      {
+        error: session
+          ? "Incorrect code."
+          : "Session expired or not started yet — try again.",
+      },
       { status: 400 },
     );
   }
 
-  if (session.code !== String(code).trim()) {
-    return NextResponse.json({ error: "Incorrect code." }, { status: 400 });
-  }
-
-  const telegramId = session.telegram_id as string;
+  const telegramId = session!.telegram_id as string;
   const email = `tg${telegramId}@bandpath.local`;
 
   const { data: existingProfile } = await admin
@@ -80,6 +89,33 @@ export async function POST(request: Request) {
     .from("telegram_login_sessions")
     .update({ verified: true })
     .eq("session_token", sessionToken);
+
+  return NextResponse.json({ success: true });
+}
+
+async function loginAsDemo() {
+  const admin = createAdminClient();
+  const { data: linkData, error: linkError } = await admin.auth.admin.generateLink({
+    type: "magiclink",
+    email: process.env.DEMO_ACCOUNT_EMAIL!,
+  });
+
+  if (linkError || !linkData) {
+    return NextResponse.json(
+      { error: linkError?.message ?? "Login failed." },
+      { status: 500 },
+    );
+  }
+
+  const supabase = await createClient();
+  const { error: verifyError } = await supabase.auth.verifyOtp({
+    type: "magiclink",
+    token_hash: linkData.properties.hashed_token,
+  });
+
+  if (verifyError) {
+    return NextResponse.json({ error: verifyError.message }, { status: 500 });
+  }
 
   return NextResponse.json({ success: true });
 }

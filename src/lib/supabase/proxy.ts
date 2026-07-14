@@ -34,6 +34,19 @@ export async function updateSession(request: NextRequest) {
   const isProtected = PROTECTED_PREFIXES.some((prefix) =>
     request.nextUrl.pathname.startsWith(prefix),
   );
+  const isRoot = request.nextUrl.pathname === "/";
+
+  // Temporary: DEMO_MODE=true auto-logs visitors into a fixed demo account
+  // instead of sending them to the Telegram login screen, so the bare link
+  // opens straight into the app. Toggle DEMO_MODE off to restore normal
+  // Telegram-only login — nothing below is deleted, only bypassed.
+  if (process.env.DEMO_MODE === "true" && !user && (isProtected || isRoot)) {
+    const demoUrl = request.nextUrl.clone();
+    demoUrl.pathname = "/api/auth/demo";
+    demoUrl.search = "";
+    demoUrl.searchParams.set("next", isRoot ? "/dashboard" : request.nextUrl.pathname);
+    return NextResponse.redirect(demoUrl);
+  }
 
   if (isProtected && !user) {
     const loginUrl = request.nextUrl.clone();

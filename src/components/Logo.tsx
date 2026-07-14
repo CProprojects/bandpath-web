@@ -10,15 +10,14 @@ export function Logo({ size = 40 }: { size?: number }) {
         }}
       >
         <svg viewBox="0 0 40 40" width={size * 0.6} height={size * 0.6}>
-          <path
-            d="M6 32 C 14 30, 18 16, 26 13"
-            fill="none"
-            stroke="#00C4FF"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          <circle cx="29" cy="11" r="6" fill="none" stroke="#00C4FF" strokeWidth="2.5" />
-          <circle cx="29" cy="11" r="2" fill="#00C4FF" />
+          <circle cx="7" cy="32.5" r="2.3" fill="#00C4FF" />
+          <circle cx="10.3" cy="29.2" r="1.3" fill="#00C4FF" />
+          <circle cx="14.4" cy="25.9" r="2.7" fill="#5fdcff" />
+          <circle cx="17.3" cy="23.4" r="1.2" fill="#00C4FF" />
+          <circle cx="20" cy="21.1" r="1.1" fill="#00C4FF" />
+          <circle cx="22.7" cy="18.8" r="1.05" fill="#00C4FF" />
+          <circle cx="27" cy="15" r="6.8" fill="none" stroke="#00C4FF" strokeWidth="2.8" />
+          <circle cx="26" cy="13.3" r="2.6" fill="#00C4FF" />
         </svg>
       </div>
       <span className="text-xl font-extrabold tracking-tight text-white">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, Crown, Loader2 } from "lucide-react";
 
 type UserRow = {
   id: string;
@@ -14,11 +14,28 @@ type UserRow = {
   lastActiveAt: string | null;
 };
 
-type SortKey = "createdAt" | "xpTotal" | "streakCount";
+type SortKey = "createdAt" | "xpTotal" | "streakCount" | "lastActiveAt";
 
-export function UsersTable({ users }: { users: UserRow[] }) {
+function formatLastOnline(iso: string | null) {
+  if (!iso) return "Never active";
+
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const minutes = Math.floor(diffMs / 60_000);
+  const hours = Math.floor(diffMs / 3_600_000);
+  const days = Math.floor(diffMs / 86_400_000);
+
+  if (minutes < 1) return "Online just now";
+  if (minutes < 60) return `Active ${minutes}m ago`;
+  if (hours < 24) return `Active ${hours}h ago`;
+  if (days < 30) return `Active ${days}d ago`;
+  return `Active ${new Date(iso).toLocaleDateString()}`;
+}
+
+export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
+  const [users, setUsers] = useState(initialUsers);
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("createdAt");
+  const [togglingId, setTogglingId] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -33,9 +50,29 @@ export function UsersTable({ users }: { users: UserRow[] }) {
     return [...rows].sort((a, b) => {
       if (sortKey === "createdAt") return b.createdAt.localeCompare(a.createdAt);
       if (sortKey === "xpTotal") return b.xpTotal - a.xpTotal;
+      if (sortKey === "lastActiveAt") return (b.lastActiveAt ?? "").localeCompare(a.lastActiveAt ?? "");
       return b.streakCount - a.streakCount;
     });
   }, [users, query, sortKey]);
+
+  async function togglePlan(user: UserRow) {
+    const nextPlan = user.plan === "pro" ? "free" : "pro";
+    setTogglingId(user.id);
+
+    try {
+      const res = await fetch(`/api/admin/users/${user.id}/plan`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: nextPlan }),
+      });
+
+      if (res.ok) {
+        setUsers((prev) => prev.map((u) => (u.id === user.id ? { ...u, plan: nextPlan } : u)));
+      }
+    } finally {
+      setTogglingId(null);
+    }
+  }
 
   return (
     <div>
@@ -58,6 +95,7 @@ export function UsersTable({ users }: { users: UserRow[] }) {
           <option value="createdAt">Newest first</option>
           <option value="xpTotal">Most XP</option>
           <option value="streakCount">Longest streak</option>
+          <option value="lastActiveAt">Most recently active</option>
         </select>
       </div>
 
@@ -83,10 +121,30 @@ export function UsersTable({ users }: { users: UserRow[] }) {
                 {u.telegramId ? `Telegram ${u.telegramId}` : "No Telegram"} · Joined{" "}
                 {new Date(u.createdAt).toLocaleDateString()}
               </div>
+              <div className="mt-0.5 text-xs text-white/35">{formatLastOnline(u.lastActiveAt)}</div>
             </div>
-            <div className="flex-shrink-0 text-right text-xs">
-              <div className="font-bold text-bp-warning">{u.xpTotal} XP</div>
-              <div className="mt-0.5 text-white/40">{u.streakCount}d streak</div>
+            <div className="flex flex-shrink-0 items-center gap-3">
+              <div className="text-right text-xs">
+                <div className="font-bold text-bp-warning">{u.xpTotal} XP</div>
+                <div className="mt-0.5 text-white/40">{u.streakCount}d streak</div>
+              </div>
+              <button
+                onClick={() => togglePlan(u)}
+                disabled={togglingId === u.id}
+                title={u.plan === "pro" ? "Switch to Free" : "Switch to Pro"}
+                className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-bold transition-colors disabled:opacity-50 ${
+                  u.plan === "pro"
+                    ? "border-bp-warning/30 bg-bp-warning/10 text-bp-warning hover:bg-bp-warning/20"
+                    : "border-bp-border text-white/50 hover:text-white"
+                }`}
+              >
+                {togglingId === u.id ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Crown className="h-3.5 w-3.5" />
+                )}
+                {u.plan === "pro" ? "Make Free" : "Make Pro"}
+              </button>
             </div>
           </div>
         ))}

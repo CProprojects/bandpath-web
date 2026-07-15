@@ -6,6 +6,7 @@ import {
   editTelegramMessage,
   answerCallbackQuery,
   generateLoginCode,
+  generateSessionToken,
   type InlineKeyboard,
 } from "@/lib/telegram";
 import { getWordById, type VocabWord } from "@/lib/vocab";
@@ -20,7 +21,7 @@ type TelegramMessage = {
 
 type TelegramCallbackQuery = {
   id: string;
-  from: { id: number };
+  from: { id: number; username?: string; first_name?: string };
   message?: { chat: { id: number }; message_id: number };
   data?: string;
 };
@@ -117,20 +118,7 @@ async function handleStart(admin: SupabaseClient, message: TelegramMessage) {
   const sessionToken = startParam;
 
   if (!sessionToken) {
-    const { data: existingUser } = await admin
-      .from("users")
-      .select("id")
-      .eq("telegram_id", String(message.from.id))
-      .maybeSingle();
-
-    if (existingUser) {
-      await safeSend(
-        message.chat.id,
-        "Welcome back! Send /vocab anytime to practice today's vocabulary words right here in the chat.",
-      );
-    } else {
-      await safeSend(message.chat.id, "Open this bot from the BandPath website's login page to get your code.");
-    }
+    await safeSend(message.chat.id, WELCOME_TEXT, mainMenuKeyboard());
     return;
   }
 
@@ -163,6 +151,48 @@ async function handleStart(admin: SupabaseClient, message: TelegramMessage) {
     message.chat.id,
     `Your BandPath login code is:\n\n<code>${code}</code>\n\nTap the code to copy it, then enter it on the website to finish logging in.`,
     undefined,
+    "HTML",
+  );
+}
+
+// ─────────────────────────────────────────────
+// "Go to Platform" main-menu button — same login-code flow as /start with a
+// token, but self-initiated from inside the bot instead of started by the
+// website. Generates its own session token, so there's no website step
+// first: we send a code plus a direct link to a bare "enter your code" page.
+// ─────────────────────────────────────────────
+async function handleGoPlatform(admin: SupabaseClient, cq: TelegramCallbackQuery) {
+  const chatId = cq.message?.chat?.id;
+  if (!chatId) {
+    await safeAnswer(cq.id);
+    return;
+  }
+
+  const sessionToken = generateSessionToken();
+  const code = generateLoginCode();
+
+  const { error } = await admin.from("telegram_login_sessions").insert({
+    session_token: sessionToken,
+    telegram_id: String(cq.from.id),
+    telegram_username: cq.from.username ?? null,
+    telegram_first_name: cq.from.first_name ?? null,
+    code,
+  });
+
+  if (error) {
+    await safeAnswer(cq.id, "Something went wrong — please try again.");
+    return;
+  }
+
+  await safeAnswer(cq.id);
+
+  const siteUrl = process.env.SITE_URL ?? "https://bandpath-web.vercel.app";
+  const enterCodeUrl = `${siteUrl}/enter-code?token=${sessionToken}`;
+
+  await safeSend(
+    chatId,
+    `Your BandPath login code is:\n\n<code>${code}</code>\n\nTap the code to copy it, then tap the button below to open BandPath and paste it in.`,
+    { inline_keyboard: [[{ text: "🌐 Open BandPath", url: enterCodeUrl }]] },
     "HTML",
   );
 }
@@ -223,6 +253,19 @@ async function handleVocabCommand(admin: SupabaseClient, message: TelegramMessag
 async function handleCallbackQuery(admin: SupabaseClient, cq: TelegramCallbackQuery) {
   const chatId = cq.message?.chat?.id;
   const data = cq.data ?? "";
+
+  // Main-menu buttons work for anyone, logged in or not — handle before the
+  // "must have a linked account" gate below (that gate is for vocab-session
+  // callbacks only).
+  if (data === "go_platform") {
+    await handleGoPlatform(admin, cq);
+    return;
+  }
+  if (data === "about_bandpath") {
+    await safeAnswer(cq.id);
+    if (chatId) await safeSend(chatId, ABOUT_TEXT);
+    return;
+  }
 
   const { data: user } = await admin
     .from("users")
@@ -398,6 +441,24 @@ async function handleSpellingReply(admin: SupabaseClient, message: TelegramMessa
 // ─────────────────────────────────────────────
 function truncate(s: string, n: number) {
   return s.length > n ? s.slice(0, n - 1) + "…" : s;
+}
+
+const WELCOME_TEXT =
+  "👋 Welcome to BandPath!\n\n" +
+  "Your smartest path to IELTS Band 7+ — real exam-format Reading, Listening, and Writing tests, " +
+  "spaced-repetition vocabulary, and band score tracking, all in one place.\n\n" +
+  "Use the buttons below to get started 👇";
+
+const ABOUT_TEXT = "ℹ️ About BandPath\n\nInformation about us.";
+
+function mainMenuKeyboard(): InlineKeyboard {
+  return {
+    inline_keyboard: [
+      [{ text: "📢 Go to Channel", url: "https://t.me/BandPath" }],
+      [{ text: "🌐 Go to Platform", callback_data: "go_platform" }],
+      [{ text: "ℹ️ About BandPath", callback_data: "about_bandpath" }],
+    ],
+  };
 }
 
 function learnCardText(word: VocabWord, index: number, total: number) {

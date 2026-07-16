@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { ADMIN_COOKIE, verifyAdminSessionValue } from "@/lib/adminSession";
-import { sendTelegramMessage, sendTelegramPhoto, type InlineKeyboard } from "@/lib/telegram";
+import { sendTelegramMessage, sendTelegramPhotoBuffer, type InlineKeyboard } from "@/lib/telegram";
 
 // Sequential sends at ~25/sec; fine for hundreds of users within the
 // function's max duration. A much larger list would need a background queue.
@@ -40,6 +40,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  // Telegram's sendPhoto-by-URL can't fetch from Supabase Storage directly
+  // (its CDN blocks Telegram's fetcher), so the photo is downloaded once
+  // here and re-sent as a buffer per recipient instead of a URL.
+  let photoBuffer: Buffer | null = null;
+  let photoFilename = "photo.jpg";
+  if (photoUrl) {
+    const path = String(photoUrl).split("/broadcast-media/")[1];
+    if (path) {
+      const { data, error: downloadError } = await admin.storage.from("broadcast-media").download(path);
+      if (!downloadError && data) {
+        photoBuffer = Buffer.from(await data.arrayBuffer());
+        photoFilename = path.split("/").pop() || "photo.jpg";
+      }
+    }
+  }
+
   let sent = 0;
   let failed = 0;
 
@@ -48,8 +64,8 @@ export async function POST(request: NextRequest) {
   // counts — a large user base would need a background job queue instead.
   for (const { telegram_id } of recipients) {
     try {
-      if (photoUrl) {
-        await sendTelegramPhoto(telegram_id!, photoUrl, message, { replyMarkup });
+      if (photoBuffer) {
+        await sendTelegramPhotoBuffer(telegram_id!, photoBuffer, photoFilename, message, { replyMarkup });
       } else {
         await sendTelegramMessage(telegram_id!, message, { replyMarkup });
       }

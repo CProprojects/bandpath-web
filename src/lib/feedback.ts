@@ -23,3 +23,23 @@ export async function resolveFeedbackTelegramId(
 
   return null;
 }
+
+// Formats a "who sent this" line for admin notifications — always shows a
+// name (platform name if registered, else Telegram @username) together with
+// the numeric Telegram ID, so the admin can identify AND reach the sender
+// straight from the message, not just one or the other.
+export function formatContactSender({
+  name,
+  username,
+  telegramId,
+}: {
+  name?: string | null;
+  username?: string | null;
+  telegramId?: string | null;
+}): string {
+  const parts: string[] = [];
+  if (name) parts.push(name);
+  else if (username) parts.push(`@${username}`);
+  if (telegramId) parts.push(`Telegram ID ${telegramId}`);
+  return parts.length ? parts.join(" · ") : "Unknown sender";
+}

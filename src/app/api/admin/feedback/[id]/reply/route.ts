@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { ADMIN_COOKIE, verifyAdminSessionValue } from "@/lib/adminSession";
-import { sendTelegramMessage } from "@/lib/telegram";
+import { sendTelegramMessage, sendTelegramPhotoFromStorage } from "@/lib/telegram";
 import { resolveFeedbackTelegramId } from "@/lib/feedback";
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -10,11 +10,13 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   }
 
   const { id } = await params;
-  const { message } = await request.json();
+  const { message, photoUrl } = await request.json();
 
   const trimmed = typeof message === "string" ? message.trim() : "";
-  if (!trimmed) {
-    return NextResponse.json({ error: "Please enter a reply." }, { status: 400 });
+  const hasPhoto = typeof photoUrl === "string" && photoUrl.length > 0;
+
+  if (!trimmed && !hasPhoto) {
+    return NextResponse.json({ error: "Please enter a reply or attach a photo." }, { status: 400 });
   }
 
   const admin = createAdminClient();
@@ -30,14 +32,30 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   }
 
   try {
-    await sendTelegramMessage(targetTelegramId, `💬 Reply from the BandPath team:\n\n${trimmed}`);
+    const header = "💬 Reply from the BandPath team:";
+    if (hasPhoto) {
+      const caption = trimmed ? `${header}\n\n${trimmed}` : header;
+      await sendTelegramPhotoFromStorage(
+        admin,
+        "feedback-media",
+        photoUrl,
+        targetTelegramId,
+        caption.length > 1024 ? caption.slice(0, 1023) + "…" : caption,
+      );
+    } else {
+      await sendTelegramMessage(targetTelegramId, `${header}\n\n${trimmed}`);
+    }
   } catch {
     return NextResponse.json({ error: "Couldn't deliver the reply — the user may have blocked the bot." }, { status: 502 });
   }
 
   const { error } = await admin
     .from("feedback")
-    .update({ reply_message: trimmed, replied_at: new Date().toISOString() })
+    .update({
+      reply_message: trimmed || "[Photo attached]",
+      reply_photo_url: hasPhoto ? photoUrl : null,
+      replied_at: new Date().toISOString(),
+    })
     .eq("id", id);
 
   if (error) {

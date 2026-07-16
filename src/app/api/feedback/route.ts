@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { sendTelegramMessage, sendTelegramPhoto, type InlineKeyboard } from "@/lib/telegram";
+import { sendTelegramMessage, sendTelegramPhotoFromStorage, type InlineKeyboard } from "@/lib/telegram";
+import { formatContactSender } from "@/lib/feedback";
 
 export async function POST(request: Request) {
   const { type, message, photoUrl } = await request.json();
@@ -50,10 +51,14 @@ export async function POST(request: Request) {
     try {
       const { data: profile } = await admin
         .from("users")
-        .select("name, full_name")
+        .select("name, full_name, telegram_id")
         .eq("id", user.id)
         .maybeSingle();
-      const who = profile?.name || profile?.full_name || user.email || "a BandPath user";
+      const who = formatContactSender({
+        name: profile?.name || profile?.full_name || user.email,
+        username: null,
+        telegramId: profile?.telegram_id,
+      });
       const label = contactType === "report" ? "🐛 Problem Report" : "💬 Feedback";
       const caption = `${label} (Platform) from ${who}:\n\n${trimmed}`;
       const replyMarkup: InlineKeyboard = {
@@ -61,9 +66,11 @@ export async function POST(request: Request) {
       };
 
       if (typeof photoUrl === "string" && photoUrl) {
-        await sendTelegramPhoto(
-          adminChatId,
+        await sendTelegramPhotoFromStorage(
+          admin,
+          "feedback-media",
           photoUrl,
+          adminChatId,
           caption.length > 1024 ? caption.slice(0, 1023) + "…" : caption,
           { replyMarkup },
         );

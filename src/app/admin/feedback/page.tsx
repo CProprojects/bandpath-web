@@ -11,7 +11,9 @@ export default async function AdminFeedbackPage() {
 
   const { data: rows } = await admin
     .from("feedback")
-    .select("id, source, type, user_id, telegram_id, telegram_username, message, photo_url, reply_message, replied_at, created_at")
+    .select(
+      "id, source, type, user_id, telegram_id, telegram_username, message, photo_url, reply_message, reply_photo_url, replied_at, created_at",
+    )
     .order("created_at", { ascending: false })
     .limit(200);
 
@@ -36,6 +38,7 @@ export default async function AdminFeedbackPage() {
       message: f.message,
       photoUrl: f.photo_url,
       replyMessage: f.reply_message,
+      replyPhotoUrl: f.reply_photo_url,
       repliedAt: f.replied_at,
       createdAt: f.created_at,
     };

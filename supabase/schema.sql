@@ -301,6 +301,7 @@ create table if not exists public.feedback (
   message text not null default '',
   photo_url text,
   reply_message text,
+  reply_photo_url text,
   replied_at timestamptz,
   created_at timestamptz not null default now()
 );
@@ -308,6 +309,7 @@ create table if not exists public.feedback (
 alter table public.feedback add column if not exists type text not null default 'feedback' check (type in ('feedback', 'report'));
 alter table public.feedback add column if not exists photo_url text;
 alter table public.feedback add column if not exists reply_message text;
+alter table public.feedback add column if not exists reply_photo_url text;
 alter table public.feedback add column if not exists replied_at timestamptz;
 
 create index if not exists feedback_created_at_idx on public.feedback (created_at desc);

@@ -12,7 +12,7 @@ import {
 } from "@/lib/telegram";
 import { getWordById, type VocabWord } from "@/lib/vocab";
 import { getVocabSessionWords, recordVocabProgress, buildQuizOptions } from "@/lib/vocabProgress";
-import { resolveFeedbackTelegramId } from "@/lib/feedback";
+import { resolveFeedbackTelegramId, formatContactSender } from "@/lib/feedback";
 
 type TelegramMessage = {
   message_id: number;
@@ -458,11 +458,14 @@ async function handleTextReply(admin: SupabaseClient, message: TelegramMessage) 
 }
 
 // ─────────────────────────────────────────────
-// Captures the admin's reply text once their chat is in the "awaiting
-// reply" state (see handleReplyButton), and relays it to the original
-// submitter's Telegram chat. Only ever matches the admin's own chat_id,
-// since that's the only chat handleReplyButton ever writes a pending row
-// for. Returns whether the message was consumed.
+// Captures the admin's reply (text and/or photo) once their chat is in the
+// "awaiting reply" state (see handleReplyButton), and relays it to the
+// original submitter's Telegram chat via copyMessage — same full-fidelity,
+// no-re-hosting relay used for the reverse direction, preceded by a header
+// message so the recipient knows it's an official reply and not spam. Only
+// ever matches the admin's own chat_id, since that's the only chat
+// handleReplyButton ever writes a pending row for. Returns whether the
+// message was consumed.
 // ─────────────────────────────────────────────
 async function handleAdminReplyCapture(admin: SupabaseClient, message: TelegramMessage): Promise<boolean> {
   const chatId = message.chat.id;
@@ -478,17 +481,21 @@ async function handleAdminReplyCapture(admin: SupabaseClient, message: TelegramM
 
   await admin.from("admin_reply_pending").delete().eq("chat_id", String(chatId));
 
-  const replyText = message.text?.trim();
-  if (!replyText) {
+  const replyText = (message.text ?? message.caption ?? "").trim();
+  if (!replyText && !message.photo) {
     await safeSend(chatId, "That looked empty — tap ↩️ Reply again to try once more.");
     return true;
   }
 
   try {
-    await sendTelegramMessage(pending.target_telegram_id, `💬 Reply from the BandPath team:\n\n${replyText}`);
+    await sendTelegramMessage(pending.target_telegram_id, "💬 Reply from the BandPath team:");
+    await copyTelegramMessage(pending.target_telegram_id, chatId, message.message_id);
     await admin
       .from("feedback")
-      .update({ reply_message: replyText, replied_at: new Date().toISOString() })
+      .update({
+        reply_message: replyText || "[Photo attached]",
+        replied_at: new Date().toISOString(),
+      })
       .eq("id", pending.feedback_id);
     await safeSend(chatId, "✅ Reply sent.");
   } catch (e) {
@@ -567,7 +574,7 @@ async function handleContactReply(admin: SupabaseClient, message: TelegramMessag
 
   const { data: user } = await admin
     .from("users")
-    .select("id")
+    .select("id, name, full_name")
     .eq("telegram_id", String(message.from.id))
     .maybeSingle();
 
@@ -586,7 +593,11 @@ async function handleContactReply(admin: SupabaseClient, message: TelegramMessag
 
   const adminChatId = process.env.ADMIN_TELEGRAM_CHAT_ID;
   if (adminChatId) {
-    const who = message.from.username ? `@${message.from.username}` : `Telegram ID ${message.from.id}`;
+    const who = formatContactSender({
+      name: user?.name || user?.full_name,
+      username: message.from.username,
+      telegramId: String(message.from.id),
+    });
     const label = pending.type === "report" ? "🐛 Problem Report" : "💬 Feedback";
     const replyKeyboard: InlineKeyboard | undefined = inserted
       ? { inline_keyboard: [[{ text: "↩️ Reply", callback_data: `reply:${inserted.id}` }]] }

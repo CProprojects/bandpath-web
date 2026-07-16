@@ -300,11 +300,15 @@ create table if not exists public.feedback (
   telegram_username text,
   message text not null default '',
   photo_url text,
+  reply_message text,
+  replied_at timestamptz,
   created_at timestamptz not null default now()
 );
 
 alter table public.feedback add column if not exists type text not null default 'feedback' check (type in ('feedback', 'report'));
 alter table public.feedback add column if not exists photo_url text;
+alter table public.feedback add column if not exists reply_message text;
+alter table public.feedback add column if not exists replied_at timestamptz;
 
 create index if not exists feedback_created_at_idx on public.feedback (created_at desc);
 
@@ -332,3 +336,21 @@ create table if not exists public.telegram_feedback_pending (
 alter table public.telegram_feedback_pending add column if not exists type text not null default 'feedback' check (type in ('feedback', 'report'));
 
 alter table public.telegram_feedback_pending enable row level security;
+
+-- ─────────────────────────────────────────────
+-- admin_reply_pending — marks the site owner's own Telegram chat as
+-- "awaiting a reply message" after they tap the "↩️ Reply" button on a
+-- forwarded feedback/report, so their next plain-text message is relayed to
+-- that submitter's Telegram chat instead of being treated as anything else.
+-- One row per chat (in practice always the admin's), self-expiring after 15
+-- minutes. Server-only: no RLS policies, only the service role key may
+-- read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.admin_reply_pending (
+  chat_id text primary key,
+  feedback_id uuid not null references public.feedback (id) on delete cascade,
+  target_telegram_id text not null,
+  expires_at timestamptz not null default (now() + interval '15 minutes')
+);
+
+alter table public.admin_reply_pending enable row level security;

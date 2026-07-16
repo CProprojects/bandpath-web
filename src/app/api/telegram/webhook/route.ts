@@ -12,6 +12,7 @@ import {
 } from "@/lib/telegram";
 import { getWordById, type VocabWord } from "@/lib/vocab";
 import { getVocabSessionWords, recordVocabProgress, buildQuizOptions } from "@/lib/vocabProgress";
+import { resolveFeedbackTelegramId } from "@/lib/feedback";
 
 type TelegramMessage = {
   message_id: number;
@@ -329,6 +330,10 @@ async function handleCallbackQuery(admin: SupabaseClient, cq: TelegramCallbackQu
     if (chatId) await safeSend(chatId, ABOUT_TEXT);
     return;
   }
+  if (data.startsWith("reply:")) {
+    await handleReplyButton(admin, cq, data.slice("reply:".length));
+    return;
+  }
 
   const { data: user } = await admin
     .from("users")
@@ -442,11 +447,94 @@ async function handleCallbackQuery(admin: SupabaseClient, cq: TelegramCallbackQu
 // flow are simply ignored).
 // ─────────────────────────────────────────────
 async function handleTextReply(admin: SupabaseClient, message: TelegramMessage) {
+  const handledAsAdminReply = await handleAdminReplyCapture(admin, message);
+  if (handledAsAdminReply) return;
+
   const handledAsContact = await handleContactReply(admin, message);
   if (handledAsContact) return;
 
   if (!message.text) return;
   await handleSpellingReply(admin, message);
+}
+
+// ─────────────────────────────────────────────
+// Captures the admin's reply text once their chat is in the "awaiting
+// reply" state (see handleReplyButton), and relays it to the original
+// submitter's Telegram chat. Only ever matches the admin's own chat_id,
+// since that's the only chat handleReplyButton ever writes a pending row
+// for. Returns whether the message was consumed.
+// ─────────────────────────────────────────────
+async function handleAdminReplyCapture(admin: SupabaseClient, message: TelegramMessage): Promise<boolean> {
+  const chatId = message.chat.id;
+
+  const { data: pending } = await admin
+    .from("admin_reply_pending")
+    .select("*")
+    .eq("chat_id", String(chatId))
+    .gt("expires_at", new Date().toISOString())
+    .maybeSingle();
+
+  if (!pending) return false;
+
+  await admin.from("admin_reply_pending").delete().eq("chat_id", String(chatId));
+
+  const replyText = message.text?.trim();
+  if (!replyText) {
+    await safeSend(chatId, "That looked empty — tap ↩️ Reply again to try once more.");
+    return true;
+  }
+
+  try {
+    await sendTelegramMessage(pending.target_telegram_id, `💬 Reply from the BandPath team:\n\n${replyText}`);
+    await admin
+      .from("feedback")
+      .update({ reply_message: replyText, replied_at: new Date().toISOString() })
+      .eq("id", pending.feedback_id);
+    await safeSend(chatId, "✅ Reply sent.");
+  } catch (e) {
+    console.error("[telegram] admin reply send failed:", e);
+    await safeSend(chatId, "⚠️ Couldn't deliver that reply — the user may have blocked the bot.");
+  }
+
+  return true;
+}
+
+// ─────────────────────────────────────────────
+// "↩️ Reply" button on a forwarded feedback/report — only the admin's own
+// chat ever receives this button (it's only ever attached to messages sent
+// to ADMIN_TELEGRAM_CHAT_ID), but we double-check here too in case that env
+// var changes later or the message gets forwarded elsewhere.
+// ─────────────────────────────────────────────
+async function handleReplyButton(admin: SupabaseClient, cq: TelegramCallbackQuery, feedbackId: string) {
+  const chatId = cq.message?.chat?.id;
+  const adminChatId = process.env.ADMIN_TELEGRAM_CHAT_ID;
+
+  if (!chatId || !adminChatId || String(chatId) !== String(adminChatId)) {
+    await safeAnswer(cq.id);
+    return;
+  }
+
+  const { data: feedback } = await admin.from("feedback").select("*").eq("id", feedbackId).maybeSingle();
+  if (!feedback) {
+    await safeAnswer(cq.id, "This feedback no longer exists.");
+    return;
+  }
+
+  const targetTelegramId = await resolveFeedbackTelegramId(admin, feedback);
+  if (!targetTelegramId) {
+    await safeAnswer(cq.id, "Can't reply — no linked Telegram account for this submission.");
+    return;
+  }
+
+  await admin.from("admin_reply_pending").upsert({
+    chat_id: String(chatId),
+    feedback_id: feedbackId,
+    target_telegram_id: targetTelegramId,
+    expires_at: new Date(Date.now() + 15 * 60 * 1000).toISOString(),
+  });
+
+  await safeAnswer(cq.id);
+  await safeSend(chatId, "✍️ Type your reply and send it:");
 }
 
 // ─────────────────────────────────────────────
@@ -483,22 +571,29 @@ async function handleContactReply(admin: SupabaseClient, message: TelegramMessag
     .eq("telegram_id", String(message.from.id))
     .maybeSingle();
 
-  await admin.from("feedback").insert({
-    source: "telegram",
-    type: pending.type,
-    user_id: user?.id ?? null,
-    telegram_id: String(message.from.id),
-    telegram_username: message.from.username ?? null,
-    message: contentText || (message.photo ? "[Photo attached]" : ""),
-  });
+  const { data: inserted } = await admin
+    .from("feedback")
+    .insert({
+      source: "telegram",
+      type: pending.type,
+      user_id: user?.id ?? null,
+      telegram_id: String(message.from.id),
+      telegram_username: message.from.username ?? null,
+      message: contentText || (message.photo ? "[Photo attached]" : ""),
+    })
+    .select()
+    .single();
 
   const adminChatId = process.env.ADMIN_TELEGRAM_CHAT_ID;
   if (adminChatId) {
     const who = message.from.username ? `@${message.from.username}` : `Telegram ID ${message.from.id}`;
     const label = pending.type === "report" ? "🐛 Problem Report" : "💬 Feedback";
+    const replyKeyboard: InlineKeyboard | undefined = inserted
+      ? { inline_keyboard: [[{ text: "↩️ Reply", callback_data: `reply:${inserted.id}` }]] }
+      : undefined;
     try {
       await safeSend(adminChatId, `${label} (Telegram) from ${who}:`);
-      await copyTelegramMessage(adminChatId, chatId, message.message_id);
+      await copyTelegramMessage(adminChatId, chatId, message.message_id, { replyMarkup: replyKeyboard });
     } catch (e) {
       console.error("[telegram] contact forward failed:", e);
     }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { sendTelegramMessage, sendTelegramPhoto } from "@/lib/telegram";
+import { sendTelegramMessage, sendTelegramPhoto, type InlineKeyboard } from "@/lib/telegram";
 
 export async function POST(request: Request) {
   const { type, message, photoUrl } = await request.json();
@@ -27,13 +27,17 @@ export async function POST(request: Request) {
 
   const admin = createAdminClient();
 
-  const { error } = await admin.from("feedback").insert({
-    source: "platform",
-    type: contactType,
-    user_id: user.id,
-    message: trimmed,
-    photo_url: typeof photoUrl === "string" && photoUrl ? photoUrl : null,
-  });
+  const { data: inserted, error } = await admin
+    .from("feedback")
+    .insert({
+      source: "platform",
+      type: contactType,
+      user_id: user.id,
+      message: trimmed,
+      photo_url: typeof photoUrl === "string" && photoUrl ? photoUrl : null,
+    })
+    .select()
+    .single();
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -52,11 +56,19 @@ export async function POST(request: Request) {
       const who = profile?.name || profile?.full_name || user.email || "a BandPath user";
       const label = contactType === "report" ? "🐛 Problem Report" : "💬 Feedback";
       const caption = `${label} (Platform) from ${who}:\n\n${trimmed}`;
+      const replyMarkup: InlineKeyboard = {
+        inline_keyboard: [[{ text: "↩️ Reply", callback_data: `reply:${inserted.id}` }]],
+      };
 
       if (typeof photoUrl === "string" && photoUrl) {
-        await sendTelegramPhoto(adminChatId, photoUrl, caption.length > 1024 ? caption.slice(0, 1023) + "…" : caption);
+        await sendTelegramPhoto(
+          adminChatId,
+          photoUrl,
+          caption.length > 1024 ? caption.slice(0, 1023) + "…" : caption,
+          { replyMarkup },
+        );
       } else {
-        await sendTelegramMessage(adminChatId, caption);
+        await sendTelegramMessage(adminChatId, caption, { replyMarkup });
       }
     } catch (e) {
       console.error("[feedback] Telegram notify failed:", e);

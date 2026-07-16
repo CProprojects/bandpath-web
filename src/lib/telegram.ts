@@ -50,11 +50,21 @@ export async function sendTelegramPhoto(
   return res.json();
 }
 
-export async function copyTelegramMessage(chatId: number | string, fromChatId: number | string, messageId: number) {
+export async function copyTelegramMessage(
+  chatId: number | string,
+  fromChatId: number | string,
+  messageId: number,
+  options?: { replyMarkup?: InlineKeyboard },
+) {
   const res = await fetch(`${TELEGRAM_API}/copyMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, from_chat_id: fromChatId, message_id: messageId }),
+    body: JSON.stringify({
+      chat_id: chatId,
+      from_chat_id: fromChatId,
+      message_id: messageId,
+      ...(options?.replyMarkup ? { reply_markup: options.replyMarkup } : {}),
+    }),
   });
 
   if (!res.ok) {

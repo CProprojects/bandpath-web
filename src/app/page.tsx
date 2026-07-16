@@ -33,12 +33,12 @@ export default function LandingPage() {
       </div>
 
       <section className="relative mt-20 w-full max-w-4xl">
-        <h2 className="text-center text-lg font-bold text-white/80">Free vs Pro</h2>
+        <h2 className="text-center text-lg font-bold text-white/80">Standard vs Pro</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-bp-border bg-bp-card/60 p-6">
             <div className="flex items-center gap-2 font-bold text-white">
               <Lock className="h-4 w-4 text-white/40" />
-              Free
+              Standard
             </div>
             <p className="mt-2 text-sm text-white/50">
               2 Reading tests + 1 Listening test, basic results.

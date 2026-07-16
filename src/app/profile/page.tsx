@@ -58,7 +58,7 @@ export default async function ProfilePage() {
             </span>
           )}
           <span className="rounded-full bg-bp-accent/15 px-3 py-1 font-semibold text-bp-accent">
-            {profile?.plan === "pro" ? "Pro" : "Free"} plan
+            {profile?.plan === "pro" ? "Pro" : "Standard"} plan
           </span>
           {profile?.created_at && (
             <span className="rounded-full bg-white/5 px-3 py-1 font-semibold text-white/40">

@@ -131,7 +131,7 @@ export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
               <button
                 onClick={() => togglePlan(u)}
                 disabled={togglingId === u.id}
-                title={u.plan === "pro" ? "Switch to Free" : "Switch to Pro"}
+                title={u.plan === "pro" ? "Switch to Standard" : "Switch to Pro"}
                 className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-bold transition-colors disabled:opacity-50 ${
                   u.plan === "pro"
                     ? "border-bp-warning/30 bg-bp-warning/10 text-bp-warning hover:bg-bp-warning/20"
@@ -143,7 +143,7 @@ export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
                 ) : (
                   <Crown className="h-3.5 w-3.5" />
                 )}
-                {u.plan === "pro" ? "Make Free" : "Make Pro"}
+                {u.plan === "pro" ? "Make Standard" : "Make Pro"}
               </button>
             </div>
           </div>

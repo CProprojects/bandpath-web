@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { BookOpen, Headphones, PenLine, Lock } from "lucide-react";
+import { BookOpen, Headphones, PenLine, Lock, Crown } from "lucide-react";
 
 export type TestCardData = {
   id: string;
@@ -11,11 +11,20 @@ export type TestCardData = {
   questionCount: number;
   durationMinutes: number;
   difficulty: string;
+  requiresPro: boolean;
   locked: boolean;
   bestBand: number | undefined;
 };
 
-type Filter = "all" | "reading" | "listening" | "writing";
+type Filter = "all" | "reading" | "listening" | "writing" | "pro";
+
+const FILTERS: { key: Filter; label: string; Icon?: typeof Crown }[] = [
+  { key: "reading", label: "Reading" },
+  { key: "listening", label: "Listening" },
+  { key: "writing", label: "Writing" },
+  { key: "pro", label: "Pro", Icon: Crown },
+  { key: "all", label: "All" },
+];
 
 const TYPE_STYLES = {
   reading: {
@@ -38,22 +47,31 @@ const TYPE_STYLES = {
 export function TestsGrid({ tests }: { tests: TestCardData[] }) {
   const [filter, setFilter] = useState<Filter>("all");
 
-  const visible = tests.filter((t) => filter === "all" || t.type === filter);
+  const visible = tests.filter((t) => {
+    if (filter === "all") return true;
+    if (filter === "pro") return t.requiresPro;
+    return t.type === filter;
+  });
 
   return (
     <div>
       <div className="mt-6 flex flex-wrap gap-2">
-        {(["reading", "listening", "writing", "all"] as const).map((f) => (
+        {FILTERS.map(({ key, label, Icon }) => (
           <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`rounded-full px-4 py-1.5 text-sm font-semibold capitalize transition-colors ${
-              filter === f
-                ? "bg-gradient-to-r from-bp-accent to-[#0098e0] text-[#06243c] shadow-[0_8px_20px_-8px_rgba(0,196,255,0.6)]"
-                : "border border-bp-border text-white/60 hover:text-white"
+            key={key}
+            onClick={() => setFilter(key)}
+            className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
+              filter === key
+                ? key === "pro"
+                  ? "bg-gradient-to-r from-amber-400 to-amber-300 text-[#3a2600] shadow-[0_8px_20px_-8px_rgba(251,191,36,0.7)]"
+                  : "bg-gradient-to-r from-bp-accent to-[#0098e0] text-[#06243c] shadow-[0_8px_20px_-8px_rgba(0,196,255,0.6)]"
+                : key === "pro"
+                  ? "border border-amber-400/40 text-amber-300 hover:border-amber-300/70"
+                  : "border border-bp-border text-white/60 hover:text-white"
             }`}
           >
-            {f}
+            {Icon && <Icon className="h-3.5 w-3.5" />}
+            {label}
           </button>
         ))}
       </div>
@@ -64,10 +82,19 @@ export function TestsGrid({ tests }: { tests: TestCardData[] }) {
 
           const card = (
             <div
-              className={`flex items-center gap-4 rounded-2xl border p-4 transition-colors ${
-                test.locked ? "border-bp-border bg-bp-card/50 opacity-60" : `${border} bg-bp-card/60`
+              className={`relative flex items-center gap-4 rounded-2xl border p-4 transition-colors ${
+                test.requiresPro
+                  ? `border-amber-400/60 bg-gradient-to-br from-amber-400/10 to-bp-card/60 shadow-[0_0_22px_-6px_rgba(251,191,36,0.55)] hover:border-amber-300/80 ${
+                      test.locked ? "opacity-75" : ""
+                    }`
+                  : test.locked
+                    ? "border-bp-border bg-bp-card/50 opacity-60"
+                    : `${border} bg-bp-card/60`
               }`}
             >
+              {test.requiresPro && (
+                <Crown className="absolute right-3 top-3 h-4 w-4 text-amber-400" />
+              )}
               <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${iconBg}`}>
                 <Icon className="h-6 w-6" />
               </div>

@@ -87,7 +87,7 @@ export const WRITING_TESTS: WritingTestMeta[] = [
     id: "writing-test-3",
     title: "Writing Test 3",
     difficulty: "Medium",
-    requiresPro: false,
+    requiresPro: true,
     durationMinutes: 60,
     task1MinWords: 150,
     task2MinWords: 250,

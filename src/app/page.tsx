@@ -41,7 +41,7 @@ export default function LandingPage() {
               Standard
             </div>
             <p className="mt-2 text-sm text-white/50">
-              2 Reading tests + 1 Listening test, basic results.
+              Most Reading, Listening & Writing tests, basic results.
             </p>
           </div>
           <div className="relative overflow-hidden rounded-2xl border border-bp-accent/30 bg-gradient-to-br from-bp-accent/10 to-bp-card/70 p-6 shadow-[0_0_24px_-8px_rgba(0,196,255,0.4)]">
@@ -54,7 +54,7 @@ export default function LandingPage() {
               Pro — $9/mo
             </div>
             <p className="relative mt-2 text-sm text-white/50">
-              All tests, detailed review with hints, progress dashboard, vocabulary builder.
+              All tests including exclusive advanced ones, detailed review with hints, progress dashboard, vocabulary builder.
             </p>
           </div>
         </div>

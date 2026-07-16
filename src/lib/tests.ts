@@ -38,7 +38,7 @@ export const TESTS: TestMeta[] = [
     durationMinutes: 60,
     difficulty: "Medium" as const,
     file: `/tests/reading-test-${n}.html`,
-    requiresPro: false,
+    requiresPro: n === 10 || n === 11,
   })),
   ...Array.from({ length: 6 }, (_, i) => i + 2).map((n) => ({
     id: `listening-test-${n}`,
@@ -48,7 +48,7 @@ export const TESTS: TestMeta[] = [
     durationMinutes: 30,
     difficulty: "Medium" as const,
     file: `/tests/listening-test-${n}.html`,
-    requiresPro: false,
+    requiresPro: n === 6 || n === 7,
   })),
 ];
 

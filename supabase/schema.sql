@@ -279,3 +279,56 @@ create table if not exists public.telegram_vocab_sessions (
 );
 
 alter table public.telegram_vocab_sessions enable row level security;
+
+-- ─────────────────────────────────────────────
+-- feedback — free-text "Contact Us" submissions (feedback or problem
+-- reports) from either the Telegram bot or the website platform, with an
+-- optional attached photo (platform submissions host it in Supabase
+-- Storage; Telegram submissions relay the original photo directly via
+-- copyMessage, so photo_url stays null for those). Always forwarded
+-- (best-effort) to the site owner's personal Telegram chat
+-- (ADMIN_TELEGRAM_CHAT_ID); this table is the source of truth regardless of
+-- whether that notification succeeds. Server-only: no RLS policies, only
+-- the service role key may read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.feedback (
+  id uuid primary key default gen_random_uuid(),
+  source text not null check (source in ('telegram', 'platform')),
+  type text not null default 'feedback' check (type in ('feedback', 'report')),
+  user_id uuid references public.users (id) on delete set null,
+  telegram_id text,
+  telegram_username text,
+  message text not null default '',
+  photo_url text,
+  created_at timestamptz not null default now()
+);
+
+alter table public.feedback add column if not exists type text not null default 'feedback' check (type in ('feedback', 'report'));
+alter table public.feedback add column if not exists photo_url text;
+
+create index if not exists feedback_created_at_idx on public.feedback (created_at desc);
+
+alter table public.feedback enable row level security;
+
+-- ─────────────────────────────────────────────
+-- telegram_feedback_pending — marks a chat as "awaiting contact content"
+-- after the user taps "Contact Us" and picks a category (Report/Feedback)
+-- in the main menu, so the next message from that chat (text, photo, or
+-- both) is captured as that contact submission instead of falling through
+-- to the vocab spelling-reply handler. One row per chat, self-expiring
+-- after 15 minutes. Server-only: no RLS policies, only the service role key
+-- may read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.telegram_feedback_pending (
+  chat_id text primary key,
+  telegram_id text,
+  telegram_username text,
+  telegram_first_name text,
+  type text not null default 'feedback' check (type in ('feedback', 'report')),
+  started_at timestamptz not null default now(),
+  expires_at timestamptz not null default (now() + interval '15 minutes')
+);
+
+alter table public.telegram_feedback_pending add column if not exists type text not null default 'feedback' check (type in ('feedback', 'report'));
+
+alter table public.telegram_feedback_pending enable row level security;

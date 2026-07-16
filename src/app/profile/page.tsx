@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { Zap, Flame, FileCheck2, GraduationCap, User } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { GoalForm } from "@/components/GoalForm";
+import { ContactForm } from "@/components/ContactForm";
 import { createClient } from "@/lib/supabase/server";
 import { getTestById } from "@/lib/tests";
 import { getAllVocabTestIds, getWordsForTest } from "@/lib/vocab";
@@ -142,6 +143,10 @@ export default async function ProfilePage() {
           })}
         </div>
       )}
+
+      <div className="mt-6">
+        <ContactForm />
+      </div>
     </AppShell>
   );
 }

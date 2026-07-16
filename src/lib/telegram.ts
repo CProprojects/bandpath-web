@@ -50,6 +50,20 @@ export async function sendTelegramPhoto(
   return res.json();
 }
 
+export async function copyTelegramMessage(chatId: number | string, fromChatId: number | string, messageId: number) {
+  const res = await fetch(`${TELEGRAM_API}/copyMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: chatId, from_chat_id: fromChatId, message_id: messageId }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Telegram copyMessage failed: ${await res.text()}`);
+  }
+
+  return res.json();
+}
+
 export async function editTelegramMessage(
   chatId: number | string,
   messageId: number,

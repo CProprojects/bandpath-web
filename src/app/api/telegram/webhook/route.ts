@@ -3,6 +3,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   sendTelegramMessage,
+  copyTelegramMessage,
   editTelegramMessage,
   answerCallbackQuery,
   generateLoginCode,
@@ -17,6 +18,8 @@ type TelegramMessage = {
   chat: { id: number };
   from: { id: number; username?: string; first_name?: string };
   text?: string;
+  caption?: string;
+  photo?: { file_id: string; width: number; height: number }[];
 };
 
 type TelegramCallbackQuery = {
@@ -41,18 +44,20 @@ export async function POST(request: NextRequest) {
   }
 
   const message: TelegramMessage | undefined = update.message;
-  if (!message?.text) {
+  if (!message || (!message.text && !message.photo)) {
     return NextResponse.json({ ok: true });
   }
 
-  const text = message.text.trim();
+  const text = message.text?.trim() ?? "";
 
   if (text.startsWith("/start")) {
+    await clearPendingContact(admin, message.chat.id);
     await handleStart(admin, message);
   } else if (text === "/vocab") {
+    await clearPendingContact(admin, message.chat.id);
     await handleVocabCommand(admin, message);
   } else {
-    await handleSpellingReply(admin, message);
+    await handleTextReply(admin, message);
   }
 
   return NextResponse.json({ ok: true });
@@ -98,6 +103,10 @@ async function safeAnswer(callbackQueryId: string, text?: string) {
     console.error("[telegram] answerCallbackQuery failed:", e);
     return null;
   }
+}
+
+async function clearPendingContact(admin: SupabaseClient, chatId: number) {
+  await admin.from("telegram_feedback_pending").delete().eq("chat_id", String(chatId));
 }
 
 // ─────────────────────────────────────────────
@@ -198,6 +207,51 @@ async function handleGoPlatform(admin: SupabaseClient, cq: TelegramCallbackQuery
 }
 
 // ─────────────────────────────────────────────
+// "Contact Us" main-menu button — asks the user to pick a category first,
+// then (in handleContactType) marks the chat as "awaiting contact content"
+// so the next message (text, photo, or both) is relayed to the site owner
+// instead of falling through to the vocab spelling-reply handler. Works for
+// anyone, logged in or not (see handleCallbackQuery below).
+// ─────────────────────────────────────────────
+async function handleStartContact(admin: SupabaseClient, cq: TelegramCallbackQuery) {
+  const chatId = cq.message?.chat?.id;
+  if (!chatId) {
+    await safeAnswer(cq.id);
+    return;
+  }
+
+  await safeAnswer(cq.id);
+  await safeSend(chatId, "📩 What's this about?", {
+    inline_keyboard: [
+      [{ text: "🐛 Report a Problem", callback_data: "contact_type:report" }],
+      [{ text: "💬 Feedback", callback_data: "contact_type:feedback" }],
+    ],
+  });
+}
+
+async function handleContactType(admin: SupabaseClient, cq: TelegramCallbackQuery, type: "report" | "feedback") {
+  const chatId = cq.message?.chat?.id;
+  if (!chatId) {
+    await safeAnswer(cq.id);
+    return;
+  }
+
+  await admin.from("telegram_feedback_pending").upsert({
+    chat_id: String(chatId),
+    telegram_id: String(cq.from.id),
+    telegram_username: cq.from.username ?? null,
+    telegram_first_name: cq.from.first_name ?? null,
+    type,
+    started_at: new Date().toISOString(),
+    expires_at: new Date(Date.now() + 15 * 60 * 1000).toISOString(),
+  });
+
+  await safeAnswer(cq.id);
+  const label = type === "report" ? "the problem" : "your feedback";
+  await safeSend(chatId, `✍️ Please describe ${label} — you can send text, a photo, or both.`);
+}
+
+// ─────────────────────────────────────────────
 // /vocab — starts a fresh Learn → Quiz → Spelling session in chat.
 // ─────────────────────────────────────────────
 async function handleVocabCommand(admin: SupabaseClient, message: TelegramMessage) {
@@ -259,6 +313,15 @@ async function handleCallbackQuery(admin: SupabaseClient, cq: TelegramCallbackQu
   // callbacks only).
   if (data === "go_platform") {
     await handleGoPlatform(admin, cq);
+    return;
+  }
+  if (data === "start_contact") {
+    await handleStartContact(admin, cq);
+    return;
+  }
+  if (data.startsWith("contact_type:")) {
+    const type = data.split(":")[1] === "report" ? "report" : "feedback";
+    await handleContactType(admin, cq, type);
     return;
   }
   if (data === "about_bandpath") {
@@ -371,6 +434,81 @@ async function handleCallbackQuery(admin: SupabaseClient, cq: TelegramCallbackQu
 }
 
 // ─────────────────────────────────────────────
+// Plain text / photo messages — routes to whichever stateful, single-shot
+// flow (if any) this chat is currently in. Composing a Contact Us message is
+// checked first since it's the simpler, chat_id-scoped flow that works even
+// for unregistered users; it falls through to the vocab spelling-reply
+// handler otherwise (which is text-only, so photos with no active contact
+// flow are simply ignored).
+// ─────────────────────────────────────────────
+async function handleTextReply(admin: SupabaseClient, message: TelegramMessage) {
+  const handledAsContact = await handleContactReply(admin, message);
+  if (handledAsContact) return;
+
+  if (!message.text) return;
+  await handleSpellingReply(admin, message);
+}
+
+// ─────────────────────────────────────────────
+// Captures the content (text and/or photo) once a chat is in the "awaiting
+// contact content" state (see handleContactType), relays it to the admin's
+// personal Telegram chat via copyMessage (preserves photos at full quality,
+// no re-hosting needed), and stores a record in the feedback table. Returns
+// whether the message was consumed as contact content (so the caller knows
+// not to also treat it as a spelling-session reply).
+// ─────────────────────────────────────────────
+async function handleContactReply(admin: SupabaseClient, message: TelegramMessage): Promise<boolean> {
+  const chatId = message.chat.id;
+
+  const { data: pending } = await admin
+    .from("telegram_feedback_pending")
+    .select("*")
+    .eq("chat_id", String(chatId))
+    .gt("expires_at", new Date().toISOString())
+    .maybeSingle();
+
+  if (!pending) return false;
+
+  await admin.from("telegram_feedback_pending").delete().eq("chat_id", String(chatId));
+
+  const contentText = (message.text ?? message.caption ?? "").trim();
+  if (!contentText && !message.photo) {
+    await safeSend(chatId, "That looked empty — tap the menu and choose 📩 Contact Us to try again.");
+    return true;
+  }
+
+  const { data: user } = await admin
+    .from("users")
+    .select("id")
+    .eq("telegram_id", String(message.from.id))
+    .maybeSingle();
+
+  await admin.from("feedback").insert({
+    source: "telegram",
+    type: pending.type,
+    user_id: user?.id ?? null,
+    telegram_id: String(message.from.id),
+    telegram_username: message.from.username ?? null,
+    message: contentText || (message.photo ? "[Photo attached]" : ""),
+  });
+
+  const adminChatId = process.env.ADMIN_TELEGRAM_CHAT_ID;
+  if (adminChatId) {
+    const who = message.from.username ? `@${message.from.username}` : `Telegram ID ${message.from.id}`;
+    const label = pending.type === "report" ? "🐛 Problem Report" : "💬 Feedback";
+    try {
+      await safeSend(adminChatId, `${label} (Telegram) from ${who}:`);
+      await copyTelegramMessage(adminChatId, chatId, message.message_id);
+    } catch (e) {
+      console.error("[telegram] contact forward failed:", e);
+    }
+  }
+
+  await safeSend(chatId, "✅ Thanks! Your message has been sent.");
+  return true;
+}
+
+// ─────────────────────────────────────────────
 // Plain text replies during the Spelling stage.
 // ─────────────────────────────────────────────
 async function handleSpellingReply(admin: SupabaseClient, message: TelegramMessage) {
@@ -456,6 +594,7 @@ function mainMenuKeyboard(): InlineKeyboard {
     inline_keyboard: [
       [{ text: "📢 Go to Channel", url: "https://t.me/BandPath" }],
       [{ text: "🌐 Go to Platform", callback_data: "go_platform" }],
+      [{ text: "📩 Contact Us", callback_data: "start_contact" }],
       [{ text: "ℹ️ About BandPath", callback_data: "about_bandpath" }],
     ],
   };

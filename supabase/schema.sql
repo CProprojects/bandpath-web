@@ -356,3 +356,59 @@ create table if not exists public.admin_reply_pending (
 );
 
 alter table public.admin_reply_pending enable row level security;
+
+-- ─────────────────────────────────────────────
+-- promo_codes — one row per blogger/ad code. discount_percent is applied to
+-- the student's price; commission_percent is informational only, used by
+-- the admin panel to compute how much to pay that blogger — no automated
+-- payout happens. Server-only: no RLS policies, only the service role key
+-- may read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.promo_codes (
+  id uuid primary key default gen_random_uuid(),
+  code text not null unique,
+  label text not null,
+  discount_percent int not null default 0 check (discount_percent between 0 and 100),
+  commission_percent int not null default 0 check (commission_percent between 0 and 100),
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+alter table public.promo_codes enable row level security;
+
+-- ─────────────────────────────────────────────
+-- promo_clicks — one row per Telegram chat: which promo code they most
+-- recently clicked (via /start promo_X), consulted when they later pay.
+-- Overwritten on every new click (last-click-wins attribution) — never
+-- deleted after use, so it also doubles as a rough "pending interest" count
+-- per code for the admin stats page. Server-only: no RLS policies, only the
+-- service role key may read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.promo_clicks (
+  telegram_id text primary key,
+  promo_code_id uuid not null references public.promo_codes (id) on delete cascade,
+  clicked_at timestamptz not null default now()
+);
+
+alter table public.promo_clicks enable row level security;
+
+-- ─────────────────────────────────────────────
+-- payments — transaction log for Telegram Stars purchases. Source of truth
+-- for granting `users.plan = 'pro'`. Server-only: no RLS policies, only the
+-- service role key may read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.payments (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references public.users (id) on delete set null,
+  telegram_id text not null,
+  promo_code_id uuid references public.promo_codes (id) on delete set null,
+  plan text not null default 'pro',
+  stars_amount int not null,
+  telegram_charge_id text not null unique,
+  status text not null default 'paid' check (status in ('paid', 'refunded')),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists payments_promo_code_idx on public.payments (promo_code_id);
+
+alter table public.payments enable row level security;

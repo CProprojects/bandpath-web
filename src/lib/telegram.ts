@@ -108,6 +108,51 @@ export async function sendTelegramPhotoFromStorage(
   return sendTelegramPhotoBuffer(chatId, buffer, filename, caption, options);
 }
 
+// Sends a Telegram Stars invoice (currency "XTR"). provider_token is
+// intentionally omitted — Stars payments are digital goods and don't use an
+// external payment provider.
+export async function sendTelegramInvoice(
+  chatId: number | string,
+  { title, description, payload, amountStars }: { title: string; description: string; payload: string; amountStars: number },
+) {
+  const res = await fetch(`${TELEGRAM_API}/sendInvoice`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      title,
+      description,
+      payload,
+      currency: "XTR",
+      prices: [{ label: title, amount: amountStars }],
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Telegram sendInvoice failed: ${await res.text()}`);
+  }
+
+  return res.json();
+}
+
+export async function answerPreCheckoutQuery(preCheckoutQueryId: string, ok: boolean, errorMessage?: string) {
+  const res = await fetch(`${TELEGRAM_API}/answerPreCheckoutQuery`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      pre_checkout_query_id: preCheckoutQueryId,
+      ok,
+      ...(errorMessage ? { error_message: errorMessage } : {}),
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Telegram answerPreCheckoutQuery failed: ${await res.text()}`);
+  }
+
+  return res.json();
+}
+
 export async function copyTelegramMessage(
   chatId: number | string,
   fromChatId: number | string,

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Megaphone, Users, MessageSquare } from "lucide-react";
+import { Megaphone, Users, MessageSquare, Tag } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { AdminSignOutButton } from "@/components/AdminSignOutButton";
 
@@ -7,6 +7,7 @@ const NAV = [
   { href: "/admin/users", label: "Users", Icon: Users },
   { href: "/admin/broadcast", label: "Broadcast", Icon: Megaphone },
   { href: "/admin/feedback", label: "Feedback", Icon: MessageSquare },
+  { href: "/admin/promo-codes", label: "Promo Codes", Icon: Tag },
 ];
 
 export function AdminShell({ active, children }: { active: string; children: React.ReactNode }) {

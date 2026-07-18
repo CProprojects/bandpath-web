@@ -6,6 +6,8 @@ import {
   copyTelegramMessage,
   editTelegramMessage,
   answerCallbackQuery,
+  sendTelegramInvoice,
+  answerPreCheckoutQuery,
   generateLoginCode,
   generateSessionToken,
   type InlineKeyboard,
@@ -21,6 +23,12 @@ type TelegramMessage = {
   text?: string;
   caption?: string;
   photo?: { file_id: string; width: number; height: number }[];
+  successful_payment?: { telegram_payment_charge_id: string; invoice_payload: string; total_amount: number };
+};
+
+type TelegramPreCheckoutQuery = {
+  id: string;
+  from: { id: number };
 };
 
 type TelegramCallbackQuery = {
@@ -44,8 +52,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
+  if (update.pre_checkout_query) {
+    await handlePreCheckout(update.pre_checkout_query);
+    return NextResponse.json({ ok: true });
+  }
+
   const message: TelegramMessage | undefined = update.message;
-  if (!message || (!message.text && !message.photo)) {
+  if (!message || (!message.text && !message.photo && !message.successful_payment)) {
+    return NextResponse.json({ ok: true });
+  }
+
+  if (message.successful_payment) {
+    await handleSuccessfulPayment(admin, message);
     return NextResponse.json({ ok: true });
   }
 
@@ -117,11 +135,13 @@ async function clearPendingContact(admin: SupabaseClient, chatId: number) {
 async function handleStart(admin: SupabaseClient, message: TelegramMessage) {
   const startParam = message.text!.trim().split(/\s+/)[1];
 
+  if (startParam?.startsWith("promo_")) {
+    await handlePromoClick(admin, message, startParam.slice("promo_".length));
+    return;
+  }
+
   if (startParam === "upgrade") {
-    await safeSend(
-      message.chat.id,
-      "BandPath Pro isn't purchasable yet, but it's coming soon! We'll let you know as soon as it's ready.",
-    );
+    await handleUpgrade(admin, message);
     return;
   }
 
@@ -163,6 +183,112 @@ async function handleStart(admin: SupabaseClient, message: TelegramMessage) {
     undefined,
     "HTML",
   );
+}
+
+// ─────────────────────────────────────────────
+// /start promo_XYZ — a blogger/ad deep link. Records last-click attribution
+// (overwrites any earlier code for this chat) so /start upgrade later on
+// picks up the discount, even if the user doesn't buy right away.
+// ─────────────────────────────────────────────
+async function handlePromoClick(admin: SupabaseClient, message: TelegramMessage, rawCode: string) {
+  const code = rawCode.toUpperCase();
+  const { data: promo } = await admin.from("promo_codes").select("*").eq("code", code).eq("active", true).maybeSingle();
+
+  if (!promo) {
+    await safeSend(message.chat.id, WELCOME_TEXT, mainMenuKeyboard());
+    return;
+  }
+
+  await admin.from("promo_clicks").upsert({
+    telegram_id: String(message.from.id),
+    promo_code_id: promo.id,
+    clicked_at: new Date().toISOString(),
+  });
+
+  await safeSend(
+    message.chat.id,
+    `🎉 Code "${promo.code}" applied — you'll get ${promo.discount_percent}% off Pro!\n\n${WELCOME_TEXT}`,
+    mainMenuKeyboard(),
+  );
+}
+
+// ─────────────────────────────────────────────
+// /start upgrade — sends a Telegram Stars invoice for BandPath Pro (30
+// days). Requires an already-linked account (users.plan lives there).
+// Applies any pending promo-code discount from handlePromoClick above.
+// ─────────────────────────────────────────────
+async function handleUpgrade(admin: SupabaseClient, message: TelegramMessage) {
+  const chatId = message.chat.id;
+  const telegramId = String(message.from.id);
+
+  const { data: user } = await admin.from("users").select("id").eq("telegram_id", telegramId).maybeSingle();
+  if (!user) {
+    await safeSend(chatId, "Log in to BandPath first (tap 🌐 Go to Platform), then send /start upgrade again.");
+    return;
+  }
+
+  const { data: click } = await admin
+    .from("promo_clicks")
+    .select("*, promo_codes(*)")
+    .eq("telegram_id", telegramId)
+    .maybeSingle();
+  const promo = click?.promo_codes && click.promo_codes.active ? click.promo_codes : null;
+
+  const basePrice = Number(process.env.PRO_PRICE_STARS ?? "1");
+  const amountStars = Math.max(1, Math.round(basePrice * (1 - (promo?.discount_percent ?? 0) / 100)));
+
+  try {
+    await sendTelegramInvoice(chatId, {
+      title: "BandPath Pro — 30 days",
+      description: promo
+        ? `Full access to all tests and features for 30 days. Includes ${promo.discount_percent}% off with code ${promo.code}.`
+        : "Full access to all tests and features for 30 days.",
+      payload: promo?.id ?? "none",
+      amountStars,
+    });
+  } catch (e) {
+    console.error("[telegram] sendInvoice failed:", e);
+    await safeSend(chatId, "Something went wrong sending the payment invoice — please try again.");
+  }
+}
+
+// ─────────────────────────────────────────────
+// pre_checkout_query — must be answered within 10 seconds or the payment is
+// cancelled. Price was already computed server-side in handleUpgrade, so
+// there's nothing left to validate; always approve.
+// ─────────────────────────────────────────────
+async function handlePreCheckout(query: TelegramPreCheckoutQuery) {
+  try {
+    await answerPreCheckoutQuery(query.id, true);
+  } catch (e) {
+    console.error("[telegram] answerPreCheckoutQuery failed:", e);
+  }
+}
+
+// ─────────────────────────────────────────────
+// successful_payment — the source of truth for granting Pro access. Records
+// the transaction (for admin promo-code stats) and flips users.plan.
+// ─────────────────────────────────────────────
+async function handleSuccessfulPayment(admin: SupabaseClient, message: TelegramMessage) {
+  const payment = message.successful_payment!;
+  const telegramId = String(message.from.id);
+  const promoCodeId = payment.invoice_payload !== "none" ? payment.invoice_payload : null;
+
+  const { data: user } = await admin.from("users").select("id").eq("telegram_id", telegramId).maybeSingle();
+
+  await admin.from("payments").insert({
+    user_id: user?.id ?? null,
+    telegram_id: telegramId,
+    promo_code_id: promoCodeId,
+    stars_amount: payment.total_amount,
+    telegram_charge_id: payment.telegram_payment_charge_id,
+  });
+
+  if (user) {
+    await admin.from("users").update({ plan: "pro" }).eq("id", user.id);
+  }
+
+  await safeSend(message.chat.id, "✅ Payment received — you now have BandPath Pro for 30 days!");
 }
 
 // ─────────────────────────────────────────────

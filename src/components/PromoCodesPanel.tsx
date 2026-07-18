@@ -1,7 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, Plus, Loader2 } from "lucide-react";
+import { Search, Plus, Loader2, ChevronDown, ChevronUp } from "lucide-react";
+
+type Buyer = { name: string; telegramId: string | null; createdAt: string };
 
 type PromoCodeItem = {
   id: string;
@@ -14,6 +16,7 @@ type PromoCodeItem = {
   revenueStars: number;
   owedStars: number;
   pendingClicks: number;
+  buyers: Buyer[];
   createdAt: string;
 };
 
@@ -100,6 +103,7 @@ function CreateCodeForm({ onCreated }: { onCreated: () => void }) {
 
 function CodeRow({ item, onToggled }: { item: PromoCodeItem; onToggled: (id: string, active: boolean) => void }) {
   const [toggling, setToggling] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   async function toggleActive() {
     setToggling(true);
@@ -113,42 +117,68 @@ function CodeRow({ item, onToggled }: { item: PromoCodeItem; onToggled: (id: str
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-bp-border bg-bp-card/60 p-3.5">
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <span className="font-mono font-bold text-white">{item.code}</span>
-          <span className="text-xs text-white/40">{item.label}</span>
-          {!item.active && (
-            <span className="rounded-full bg-bp-danger/15 px-2 py-0.5 text-[10px] font-bold text-bp-danger">Inactive</span>
-          )}
+    <div className="rounded-2xl border border-bp-border bg-bp-card/60 p-3.5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <span className="font-mono font-bold text-white">{item.code}</span>
+            <span className="text-xs text-white/40">{item.label}</span>
+            {!item.active && (
+              <span className="rounded-full bg-bp-danger/15 px-2 py-0.5 text-[10px] font-bold text-bp-danger">Inactive</span>
+            )}
+          </div>
+          <div className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-xs text-white/40">
+            <span>{item.discountPercent}% student discount</span>
+            <span>{item.commissionPercent}% commission</span>
+            <span>{item.pendingClicks} pending click{item.pendingClicks === 1 ? "" : "s"}</span>
+          </div>
         </div>
-        <div className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-xs text-white/40">
-          <span>{item.discountPercent}% student discount</span>
-          <span>{item.commissionPercent}% commission</span>
-          <span>{item.pendingClicks} pending click{item.pendingClicks === 1 ? "" : "s"}</span>
+        <div className="flex flex-shrink-0 items-center gap-4">
+          <button
+            onClick={() => setExpanded((v) => !v)}
+            disabled={item.conversions === 0}
+            className="flex items-center gap-1 text-right text-xs disabled:cursor-default"
+          >
+            <div>
+              <div className="flex items-center gap-1 font-bold text-bp-success">
+                {item.conversions} sold
+                {item.conversions > 0 && (expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />)}
+              </div>
+              <div className="mt-0.5 text-white/40">{item.revenueStars} ⭐ revenue</div>
+            </div>
+          </button>
+          <div className="text-right text-xs">
+            <div className="font-bold text-bp-warning">{item.owedStars} ⭐</div>
+            <div className="mt-0.5 text-white/40">owed to blogger</div>
+          </div>
+          <button
+            onClick={toggleActive}
+            disabled={toggling}
+            className={`rounded-lg border px-2.5 py-1.5 text-[11px] font-bold transition-colors disabled:opacity-50 ${
+              item.active
+                ? "border-bp-border text-white/50 hover:text-white"
+                : "border-bp-success/30 bg-bp-success/10 text-bp-success hover:bg-bp-success/20"
+            }`}
+          >
+            {toggling ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : item.active ? "Deactivate" : "Activate"}
+          </button>
         </div>
       </div>
-      <div className="flex flex-shrink-0 items-center gap-4">
-        <div className="text-right text-xs">
-          <div className="font-bold text-bp-success">{item.conversions} sold</div>
-          <div className="mt-0.5 text-white/40">{item.revenueStars} ⭐ revenue</div>
+
+      {expanded && item.buyers.length > 0 && (
+        <div className="mt-3 flex flex-col gap-1.5 border-t border-bp-border pt-3">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-white/40">Bought by</div>
+          {item.buyers.map((buyer, i) => (
+            <div key={i} className="flex items-center justify-between text-xs">
+              <span className="text-white/80">
+                {buyer.name}
+                {buyer.telegramId && <span className="ml-1.5 text-white/35">· Telegram {buyer.telegramId}</span>}
+              </span>
+              <span className="text-white/35">{new Date(buyer.createdAt).toLocaleString()}</span>
+            </div>
+          ))}
         </div>
-        <div className="text-right text-xs">
-          <div className="font-bold text-bp-warning">{item.owedStars} ⭐</div>
-          <div className="mt-0.5 text-white/40">owed to blogger</div>
-        </div>
-        <button
-          onClick={toggleActive}
-          disabled={toggling}
-          className={`rounded-lg border px-2.5 py-1.5 text-[11px] font-bold transition-colors disabled:opacity-50 ${
-            item.active
-              ? "border-bp-border text-white/50 hover:text-white"
-              : "border-bp-success/30 bg-bp-success/10 text-bp-success hover:bg-bp-success/20"
-          }`}
-        >
-          {toggling ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : item.active ? "Deactivate" : "Activate"}
-        </button>
-      </div>
+      )}
     </div>
   );
 }

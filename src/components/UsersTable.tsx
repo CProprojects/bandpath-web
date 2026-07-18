@@ -12,6 +12,7 @@ type UserRow = {
   streakCount: number;
   createdAt: string;
   lastActiveAt: string | null;
+  promoCode: string | null;
 };
 
 type SortKey = "createdAt" | "xpTotal" | "streakCount" | "lastActiveAt";
@@ -114,6 +115,11 @@ export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
                 {u.plan === "pro" && (
                   <span className="flex-shrink-0 rounded-full bg-bp-warning/15 px-2 py-0.5 text-[10px] font-bold text-bp-warning">
                     Pro
+                  </span>
+                )}
+                {u.plan === "pro" && u.promoCode && (
+                  <span className="flex-shrink-0 rounded-full bg-bp-accent/15 px-2 py-0.5 font-mono text-[10px] font-bold text-bp-accent">
+                    {u.promoCode}
                   </span>
                 )}
               </div>

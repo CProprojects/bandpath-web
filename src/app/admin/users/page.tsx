@@ -9,12 +9,28 @@ export default async function AdminUsersPage() {
   await requireAdmin();
 
   const admin = createAdminClient();
-  const { data: allUsers } = await admin
-    .from("users")
-    .select("id, name, full_name, telegram_id, plan, xp_total, streak_count, created_at, last_active_at")
-    .order("created_at", { ascending: false });
+  const [{ data: allUsers }, { data: payments }] = await Promise.all([
+    admin
+      .from("users")
+      .select("id, name, full_name, telegram_id, plan, xp_total, streak_count, created_at, last_active_at")
+      .order("created_at", { ascending: false }),
+    admin
+      .from("payments")
+      .select("user_id, created_at, promo_codes(code)")
+      .eq("status", "paid")
+      .order("created_at", { ascending: false }),
+  ]);
 
   const users = allUsers ?? [];
+
+  // Most recent paid purchase per user, so the users list can show which
+  // promo code (if any) they used to go Pro.
+  const promoCodeByUser = new Map<string, string>();
+  (payments ?? []).forEach((p) => {
+    if (!p.user_id || promoCodeByUser.has(p.user_id)) return;
+    const code = (p.promo_codes as unknown as { code: string } | null)?.code;
+    if (code) promoCodeByUser.set(p.user_id, code);
+  });
   const totalUsers = users.length;
   const proUsers = users.filter((u) => u.plan === "pro").length;
 
@@ -81,6 +97,7 @@ export default async function AdminUsersPage() {
             streakCount: u.streak_count,
             createdAt: u.created_at,
             lastActiveAt: u.last_active_at,
+            promoCode: promoCodeByUser.get(u.id) ?? null,
           }))}
         />
       </div>

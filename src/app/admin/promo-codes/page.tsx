@@ -11,15 +11,34 @@ export default async function AdminPromoCodesPage() {
 
   const [{ data: codes }, { data: payments }, { data: clicks }] = await Promise.all([
     admin.from("promo_codes").select("*").order("created_at", { ascending: false }),
-    admin.from("payments").select("promo_code_id, stars_amount").eq("status", "paid"),
+    admin
+      .from("payments")
+      .select("promo_code_id, stars_amount, user_id, telegram_id, created_at")
+      .eq("status", "paid")
+      .order("created_at", { ascending: false }),
     admin.from("promo_clicks").select("promo_code_id"),
   ]);
 
-  const paymentsByCode = new Map<string, { conversions: number; revenue: number }>();
+  const buyerUserIds = [...new Set((payments ?? []).map((p) => p.user_id).filter((id): id is string => !!id))];
+  const { data: buyerUsers } = buyerUserIds.length
+    ? await admin.from("users").select("id, name, full_name, telegram_id").in("id", buyerUserIds)
+    : { data: [] };
+  const buyerMap = new Map((buyerUsers ?? []).map((u) => [u.id, u]));
+
+  const paymentsByCode = new Map<
+    string,
+    { conversions: number; revenue: number; buyers: { name: string; telegramId: string | null; createdAt: string }[] }
+  >();
   (payments ?? []).forEach((p) => {
     if (!p.promo_code_id) return;
-    const prev = paymentsByCode.get(p.promo_code_id) ?? { conversions: 0, revenue: 0 };
-    paymentsByCode.set(p.promo_code_id, { conversions: prev.conversions + 1, revenue: prev.revenue + p.stars_amount });
+    const buyerUser = p.user_id ? buyerMap.get(p.user_id) : undefined;
+    const name = buyerUser?.name || buyerUser?.full_name || (p.telegram_id ? `Telegram ${p.telegram_id}` : "Unknown");
+    const prev = paymentsByCode.get(p.promo_code_id) ?? { conversions: 0, revenue: 0, buyers: [] };
+    paymentsByCode.set(p.promo_code_id, {
+      conversions: prev.conversions + 1,
+      revenue: prev.revenue + p.stars_amount,
+      buyers: [...prev.buyers, { name, telegramId: buyerUser?.telegram_id ?? p.telegram_id, createdAt: p.created_at }],
+    });
   });
 
   const clicksByCode = new Map<string, number>();
@@ -28,7 +47,7 @@ export default async function AdminPromoCodesPage() {
   });
 
   const items = (codes ?? []).map((c) => {
-    const stats = paymentsByCode.get(c.id) ?? { conversions: 0, revenue: 0 };
+    const stats = paymentsByCode.get(c.id) ?? { conversions: 0, revenue: 0, buyers: [] };
     return {
       id: c.id,
       code: c.code,
@@ -40,6 +59,7 @@ export default async function AdminPromoCodesPage() {
       revenueStars: stats.revenue,
       owedStars: Math.round((stats.revenue * c.commission_percent) / 100),
       pendingClicks: clicksByCode.get(c.id) ?? 0,
+      buyers: stats.buyers,
       createdAt: c.created_at,
     };
   });

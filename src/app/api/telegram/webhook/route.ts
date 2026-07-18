@@ -71,9 +71,11 @@ export async function POST(request: NextRequest) {
 
   if (text.startsWith("/start")) {
     await clearPendingContact(admin, message.chat.id);
+    await clearPendingPromoEntry(admin, message.chat.id);
     await handleStart(admin, message);
   } else if (text === "/vocab") {
     await clearPendingContact(admin, message.chat.id);
+    await clearPendingPromoEntry(admin, message.chat.id);
     await handleVocabCommand(admin, message);
   } else {
     await handleTextReply(admin, message);
@@ -126,6 +128,10 @@ async function safeAnswer(callbackQueryId: string, text?: string) {
 
 async function clearPendingContact(admin: SupabaseClient, chatId: number) {
   await admin.from("telegram_feedback_pending").delete().eq("chat_id", String(chatId));
+}
+
+async function clearPendingPromoEntry(admin: SupabaseClient, chatId: number) {
+  await admin.from("telegram_promo_entry_pending").delete().eq("chat_id", String(chatId));
 }
 
 // ─────────────────────────────────────────────
@@ -213,9 +219,10 @@ async function handlePromoClick(admin: SupabaseClient, message: TelegramMessage,
 }
 
 // ─────────────────────────────────────────────
-// /start upgrade — sends a Telegram Stars invoice for BandPath Pro (30
-// days). Requires an already-linked account (users.plan lives there).
-// Applies any pending promo-code discount from handlePromoClick above.
+// /start upgrade — requires an already-linked account (users.plan lives
+// there). Rather than invoicing immediately, shows a prompt so the user can
+// type a promo code by hand (not just via a /start promo_X deep link)
+// before paying. sendUpgradeInvoice (below) does the actual Stars invoice.
 // ─────────────────────────────────────────────
 async function handleUpgrade(admin: SupabaseClient, message: TelegramMessage) {
   const chatId = message.chat.id;
@@ -227,12 +234,78 @@ async function handleUpgrade(admin: SupabaseClient, message: TelegramMessage) {
     return;
   }
 
+  await clearPendingPromoEntry(admin, chatId);
+
+  const promo = await getActivePromoForTelegramId(admin, telegramId);
+
+  if (promo) {
+    await safeSend(chatId, `🎉 Code "${promo.code}" is applied — ${promo.discount_percent}% off Pro.`, {
+      inline_keyboard: [
+        [{ text: "✅ Continue to Payment", callback_data: "upgrade_pay" }],
+        [{ text: "✏️ Enter a different code", callback_data: "upgrade_enter_promo" }],
+      ],
+    });
+  } else {
+    await safeSend(chatId, "💎 Upgrade to BandPath Pro — 30 days of full access.\n\nHave a promo code?", {
+      inline_keyboard: [
+        [{ text: "🏷️ Enter Promo Code", callback_data: "upgrade_enter_promo" }],
+        [{ text: "➡️ Continue without a code", callback_data: "upgrade_pay" }],
+      ],
+    });
+  }
+}
+
+async function getActivePromoForTelegramId(admin: SupabaseClient, telegramId: string) {
   const { data: click } = await admin
     .from("promo_clicks")
     .select("*, promo_codes(*)")
     .eq("telegram_id", telegramId)
     .maybeSingle();
-  const promo = click?.promo_codes && click.promo_codes.active ? click.promo_codes : null;
+  return click?.promo_codes && click.promo_codes.active ? click.promo_codes : null;
+}
+
+// ─────────────────────────────────────────────
+// "Enter Promo Code" button — marks the chat as awaiting a typed code.
+// ─────────────────────────────────────────────
+async function handleUpgradeEnterPromo(admin: SupabaseClient, cq: TelegramCallbackQuery) {
+  const chatId = cq.message?.chat?.id;
+  if (!chatId) {
+    await safeAnswer(cq.id);
+    return;
+  }
+
+  await admin.from("telegram_promo_entry_pending").upsert({
+    chat_id: String(chatId),
+    expires_at: new Date(Date.now() + 15 * 60 * 1000).toISOString(),
+  });
+
+  await safeAnswer(cq.id);
+  await safeSend(chatId, "✏️ Type your promo code now, or tap Skip if you don't have one:", {
+    inline_keyboard: [[{ text: "⏭️ Skip", callback_data: "upgrade_pay" }]],
+  });
+}
+
+// ─────────────────────────────────────────────
+// "Continue to Payment" / "Continue without a code" / "Skip" button —
+// sends the actual Stars invoice, applying whatever promo (if any) is
+// attributed to this chat at this moment. Also clears any "awaiting typed
+// code" state, since reaching this button means that flow is done —
+// otherwise a later, unrelated message could be wrongly read as a promo
+// code attempt.
+// ─────────────────────────────────────────────
+async function handleUpgradePay(admin: SupabaseClient, cq: TelegramCallbackQuery) {
+  const chatId = cq.message?.chat?.id;
+  if (!chatId) {
+    await safeAnswer(cq.id);
+    return;
+  }
+  await clearPendingPromoEntry(admin, chatId);
+  await safeAnswer(cq.id);
+  await sendUpgradeInvoice(admin, chatId, String(cq.from.id));
+}
+
+async function sendUpgradeInvoice(admin: SupabaseClient, chatId: number | string, telegramId: string) {
+  const promo = await getActivePromoForTelegramId(admin, telegramId);
 
   const basePrice = Number(process.env.PRO_PRICE_STARS ?? "1");
   const amountStars = Math.max(1, Math.round(basePrice * (1 - (promo?.discount_percent ?? 0) / 100)));
@@ -460,6 +533,14 @@ async function handleCallbackQuery(admin: SupabaseClient, cq: TelegramCallbackQu
     await handleReplyButton(admin, cq, data.slice("reply:".length));
     return;
   }
+  if (data === "upgrade_enter_promo") {
+    await handleUpgradeEnterPromo(admin, cq);
+    return;
+  }
+  if (data === "upgrade_pay") {
+    await handleUpgradePay(admin, cq);
+    return;
+  }
 
   const { data: user } = await admin
     .from("users")
@@ -576,11 +657,65 @@ async function handleTextReply(admin: SupabaseClient, message: TelegramMessage) 
   const handledAsAdminReply = await handleAdminReplyCapture(admin, message);
   if (handledAsAdminReply) return;
 
+  const handledAsPromoEntry = await handlePromoEntryReply(admin, message);
+  if (handledAsPromoEntry) return;
+
   const handledAsContact = await handleContactReply(admin, message);
   if (handledAsContact) return;
 
   if (!message.text) return;
   await handleSpellingReply(admin, message);
+}
+
+// ─────────────────────────────────────────────
+// Captures a manually-typed promo code once the chat is in the "awaiting
+// promo code" state (see handleUpgradeEnterPromo). Applies it via the same
+// promo_clicks attribution used by /start promo_X deep links, so
+// sendUpgradeInvoice picks it up the same way either path was used.
+// ─────────────────────────────────────────────
+async function handlePromoEntryReply(admin: SupabaseClient, message: TelegramMessage): Promise<boolean> {
+  const chatId = message.chat.id;
+  const telegramId = String(message.from.id);
+
+  const { data: pending } = await admin
+    .from("telegram_promo_entry_pending")
+    .select("*")
+    .eq("chat_id", String(chatId))
+    .gt("expires_at", new Date().toISOString())
+    .maybeSingle();
+
+  if (!pending) return false;
+
+  await admin.from("telegram_promo_entry_pending").delete().eq("chat_id", String(chatId));
+
+  const rawCode = (message.text ?? "").trim().toUpperCase();
+  if (!rawCode) {
+    await safeSend(chatId, "That looked empty. Send /start upgrade to try again.");
+    return true;
+  }
+
+  const { data: promo } = await admin.from("promo_codes").select("*").eq("code", rawCode).eq("active", true).maybeSingle();
+
+  if (!promo) {
+    await safeSend(chatId, `❌ Code "${rawCode}" isn't valid or is no longer active.`, {
+      inline_keyboard: [
+        [{ text: "✏️ Try another code", callback_data: "upgrade_enter_promo" }],
+        [{ text: "➡️ Continue without a code", callback_data: "upgrade_pay" }],
+      ],
+    });
+    return true;
+  }
+
+  await admin.from("promo_clicks").upsert({
+    telegram_id: telegramId,
+    promo_code_id: promo.id,
+    clicked_at: new Date().toISOString(),
+  });
+
+  await safeSend(chatId, `🎉 Code "${promo.code}" applied — ${promo.discount_percent}% off!`, {
+    inline_keyboard: [[{ text: "✅ Continue to Payment", callback_data: "upgrade_pay" }]],
+  });
+  return true;
 }
 
 // ─────────────────────────────────────────────

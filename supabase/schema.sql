@@ -412,3 +412,17 @@ create table if not exists public.payments (
 create index if not exists payments_promo_code_idx on public.payments (promo_code_id);
 
 alter table public.payments enable row level security;
+
+-- ─────────────────────────────────────────────
+-- telegram_promo_entry_pending — marks a chat as "awaiting a typed promo
+-- code" after tapping "Enter Promo Code" on the upgrade prompt, so the next
+-- plain-text message is checked as a promo code instead of anything else.
+-- Self-expiring after 15 minutes. Server-only: no RLS policies, only the
+-- service role key may read/write.
+-- ─────────────────────────────────────────────
+create table if not exists public.telegram_promo_entry_pending (
+  chat_id text primary key,
+  expires_at timestamptz not null default (now() + interval '15 minutes')
+);
+
+alter table public.telegram_promo_entry_pending enable row level security;

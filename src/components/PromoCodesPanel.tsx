@@ -57,36 +57,56 @@ function CreateCodeForm({ onCreated }: { onCreated: () => void }) {
     <form onSubmit={handleSubmit} className="rounded-2xl border border-bp-border bg-bp-card/60 p-4">
       <div className="text-sm font-bold text-white">New Promo Code</div>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <input
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="CODE (e.g. ROVSHAN10)"
-          className="rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
-        />
-        <input
-          value={label}
-          onChange={(e) => setLabel(e.target.value)}
-          placeholder="Blogger / channel name"
-          className="rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
-        />
-        <input
-          type="number"
-          min="0"
-          max="100"
-          value={discountPercent}
-          onChange={(e) => setDiscountPercent(e.target.value)}
-          placeholder="Discount %"
-          className="rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
-        />
-        <input
-          type="number"
-          min="0"
-          max="100"
-          value={commissionPercent}
-          onChange={(e) => setCommissionPercent(e.target.value)}
-          placeholder="Commission %"
-          className="rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
-        />
+        <div>
+          <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-white/40">Code</label>
+          <input
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="e.g. ROVSHAN10"
+            className="w-full rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
+          />
+          <p className="mt-1 text-[10px] text-white/35">What the student/blogger types or clicks</p>
+        </div>
+        <div>
+          <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-white/40">
+            Blogger / Channel
+          </label>
+          <input
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+            placeholder="e.g. Rovshan's channel"
+            className="w-full rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
+          />
+          <p className="mt-1 text-[10px] text-white/35">Just for your own reference</p>
+        </div>
+        <div>
+          <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-white/40">
+            Discount %
+          </label>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value={discountPercent}
+            onChange={(e) => setDiscountPercent(e.target.value)}
+            className="w-full rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
+          />
+          <p className="mt-1 text-[10px] text-white/35">How much off the price the student gets</p>
+        </div>
+        <div>
+          <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-white/40">
+            Commission %
+          </label>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value={commissionPercent}
+            onChange={(e) => setCommissionPercent(e.target.value)}
+            className="w-full rounded-lg border border-bp-border bg-bp-bg px-3 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-bp-accent"
+          />
+          <p className="mt-1 text-[10px] text-white/35">How much you owe the blogger, for your own tracking</p>
+        </div>
       </div>
       <button
         type="submit"
@@ -116,9 +136,15 @@ function CodeRow({ item, onToggled }: { item: PromoCodeItem; onToggled: (id: str
     if (res.ok) onToggled(item.id, !item.active);
   }
 
+  const canExpand = item.conversions > 0;
+
   return (
     <div className="rounded-2xl border border-bp-border bg-bp-card/60 p-3.5">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div
+        onClick={() => canExpand && setExpanded((v) => !v)}
+        className={`flex flex-wrap items-center justify-between gap-3 ${canExpand ? "cursor-pointer" : ""}`}
+        title={canExpand ? "Click to see who bought with this code" : undefined}
+      >
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <span className="font-mono font-bold text-white">{item.code}</span>
@@ -126,6 +152,7 @@ function CodeRow({ item, onToggled }: { item: PromoCodeItem; onToggled: (id: str
             {!item.active && (
               <span className="rounded-full bg-bp-danger/15 px-2 py-0.5 text-[10px] font-bold text-bp-danger">Inactive</span>
             )}
+            {canExpand && (expanded ? <ChevronUp className="h-3.5 w-3.5 text-white/30" /> : <ChevronDown className="h-3.5 w-3.5 text-white/30" />)}
           </div>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-xs text-white/40">
             <span>{item.discountPercent}% student discount</span>
@@ -134,25 +161,19 @@ function CodeRow({ item, onToggled }: { item: PromoCodeItem; onToggled: (id: str
           </div>
         </div>
         <div className="flex flex-shrink-0 items-center gap-4">
-          <button
-            onClick={() => setExpanded((v) => !v)}
-            disabled={item.conversions === 0}
-            className="flex items-center gap-1 text-right text-xs disabled:cursor-default"
-          >
-            <div>
-              <div className="flex items-center gap-1 font-bold text-bp-success">
-                {item.conversions} sold
-                {item.conversions > 0 && (expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />)}
-              </div>
-              <div className="mt-0.5 text-white/40">{item.revenueStars} ⭐ revenue</div>
-            </div>
-          </button>
+          <div className="text-right text-xs">
+            <div className="font-bold text-bp-success">{item.conversions} sold</div>
+            <div className="mt-0.5 text-white/40">{item.revenueStars} ⭐ revenue</div>
+          </div>
           <div className="text-right text-xs">
             <div className="font-bold text-bp-warning">{item.owedStars} ⭐</div>
             <div className="mt-0.5 text-white/40">owed to blogger</div>
           </div>
           <button
-            onClick={toggleActive}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleActive();
+            }}
             disabled={toggling}
             className={`rounded-lg border px-2.5 py-1.5 text-[11px] font-bold transition-colors disabled:opacity-50 ${
               item.active

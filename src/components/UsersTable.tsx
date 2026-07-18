@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, Crown, Loader2 } from "lucide-react";
+import { Search, Crown, Loader2, Tag } from "lucide-react";
 
 type UserRow = {
   id: string;
@@ -16,6 +16,7 @@ type UserRow = {
 };
 
 type SortKey = "createdAt" | "xpTotal" | "streakCount" | "lastActiveAt";
+type PlanFilter = "all" | "pro" | "free";
 
 function formatLastOnline(iso: string | null) {
   if (!iso) return "Never active";
@@ -35,18 +36,17 @@ function formatLastOnline(iso: string | null) {
 export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
   const [users, setUsers] = useState(initialUsers);
   const [query, setQuery] = useState("");
+  const [planFilter, setPlanFilter] = useState<PlanFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("createdAt");
   const [togglingId, setTogglingId] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const rows = q
-      ? users.filter(
-          (u) =>
-            (u.name ?? "").toLowerCase().includes(q) ||
-            (u.telegramId ?? "").toLowerCase().includes(q),
-        )
-      : users;
+    const rows = users.filter((u) => {
+      if (planFilter !== "all" && u.plan !== planFilter) return false;
+      if (!q) return true;
+      return (u.name ?? "").toLowerCase().includes(q) || (u.telegramId ?? "").toLowerCase().includes(q);
+    });
 
     return [...rows].sort((a, b) => {
       if (sortKey === "createdAt") return b.createdAt.localeCompare(a.createdAt);
@@ -54,7 +54,7 @@ export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
       if (sortKey === "lastActiveAt") return (b.lastActiveAt ?? "").localeCompare(a.lastActiveAt ?? "");
       return b.streakCount - a.streakCount;
     });
-  }, [users, query, sortKey]);
+  }, [users, query, planFilter, sortKey]);
 
   async function togglePlan(user: UserRow) {
     const nextPlan = user.plan === "pro" ? "free" : "pro";
@@ -100,6 +100,22 @@ export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
         </select>
       </div>
 
+      <div className="mt-2 flex gap-2">
+        {(["all", "pro", "free"] as const).map((f) => (
+          <button
+            key={f}
+            onClick={() => setPlanFilter(f)}
+            className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
+              planFilter === f
+                ? "bg-gradient-to-r from-bp-accent to-[#0098e0] text-[#06243c]"
+                : "border border-bp-border text-white/60 hover:text-white"
+            }`}
+          >
+            {f === "all" ? "All" : f === "pro" ? "Pro Users" : "Standard Users"}
+          </button>
+        ))}
+      </div>
+
       <div className="mt-3 flex flex-col gap-2">
         {filtered.length === 0 && (
           <p className="py-6 text-center text-sm text-white/40">No users match &ldquo;{query}&rdquo;.</p>
@@ -118,7 +134,8 @@ export function UsersTable({ users: initialUsers }: { users: UserRow[] }) {
                   </span>
                 )}
                 {u.plan === "pro" && u.promoCode && (
-                  <span className="flex-shrink-0 rounded-full bg-bp-accent/15 px-2 py-0.5 font-mono text-[10px] font-bold text-bp-accent">
+                  <span className="flex flex-shrink-0 items-center gap-1 rounded-full bg-bp-accent/15 px-2 py-0.5 font-mono text-[10px] font-bold text-bp-accent">
+                    <Tag className="h-2.5 w-2.5" />
                     {u.promoCode}
                   </span>
                 )}

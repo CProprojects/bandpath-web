@@ -296,6 +296,32 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
 #back-to-results{display:none;position:fixed;top:62px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
 #back-to-results:hover{opacity:.88}
 
+
+/* AUDIOSCRIPT */
+#script-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5100;overflow-y:auto;padding:20px 20px 40px}
+body.dark #script-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.script-header{max-width:980px;margin:0 auto 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.script-title{font-size:18px;font-weight:800;color:var(--text)}
+.script-back{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);color:var(--text);border:1.5px solid var(--border);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.script-back:hover{opacity:.85}
+.script-tabs{display:flex;gap:3px;background:var(--bg3);border-radius:9px;padding:3px;max-width:980px;margin:0 auto 16px}
+.script-tab{flex:1;background:transparent;color:var(--text2);border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:all .15s}
+.script-tab:hover{color:var(--text)}
+.script-tab.active{background:var(--accent);color:#06243c;box-shadow:0 0 16px -4px rgba(0,196,255,.5)}
+.script-layout{max-width:980px;margin:0 auto;display:grid;grid-template-columns:3fr 2fr;gap:16px;align-items:start}
+.script-panel,.script-answers{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+body.dark .script-panel,body.dark .script-answers{background:var(--card-grad)}
+.script-panel-title,.script-answers-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.script-line{font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:10px}
+.script-speaker{color:var(--accent);font-weight:800;margin-right:5px}
+.script-ans-item{display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.script-ans-item:last-child{border-bottom:none}
+.script-ans-q{font-weight:800;color:var(--accent);min-width:34px;flex-shrink:0}
+.script-ans-val{color:var(--text);font-weight:600}
+@media(max-width:768px){
+  .script-layout{grid-template-columns:1fr}
+}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -511,10 +537,36 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
     <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="openScript()">📜 View Script</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
     </a>
+  </div>
+</div>
+
+
+<!-- SCRIPT / AUDIOSCRIPT -->
+<div id="script-screen">
+  <div class="script-header">
+    <div class="script-title">📜 Audioscript — Listening Test 3</div>
+    <button class="script-back" onclick="closeScript()">← Back to Results</button>
+  </div>
+  <div class="script-tabs" id="script-tabs">
+    <button class="script-tab active" onclick="switchScriptPart(0)">Part 1</button>
+    <button class="script-tab" onclick="switchScriptPart(1)">Part 2</button>
+    <button class="script-tab" onclick="switchScriptPart(2)">Part 3</button>
+    <button class="script-tab" onclick="switchScriptPart(3)">Part 4</button>
+  </div>
+  <div class="script-layout">
+    <div class="script-panel">
+      <div class="script-panel-title"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Transcript</div>
+      <div id="script-text-content"></div>
+    </div>
+    <div class="script-answers">
+      <div class="script-answers-title"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Answer Key</div>
+      <div id="script-answers-content"></div>
+    </div>
   </div>
 </div>
 
@@ -1282,6 +1334,204 @@ function backToResults(){
   document.getElementById('back-to-results').style.display='none';
   document.getElementById('results-screen').style.display='block';
 }
+
+// ─────────────────────────────────────────────
+// AUDIOSCRIPT
+// ─────────────────────────────────────────────
+const SCRIPT_DATA=[
+`Narrator: Now turn to section 1. Section 1. You will hear a woman telephoning a member of staff at a local newspaper. First, you have some time to look at questions 1 to 5.
+Narrator: You will see that there is an example that has been done for you. On this occasion only, the conversation relating to this will be played first.
+Stephen: Subscriber services, this is Stephen. May I help you?
+Woman: Good morning, Stephen. I'm calling because I'd like to get a copy of a photo of my son that came out in the newspaper last week.
+Stephen: Sure, I can help you with that. Do you have the exact date?
+Woman: Yes, uh, it was last Monday. That was March...
+Stephen: The tenth?
+Woman: Yes, that's the date.
+Narrator: The date of the newspaper is March the 10th. So, tenth has been written in the space. Now we shall begin. You should answer the questions as you listen, because you will not hear the recording a second time. Listen carefully and answer questions 1 to 5.
+Stephen: Subscriber services, this is Stephen. May I help you?
+Woman: Good morning, Stephen. I'm calling because I'd like to get a copy of a photo of my son that came out in the newspaper last week.
+Stephen: Sure, I can help you with that. Do you have the exact date?
+Woman: Yes, uh, it was last Monday. That was March...
+Stephen: The tenth?
+Woman: Yes, that's the date.
+Stephen: Okay, sure. Just one moment, please. Okay, I have the newspaper from that date on my computer screen. Now, what section was it in?
+Woman: It was a feature story on local high school athletes.
+Stephen: Okay. So, local athletes are always on the back page.
+Woman: No, I don't remember it being at the back. I clearly remember it being on the front.
+Stephen: Oh, you're right. We just started doing those features there in the last several editions. Which story was it?
+Woman: Student athlete of the month. Oops, no, excuse me, I'm sorry. I mean week.
+Stephen: And that's your son, you said? You must be very proud of him. That's quite an accomplishment. Ah, yes, here it is. Chase Packers, baseball player.
+Woman: That's him. But actually, the reporter got his surname wrong. It should be Parkhurst. That's P-A-R-K-H-U-R-S-T.
+Stephen: Okay, I'll make a note of that. Now, I'm assuming this photo is just for your own use, not for additional reprinting?
+Woman: Reprinting?
+Stephen: Yes. With copyright laws, you need to fill out an extra form if you're going to reprint the photo in another publication.
+Woman: Oh, I see. No, it's not for business or commercial purposes or anything. It's just for personal use. I want everyone who visits our home to see it. I'm so proud of him.
+Stephen: Of course. Now, I don't know if you knew this, but even though the photo is in black and white in the paper, you can choose to get your reprint in color.
+Woman: Oh, that's interesting. He does look so distinguished in the black and white. I like that.
+Stephen: Okay.
+Woman: But you know what? I'll actually take the color. That way, his uniform will really stand out.
+Stephen: Sure thing.
+Narrator: Before you hear the rest of the conversation, you have some time to look at questions 6 to 10.
+Narrator: Now listen and answer questions 6 to 10.
+Stephen: Okay, let's see here. What else? Oh, yes, of course, size. What size would you like? You can have the standard size or the wallet size.
+Woman: Um, no, not the small one. These wallet-sized ones aren't helpful as I'd like to frame it.
+Stephen: Just one?
+Woman: Well, can I get more than one?
+Stephen: Yes. Extra copies of the same print are discounted 50% if you order them at the same time.
+Woman: Well, they are quite expensive to begin with. So, while I'd love a couple for the grandparents, I think I'll just stick with one. No, no, no, I'd better get three. It is a once in a lifetime thing, you know. What's a few extra dollars when it comes to memories?
+Stephen: Okay, so let me see here. The total on that will be $80. Would you like to add rush processing?
+Woman: I'd like them really fast.
+Stephen: Okay, rush processing will add $15 to your order.
+Woman: Oh, really? Hmm, that's quite expensive. I do want to get them quickly, but I guess I can be patient, too. So, uh, yeah, I'll just do normal processing. Is it still pretty fast?
+Stephen: Usually about four to five business days.
+Woman: Oh, that's not bad at all. So, let's see, is there anything else?
+Stephen: Just the payment.
+Woman: Yes, of course. Can I pay you with a credit card?
+Stephen: Yes, sure. We also take checks.
+Woman: Oh, that's convenient. I'll do that, then. I really prefer to pay by check rather than use my credit card.
+Stephen: Now, when they arrive, would you like to pick them up in our office, or would you like us to send them to you?
+Woman: Ah, it's rather inconvenient for me to stop by.
+Stephen: I'll go ahead and mail them, then, and that's no extra charge.
+Woman: Oh, good.
+Stephen: One last question, if you don't mind. We routinely survey all our callers just to see how often they read the newspaper.
+Woman: For years and years, we read the entire paper on a daily basis. But now we're so busy, it seems we don't have time to read like we used to, except on weekends. But still, yes, you can say we read it each day. My husband still does, for sure.
+Stephen: Okay, thanks. Now, ma'am, let's get your address.
+Narrator: That is the end of section 1. You now have half a minute to check your answers.`,
+`Presenter: Now turn to Section Two.
+Presenter: Section Two. You will hear a talk by the organizer of an information day about training courses for workers in hotels, restaurants, and other parts of the hospitality industry. First, you have some time to look at questions 11 to 15.
+Presenter: Now listen carefully and answer questions 11 to 15.
+John: Morning, everyone. My name is John. I've worked in the hospitality industry for 20 years, here and all around the world. I've done it all—washing dishes in cafés, waiting tables, hotel work. I've been better at some of these roles than others, to be honest. But what I've always loved is the incredible variety of workmates I've had over the years. Today, I want to introduce some of the training courses available here at the college. So, today's program: this morning, there'll be short presentations about different hospitality jobs. Then, this afternoon, there'll be workshops where you can explore these ideas in more detail. So, your first presentation is on restaurant service. Another session focuses on kitchen assistants who help the cooks in the kitchen. This is a great way to learn cooking skills. There's an amazing number of traditional techniques to learn. You'd be surprised how many top chefs in expensive restaurants started out as a kitchen assistant. But be warned, kitchen assistants arrive at work first and leave last, so think hard about whether you can cope with the commitment. The session about porters, cleaners, and dishwashers is a popular one. These positions are good for students especially, because they require no experience. Dishwashers have to work late into the evening—no surprises there. A porter's role is more important than many people realize because guests' first impressions are formed by the staff they meet on arrival. Cleaners will usually be doing shift work, which may or may not suit you depending on your situation. Another popular session looks at the role of the receptionist. This is a key role. You have to deal with every part of the hotel. So, having receptionist work on your CV or resume is often a good way of moving your career forward in the long run. But having said that, they can be challenging, you know, dealing with people from all around the world. You have to already be good at working under a lot of pressure. You can't work out how to do it on the job. For any of these jobs, you'll usually have an interview. So, there's also a session on interview skills. Now, frankly, for the less skilled roles, the interview will be pretty quick. But for some of the jobs I've mentioned, the interview is just as important as it is in other types of employment. Basically, the key to coming across well is the same today as it was when I started 20 years ago. And the good thing is, it's not too difficult to develop these skills with a little training and rehearsal.
+Presenter: Before you hear the rest of the talk, you have some time to look at questions 16 to 20.
+Presenter: Now listen and answer questions 16 to 20.
+John: Okay. Then this afternoon we'll have the workshops. They'll be held in various classrooms around the college. So, if you have a look at your college plan, I'll tell you where they're going to be. Now, at the moment, we're in the hall. You'll see it at the bottom of your plan. So, if you want to go to the workshop on restaurant service, go out of the hall and turn right. Walk along to the office, and it's the classroom immediately next door to that. For kitchen hands, when you come out of the hall, you'll see the square in front of you. Cross to the other side of the square and you'll see a block of two classrooms. You want the one on the left. Now, porters, cleaners, and dishwashers. You want to find a block of classes on the northern side of the college. There's a long block of classrooms, and you want the one at the eastern end. For the receptionist workshop, turn right out of the hall and go past the office. Then head up north between the two sets of classrooms. You'll come to the first room on your left, and it's the classroom directly opposite that. For those of you who are wanting to brush up on your interview skills, there's an interview skills workshop. You see that on the western side of the square there's a single, large classroom. That's in there. Okay, now let's move on to look at
+Presenter: That is the end of Section Two. You now have half a minute to check your answers.`,
+`Narrator: Now turn to Section 3.
+
+Narrator: Section 3. You will hear two engineering students discussing a presentation they are preparing about a battery-powered motorbike. First, you have some time to look at Questions 21 to 26.
+
+Narrator: Now listen carefully and answer Questions 21 to 26.
+
+Student: Hi Sarah. Shall we make a start on that presentation about our battery-powered motorbike project?
+
+Sarah: Yes, let's. It'd be nice to do a good job for the university open day. I hope the lecturer's right that it'll interest people thinking about coming here to study.
+
+Student: Well, they certainly should. And at least it won't be assessed.
+
+Sarah: Yes, and I guess we should be proud our project was chosen rather than anything done by others in our class. And our project's unusual because people usually think of environmentally friendly vehicles as being relatively slow, but our battery-powered motorbike can get up to 165 kilometers an hour, the same as lots of petrol-driven bikes.
+
+Student: And it has an efficiency of 90%, whereas ordinary bikes are far less. They waste a huge amount of energy.
+
+Sarah: And our bike doesn't need a petrol tank or an exhaust system, either. So, markedly, the design is more straightforward, and it's also lighter.
+
+Student: Anyway, it's going to be quite a challenge to prepare something interesting and appropriate for all the people who might come.
+
+Sarah: Well, time is certainly going to be an issue.
+
+Student: You mean in terms of how much we have to deal with in only 15 minutes?
+
+Sarah: Well, I was thinking more about the fact that the talk's next week, and we have a lot of other stuff on just now.
+
+Student: Absolutely. So, how shall we organize things? We could just do a short talk and allow most of the time for questions.
+
+Sarah: Well, it'd be good to allow plenty of time for those, but I think we need to present quite a lot, too. We could start by showing a couple of minutes from the film of the race it took part in.
+
+Student: Brilliant. I'm sure they'd love that. Then we can talk about how we built and tested the motorbike and so on. For example, one of us could talk through the project from the initial brief to prototype stage, and then the other take it on to testing and development.
+
+Sarah: Well, let's deal with that later. It might be better to have just you or me doing the talking, but we don't need to decide just yet.
+
+Student: Okay. So, what about the slides for our presentation? Shall we work on the text for those now? Well, we could just use keywords, that'll help structure our talk.
+
+Sarah: How about using mainly visuals? I took lots of photos as we went along, so it'd be easy to illustrate the progress of the project that way. More interesting than diagrams, and slides with lots of text can be boring.
+
+Student: Okay, right you are. So, do you think we should discuss things with the lecturer before going much further? We could do that this afternoon.
+
+Sarah: Wouldn't it be better to get a first draft done, then we've got something more concrete to discuss with him?
+
+Student: Sure. But I'd quite like a bit more input before we spend a lot of time preparing something that might not be what's needed.
+
+Sarah: Okay. When did we have a word with Hamish in the fourth year? His tutor had him doing something similar last summer, so I'm sure he'd give us some useful pointers.
+
+Student: Great, let's do that after lunch.
+
+Narrator: Before you hear the rest of the discussion, you have some time to look at Questions 27 to 30.
+
+Narrator: Now listen and answer Questions 27 to 30.
+
+Student: Let's think a bit more about how the project went. That might give us some ideas.
+
+Sarah: Okay.
+
+Student: Well, first, I'd say that writing the report was hard.
+
+Sarah: Yes, I was dreading having to write 80 pages in just a month! But actually, it was harder making sure we didn't go over length. Anyway, I never imagined we'd deal with it with a day to spare.
+
+Student: No, it was lucky your sister had time to proofread it. She picked up on several careless mistakes, especially in the bibliography.
+
+Sarah: Yes, well, she works in publishing, so she's used to checking things. I suppose it helped that we kept detailed notebooks throughout the year. That was a chore, but worth it.
+
+Student: Yes, I didn't enjoy keeping mine up to date. I actually found it really time-consuming noting down all the adaptations we made to the design as we went along. I hadn't anticipated that.
+
+Sarah: Me too. And I thought the tutor could have given us a bit more advice at the beginning of the process.
+
+Student: That's right. I liked doing the concept sketches. For me, that was one of the best bits. I've always enjoyed those initial stages of the design process.
+
+Sarah: I was relieved that the tutor picked up on that mistake we made in our aerodynamic sketches. It would have been disastrous if that hadn't been picked up at an early stage.
+
+Student: Exactly.
+
+Sarah: Finding sponsors took quite some time, of course.
+
+Student: Yes, but we knew that'd be an issue. And I never expected it to be enjoyable, not like the actual hands-on project work. The tutor certainly came into his own at that stage.
+
+Sarah: Yes, I never expected him to have such useful contacts in industry. Good thing for us he did, though.
+
+Student: Right.
+
+Narrator: That is the end of Section 3. You now have half a minute to check your answers.`,
+`Presenter: Now turn to section 4.
+
+Presenter: Section 4. You will hear a university lecture on the early development of the telescope. First, you have some time to look at questions 31 to 40.
+
+Presenter: Now listen carefully and answer questions 31 to 40.
+
+Lecturer: Good morning. Today's lecture is about the development of the telescope up until the end of the 17th century. We can trace the telescope's earliest form back to the 1200s. History records Roger Bacon as possibly the first to invent a magnifying glass. The principal use of his invention was for reading. This proved to be a benefit mostly for researchers who, until then, had been forced to give up working while still relatively young because of impaired vision. In 1608, a Dutch astronomer called Lipperhey discovered that if convex and concave lenses were put together, they created a magnifying glass through which things at a distance could be seen. He created a miniature telescope. It was so small that initially, people took it to the theater for a better view of the stage. Galileo found out about Lipperhey's invention in the spring of 1609 and immediately set about improving it. Galileo experimented with different lenses, combining a weak convex lens with a strong concave lens. He discovered that this intensified the strength of the instrument. Unfortunately, the lenses the opticians were making for glasses were unsatisfactory for what Galileo wanted to do, as they did not have powerful enough magnification. Galileo therefore decided that to solve his problem, he would have to start the production of his own lenses. Eventually, he achieved a magnification about nine times more than you could see with the naked eye, an enormous improvement over everything else on the market. Galileo then decided to approach the Senate of Venice to demonstrate the improved instrument. Many senators were eager to try the new telescope and climbed the highest bell towers in Venice to look through the glass at ships far out to sea. The government of Venice were impressed by his invention's obvious potential and envisioned the advantages this eye glass could have for the army. His first major astronomical discovery with the telescope was that the moon's surface was mountainous and not a perfect sphere as it had always been assumed. During the lunar cycle of 28 days, he found that the shadows seemed to vary with the light. Galileo also figured out how to estimate the altitude of the mountains on the moon by looking for bright spots in the dark areas. Galileo looked for the spots when it was a half moon and, with geometry, was able to calculate the elevation of the mountains. From these calculations, he was able to draw charts of the terrain and show the altitudes of the mountains. In 1610, Galileo's next major discovery was regarding Jupiter. Using a magnification telescope 20 times the strength of his previous ones, he looked at Jupiter on successive nights. His main observation was a trio of what initially seemed to be small stars close to Jupiter. However, by the 15th night, he realized that they were going around the planet in a daily orbit and that, in fact, they were moons, not stars. And three days later, he saw a fourth one. This discovery showed how important a telescope was for astronomers. They would now be able to see celestial objects that could not previously be seen by the naked eye. In the later 1600s, scientists started to make a stronger telescope, revealing the galaxy. Scientists realized that when they increased the length of the telescope, the intensity of magnification improved significantly. One such telescope was created in 1656 and magnified over 100 times. It had the incredible length of 4 meters. Telescopes continued to become longer over the next few years. And in fact, the astronomer Hevelius built one in 1670 that was 43 meters long. However, these telescopes were soon to prove useless for accurate observation because the slightest wind caused the instrument to shift. Finally, in 1675, astronomers abandoned the tube telescope and instead mounted the telescope on a building. Telescopes like this were called aerial telescopes. Scientists hoped that the stability of the mount would decrease the frustration when observing stars. Well, that's about it for today, and so I...
+
+Presenter: That is the end of section 4. You now have half a minute to check your answers.`
+];
+let scriptPart=0;
+function openScript(){
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('script-screen').style.display='block';
+  renderScriptPart(0);
+}
+function closeScript(){
+  document.getElementById('script-screen').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+function switchScriptPart(idx){
+  scriptPart=idx;
+  document.querySelectorAll('#script-tabs .script-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  renderScriptPart(idx);
+}
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function renderScriptPart(idx){
+  const raw=SCRIPT_DATA[idx]||'';
+  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  document.getElementById('script-text-content').innerHTML=lines.map(line=>{
+    const m=line.match(/^([^:]{1,28}):\s*(.+)$/);
+    if(m)return `<div class="script-line"><span class="script-speaker">${escapeHtml(m[1])}:</span>${escapeHtml(m[2])}</div>`;
+    return `<div class="script-line">${escapeHtml(line)}</div>`;
+  }).join('');
+  const [start,end]=SECTION_RANGES[idx];
+  let ansHtml='';
+  for(let i=start;i<=end;i++){
+    ansHtml+=`<div class="script-ans-item"><span class="script-ans-q">Q${i}</span><span class="script-ans-val">${escapeHtml(ANSWERS[i].answer)}</span></div>`;
+  }
+  document.getElementById('script-answers-content').innerHTML=ansHtml;
+}
+
 
 // ═══════════════════════════════════════════
 // RESTART

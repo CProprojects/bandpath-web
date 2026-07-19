@@ -284,6 +284,32 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
 #back-to-results{display:none;position:fixed;top:62px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
 #back-to-results:hover{opacity:.88}
 
+
+/* AUDIOSCRIPT */
+#script-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5100;overflow-y:auto;padding:20px 20px 40px}
+body.dark #script-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.script-header{max-width:980px;margin:0 auto 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.script-title{font-size:18px;font-weight:800;color:var(--text)}
+.script-back{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);color:var(--text);border:1.5px solid var(--border);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.script-back:hover{opacity:.85}
+.script-tabs{display:flex;gap:3px;background:var(--bg3);border-radius:9px;padding:3px;max-width:980px;margin:0 auto 16px}
+.script-tab{flex:1;background:transparent;color:var(--text2);border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:all .15s}
+.script-tab:hover{color:var(--text)}
+.script-tab.active{background:var(--accent);color:#06243c;box-shadow:0 0 16px -4px rgba(0,196,255,.5)}
+.script-layout{max-width:980px;margin:0 auto;display:grid;grid-template-columns:3fr 2fr;gap:16px;align-items:start}
+.script-panel,.script-answers{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+body.dark .script-panel,body.dark .script-answers{background:var(--card-grad)}
+.script-panel-title,.script-answers-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.script-line{font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:10px}
+.script-speaker{color:var(--accent);font-weight:800;margin-right:5px}
+.script-ans-item{display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.script-ans-item:last-child{border-bottom:none}
+.script-ans-q{font-weight:800;color:var(--accent);min-width:34px;flex-shrink:0}
+.script-ans-val{color:var(--text);font-weight:600}
+@media(max-width:768px){
+  .script-layout{grid-template-columns:1fr}
+}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -499,10 +525,36 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
     <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="openScript()">📜 View Script</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
     </a>
+  </div>
+</div>
+
+
+<!-- SCRIPT / AUDIOSCRIPT -->
+<div id="script-screen">
+  <div class="script-header">
+    <div class="script-title">📜 Audioscript — Listening Test 4</div>
+    <button class="script-back" onclick="closeScript()">← Back to Results</button>
+  </div>
+  <div class="script-tabs" id="script-tabs">
+    <button class="script-tab active" onclick="switchScriptPart(0)">Part 1</button>
+    <button class="script-tab" onclick="switchScriptPart(1)">Part 2</button>
+    <button class="script-tab" onclick="switchScriptPart(2)">Part 3</button>
+    <button class="script-tab" onclick="switchScriptPart(3)">Part 4</button>
+  </div>
+  <div class="script-layout">
+    <div class="script-panel">
+      <div class="script-panel-title"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Transcript</div>
+      <div id="script-text-content"></div>
+    </div>
+    <div class="script-answers">
+      <div class="script-answers-title"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Answer Key</div>
+      <div id="script-answers-content"></div>
+    </div>
   </div>
 </div>
 
@@ -1218,6 +1270,151 @@ function backToResults(){
   document.getElementById('back-to-results').style.display='none';
   document.getElementById('results-screen').style.display='block';
 }
+
+// ─────────────────────────────────────────────
+// AUDIOSCRIPT
+// ─────────────────────────────────────────────
+const SCRIPT_DATA=[
+`Presenter: IELTS listening. Version 54768. You will hear a number of different recordings, and you will have to answer questions on what you hear. There will be time for you to read the instructions and questions, and you will have a chance to check your work. All the recordings will be played once only. The test is in four sections. Write all your answers in the listening question booklet. At the end of the test, you will be given 10 minutes to transfer your answers to an answer sheet. Now turn to section one on page two of your question booklet. Section one. You will hear a woman who wants to rent a vacation cottage telephoning the owner. First, you have some time to look at questions one to seven on page two.
+Presenter: You will see that there is an example that has been done for you. On this occasion only, the conversation relating to this will be played first.
+Dave: Hello?
+Woman: Oh, hello. I'm calling about a vacation rental. The name I've been given is Carol Marriott.
+Dave: I'm Dave, Carol's husband. We own it together.
+Presenter: The joint owners of the cottage are Carol Marriott and her husband Dave. So Dave has been written in the space. Now we shall begin. You should answer the questions as you listen, because you will not hear the recording a second time. Listen carefully and answer questions one to seven.
+Dave: Hello?
+Woman: Oh, hello. I'm calling about a vacation rental. The name I've been given is Carol Marriott.
+Dave: I'm Dave, Carol's husband. We own it together.
+Woman: Oh, right. Uh, well, some friends of ours rented uh Aster Cottage from you for a week by the ocean last summer, and they recommended it to us. My husband and I would like to rent it in the fall, for a week.
+Dave: Okay. When, exactly?
+Woman: Um, we're looking at the week beginning September 21st, if it's available.
+Dave: Let me check. Uh, mmm, no, I'm sorry, it's already booked that week. You could have it the previous week, from the 14th.
+Woman: Well, we could manage that week, if we change a couple of arrangements. Um, how much would it cost?
+Dave: That would be $835.
+Woman: Ah, that's rather more than we wanted to pay, I'm afraid. We were hoping to pay closer to $790, which our friends paid last year.
+Dave: We also have a slightly smaller cottage called Periwinkle Cottage.
+Woman: Excuse me, um, how do you spell the name?
+Dave: P-E-R-I-W-I-N-K-L-E. Periwinkle. It's available the week you wanted, and it's the exact same price that your friends paid last year. I take it you want a place that sleeps just two people, like Aster Cottage?
+Woman: Um, yes. Is it near Aster Cottage?
+Dave: Yeah, it's right across the street.
+Woman: And what's this cottage like?
+Dave: Well, it's uh part of a historic building that was originally a school 100 years ago. It was converted into a post office around 1950. Then, later on, the post office moved and the building was divided to make two cottages.
+Woman: So, is it on several floors?
+Dave: No, it's all on one floor. There's a large living room, a kitchen that's really well-equipped, a bedroom, and a bathroom with a tub and a shower.
+Woman: Oh, very nice.
+Dave: From the living room, you can go out onto the deck, which is a great place to have your meals when the weather's nice.
+Woman: That sounds fantastic! Can you see the river that flows through the town from the cottage?
+Dave: You sure can. It's close by. You can see it from the bedroom.
+Woman: Okay. Uh, would we need to bring anything? Bedding, say?
+Dave: That's provided. But we make a small charge for towels, unless you bring your own, of course.
+Woman: Oh, okay. I'll do that. Uh, because we'll be driving, there'll be plenty of room in the car for things like that. Oh, that reminds me, is there a garage that we can use?
+Dave: I'm afraid there isn't one. Uh, but you can usually get a parking spot on the street right in front of the cottage.
+Woman: No problem. We probably won't use the car much while we're there anyway. We like to go for walks.
+Presenter: Before you hear the rest of the conversation, you have some time to look at questions eight to ten on page two.
+Presenter: Now listen and answer questions eight to ten.
+Woman: Oh, and what about the town itself? Are there any restaurants in the neighborhood?
+Dave: There are a few, all within walking distance. A lot of people like the fish restaurant, but in my opinion, the Chinese restaurant has got to be the best for miles around.
+Woman: That's good to know. We might end up eating out every evening.
+Dave: Well, why not?
+Woman: Our friends said the town is pretty famous for antique stores.
+Dave: That's right. There's a whole bunch of them, at least 10 on the Main Street.
+Woman: Marvelous! Okay, I'd like to make the booking, please.
+Dave: Great! We ask for a deposit of $200 and final payment at least six weeks before your stay. But we'll be away ourselves for much of August, so let's say no later than the last day of July. Is that okay with you?
+Woman: Fine.
+Dave: Okay. Then let me give you our details so you can send the deposit.
+Presenter: That is the end of section one. You now have half a minute to check your answers.`,
+`Announcer: Section two. You will hear a coordinator talking to volunteer helpers before a race involving a large number of people. First, you have some time to look at questions 11 to 14 on page three.
+Announcer: Now listen carefully and answer questions 11 to 14.
+Coordinator: Thank you for volunteering to help us with the Bridge to Brisbane Fun Run. The purpose of this meeting is to give you some information about your duties on race day. Some of you are asking about where you can park on the day. Unfortunately, some of the usual places, down by the river for example, will be out of bounds because we'll need extra space for emergency vehicles. Probably the best option is the Jack Gray Sports Field in Barker Street. Although the closest parking lot is the Metro Shopping Complex, I would advise you not to park there as they tend to tow away people who aren't customers. At the start line, most of you will be checking that runners have the necessary gear, especially their electronic timing chip, the race number, and the identity wristband. Make sure that the number is attached to the front of the running shirt or singlet, not the back. The timing chip, which records the runner's time, needs to be clipped onto one of their shoes and check that they are wearing their wristband. Some of you will be responsible for organizing the starting groups. It's very important that runners start in a particular order. There is a system of color codes. The red group are walkers and people with baby strollers. The purple group are runners that expect to finish in less than one hour and the yellow group are our elite athletes. We'd like them to start the race, and we'd like the other groups to follow after that, with the red group and the strollers at the very back. This is for their own safety. Now, we are still short on volunteers for the race day, so if you have any friends or family members who might be interested, please let us know. We're probably okay for people to help with the start, but we'll still desperately need volunteers along the race course to distribute water bottles to the runners. A few of you have offered to help with first aid, but the good people of St John's Ambulance have donated their services, so that won't be necessary.
+Announcer: Before you hear the rest of the talk, you have some time to look at questions 15 to 20 on page four.
+Announcer: Now listen and answer questions 15 to 20.
+Coordinator: Now I'll show you the layout of the race village, which is where the race ends. Can you all see the map? If you look at the bottom right-hand side, you'll see where the runners enter the village, next to the corporate catering section. As you continue along the course, you'll see the stage on your right. That's where the winners will receive their medals. Now, can you all see the finish line near the center? After they finish the race, the runners can take one of two paths, it doesn't matter which one, to get their finisher's t-shirts from the t-shirt stand at the end of those paths. Many of you will be stationed there at the end of the race. After they finish, the runners will also want their belongings, and all bags are kept in the building on Bowen Road. It's quite close to the exit in the top left-hand corner of your map. Now, some of you will have an important role working in the information center. That's the building in the center of the map, not far from the finish line. It's just below it on your map. And one other thing, can you all please remind the runners to enter in the prize draw for the new car? The entry box is between the shade tents and the corporate catering buildings. Okay, let's see now, what else do I need to point out? Ah, yes, the runners are always thirsty, and the main water station in the village is just beside the third exit through to Gregory Terrace. Can you see it there to the left of the corporate catering area? So, everyone please direct the race finishers there to get their free bottled water.
+Announcer: That is the end of section two. You will now have half a minute to check your answers.
+Announcer: Now turn to section three on page five.`,
+`Joel: Dr. Owen?
+Dr. Owen: Come in, Joel. Right, so how's your research going? You're looking at how farmers feel about new technology in agriculture, aren't you?
+Joel: Well, actually, it's more general than that. I'm looking at their attitudes to a variety of new developments in agriculture.
+Dr. Owen: Okay. Have you got a title for the project yet?
+Joel: I was thinking of something simple, like "Farmers' attitudes towards the adoption of new farming practices."
+Dr. Owen: Mmm, that's possibly a bit too general. I think the title needs to be a bit more specific. What kind of farming will you be looking at?
+Joel: Well, that'll vary, actually. But I want to speak to each of the 10 farmers in my sample, so I've chosen farmers which are all in the same region.
+Dr. Owen: Okay. Well, I'd specify where they are, then.
+Joel: Right. I'll amend the title to do that.
+Dr. Owen: Okay. Is there any particular reason why you've decided to do face-to-face interviews? It'll be quite time-consuming, won't it?
+Joel: Yes, and I did consider doing telephone interviews for that reason, especially as it's unnecessary for me to actually see the places where they work. It's just that, in my experience, a lot of farmers don't like talking on the phone, so they'll be more likely to talk freely if I see them in person.
+Dr. Owen: Yes, you're probably right. Good.
+Joel: Then, the first thing I want to investigate is how the farmers actually find out about new developments in agriculture that they might want to adopt, what sources they use.
+Dr. Owen: Right. So how are you going to do this?
+Joel: Well, I could make a checklist of sources of information for them to look at in advance, so they could tick off the ones they actually use. Things like farming magazines, farm product advertisements, television and the internet, and so on.
+Dr. Owen: It might be more useful to ask them, rather than show them a list. A spontaneous response to one or two open questions might give you a more accurate picture.
+Joel: All right. I'll do that then.
+Dr. Owen: Now, talk me through some of the other issues you want to cover.
+Joel: Well, there's the way the government communicates with farmers.
+Dr. Owen: Right. Well, one thing is, farmers complain that the government sends out the same information to all of them, whether they're poultry farmers or dairy farmers or arable farmers.
+Joel: So they get all this information, but half of it doesn't actually apply to them.
+Dr. Owen: Exactly. So you could look at that.
+Joel: Right. Then, I wanted to look at attitudes of British farmers to the cost of making any changes on their farms. According to articles I've read, farmers in Britain aren't in principle against investing money in new machinery and new practices, but they're actually just too busy to work out what the financial implications are.
+Dr. Owen: Yes, and a lot of them don't seem to consider getting financial advice from their accountants about it either.
+Joel: Right.
+Dr. Owen: There's also been some research in Australia on sheep rearing practices. I can give you the reference if you like. Basically, it appears that the majority of Australian sheep farmers are willing to risk adopting new practices on the basis of just a few pieces of research. They don't usually wait until the evidence in favor of the changes is overwhelming. They're quite happy to act before then, so they can get ahead of the game.
+Joel: Okay, I'll take a look at that. Thanks.
+Joel: We said we'd also look at some of the reading material I've been reviewing.
+Dr. Owen: Yes. I had another look at "Contemporary Farming Manual", which is clearly bang up-to-date. It covers a lot of things a farmer might want to know, but it's so dull.
+Joel: Absolutely. I found it really hard-going, and I can't imagine any farmer wading through it. There aren't even any decent pictures.
+Dr. Owen: Did you have time to look at "Running a Small Farm"?
+Joel: Yes, although I only read bits of it because despite being entertaining, it wasn't very academic.
+Dr. Owen: I know. And a lot of the information is either misleading or simply wrong. I'm surprised it got published at all. I don't imagine the farming press will rate it very highly.
+Joel: Mm. You recommend "Agriculture and Economics".
+Dr. Owen: Mm.
+Joel: I expected that it would be really difficult, the title's a bit off-putting. But I thought it was brilliant, so I've bought it.
+Dr. Owen: Yes. Some people think it relies too heavily on farming practices in specific parts of the world, but the theories that underpin these are universal, and that's why it's a required textbook for anyone studying agriculture.
+Joel: Right.
+Dr. Owen: What else did you come across?
+Joel: I borrowed "How to Survive in Farming" from the library. I thought it'd be interesting background, and I liked the informal style, but it turned out to have been written years ago.
+Dr. Owen: Yes, and like everything else, farming fashions have changed, so it's badly in need of a new edition.
+Joel: Can I ask you a question about...`,
+`Presenter: Section 4. You will hear part of a lecture given by an art and design lecturer on the topic of Aboriginal textile design in Australia. First, you have some time to look at questions 31 to 40 on page 7.
+Presenter: Now listen carefully and answer questions 31 to 40.
+Lecturer: The indigenous people of Australia, or Aboriginals, have a long history of using animal and plant fibers to make a variety of fabric. Over the years, their traditional designs and stories have been incorporated into various textiles. The Ernabella Arts Centre is a place where local Aboriginals can produce their traditional craft and also learn new techniques to decorate fabric. For the first 30 years, the artists crafted rugs working with wool. These rugs incorporated their own unique designs. However, as they became less economical to produce, the artists were introduced to batik, which is an Indonesian method of dyeing textiles. Batik is quicker than weaving, so many of the Ernabella artists started to produce it themselves. Screen printing was later introduced to the centre, and Ernabella's artists were commissioned to produce fabric for furniture that was to be used at popular tourist destinations such as the National Park offices at Uluru. Screen printing has also been used successfully by the Tiwi people, who live on islands north of Darwin. Their company, Tiwi Designs, produces fabric that is inspired by their surroundings. For example, they incorporated bird motifs into their early designs. Tiwi art, culture and language are very different from those of mainland Aboriginal groups. The patterns on their fabric are related to the beliefs and legends in their culture. For example, some textile designs are chosen because they are thought to cause rain. Another successful Aboriginal design company was founded by Jimmy Pike. His dynamic prints, paintings and fabrics are greatly influenced by the Australian landscape, in particular, that of the desert, which is often featured in his work. Pike worked with acrylic paint, oil pastels and screen printing. Surprisingly, Jimmy Pike's life as an artist began in prison, where he was serving a sentence for murder. The art teachers there recognized his talent and gave him the technical skills he needed to become a successful artist. After Pike's release, he started his own company, aiming to create a product that would sell well commercially but still retain its Aboriginal cultural identity. Eventually, he decided to bring his artwork onto textiles, which were used to produce clothing. The designs he selected were transferred onto cotton and had both a strong linear character and a good color range. Bronwyn Bancroft is one of the most successful Aboriginal artists and designers to date. She has produced a great deal of artwork and textiles, and many of her paintings are held by Australian art galleries. Her work reflects her Aboriginal roots but always with a contemporary, fresh view of family and the natural environment. In 1995, she was chosen by a charity organization to paint a pair of jeans owned by Cathy Freeman, a famous Aboriginal Australian athlete. She used imagery of lizards moving quickly over the Australian terrain, and she added a rainbow, which represents the optimism that Cathy symbolizes for all Aboriginal people. In 2001, she was chosen to design costumes for the opening of the biggest street parade ever held in Australia, the Journey of a Nation parade. The people in Bancroft's section of the parade all wore an outfit she designed. It featured the image of a snake that had no head or tail to represent an ongoing culture. Exploitation of creative work can be a problem for any artist, and copyright laws exist to protect individual artists from the unauthorized use of his or her work. This issue is often more complex for Aboriginal artists, as the symbols and motifs used in their designs also hold cultural significance for them. An example of this was when a businessman had rugs made overseas, incorporating images stolen from Aboriginal paintings. The Carpet Case, as it became known, was taken to court, where luckily, the artists won.
+Presenter: That is the end of section 4. You now have half a minute to check your answers.
+Presenter: That is the end of the listening test. You now have 10 minutes to transfer your answers to the listening answer sheet.
+Presenter: You have 2 minutes left.
+Presenter: You have 1 minute left.
+Presenter: Please stop writing and wait for your question booklet to be collected.`
+];
+let scriptPart=0;
+function openScript(){
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('script-screen').style.display='block';
+  renderScriptPart(0);
+}
+function closeScript(){
+  document.getElementById('script-screen').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+function switchScriptPart(idx){
+  scriptPart=idx;
+  document.querySelectorAll('#script-tabs .script-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  renderScriptPart(idx);
+}
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function renderScriptPart(idx){
+  const raw=SCRIPT_DATA[idx]||'';
+  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  document.getElementById('script-text-content').innerHTML=lines.map(line=>{
+    const m=line.match(/^([^:]{1,28}):\s*(.+)$/);
+    if(m)return `<div class="script-line"><span class="script-speaker">${escapeHtml(m[1])}:</span>${escapeHtml(m[2])}</div>`;
+    return `<div class="script-line">${escapeHtml(line)}</div>`;
+  }).join('');
+  const [start,end]=SECTION_RANGES[idx];
+  let ansHtml='';
+  for(let i=start;i<=end;i++){
+    ansHtml+=`<div class="script-ans-item"><span class="script-ans-q">Q${i}</span><span class="script-ans-val">${escapeHtml(ANSWERS[i].answer)}</span></div>`;
+  }
+  document.getElementById('script-answers-content').innerHTML=ansHtml;
+}
+
 
 // ═══════════════════════════════════════════
 // RESTART

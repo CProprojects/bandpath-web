@@ -284,6 +284,32 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
 #back-to-results{display:none;position:fixed;top:62px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
 #back-to-results:hover{opacity:.88}
 
+
+/* AUDIOSCRIPT */
+#script-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:5100;overflow-y:auto;padding:20px 20px 40px}
+body.dark #script-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 0%,#0c2038 55%,#0a1a30 100%)}
+.script-header{max-width:980px;margin:0 auto 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.script-title{font-size:18px;font-weight:800;color:var(--text)}
+.script-back{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);color:var(--text);border:1.5px solid var(--border);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.script-back:hover{opacity:.85}
+.script-tabs{display:flex;gap:3px;background:var(--bg3);border-radius:9px;padding:3px;max-width:980px;margin:0 auto 16px}
+.script-tab{flex:1;background:transparent;color:var(--text2);border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:all .15s}
+.script-tab:hover{color:var(--text)}
+.script-tab.active{background:var(--accent);color:#06243c;box-shadow:0 0 16px -4px rgba(0,196,255,.5)}
+.script-layout{max-width:980px;margin:0 auto;display:grid;grid-template-columns:3fr 2fr;gap:16px;align-items:start}
+.script-panel,.script-answers{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+body.dark .script-panel,body.dark .script-answers{background:var(--card-grad)}
+.script-panel-title,.script-answers-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.script-line{font-size:13.5px;color:var(--text2);line-height:1.75;margin-bottom:10px}
+.script-speaker{color:var(--accent);font-weight:800;margin-right:5px}
+.script-ans-item{display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px}
+.script-ans-item:last-child{border-bottom:none}
+.script-ans-q{font-weight:800;color:var(--accent);min-width:34px;flex-shrink:0}
+.script-ans-val{color:var(--text);font-weight:600}
+@media(max-width:768px){
+  .script-layout{grid-template-columns:1fr}
+}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -499,10 +525,36 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
     <button class="res-btn res-btn-primary" onclick="reviewMode()" style="box-shadow:0 12px 28px -10px rgba(0,196,255,.6)"><svg class="ic" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg>Review Answers</button>
     <button class="res-btn res-btn-secondary" onclick="restartTest()"><svg class="ic" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New Attempt</button>
     <button class="res-btn res-btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+    <button class="res-btn res-btn-secondary" onclick="openScript()">📜 View Script</button>
     <a class="tg-btn" href="https://t.me/mockieltstest" target="_blank">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
       More Tests on Telegram
     </a>
+  </div>
+</div>
+
+
+<!-- SCRIPT / AUDIOSCRIPT -->
+<div id="script-screen">
+  <div class="script-header">
+    <div class="script-title">📜 Audioscript — Listening Test 1</div>
+    <button class="script-back" onclick="closeScript()">← Back to Results</button>
+  </div>
+  <div class="script-tabs" id="script-tabs">
+    <button class="script-tab active" onclick="switchScriptPart(0)">Part 1</button>
+    <button class="script-tab" onclick="switchScriptPart(1)">Part 2</button>
+    <button class="script-tab" onclick="switchScriptPart(2)">Part 3</button>
+    <button class="script-tab" onclick="switchScriptPart(3)">Part 4</button>
+  </div>
+  <div class="script-layout">
+    <div class="script-panel">
+      <div class="script-panel-title"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Transcript</div>
+      <div id="script-text-content"></div>
+    </div>
+    <div class="script-answers">
+      <div class="script-answers-title"><svg class="ic" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Answer Key</div>
+      <div id="script-answers-content"></div>
+    </div>
   </div>
 </div>
 
@@ -1233,6 +1285,187 @@ function backToResults(){
   document.getElementById('back-to-results').style.display='none';
   document.getElementById('results-screen').style.display='block';
 }
+
+// ─────────────────────────────────────────────
+// AUDIOSCRIPT
+// ─────────────────────────────────────────────
+const SCRIPT_DATA=[
+`Narrator: You will hear a tourist calling a receptionist for some information. First, you have some time to look at questions one to four.
+
+Narrator: Listen carefully and answer questions one to four.
+
+Receptionist: Greek Island Holidays. Can I help you?
+
+Tourist: Yes. I hope so. I have a friend who's just come back from Corfu, and she's recommended some apartments in Arillas. She thought they might be on your list.
+
+Receptionist: Arillas. Um, let me check. Can you give me the names?
+
+Tourist: Yes. The first is Rose Garden Apartments. Could you tell me a little bit of information about the apartments, its features and prices, for instance?
+
+Receptionist: Well, at Rose Garden, they have a huge parking lot and it is free parking, so it can be very convenient for some big families who drive there to spend holidays.
+
+Tourist: Oh, that's great. Our whole family will be going.
+
+Receptionist: And there's a big swimming pool inside, which can accommodate over 50 people. We are thinking of replacing it into an aquarium, but it's still in discussion.
+
+Tourist: That sounds exciting. What about the cost?
+
+Receptionist: $219.
+
+Tourist: That seems reasonable. I'm just jotting down some notes. Now, the second one my friend mentioned was called Blue Bay.
+
+Receptionist: Blue Bay? Oh, yes, in fact, that's very popular and it has some special features.
+
+Tourist: Really?
+
+Receptionist: The main attraction is the large man-made lake, and it's only around a kilometer from some shops.
+
+Tourist: Is it much more expensive than the first one?
+
+Receptionist: Actually, it's $50 cheaper than the first one. That's mainly because they don't have a parking lot there. Moreover, we plan to install a lift, but we are currently short of funds, so we don't have it at the moment, and this apartment isn't really suitable for those with disabilities.
+
+Tourist: Right. Now, there are just two more apartments on the list. The third one is Sunshade Apartments.
+
+Receptionist: This one is on top of a hill, with a huge parking lot. Each room used to have a nice kitchen, but we have turned it into a beautiful garden, since our customers don't cook much, and they have shared barbecue facilities.
+
+Tourist: Sounds great.
+
+Receptionist: Yes, it is well equipped.
+
+Tourist: How much does it cost?
+
+Receptionist: $490.
+
+Tourist: I don't think that would be within our budget, unfortunately. And the last one sounds a bit expensive, too - the Grand Apartments.
+
+Receptionist: That one is quite reasonable. There's no parking lot, but parking on the street requires no charge. Many teenagers and businessmen have come here to spend their summer holiday, but children make the biggest part of our customers. There is a huge painting room for them.
+
+Tourist: Sounds lovely. Okay, I will think about which one to book with my family.
+
+Narrator: Before you hear the rest of the conversation, you have some time to look at questions five to ten.
+
+Narrator: Now listen and answer questions five to ten.
+
+Receptionist: That's fine. We've got plenty of apartments here when you come. Is there anything else you need to know about accommodation?
+
+Tourist: Oh, actually, could you tell me some more details about Arillas in general?
+
+Receptionist: Sure. What would you like to know?
+
+Tourist: Well, my friend told me that Arillas was pretty, but I don't know what the best way is to see the town.
+
+Receptionist: Well, if you want to enjoy the scenery, then the Blue City bus is recommended. Just a second while I check... Ah, that one is a business route, mainly for commuters. The green one is a double-decker, which offers a nicer view.
+
+Tourist: I also heard that the ferry boat trip is quite popular.
+
+Receptionist: Yes, if you want to immerse yourself in the magnificent sea views, then the ferry boat trip is a must. The trip used to last 35 minutes, but we made it a little bit longer, to 50 minutes, in response to our customers' demands. A 30-minute seafood dinner is included in this trip.
+
+Tourist: Okay. And one more question: I like riding bikes. Can I rent a bike and cycle around the town?
+
+Receptionist: Of course. There is a mall on Main Street and Arillas Bike Hire is located behind it.
+
+Tourist: Okay, I have made a note of that.
+
+Receptionist: Furthermore, I'd like to suggest three famous museums, from which you can learn native history and culture.
+
+Tourist: That sounds fun.
+
+Receptionist: Okay, the first one has an exhibition of the interior design, as well as some famous paintings and sculptures. Some of the paintings are donated by some well-known scientists.
+
+Tourist: That's great.
+
+Receptionist: Yeah, the second one is about something that is familiar to us, but actually most people don't know much about it, which is fizzy drinks or soda. The visitors will be shown the history of some famous products in this industry, and how they are produced. It's interesting to know that some products have been taken to the space before.
+
+Tourist: Wow, I would like to go there.
+
+Receptionist: Yes, you should. And the last one is about some special phenomenon outside the planet where we live. Some experts are there to unveil the mystery if the visitors have any questions. Various machines and equipment are displayed inside, you can't miss it. Are there any more questions for now?
+
+Tourist: No, that is all.
+
+Receptionist: I hope you have a happy journey.
+
+Tourist: Thank you.
+
+Narrator: That is the end of section one. You now have half a minute to check your answers.`,
+`Announcer: You will hear a man introducing a ski resort to a group of listeners. First, you have some time to look at questions 11 to 16.
+
+Announcer: Now listen carefully and answer questions 11 to 16.
+
+Presenter: Hello all, welcome to Aspen Ski Resort near Cumbria. It is one of my favorite vacation spots. I first discovered this fantastic resort when it was recommended to me by a journalist who was interviewing me. I then contacted my travel agent for further information about the resort and, from the first time I visited the place, it was love at first sight. Now, when I don't have acting jobs to do, I would come here and relax. My parents were both geographers and their profession afforded my siblings and I the opportunity to travel with them all over the world when we were growing up, visiting some of the places I had seen in the television documentaries I had watched. Their passion kept affecting me and, eventually, I realized that traveling has been something I love for a long time. A bit of background on the Aspen Ski Resort. The area of Cumbria was first known as a vacation spot in the 1920s, however, that was only as a summer vacation spot. The area became home to a summer resort in the 1930s. In the 1960s, with the increasing popularity of downhill skiing, the first British ski resort appeared. The Aspen Ski Resort was established soon after in 1968, and the Cumbria area became a popular destination for winter skiing vacations. Although snow skiing is the most popular winter activity at the resort, there are also some other popular activities. In the spring, summer, and fall seasons, playing golf is easily the favorite activity of most of the resort's guests. There are five top-ranked courses within a short driving distance of the resort, and the resort offers many packages for visitors during the warmer months. Also, throughout the year, many of the resort's guests like to visit the Great Waters Brewing Company, but it is under reconstruction at the moment. Also, many of our visitors take advantage of skydiving activities offered by a skydiving school, but the school is located in another town, which is about a two-hour drive from here. Some people ask what activities are recommended in the nearby Edimore region. Many visitors to that popular destination often also visit either the hot springs near the city of Marlburgh, or the local market in the city of Jameston. The hot springs are geothermally heated groundwaters that rise from the crust of the earth, and are enjoyed by folks of all ages. However, the price of having a hot spa there is quite high this season. The Edimore Nature Museum is a great alternative. You will see details of the animals which are native to the area. Most visitors in the past gave really positive feedback about the museum. The market in Jameston region has a nice selection of fruits and vegetables which are grown on farms in the area, and also a selection of fresh seafood. The market is not open this week. Please note that the Aspen Resort sponsors monthly education and entertainment programs which are open to the public. Previous programs have featured mountain walking in Europe and wildlife around the world. The upcoming entertainment program, which will take place at 7:00 p.m. May the 18th in the resort's conference center, will be about the landscape of the United Kingdom. These events are free to those attending, but seats are available on a first-come, first-served basis.
+
+Announcer: Before you hear the rest of the talk, you have some time to look at questions 17 to 20.
+
+Announcer: Now listen and answer questions 17 to 20.
+
+Presenter: Finally, let me outline what some of the Cumbria area's other skiing locations are popular for. Lakeside is the oldest of the area resorts. Its popularity barely decreases over the years, and it was recently renovated. A newly built ski school there has attracted some attention, and it will be open to the public within a couple of months. Petersburgh is well known as a training site for skiing teams. It's the home training base for Olympic champion Billy Randolph. Winterton is a resort that is well known as a place for inexperienced skiers. It has many different bunny hills for new learners, and it doesn't require any good equipment. Al Slopes is a resort that will provide you with some special service. They have a certified staff that will care for your kids while you are on the slopes. For people who want to enjoy the beauty of nature as well as having some exciting activities, these places are...
+
+Announcer: That's the end of section two. You now have half a minute to check your answers.`,
+`Narrator: Section 3. You will hear two students called Helen and Paul talking to their tutor about a nursing course. First, you have some time to look at questions 21 to 24.
+Narrator: Now, listen carefully and answer questions 21 to 24.
+Tutor: Helen and Paul, congratulations to you both for doing so well the past semester. You two have exhibited an impeccable performance during your first year in the nursing program. I'd like to get some feedback from the two of you to better improve the program and to provide guidance for our prospective students. I'd like to start with you, Helen. So, first of all, which aspect of the program impressed you?
+Helen: Well, to be honest, when I was enrolled into the course, I was expecting a group of classmates my age, but as I stepped into the classroom for the first time, I was surprised by the diversity. Most were in their twenties, but there were also those in their thirties or even forties. As it turns out, the intergenerational communication has sparked intense debate and new thinking, and I think that's something special about the program that I appreciate very much.
+Tutor: What about you, Paul? What do you think of the program?
+Paul: For me, the group project we carried out last semester is another key feature of the program. The whole class was divided into eight different groups working on eight prospective cases. Team building sessions were conducted in a collaborative way most of the time. Comprised of five members, our group studied acute pancreatitis. During the process, we broke the task into different parts and assigned them to each member. We were then able to tackle the complex problem by pooling our knowledge and skills. More importantly, stronger links were established between the group members. Because of the project, we've all become good friends.
+Tutor: That's true. According to graduates, group projects prepare them for the work world in which teamwork and collaboration are increasingly the norm. So tell me, Paul, what else do you like about the program?
+Paul: I want to be a registered nurse working in a public hospital after graduation. So the internship provided is a valuable opportunity for clinical practice in a supportive learning atmosphere. However, I was amazed by the amount of written assignments since I thought the course should have focused more on practice-oriented learning.
+Helen: Well, I have to disagree with you, Paul. The essays demonstrate your understanding of the course. For me, writing essays is a process that involves critical thinking, which challenges me to develop my points more thoroughly. I've thus managed to gain a diversity of perspectives.
+Tutor: The program is designed to deliver basic and advanced theoretical knowledge of core concepts including healthcare systems concepts, together with practicum or clinical practice experience to bridge the classroom content to the practice setting. So, I'm afraid written work is unavoidable. Also this year, we've added a module of law. How do you feel about that?
+Helen: At first, we felt that learning law is kind of redundant and too time-consuming. After a few sessions, we realized that it is necessary in dealing with future medical disputes.
+Narrator: Before you hear the rest of the talk, you have some time to look at questions 25 to 30.
+Narrator: Now, listen and answer questions 25 to 30.
+Tutor: Do you have any suggestions for prospective students?
+Paul: What bothers me most is handing in essays on time. I almost missed the deadline once because there were three essays due within the same week. So rationalizing your time is critical.
+Helen: Well, that's true. The lectures deliver so much useful information. I have poor memory, so I kept making notes and revisiting them on a regular basis. To my surprise, at the end of the semester, I have learned the key concepts by heart.
+Tutor: How was the research? I heard that it was quite challenging. How did you manage to overcome the difficulties?
+Paul: That's true. The majority of us had no clue how to carry out the research at first. Fortunately, when I was digging up reference materials at the library, I sought help from the librarian. She taught me about finding the appropriate resources and choosing the proper research methods.
+Tutor: Have you checked out the online forum?
+Helen: Yes, it has become a habit for me to visit the forum regularly. In a sense, it extends classroom learning. It is where the students post academic problems that they come across and get support from the faculty members.
+Paul: Some of my classmates didn't do so well during the placement tests. I feel that background reading is necessary.
+Tutor: Lastly, do you have anything to say to the freshmen?
+Helen: I was really ambitious at first, trying to get straight A's on my transcript. I made tons of notes and worked hard even on the optional assignments to get extra credit. I stressed myself out before having an emotional breakdown. After consulting my advisor, I found it important to set realistic goals. Don't push yourself too hard. It is wise to sort out your priorities.
+Tutor: Thank you for coming here today and providing valuable feedback on the program. Have a great summer break.
+Narrator: That is the end of section 3. You now have half a minute to check your answers.
+Narrator: Now turn to section 4.`,
+`Presenter: You will hear a lecture about how carbon dioxide is produced from food and what are the effects of the emission problem. First, you have some time to look at questions 31 to 40.
+Presenter: Now listen carefully and answer questions 31 to 40.
+Lecturer: Good afternoon, thanks for coming to today's lecture. In the last few decades, the environmental impact of food production and consumption has become one of the greatest concerns. When we look at what we eat and how we produce the food, we can find extensive evidence for how we damage our environment. Greenhouse gas emissions may come from livestock such as cows, agricultural soils and rice production. According to statistics, the carbon dioxide emissions from the production of the food people consume every day are almost the same as the emissions we make when we are driving. Let's look at some more specific examples. The cultivation and processing of 100 grams of coffee beans are responsible for 140 grams of carbon dioxide. Now, some international organizations are training farmers in many countries to use sustainable agricultural methods as a way of reducing their carbon dioxide emissions. All agricultural practices have been found to have a variety of effects on the environment. Some of the environmental effects are associated with meat production. The popular red meat requires 28 times more land to produce than chicken, 11 times more water, and results in five times more climate warming emissions. According to another research, cooking process also causes greenhouse gas emissions. Scientists now are working on how to best minimize its impact. Another problem that we cannot neglect is the packaging of food products, as packaging takes a lot of energy, water, and other natural resources to produce. So, a lot of natural resources are wasted when we throw the packaging materials away. Furthermore, packaging waste produces a big amount of greenhouse gas. To make things even worse, the food we eat often comes from places far away. Therefore, the transportation of our food across long distances contributes to air and water pollution. In recent decades, with the growing number of population, more food is in demand, so more land has been used to produce food. Hundreds and even thousands of forests have been cut down. It had a devastating effect on the climate because forests can absorb greenhouse gases. People in different parts of the world apply various kinds of farming practices. In most countries, cows and other livestock are kept on the farms, while in some countries they are kept in a restricted area on a mountain, but they all contribute to the carbon dioxide emissions. And for animal agriculture, the problem can be more serious because the livestock need food all the time. In America, cows eat an overwhelming amount of corn and soybeans each year. In order to create a better world for us and our future generations, we should adopt sustainable agriculture. The goal of sustainable agriculture is to meet the world's growing demand for food at the present, without affecting future generations. Every person involved in the food system—growers, food processors, distributors, retailers, consumers, and waste managers—can play a role in ensuring a sustainable agricultural system. There are many practices commonly used by people working in sustainable agriculture and sustainable food systems. Crop growers may change their food production methods to prevent pollution, although some other areas of agriculture are very hard to change, such as fishing. Consumers and retailers concerned with sustainability can look for foods that are environmentally friendly. However, sustainable agriculture is more than a collection of practices. It is also a process of negotiation, a push and pull between the competing interests of an individual farmer or of people in a community as they work to solve complex problems about how we grow our food. In conclusion, I want to emphasize that we may not be able to go back to the old times and live a simpler lifestyle, but we can take an active role in preventing more environmental problems caused by carbon dioxide emissions. In the next lecture, I will share some of the studies and effective solutions with you.
+Presenter: That is the end of section four. You now have half a minute to check your answers.
+Presenter: That is the end of the listening test. In the IELTS test, you would now have 10 minutes to transfer your answers to your answer sheet.`
+];
+let scriptPart=0;
+function openScript(){
+  document.getElementById('results-screen').style.display='none';
+  document.getElementById('script-screen').style.display='block';
+  renderScriptPart(0);
+}
+function closeScript(){
+  document.getElementById('script-screen').style.display='none';
+  document.getElementById('results-screen').style.display='block';
+}
+function switchScriptPart(idx){
+  scriptPart=idx;
+  document.querySelectorAll('#script-tabs .script-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  renderScriptPart(idx);
+}
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function renderScriptPart(idx){
+  const raw=SCRIPT_DATA[idx]||'';
+  const lines=raw.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  document.getElementById('script-text-content').innerHTML=lines.map(line=>{
+    const m=line.match(/^([^:]{1,28}):\s*(.+)$/);
+    if(m)return `<div class="script-line"><span class="script-speaker">${escapeHtml(m[1])}:</span>${escapeHtml(m[2])}</div>`;
+    return `<div class="script-line">${escapeHtml(line)}</div>`;
+  }).join('');
+  const [start,end]=SECTION_RANGES[idx];
+  let ansHtml='';
+  for(let i=start;i<=end;i++){
+    ansHtml+=`<div class="script-ans-item"><span class="script-ans-q">Q${i}</span><span class="script-ans-val">${escapeHtml(ANSWERS[i].answer)}</span></div>`;
+  }
+  document.getElementById('script-answers-content').innerHTML=ansHtml;
+}
+
 
 // ─────────────────────────────────────────────
 // RESTART

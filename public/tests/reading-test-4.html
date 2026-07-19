@@ -247,6 +247,20 @@ body:not(.dark) .res-btn-primary{background:var(--accent);color:#fff}
 #back-to-results{display:none;position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;z-index:4000;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:opacity .15s}
 #back-to-results:hover{opacity:.88}
 
+
+/* CUSTOM CONFIRM MODAL */
+#bp-confirm-modal{display:none;position:fixed;inset:0;z-index:9000;align-items:center;justify-content:center;background:rgba(5,15,26,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#bp-confirm-modal.show{display:flex}
+.bp-confirm-box{background:var(--bg2);border:1.5px solid var(--border);border-radius:16px;padding:24px 26px;max-width:360px;width:90%;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+body.dark .bp-confirm-box{background:var(--card-grad);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.bp-confirm-msg{font-size:14.5px;color:var(--text);line-height:1.6;margin-bottom:20px;font-weight:600}
+.bp-confirm-actions{display:flex;gap:10px;justify-content:flex-end}
+.bp-confirm-btn{padding:9px 18px;border-radius:9px;border:none;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.bp-confirm-btn:hover{opacity:.85}
+.bp-confirm-btn-cancel{background:var(--bg3);color:var(--text);border:1.5px solid var(--border)}
+.bp-confirm-btn-ok{background:linear-gradient(120deg,#00C4FF,#0098e0);color:#06243c}
+body:not(.dark) .bp-confirm-btn-ok{background:var(--accent);color:#fff}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -430,7 +444,40 @@ body.dark #results-screen{background:radial-gradient(120% 60% at 50% 0%,#123558 
   </div>
 </div>
 
+
+<!-- CUSTOM CONFIRM MODAL -->
+<div id="bp-confirm-modal">
+  <div class="bp-confirm-box">
+    <div class="bp-confirm-msg" id="bp-confirm-msg"></div>
+    <div class="bp-confirm-actions">
+      <button class="bp-confirm-btn bp-confirm-btn-cancel" id="bp-confirm-cancel">Cancel</button>
+      <button class="bp-confirm-btn bp-confirm-btn-ok" id="bp-confirm-ok">Confirm</button>
+    </div>
+  </div>
+</div>
+
 <script>
+
+function bpConfirm(message){
+  return new Promise(resolve=>{
+    const modal=document.getElementById('bp-confirm-modal');
+    document.getElementById('bp-confirm-msg').textContent=message;
+    modal.classList.add('show');
+    const okBtn=document.getElementById('bp-confirm-ok');
+    const cancelBtn=document.getElementById('bp-confirm-cancel');
+    function cleanup(result){
+      modal.classList.remove('show');
+      okBtn.removeEventListener('click',onOk);
+      cancelBtn.removeEventListener('click',onCancel);
+      resolve(result);
+    }
+    function onOk(){cleanup(true);}
+    function onCancel(){cleanup(false);}
+    okBtn.addEventListener('click',onOk);
+    cancelBtn.addEventListener('click',onCancel);
+  });
+}
+
 const PASSAGES=[
 {
   title:'READING PASSAGE 1',
@@ -1118,10 +1165,10 @@ function removeHighlight(){
 // ═══════════════════════════════════════════
 // SUBMIT & RESULTS
 // ═══════════════════════════════════════════
-function submitTest(){
+async function submitTest(){
   if(testDone)return;
   const un=QUESTIONS.filter(q=>!answers[q.id]||!answers[q.id].trim()).length;
-  if(un>0){flashUnanswered();if(!confirm(`${un} question(s) unanswered. Submit anyway?`))return;}
+  if(un>0){flashUnanswered();if(!(await bpConfirm(`${un} question(s) unanswered. Submit anyway?`)))return;}
   clearInterval(timerInt);testDone=true;showResults();
 }
 
@@ -1222,8 +1269,8 @@ function applyReviewMarkup(){
 // ═══════════════════════════════════════════
 // RESTART
 // ═══════════════════════════════════════════
-function restartTest(){
-  if(!confirm('Restart? All answers and the timer will be reset.'))return;
+async function restartTest(){
+  if(!(await bpConfirm('Restart? All answers and the timer will be reset.')))return;
   ['ielts_t4_answers','ielts_t4_flags','ielts_t4_timer','ielts_t4_notes'].forEach(k=>localStorage.removeItem(k));
   answers={};flags={};timerSec=3600;testDone=false;reviewModeOn=false;currentPassage=0;
   clearInterval(timerInt);timerInt=null;
